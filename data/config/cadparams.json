@@ -1,0 +1,812 @@
+{
+  "version": 1,
+  "joy_scale_x": -3.0303,
+  "joy_scale_y": -2.6413,
+  "joy_deadzone": 0.05,
+  "joy_sensitivity": 20,
+  "thumbwheel_sensitivity": 1,
+  "joy_steady_time": 200,
+  "current_program": 0,
+  "programs": [
+    {
+      "name": "Solidworks",
+      "logo": "solidworks.bmp",
+      "default_joystick_mode": 4,
+      "pan": {
+        "actionarray": [
+          "5",
+          "17",
+          "0"
+        ],
+        "valuearray": [
+          "1",
+          "3",
+          "0"
+        ]
+      },
+      "rotate": {
+        "actionarray": [
+          "17",
+          "0",
+          "0"
+        ],
+        "valuearray": [
+          "3",
+          "0",
+          "0"
+        ]
+      },
+      "zoom": {
+        "actionarray": [
+          "5",
+          "17",
+          "0"
+        ],
+        "valuearray": [
+          "2",
+          "3",
+          "0"
+        ]
+      },
+      "buttons": [
+        {
+          "name": "button1",
+          "actionarray": [
+            "4",
+            "0",
+            "0"
+          ],
+          "valuearray": [
+            "i",
+            "0",
+            "0"
+          ]
+        },
+        {
+          "name": "button2",
+          "actionarray": [
+            "4",
+            "0",
+            "0"
+          ],
+          "valuearray": [
+            "f",
+            "0",
+            "0"
+          ]
+        },
+        {
+          "name": "button3",
+          "actionarray": [
+            "2",
+            "0",
+            "0"
+          ],
+          "valuearray": [
+            "12",
+            "0",
+            "0"
+          ]
+        },
+        {
+          "name": "button4",
+          "actionarray": [
+            "0",
+            "0",
+            "0"
+          ],
+          "valuearray": [
+            "0",
+            "0",
+            "0"
+          ]
+        },
+        {
+          "name": "button5",
+          "actionarray": [
+            "15",
+            "0",
+            "0"
+          ],
+          "valuearray": [
+            "7",
+            "0",
+            "0"
+          ]
+        },
+        {
+          "name": "button6",
+          "actionarray": [
+            "0",
+            "0",
+            "0"
+          ],
+          "valuearray": [
+            "0",
+            "0",
+            "0"
+          ]
+        },
+        {
+          "name": "button7",
+          "actionarray": [
+            "0",
+            "0",
+            "0"
+          ],
+          "valuearray": [
+            "0",
+            "0",
+            "0"
+          ]
+        },
+        {
+          "name": "button8",
+          "actionarray": [
+            "15",
+            "0",
+            "0"
+          ],
+          "valuearray": [
+            "8",
+            "0",
+            "0"
+          ]
+        },
+        {
+          "name": "button9",
+          "actionarray": [
+            "17",
+            "0",
+            "0"
+          ],
+          "valuearray": [
+            "1",
+            "0",
+            "0"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Fusion360",
+      "logo": "fusion360.bmp",
+      "default_joystick_mode": 4,
+      "pan": {
+        "actionarray": [
+          "17",
+          "0",
+          "0"
+        ],
+        "valuearray": [
+          "3",
+          "0",
+          "0"
+        ]
+      },
+      "rotate": {
+        "actionarray": [
+          "5",
+          "17",
+          "0"
+        ],
+        "valuearray": [
+          "2",
+          "3",
+          "0"
+        ]
+      },
+      "zoom": {
+        "actionarray": [
+          "9",
+          "17",
+          "0"
+        ],
+        "valuearray": [
+          "1",
+          "3",
+          "0"
+        ]
+      },
+      "buttons": [
+        {
+          "name": "button1",
+          "actionarray": [
+            "4",
+            "0",
+            "0"
+          ],
+          "valuearray": [
+            "i",
+            "0",
+            "0"
+          ]
+        },
+        {
+          "name": "button2",
+          "actionarray": [
+            "6",
+            "0",
+            "0"
+          ],
+          "valuearray": [
+            "6",
+            "0",
+            "0"
+          ]
+        },
+        {
+          "name": "button3",
+          "actionarray": [
+            "2",
+            "0",
+            "0"
+          ],
+          "valuearray": [
+            "12",
+            "0",
+            "0"
+          ]
+        },
+        {
+          "name": "button4",
+          "actionarray": [
+            "0",
+            "0",
+            "0"
+          ],
+          "valuearray": [
+            "0",
+            "0",
+            "0"
+          ]
+        },
+        {
+          "name": "button5",
+          "actionarray": [
+            "15",
+            "0",
+            "0"
+          ],
+          "valuearray": [
+            "7",
+            "0",
+            "0"
+          ]
+        },
+        {
+          "name": "button6",
+          "actionarray": [
+            "0",
+            "0",
+            "0"
+          ],
+          "valuearray": [
+            "0",
+            "0",
+            "0"
+          ]
+        },
+        {
+          "name": "button7",
+          "actionarray": [
+            "0",
+            "0",
+            "0"
+          ],
+          "valuearray": [
+            "0",
+            "0",
+            "0"
+          ]
+        },
+        {
+          "name": "button8",
+          "actionarray": [
+            "15",
+            "0",
+            "0"
+          ],
+          "valuearray": [
+            "8",
+            "0",
+            "0"
+          ]
+        },
+        {
+          "name": "button9",
+          "actionarray": [
+            "17",
+            "0",
+            "0"
+          ],
+          "valuearray": [
+            "1",
+            "0",
+            "0"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Blender",
+      "logo": "blender.bmp",
+      "default_joystick_mode": 4,
+      "pan": {
+        "actionarray": [
+          "5",
+          "17",
+          "0"
+        ],
+        "valuearray": [
+          "2",
+          "3",
+          "0"
+        ]
+      },
+      "rotate": {
+        "actionarray": [
+          "17",
+          "0",
+          "0"
+        ],
+        "valuearray": [
+          "3",
+          "0",
+          "0"
+        ]
+      },
+      "zoom": {
+        "actionarray": [
+          "5",
+          "17",
+          "0"
+        ],
+        "valuearray": [
+          "1",
+          "3",
+          "0"
+        ]
+      },
+      "buttons": [
+        {
+          "name": "button1",
+          "actionarray": [
+            "0",
+            "0",
+            "0"
+          ],
+          "valuearray": [
+            "0",
+            "0",
+            "0"
+          ]
+        },
+        {
+          "name": "button2",
+          "actionarray": [
+            "0",
+            "0",
+            "0"
+          ],
+          "valuearray": [
+            "0",
+            "0",
+            "0"
+          ]
+        },
+        {
+          "name": "button3",
+          "actionarray": [
+            "0",
+            "0",
+            "0"
+          ],
+          "valuearray": [
+            "0",
+            "0",
+            "0"
+          ]
+        },
+        {
+          "name": "button4",
+          "actionarray": [
+            "0",
+            "0",
+            "0"
+          ],
+          "valuearray": [
+            "0",
+            "0",
+            "0"
+          ]
+        },
+        {
+          "name": "button5",
+          "actionarray": [
+            "15",
+            "0",
+            "0"
+          ],
+          "valuearray": [
+            "7",
+            "0",
+            "0"
+          ]
+        },
+        {
+          "name": "button6",
+          "actionarray": [
+            "0",
+            "0",
+            "0"
+          ],
+          "valuearray": [
+            "0",
+            "0",
+            "0"
+          ]
+        },
+        {
+          "name": "button7",
+          "actionarray": [
+            "0",
+            "0",
+            "0"
+          ],
+          "valuearray": [
+            "0",
+            "0",
+            "0"
+          ]
+        },
+        {
+          "name": "button8",
+          "actionarray": [
+            "15",
+            "0",
+            "0"
+          ],
+          "valuearray": [
+            "8",
+            "0",
+            "0"
+          ]
+        },
+        {
+          "name": "button9",
+          "actionarray": [
+            "17",
+            "0",
+            "0"
+          ],
+          "valuearray": [
+            "1",
+            "0",
+            "0"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "FreeCAD",
+      "logo": "FreeCAD.bmp",
+      "default_joystick_mode": 4,
+      "pan": {
+        "actionarray": [
+          "17",
+          "0",
+          "0"
+        ],
+        "valuearray": [
+          "3",
+          "0",
+          "0"
+        ]
+      },
+      "rotate": {
+        "actionarray": [
+          "17",
+          "17",
+          "0"
+        ],
+        "valuearray": [
+          "3",
+          "2",
+          "0"
+        ]
+      },
+      "zoom": {
+        "actionarray": [
+          "9",
+          "17",
+          "0"
+        ],
+        "valuearray": [
+          "1",
+          "2",
+          "0"
+        ]
+      },
+      "buttons": [
+        {
+          "name": "button1",
+          "actionarray": [
+            "0",
+            "0",
+            "0"
+          ],
+          "valuearray": [
+            "0",
+            "0",
+            "0"
+          ]
+        },
+        {
+          "name": "button2",
+          "actionarray": [
+            "4",
+            "4",
+            "0"
+          ],
+          "valuearray": [
+            "v",
+            "f",
+            "0"
+          ]
+        },
+        {
+          "name": "button3",
+          "actionarray": [
+            "0",
+            "0",
+            "0"
+          ],
+          "valuearray": [
+            "0",
+            "0",
+            "0"
+          ]
+        },
+        {
+          "name": "button4",
+          "actionarray": [
+            "0",
+            "0",
+            "0"
+          ],
+          "valuearray": [
+            "0",
+            "0",
+            "0"
+          ]
+        },
+        {
+          "name": "button5",
+          "actionarray": [
+            "15",
+            "0",
+            "0"
+          ],
+          "valuearray": [
+            "7",
+            "0",
+            "0"
+          ]
+        },
+        {
+          "name": "button6",
+          "actionarray": [
+            "0",
+            "0",
+            "0"
+          ],
+          "valuearray": [
+            "0",
+            "0",
+            "0"
+          ]
+        },
+        {
+          "name": "button7",
+          "actionarray": [
+            "0",
+            "0",
+            "0"
+          ],
+          "valuearray": [
+            "0",
+            "0",
+            "0"
+          ]
+        },
+        {
+          "name": "button8",
+          "actionarray": [
+            "15",
+            "0",
+            "0"
+          ],
+          "valuearray": [
+            "8",
+            "0",
+            "0"
+          ]
+        },
+        {
+          "name": "button9",
+          "actionarray": [
+            "17",
+            "0",
+            "0"
+          ],
+          "valuearray": [
+            "1",
+            "0",
+            "0"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "AC3D",
+      "logo": "ac3d.bmp",
+      "default_joystick_mode": 4,
+      "pan": {
+        "actionarray": [
+          "17",
+          "0",
+          "0"
+        ],
+        "valuearray": [
+          "3",
+          "0",
+          "0"
+        ]
+      },
+      "rotate": {
+        "actionarray": [
+          "5",
+          "17",
+          "0"
+        ],
+        "valuearray": [
+          "3",
+          "1",
+          "0"
+        ]
+      },
+      "zoom": {
+        "actionarray": [
+          "0",
+          "0",
+          "0"
+        ],
+        "valuearray": [
+          "0",
+          "0",
+          "0"
+        ]
+      },
+      "buttons": [
+        {
+          "name": "button1",
+          "actionarray": [
+            "0",
+            "0",
+            "0"
+          ],
+          "valuearray": [
+            "0",
+            "0",
+            "0"
+          ]
+        },
+        {
+          "name": "button2",
+          "actionarray": [
+            "0",
+            "0",
+            "0"
+          ],
+          "valuearray": [
+            "0",
+            "0",
+            "0"
+          ]
+        },
+        {
+          "name": "button3",
+          "actionarray": [
+            "0",
+            "0",
+            "0"
+          ],
+          "valuearray": [
+            "0",
+            "0",
+            "0"
+          ]
+        },
+        {
+          "name": "button4",
+          "actionarray": [
+            "0",
+            "0",
+            "0"
+          ],
+          "valuearray": [
+            "0",
+            "0",
+            "0"
+          ]
+        },
+        {
+          "name": "button5",
+          "actionarray": [
+            "15",
+            "0",
+            "0"
+          ],
+          "valuearray": [
+            "7",
+            "0",
+            "0"
+          ]
+        },
+        {
+          "name": "button6",
+          "actionarray": [
+            "0",
+            "0",
+            "0"
+          ],
+          "valuearray": [
+            "0",
+            "0",
+            "0"
+          ]
+        },
+        {
+          "name": "button7",
+          "actionarray": [
+            "0",
+            "0",
+            "0"
+          ],
+          "valuearray": [
+            "0",
+            "0",
+            "0"
+          ]
+        },
+        {
+          "name": "button8",
+          "actionarray": [
+            "15",
+            "0",
+            "0"
+          ],
+          "valuearray": [
+            "8",
+            "0",
+            "0"
+          ]
+        },
+        {
+          "name": "button9",
+          "actionarray": [
+            "17",
+            "0",
+            "0"
+          ],
+          "valuearray": [
+            "1",
+            "0",
+            "0"
+          ]
+        }
+      ]
+    }
+  ]
+}

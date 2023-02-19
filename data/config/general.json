@@ -1,0 +1,16 @@
+{
+	"version": 1,
+	"menubuttoncolor": "#00efcb",
+	"functionbuttoncolor": "#000000",
+	"latchcolor": "#fe0149",
+	"background": "#000000",
+	"sleepenable": false,
+	"sleeptimer": 10,
+	"usbcommsenable": false,
+	"beep": true,
+	"modifier1": 130,
+	"modifier2": 129,
+	"modifier3": 0,
+	"helperdelay": 500,
+	"startup_menu": 0
+}

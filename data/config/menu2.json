@@ -1,0 +1,228 @@
+{
+  "menuname":"CAD", 
+  "button11": {
+    "logo": "calibrate.bmp",
+    "latch": false,
+    "latchlogo": "",
+    "actionarray": [
+      "15",
+      "0",
+      "0"
+    ],
+    "valuearray": [
+      "3",
+      "0",
+      "0"
+    ]
+  },
+  "button12": {
+    "logo": "zero.bmp",
+    "latch": false,
+    "latchlogo": "",
+    "actionarray": [
+      "15",
+      "0",
+      "0"
+    ],
+    "valuearray": [
+      "2",
+      "0",
+      "0"
+    ]
+  },
+  "button13": {
+    "logo": "flip_x.bmp",
+    "latch": false,
+    "latchlogo": "",
+    "actionarray": [
+      "15",
+      "0",
+      "0"
+    ],
+    "valuearray": [
+      "4",
+      "0",
+      "0"
+    ]
+  },
+  "button14": {
+    "logo": "flip_y.bmp",
+    "latch": false,
+    "latchlogo": "",
+    "actionarray": [
+      "15",
+      "0",
+      "0"
+    ],
+    "valuearray": [
+      "5",
+      "0",
+      "0"
+    ]
+  },
+  "button15": {
+    "logo": "blank.bmp",
+    "latch": false,
+    "latchlogo": "",
+    "actionarray": [
+      "0",
+      "0",
+      "0"
+    ],
+    "valuearray": [
+      "0",
+      "0",
+      "0"
+    ]
+  },
+  "button21": {
+    "logo": "floppy.bmp",
+    "latch": false,
+    "latchlogo": "",
+    "actionarray": [
+      "15",
+      "0",
+      "0"
+    ],
+    "valuearray": [
+      "6",
+      "0",
+      "0"
+    ]
+  },
+  "button22": {
+    "logo": "app.bmp",
+    "latch": false,
+    "latchlogo": "",
+    "actionarray": [
+      "14",
+      "0",
+      "0"
+    ],
+    "valuearray": [
+      "7",
+      "0",
+      "0"
+    ]
+  },
+  "button23": {
+    "logo": "blank.bmp",
+    "latch": false,
+    "latchlogo": "",
+    "actionarray": [
+      "0",
+      "0",
+      "0"
+    ],
+    "valuearray": [
+      "0",
+      "0",
+      "0"
+    ]
+  },
+  "button24": {
+    "logo": "info.bmp",
+    "latch": false,
+    "latchlogo": "",
+    "actionarray": [
+      "11",
+      "0",
+      "0"
+    ],
+    "valuearray": [
+      "9",
+      "0",
+      "0"
+    ]
+  },
+  "button25": {
+    "logo": "blank.bmp",
+    "latch": false,
+    "latchlogo": "",
+    "actionarray": [
+      "0",
+      "0",
+      "0"
+    ],
+    "valuearray": [
+      "0",
+      "0",
+      "0"
+    ]
+  },
+  "button31": {
+    "logo": "blank.bmp",
+    "latch": false,
+    "latchlogo": "",
+    "actionarray": [
+      "0",
+      "0",
+      "0"
+    ],
+    "valuearray": [
+      "0",
+      "0",
+      "0"
+    ]
+  },
+  "button32": {
+    "logo": "blank.bmp",
+    "latch": false,
+    "latchlogo": "",
+    "actionarray": [
+      "0",
+      "0",
+      "0"
+    ],
+    "valuearray": [
+      "0",
+      "0",
+      "0"
+    ]
+  },
+  "button33": {
+    "logo": "blank.bmp",
+    "latch": false,
+    "latchlogo": "",
+    "actionarray": [
+      "0",
+      "0",
+      "0"
+    ],
+    "valuearray": [
+      "0",
+      "0",
+      "0"
+    ]
+  },
+  "button34": {
+    "logo": "home.bmp",
+    "latch": false,
+    "latchlogo": "",
+    "actionarray": [
+      "14",
+      "0",
+      "0"
+    ],
+    "valuearray": [
+      "0",
+      "0",
+      "0"
+    ]
+  },
+  "button35": {
+    "logo": "home.bmp",
+    "latch": false,
+    "latchlogo": "",
+    "actionarray": [
+      "14",
+      "0",
+      "0"
+    ],
+    "valuearray": [
+      "0",
+      "0",
+      "0"
+    ]
+  }
+}

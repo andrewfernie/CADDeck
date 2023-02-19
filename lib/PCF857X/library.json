@@ -1,0 +1,24 @@
+{
+  "name": "PCF857X library",
+  "version": "2.3.4",
+  "keywords": "digital, i2c, encoder, expander, pcf8574, pcf8574a, pcf8575, pcf8575a, esp32, esp8266, stm32, SAMD, Arduino, wire",
+  "description": "Most starred PCF857X library. i2c digital expander for Arduino, esp32, SMT32 and ESP8266. Can read write digital values with only 2 wire. Very simple to use and encoder support.",
+  "homepage": "https://www.mischianti.org/category/my-libraries/pcf857X/",
+  "authors":
+  [
+    {
+      "name": "Renzo Mischianti",
+      "email": "renzo.mischianti@gmail.com",
+      "maintainer": true,
+      "url": "https://www.mischianti.org"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xreef/PCF857X_library"
+  },
+  "license": "MIT",
+  "frameworks": "arduino",
+  "platforms": "*",
+  "headers": ["PCF857X.h, PCF857X_library.h"]
+}
