@@ -51,11 +51,15 @@ The touch panel is adapted from Dustin Watt's FreeTouchDeck project (https://git
    Try setting LOG_MSG_LEVEL to 3 and you will get quite a few more status messages
 
 
-## Hardware Build
+# Hardware Build
 
 ![Assembly](images/Assembly.png)
 
 Most assembly is basic and is primarily wiring.  Complete 3D CAD models are provided in both Fusion360 and STEP formats in the hardware/model folder.
+
+References to button numbers are as shown in this diagram:
+![Button Numbers](images/ButtonLayout.png)
+
 
 ## Case
 A Fusion360 model of the case, as well as STL files, are included in the CADDeck repository. The main case is printed in four pieces. The two top sections are bolted together internal to the case with M3 cap screws and nuts. M3 threaded inserts are used in the top front piece (six places), then the bottom is attached to the top with M3 flat head screws. 
@@ -68,8 +72,12 @@ There is no obvious way to attach the screen to the case, so I soldered four 6mm
 ![Screen Attachment](images/ScreenAttachment.png)
 M2.5 flathead screews come through the bottom part of the case and are used to both hold the case closed and to attach the screen.
 
+## Joystick knob
+The joystick knob consists of two more 3D printed parts.  Two M3 screws are used to hold the two parts together, with threaded inserts in the bottom part. The perfboard to which the encoder and debounce/pullup components are mounted is clamped by the top and bottom parts. 
 
-Two more pieces are required for the joystick knob. 
+Four tactile buttons are located around the knob. I used a little hot glue to hold them in place against the bottom part of the knob. 
+
+The first version of the knob only had two buttons, equivalent to Buttons 5 and 6. The idea was to hold one down while moving the joystick to pan the view and the other to rotate the view. The problem was that I found it awkward to use Button 6 while holding the joystick in my left hand, and the same problem with Button 5 while holding the joystick in my right hand. So, I added Buttons 7 and 8.  I find that Buttons 5 and 8 work well with the left hand, and Buttons 6 and 7 work well with the right hand.
 
 ## Wiring
 A [wiring diagram](hardware/Electrical/Wiring%20Diagram.pdf) is included in the hardware/electrical folder. Most of it is straighjtforward.
@@ -110,7 +118,7 @@ Misc M3 hardware (nuts, screws, etc)
 30AWG silicon stranded wire
 r
 
-## Setup
+# Setup
 Once the unit is assembled and the display is coming up you should see the main page.
 ![Main Page](images/mainpage.png)
 
@@ -132,9 +140,10 @@ The joystick X and Y data may be bouncing around a bit. This is normal as the jo
 
 Bind your computer to the CADDeck using the Bluetooth setings page on your computer.
 
-## Configuration
+# Configuration
 Note that all of the pages shown or mentioned above are samples. Every page can be reorganized and customized to suit your needs via the configurator.
 
+## WiFi Configuration
 The configurator is accessed via a web browser on a computer or tablet connected to the same network as the ESP32. To enable the configurator go to the settings page on the touch panel and select the WiFi Enable button.  
 ![System Settings](images/systemsettings.png)
 
@@ -176,3 +185,32 @@ Below that is the button action definition. The same approach to defining the ac
 3. The actions that must be taken to enable pan/rotate/zoom to be controlled by the joystick (i.e. the mouse) within the selected CAD program. Note that the definition of what is needed to control pan/rotate/zoom is separate from which button enables that mode. As an example, Solidworks needs the middle mouse button to be held down to rotate the view. So, JoystickRotate/Action1 is set to "Mouse Buttons" and Value1 is set to "Press Middle Button". To assign the Rotate function to button 8, click "8" in the image to the left, then set SelectedButton/Action1 to "CAD Functions" and Value1 to "Joystick Rotate"
 ![Configuring the Rotate function](images/ConfigureRotate.png)
 At the very bottom is the "Save CAD Config" button. When selected the settings for all CAD programs are saved on the ESP32 in file cadparams.json
+
+## Default Configuration
+While everything can be changed via the configurator, there are some default settings provided with the code. These are:
+
+### Control assignments
+1. Joystick moves the mouse pointer
+2. Joystick with Button 5 held down pans the view
+3. Joystick with Button 6 held down rotates the view
+4. The encoder zooms in and out
+5. The encoder Button 9 is the same as the left mouse button (select)
+6. Button 1 is measure ("i" in Fusion360) (I assigned "i" as a keyboard shortcut to measure in Solidworks)
+7. Button 2 sets the zoom to fit ("F6" in Fusion360), ("f" in Solidworks)
+8. Button 3 unselects ("ESC" in Fusion360 and Solidworks)
+9. Button 4 toggles object visibility ("v" in Fusion360) or hides object ("TAB" in Solidworks)
+
+### Menus
+Menu numbers are assigned as follows:
+1. Menu 0: Main menu
+2. Menu 1: System Settings
+3. Menu 2: CAD Settings
+4. Menu 3: Not used
+5. Menu 4: Not used
+6. Menu 5: Not used
+7. Menu 6: Not used
+8. Menu 7: Select active CAD program
+9. Menu 8: Fusion360 actions
+10. Menu 9: Not used
+ 
+

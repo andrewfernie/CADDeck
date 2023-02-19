@@ -121,7 +121,7 @@
     ]
   },
   "button24": {
-    "logo": "info.bmp",
+    "logo": "ones_zeros.bmp",
     "latch": false,
     "latchlogo": "",
     "actionarray": [

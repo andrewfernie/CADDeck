@@ -91,12 +91,12 @@
         {
           "name": "button4",
           "actionarray": [
-            "0",
+            "2",
             "0",
             "0"
           ],
           "valuearray": [
-            "0",
+            "6",
             "0",
             "0"
           ]
@@ -251,12 +251,12 @@
         {
           "name": "button4",
           "actionarray": [
-            "0",
+            "4",
             "0",
             "0"
           ],
           "valuearray": [
-            "0",
+            "v",
             "0",
             "0"
           ]
