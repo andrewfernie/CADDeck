@@ -237,6 +237,7 @@ void drawKeypad()
         }
 
         drawTopStatusBar(true);  // Draw the top status bar, with a forced redraw
+        drawBottomStatusBar(true);  // Draw the bottom status bar, with a forced redraw
     }
 
     else if (pageNum == SPECIAL_4_PAGE) {
@@ -587,7 +588,7 @@ void drawBottomStatusBar(bool force_redraw = true)
     }
 
     strncpy(buffer, "", sizeof(buffer));
-    comparison = strncmp(buffer, bottomStatusBarTextRight, sizeof(buffer));
+    comparison = strncmp(buffer, bottomStatusBarTextRight, sizeof(bottomStatusBarTextRight));
 
     if (comparison != 0 || force_redraw) {
         tft.fillRect(SCREEN_WIDTH - SCREEN_WIDTH / 3, SCREEN_HEIGHT - KEY_MARGIN_Y_BOTTOM, SCREEN_WIDTH / 3, KEY_MARGIN_Y_BOTTOM, TFT_BLACK);
