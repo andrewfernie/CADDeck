@@ -422,7 +422,12 @@ bool resetconfig(String file)
         newfile.println("\"joy_scale_y\": 1.0,");
         newfile.println("\"joy_deadzone\": 0.01,");
         newfile.println("\"joy_sensitivity\": 10,");
-        newfile.println("\"thumbwheel_sensitivity\": 1,");
+        newfile.println("\"zoom_scale\": 1.0,");
+        newfile.println("\"zoom_deadzone\": 0.01,");
+        newfile.println("\"zoom_sensitivity\": 10,");
+        newfile.println("\"rotate_scale\": 1.0,");
+        newfile.println("\"rotate_deadzone\": 0.01,");
+        newfile.println("\"rotate_sensitivity\": 10,");
         newfile.println("\"joy_steady_time\": 200,");
         newfile.println("\"CADProgram\": \"Solidworks\" ");
 

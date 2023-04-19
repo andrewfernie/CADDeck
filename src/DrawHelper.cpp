@@ -430,52 +430,35 @@ void printIOValues()
     tft.setTextColor(TFT_WHITE, TFT_BLACK);
     tft.printf("Version: %s    \n", versionnumber);
 
-#ifdef JOYSTICK_ENABLE
     tft.printf("Joystick X: %f     \n", joystick.x());
     tft.printf("Joystick Y: %f     \n", joystick.y());
-#else
-    tft.println("Joystick X: Disabled");
-    tft.println("Joystick Y: Disabled");
-#endif
+
+    tft.printf("Zoom: %f     \n", zoomControl.Value());
+    tft.printf("Rotate: %f     \n", rotateControl.Value());
 
     //    PCF857X::DigitalInput di = pcf857X.digitalReadAll();
 
-    tft.print(" ENC_1 A-B-SW: ");
-    tft.print(digitalRead(ENC_1_A));
-    tft.print(" - ");
-    tft.print(digitalRead(ENC_1_B));
-    tft.print(" - ");
-    tft.println(get_pcf857X_bit(pcf857X_inputs, ENC_1_SW));
-    tft.print(" ENC_1 value: ");
-    tft.print(encoder1Value);
-    tft.println("   "); 
-
-    tft.print(" Buttons 1-2-3-4: ");
+    tft.print(" Buttons 1-2-3-4-5: ");
     tft.print(get_pcf857X_bit(pcf857X_inputs, BUTTON_1));
     tft.print(" - ");
     tft.print(get_pcf857X_bit(pcf857X_inputs, BUTTON_2));
     tft.print(" - ");
     tft.print(get_pcf857X_bit(pcf857X_inputs, BUTTON_3));
     tft.print(" - ");
-    tft.println(get_pcf857X_bit(pcf857X_inputs, BUTTON_4));
+    tft.print(get_pcf857X_bit(pcf857X_inputs, BUTTON_4));
+    tft.print(" - ");
+    tft.println(get_pcf857X_bit(pcf857X_inputs, BUTTON_5));
 
-    tft.print(" Joystick Buttons 1-2-3-4: ");
-    tft.print(get_pcf857X_bit(pcf857X_inputs, BUTTON_JOY_1));
+    tft.print(" Buttons 6-7-8-9-10: ");
+    tft.print(get_pcf857X_bit(pcf857X_inputs, BUTTON_6));
     tft.print(" - ");
-    tft.print(get_pcf857X_bit(pcf857X_inputs, BUTTON_JOY_2));
+    tft.print(get_pcf857X_bit(pcf857X_inputs, BUTTON_7));
     tft.print(" - ");
-    tft.print(get_pcf857X_bit(pcf857X_inputs, BUTTON_JOY_3));
+    tft.print(get_pcf857X_bit(pcf857X_inputs, BUTTON_8));
     tft.print(" - ");
-    tft.println(get_pcf857X_bit(pcf857X_inputs, BUTTON_JOY_4));
-
-    tft.print(" Joystick Mode Pins 0-1-2-3: ");
-    tft.print(joystick_mode_pins[0]);
+    tft.print(get_pcf857X_bit(pcf857X_inputs, BUTTON_9));
     tft.print(" - ");
-    tft.print(joystick_mode_pins[1]);
-    tft.print(" - ");
-    tft.print(joystick_mode_pins[2]);
-    tft.print(" - ");
-    tft.println(joystick_mode_pins[3]);
+    tft.println(get_pcf857X_bit(pcf857X_inputs, BUTTON_10));
 
     delay(100);
 
