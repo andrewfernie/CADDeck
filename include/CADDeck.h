@@ -1,8 +1,11 @@
 #pragma once
 
+// This code is being developed on two different hardware platforms with different pin allocations.
+#define NEW_PINS
+
 // Basic macros for debug and info messages to the serial port
 #define LOG_MSG_BASIC 1
-#define LOG_MSG_LEVEL 3  // 1=ERROR, 2=ERROR+WARN, 3=ERROR+WARN+INFO
+#define LOG_MSG_LEVEL 1  // 1=ERROR, 2=ERROR+WARN, 3=ERROR+WARN+INFO
 #define LOG_MSG_DEBUG 1
 #define LOG_MSG_TOUCH_DEBUG 0  // messages to console each time a touch is detected
 #define USE_DEBUG_PINS 0
