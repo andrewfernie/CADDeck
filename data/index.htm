@@ -661,26 +661,28 @@
 							<img src="ButtonLayout10.png" usemap="#image-map">
 
 							<map name="image-map">
-								<area target="" alt="Button 1" title="Button 1" href="#" coords="67,74,103,110"
+								<area target="" alt="Button 0" title="Button 0" href="#" coords="247,133,285,166"
 									shape="rect" onclick="select_new_button(0)">
-								<area target="" alt="Button 2" title="Button 2" href="#" coords="120,74,151,106"
+								<area target="" alt="Button 1" title="Button 1" href="#" coords="67,74,103,110"
 									shape="rect" onclick="select_new_button(1)">
-								<area target="" alt="Button 3" title="Button 3" href="#" coords="63,125,101,164"
+								<area target="" alt="Button 2" title="Button 2" href="#" coords="120,74,151,106"
 									shape="rect" onclick="select_new_button(2)">
-								<area target="" alt="Button 4" title="Button 4" href="#" coords="116,131,156,165"
+								<area target="" alt="Button 3" title="Button 3" href="#" coords="63,125,101,164"
 									shape="rect" onclick="select_new_button(3)">
-								<area target="" alt="Button 5" title="Button 5" href="#" coords="114,184,157,224"
+								<area target="" alt="Button 4" title="Button 4" href="#" coords="116,131,156,165"
 									shape="rect" onclick="select_new_button(4)">
-								<area target="" alt="Button 6" title="Button 6" href="#" coords="378,76,417,110"
+								<area target="" alt="Button 5" title="Button 5" href="#" coords="114,184,157,224"
 									shape="rect" onclick="select_new_button(5)">
-								<area target="" alt="Button 7" title="Button 7" href="#" coords="430,73,473,111"
+								<area target="" alt="Button 6" title="Button 6" href="#" coords="378,76,417,110"
 									shape="rect" onclick="select_new_button(6)">
-								<area target="" alt="Button 8" title="Button 8" href="#" coords="377,126,420,167"
+								<area target="" alt="Button 7" title="Button 7" href="#" coords="430,73,473,111"
 									shape="rect" onclick="select_new_button(7)">
-								<area target="" alt="Button 9" title="Button 9" href="#" coords="431,129,474,171"
+								<area target="" alt="Button 8" title="Button 8" href="#" coords="377,126,420,167"
 									shape="rect" onclick="select_new_button(8)">
-								<area target="" alt="Button 10" title="Button 10" href="#" coords="376,179,421,224"
+								<area target="" alt="Button 9" title="Button 9" href="#" coords="431,129,474,171"
 									shape="rect" onclick="select_new_button(9)">
+								<area target="" alt="Button 10" title="Button 10" href="#" coords="376,179,421,224"
+									shape="rect" onclick="select_new_button(10)">
 							</map>
 						</td>
 						<!-- <td style="width: 50%;"> -->
@@ -753,7 +755,8 @@
 								<tr>
 									<br>
 									<br />Selected Button:
-									<input type="text" id="selected_hw_button" name="selected_hw_button" style="border:0px" readonly>
+									<input type="text" id="selected_hw_button" name="selected_hw_button"
+										style="border:0px" readonly>
 									<br />Action 1:
 									<select class="actions" id='joybuttonaction0' name='joybuttonaction0'></select>
 									<select class="actions" id='joybuttonvalue0' name='joybuttonvalue0'></select>
@@ -1796,6 +1799,10 @@
 			{
 				name: 'Joystick Rotate',
 				value: '14'
+			},
+			{
+				name: 'Mode Button',
+				value: '15'
 			}
 			]
 		},
@@ -3637,7 +3644,7 @@
 				})
 		}
 
-		// Five applications, each with ten buttons, each with action and value arrays
+		// Five applications, each with eleven buttons, each with action and value arrays
 		var hwbuttondefs =
 			[[[["0", "0", "0"], ["0", "0", "0"]],
 			[["0", "0", "0"], ["0", "0", "0"]],
@@ -3648,15 +3655,6 @@
 			[["0", "0", "0"], ["0", "0", "0"]],
 			[["0", "0", "0"], ["0", "0", "0"]],
 			[["0", "0", "0"], ["0", "0", "0"]],
-			[["0", "0", "0"], ["0", "0", "0"]]],
-			[[["0", "0", "0"], ["0", "0", "0"]],
-			[["0", "0", "0"], ["0", "0", "0"]],
-			[["0", "0", "0"], ["0", "0", "0"]],
-			[["0", "0", "0"], ["0", "0", "0"]],
-			[["0", "0", "0"], ["0", "0", "0"]],
-			[["0", "0", "0"], ["0", "0", "0"]],
-			[["0", "0", "0"], ["0", "0", "0"]],
-			[["0", "0", "0"], ["0", "0", "0"]],
 			[["0", "0", "0"], ["0", "0", "0"]],
 			[["0", "0", "0"], ["0", "0", "0"]]],
 			[[["0", "0", "0"], ["0", "0", "0"]],
@@ -3668,6 +3666,18 @@
 			[["0", "0", "0"], ["0", "0", "0"]],
 			[["0", "0", "0"], ["0", "0", "0"]],
 			[["0", "0", "0"], ["0", "0", "0"]],
+			[["0", "0", "0"], ["0", "0", "0"]],
+			[["0", "0", "0"], ["0", "0", "0"]]],
+			[[["0", "0", "0"], ["0", "0", "0"]],
+			[["0", "0", "0"], ["0", "0", "0"]],
+			[["0", "0", "0"], ["0", "0", "0"]],
+			[["0", "0", "0"], ["0", "0", "0"]],
+			[["0", "0", "0"], ["0", "0", "0"]],
+			[["0", "0", "0"], ["0", "0", "0"]],
+			[["0", "0", "0"], ["0", "0", "0"]],
+			[["0", "0", "0"], ["0", "0", "0"]],
+			[["0", "0", "0"], ["0", "0", "0"]],
+			[["0", "0", "0"], ["0", "0", "0"]],
 			[["0", "0", "0"], ["0", "0", "0"]]],
 			[[["0", "0", "0"], ["0", "0", "0"]],
 			[["0", "0", "0"], ["0", "0", "0"]],
@@ -3678,8 +3688,10 @@
 			[["0", "0", "0"], ["0", "0", "0"]],
 			[["0", "0", "0"], ["0", "0", "0"]],
 			[["0", "0", "0"], ["0", "0", "0"]],
+			[["0", "0", "0"], ["0", "0", "0"]],
 			[["0", "0", "0"], ["0", "0", "0"]]],
 			[[["0", "0", "0"], ["0", "0", "0"]],
+			[["0", "0", "0"], ["0", "0", "0"]],
 			[["0", "0", "0"], ["0", "0", "0"]],
 			[["0", "0", "0"], ["0", "0", "0"]],
 			[["0", "0", "0"], ["0", "0", "0"]],
@@ -3777,7 +3789,7 @@
 						axisbuttondefs[program][ZoomAxis][1][1] = data.programs[program].zoom.valuearray[1];
 						axisbuttondefs[program][ZoomAxis][1][2] = data.programs[program].zoom.valuearray[2];
 
-						for (let button = 0; button <= 9; button++) {
+						for (let button = 0; button <= 10; button++) {
 							console.log('   Loading defn button ' + button);
 							hwbuttondefs[program][button][0][0] = data.programs[program].buttons[button].actionarray[0];
 							hwbuttondefs[program][button][0][1] = data.programs[program].buttons[button].actionarray[1];
@@ -3799,7 +3811,7 @@
 		}
 
 		function show_hwbutton_def(program_index, button_index) {
-			document.getElementById("selected_hw_button").value = "Button " + (button_index+1);
+			document.getElementById("selected_hw_button").value = "Button " + (button_index);
 
 			document.getElementById("joybuttonaction0").value = hwbuttondefs[program_index][button_index][0][0];
 			document.getElementById("joybuttonaction1").value = hwbuttondefs[program_index][button_index][0][1];

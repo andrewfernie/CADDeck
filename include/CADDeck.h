@@ -281,7 +281,7 @@ struct CADConfig {
     uint16_t num_programs;
 };
 
-#define NUM_HW_BUTTONS 10
+#define NUM_HW_BUTTONS 11
 struct CADProgramConfig {
     uint8_t version;
     char name[32];
@@ -375,9 +375,9 @@ enum CADFnEnum {
     CADFn_NoAction = 0,
     CADFn_SetCADProgram = 1,
     CADFn_CalibrateZero = 2,
-    CADFn_CalibrateJoyScale = 3,
-    CADFn_CalibrateZoomScale = 4,
-    CADFn_CalibrateRotateScale = 5,
+    CADFn_CalibrateControlScale = 3,
+    CADFn_Spare1 = 4,
+    CADFn_Spare2 = 5,
     CADFn_InvertJoyScaleX = 6,
     CADFn_InvertJoyScaleY = 7,
     CADFn_InvertScaleZoom = 8,
@@ -386,7 +386,8 @@ enum CADFnEnum {
     CADFn_JoystickPan = 11,
     CADFn_JoystickTilt = 12,
     CADFn_JoystickZoom = 13,
-    CADFn_JoystickRotate = 14
+    CADFn_JoystickRotate = 14,
+    CADFn_ModeSelect = 15
 };
 
 enum JoystickMode {

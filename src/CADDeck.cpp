@@ -45,7 +45,7 @@
 
 #include "CADDeck.h"
 
-const char *versionnumber = "0.0.8.10Button.WIP";
+const char *versionnumber = "0.0.9_10Button.WIP";
 
 /*
  * Version 0.0.8.10Button.WIP    - In work
@@ -203,7 +203,7 @@ char jsonFileFail[32] = "";
 
 bool psramAvailable = false;
 
-uint8_t last_hwbutton_state[NUM_HW_BUTTONS] = {0, 0, 0, 0, 0, 0, 0, 0, 0};
+uint8_t last_hwbutton_state[NUM_HW_BUTTONS] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
 // Invoke the TFT_eSPI button class and create all the button objects
 TFT_eSPI_Button key[BUTTON_ROWS][BUTTON_COLS];
