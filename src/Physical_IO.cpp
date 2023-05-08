@@ -174,7 +174,7 @@ void update_io()
             case CADApp_FreeCAD:
             case CADApp_AC3D:
                 if (control_mode == 0) {
-                    Mouse.move(joystick.x() * cadconfig.joy_sensitivity, joystick.y() * cadconfig.joy_sensitivity, 0);
+                    Mouse.move(joystick.x() * cadconfig.joy_sensitivity, joystick.y() * cadconfig.joy_sensitivity, zoomControl.Value() * cadconfig.zoom_sensitivity);
                 }
                 else if (control_mode == 1) {
                     Mouse.move(rotateControl.Value() * cadconfig.rotate_sensitivity, 0, 0);
