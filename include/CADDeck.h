@@ -4,6 +4,7 @@
 #define NEW_PINS
 
 // Basic macros for debug and info messages to the serial port
+// If too many messages are being sent the web server used for the configurator may not work as well. 
 #define LOG_MSG_BASIC 1
 #define LOG_MSG_LEVEL 1  // 1=ERROR, 2=ERROR+WARN, 3=ERROR+WARN+INFO
 #define LOG_MSG_DEBUG 1
@@ -397,4 +398,12 @@ enum JoystickMode {
     JoystickModeZoom = 3,
     JoystickModeRotate = 4,
     JoystickModeMouse = 5
+};
+
+enum CADApplications {
+    CADApp_SolidWorks = 0,
+    CADApp_Fusion360 = 1,
+    CADApp_Blender = 2,
+    CADApp_FreeCAD = 3,
+    CADApp_AC3D = 4
 };
