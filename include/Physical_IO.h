@@ -21,8 +21,8 @@ const uint8_t JOYSTICK_Y = 33;
 extern int8_t joystick_mode_pins[4];
 extern int8_t mode_select_button_pin;
 
-const uint8_t ZOOM_PIN = 34;
-const uint8_t ROTATE_PIN = 35;
+const uint8_t ZOOM_PIN = 35;
+const uint8_t ROTATE_PIN = 34;
 
 const uint16_t CALIBRATION_TIME_MS = 10000;
 
@@ -34,11 +34,11 @@ const uint8_t BUTTON_2 = P2;
 const uint8_t BUTTON_3 = P3;
 const uint8_t BUTTON_4 = P4;
 const uint8_t BUTTON_5 = P5;
-const uint8_t BUTTON_6 = P10;
-const uint8_t BUTTON_7 = P11;
-const uint8_t BUTTON_8 = P12;
-const uint8_t BUTTON_9 = P13;
-const uint8_t BUTTON_10 = P14;
+const uint8_t BUTTON_6 = P8;
+const uint8_t BUTTON_7 = P9;
+const uint8_t BUTTON_8 = P10;
+const uint8_t BUTTON_9 = P11;
+const uint8_t BUTTON_10 = P12;
 #else
 const uint8_t BUTTON_0 = P14;
 const uint8_t BUTTON_1 = P8;
