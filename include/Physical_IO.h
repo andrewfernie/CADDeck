@@ -3,6 +3,7 @@
 #include "joystick.h"
 #include "AnalogControl.h"
 #include "PCF857X.h"
+#include "DenoiseComparison.h"
 
 
 const uint8_t PCF857X_SCL = 19;
