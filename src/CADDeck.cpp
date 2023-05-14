@@ -45,11 +45,17 @@
 
 #include "CADDeck.h"
 
-const char *versionnumber = "0.0.11_10Button";
+const char *versionnumber = "0.0.12_10Button";
 
 /*
 
- * Version 0.0.11.10Button
+ * Version 0.0.12.10Button
+ *                   - Fix initialization of active CAD program for configurator
+ *                   - Disable sleep timer to see if this is the cause of losing bluetooth connection
+ *                   - To help setup debug, the default behavior of button_1 to button_10 (not including button 0) in 
+ *                     cadparams.json is to send a letter "a" through "j". This can be changed in the configurator.
+ *
+ * * Version 0.0.11.10Button
  *                   - Zoom control active without pushing button
  *
  * Version 0.0.10.10Button
