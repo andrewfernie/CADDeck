@@ -1,5 +1,6 @@
 #pragma once
 
+#define BLUETOOTH_COMMANDS   // Enable Bluetooth commands (BLE Keyboard and BLE Mouse). Otherwise only USB commands are enabled. (IN WORK)
 // This code is being developed on two different hardware platforms with different pin allocations.
 #define NEW_PINS
 
@@ -17,7 +18,10 @@
 // NOTE: The hardware configuration for the display (pins, display type, etc.) is defined in the platformio.ini file.
 // This avoids the need to modify files in the TFT_eSPI library, which would be overwritten when the library is updated.
 
+#ifdef BLUETOOTH_COMMANDS
 #include <BleCombo.h>     // BLE combo library (Keyboard and Mouse)
+#else
+#endif
 #include <FS.h>           // Filesystem support header
 #include <Preferences.h>  // Used to store states before sleep/reboot
 #include <TFT_eSPI.h>     // The TFT_eSPI library
@@ -34,6 +38,7 @@
 #include <SPIFFS.h>  // Filesystem support header
 #endif
 
+#ifdef BLUETOOTH_COMMANDS
 #if defined(USE_NIMBLE)
 
 #include "NimBLEBeacon.h"  // Additional BLE functionaity using NimBLE
@@ -47,6 +52,7 @@
 #include "BLEUtils.h"   // Additional BLE functionaity
 
 #endif  // USE_NIMBLE
+#endif
 
 #include <ArduinoJson.h>        // Using ArduinoJson to read and write config files
 #include <AsyncTCP.h>           //Async Webserver support header
@@ -54,8 +60,10 @@
 #include <ESPmDNS.h>            // DNS functionality
 #include <WiFi.h>               // Wifi support
 
+#ifdef BLUETOOTH_COMMANDS
 #include "esp_bt_device.h"  // Additional BLE functionaity
 #include "esp_bt_main.h"    // Additional BLE functionaity
+#endif
 #include "esp_sleep.h"      // Additional BLE functionaity
 
 #include "DrawHelper.h"
@@ -333,10 +341,12 @@ extern char jsonFileFail[32];
 // Invoke the TFT_eSPI button class and create all the button objects
 extern TFT_eSPI_Button key[BUTTON_ROWS][BUTTON_COLS];
 
+#ifdef BLUETOOTH_COMMUNICATION
 // Checking for BLE Keyboard version
 #ifndef BLE_COMBO_VERSION
 #warning Original ESP32-BLE-Combo Keyboard version detected. Please check.
 #define BLE_COMBO_VERSION "Outdated"
+#endif
 #endif
 
 // Special pages

@@ -68,7 +68,7 @@
 
 #include "CADDeck.h"
 
-const char *versionnumber = "0.0.13_10Button";
+const char *versionnumber = "0.0.16_10Button";
 
 /*
  * Version 0.0.13.10Button
@@ -579,9 +579,11 @@ void setup()
     tft.setFreeFont(LABEL_FONT);
 
     //------------------BLE Initialization ------------------------
-    MSG_INFOLN("[INFO] Starting BLE");
-    // bleKeyboard.begin();
-    // bleMouse.begin();
+    #ifdef BLUETOOTH_COMMANDS
+    MSG_INFOLN("[INFO] Starting BLE HID devices");
+    #else
+    MSG_INFOLN("[INFO] Starting USB HID devices");
+    #endif
     Keyboard.begin();
     Mouse.begin();
 
