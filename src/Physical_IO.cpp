@@ -57,40 +57,40 @@ void set_move_mode(uint8_t cadapp)
 {
     switch (cadapp) {
         case CADApp_SolidWorks:
-            KeyboardMouseAction(17, 11, 0);  // Release all mouse buttons
-            KeyboardMouseAction(5, 9, 0);    // Release all keys
-            KeyboardMouseAction(5, 1, 0);    // Set left ctrl key
-            KeyboardMouseAction(17, 3, 0);   // Set middle mouse button
+            KeyboardMouseAction(Action_MouseButton, MouseButton_RLRM, 0);  // Release all mouse buttons
+            KeyboardMouseAction(Action_Option, OptionKey_ReleaseAll, 0);    // Release all keys
+            KeyboardMouseAction(Action_Option, OptionKey_LCtrl, 0);    // Set left ctrl key
+            KeyboardMouseAction(Action_MouseButton, MouseButton_PM, 0);   // Set middle mouse button
             break;
 
         case CADApp_Fusion360:
-            KeyboardMouseAction(17, 11, 0);  // Release all mouse buttons
-            KeyboardMouseAction(5, 9, 0);    // Release all keys
-            KeyboardMouseAction(17, 3, 0);   // Set middle mouse button
+            KeyboardMouseAction(Action_MouseButton, MouseButton_RLRM, 0);  // Release all mouse buttons
+            KeyboardMouseAction(Action_Option, OptionKey_ReleaseAll, 0);    // Release all keys
+            KeyboardMouseAction(Action_MouseButton, MouseButton_PM, 0);   // Set middle mouse button
             break;
 
         case CADApp_Blender:
-            KeyboardMouseAction(17, 11, 0);  // Release all mouse buttons
-            KeyboardMouseAction(5, 9, 0);    // Release all keys
-            KeyboardMouseAction(5, 2, 0);    // Set left shift key
-            KeyboardMouseAction(17, 3, 0);   // Set middle mouse button
+            KeyboardMouseAction(Action_MouseButton, MouseButton_RLRM, 0);  // Release all mouse buttons
+            KeyboardMouseAction(Action_Option, OptionKey_ReleaseAll, 0);    // Release all keys
+            KeyboardMouseAction(Action_Option, OptionKey_LShift, 0);    // Set left shift key
+            KeyboardMouseAction(Action_MouseButton, MouseButton_PM, 0);   // Set middle mouse button
             break;
 
         case CADApp_FreeCAD:
-            KeyboardMouseAction(17, 11, 0);  // Release all mouse buttons
-            KeyboardMouseAction(5, 9, 0);    // Release all keys
-            KeyboardMouseAction(17, 3, 0);   // Set middle mouse button
+            KeyboardMouseAction(Action_MouseButton, MouseButton_RLRM, 0);  // Release all mouse buttons
+            KeyboardMouseAction(Action_Option, OptionKey_ReleaseAll, 0);    // Release all keys
+            KeyboardMouseAction(Action_MouseButton, MouseButton_PM, 0);   // Set middle mouse button
             break;
 
         case CADApp_AC3D:
-            KeyboardMouseAction(17, 11, 0);  // Release all mouse buttons
-            KeyboardMouseAction(5, 9, 0);    // Release all keys
-            KeyboardMouseAction(17, 3, 0);   // Set middle mouse button
+            KeyboardMouseAction(Action_MouseButton, MouseButton_RLRM, 0);  // Release all mouse buttons
+            KeyboardMouseAction(Action_Option, OptionKey_ReleaseAll, 0);    // Release all keys
+            KeyboardMouseAction(Action_MouseButton, MouseButton_PM, 0);   // Set middle mouse button
             break;
 
         default:
-            KeyboardMouseAction(17, 11, 0);  // Release all mouse buttons
-            KeyboardMouseAction(5, 9, 0);    // Release all keys
+            KeyboardMouseAction(Action_MouseButton, MouseButton_RLRM, 0);  // Release all mouse buttons
+            KeyboardMouseAction(Action_Option, OptionKey_ReleaseAll, 0);    // Release all keys
             break;
     }
     control_mode = JOYSTICK_CONTROL_MODE_MOVE;
@@ -101,41 +101,41 @@ void set_rotate_mode(uint8_t cadapp)
 {
     switch (cadapp) {
         case CADApp_SolidWorks:
-            KeyboardMouseAction(17, 11, 0);  // Release all mouse buttons
-            KeyboardMouseAction(5, 9, 0);    // Release all keys
-            KeyboardMouseAction(17, 3, 0);   // Set middle mouse button
+            KeyboardMouseAction(Action_MouseButton, MouseButton_RLRM, 0);  // Release all mouse buttons
+            KeyboardMouseAction(Action_Option, OptionKey_ReleaseAll, 0);    // Release all keys
+            KeyboardMouseAction(Action_MouseButton, MouseButton_PM, 0);   // Set middle mouse button
             break;
 
         case CADApp_Fusion360:
-            KeyboardMouseAction(17, 11, 0);  // Release all mouse buttons
-            KeyboardMouseAction(5, 9, 0);    // Release all keys
-            KeyboardMouseAction(5, 2, 0);    // Set left shift key
-            KeyboardMouseAction(17, 3, 0);   // Set middle mouse button
+            KeyboardMouseAction(Action_MouseButton, MouseButton_RLRM, 0);  // Release all mouse buttons
+            KeyboardMouseAction(Action_Option, OptionKey_ReleaseAll, 0);    // Release all keys
+            KeyboardMouseAction(Action_Option, OptionKey_LShift, 0);    // Set left shift key
+            KeyboardMouseAction(Action_MouseButton, MouseButton_PM, 0);   // Set middle mouse button
             break;
 
         case CADApp_Blender:
-            KeyboardMouseAction(17, 11, 0);  // Release all mouse buttons
-            KeyboardMouseAction(5, 9, 0);    // Release all keys
-            KeyboardMouseAction(17, 3, 0);   // Set middle mouse button
+            KeyboardMouseAction(Action_MouseButton, MouseButton_RLRM, 0);  // Release all mouse buttons
+            KeyboardMouseAction(Action_Option, OptionKey_ReleaseAll, 0);    // Release all keys
+            KeyboardMouseAction(Action_MouseButton, MouseButton_PM, 0);   // Set middle mouse button
             break;
 
         case CADApp_FreeCAD:
-            KeyboardMouseAction(17, 11, 0);  // Release all mouse buttons
-            KeyboardMouseAction(5, 9, 0);    // Release all keys
-            KeyboardMouseAction(17, 3, 0);   // Set middle mouse button
-            KeyboardMouseAction(17, 2, 0);   // Set right mouse button (must set middle mouse button then right mouse button for FreeCAD)
+            KeyboardMouseAction(Action_MouseButton, MouseButton_RLRM, 0);  // Release all mouse buttons
+            KeyboardMouseAction(Action_Option, OptionKey_ReleaseAll, 0);    // Release all keys
+            KeyboardMouseAction(Action_MouseButton, MouseButton_PM, 0);   // Set middle mouse button
+            KeyboardMouseAction(Action_MouseButton, MouseButton_PR, 0);   // Set right mouse button (must set middle mouse button then right mouse button for FreeCAD)
             break;
 
         case CADApp_AC3D:
-            KeyboardMouseAction(17, 11, 0);  // Release all mouse buttons
-            KeyboardMouseAction(5, 9, 0);    // Release all keys
-            KeyboardMouseAction(5, 3, 0);    // Set left alt key
-            KeyboardMouseAction(17, 1, 0);   // Set left mouse button
+            KeyboardMouseAction(Action_MouseButton, MouseButton_RLRM, 0);  // Release all mouse buttons
+            KeyboardMouseAction(Action_Option, OptionKey_ReleaseAll, 0);    // Release all keys
+            KeyboardMouseAction(Action_Option, OptionKey_LAlt, 0);    // Set left alt key
+            KeyboardMouseAction(Action_MouseButton, MouseButton_PL, 0);   // Set left mouse button
             break;
 
         default:
-            KeyboardMouseAction(17, 11, 0);  // Release all mouse buttons
-            KeyboardMouseAction(5, 9, 0);    // Release all keys
+            KeyboardMouseAction(Action_MouseButton, MouseButton_RLRM, 0);  // Release all mouse buttons
+            KeyboardMouseAction(Action_Option, OptionKey_ReleaseAll, 0);    // Release all keys
             break;
     }
 
@@ -147,41 +147,41 @@ void set_pantilt_mode(uint8_t cadapp)
 {
     switch (cadapp) {
         case CADApp_SolidWorks:
-            KeyboardMouseAction(17, 11, 0);  // Release all mouse buttons
-            KeyboardMouseAction(5, 9, 0);    // Release all keys
-            KeyboardMouseAction(17, 3, 0);   // Set middle mouse button
+            KeyboardMouseAction(Action_MouseButton, MouseButton_RLRM, 0);  // Release all mouse buttons
+            KeyboardMouseAction(Action_Option, OptionKey_ReleaseAll, 0);    // Release all keys
+            KeyboardMouseAction(Action_MouseButton, MouseButton_PM, 0);   // Set middle mouse button
             break;
 
         case CADApp_Fusion360:
-            KeyboardMouseAction(17, 11, 0);  // Release all mouse buttons
-            KeyboardMouseAction(5, 9, 0);    // Release all keys
-            KeyboardMouseAction(5, 2, 0);    // Set left shift key
-            KeyboardMouseAction(17, 3, 0);   // Set middle mouse button
+            KeyboardMouseAction(Action_MouseButton, MouseButton_RLRM, 0);  // Release all mouse buttons
+            KeyboardMouseAction(Action_Option, OptionKey_ReleaseAll, 0);    // Release all keys
+            KeyboardMouseAction(Action_Option, OptionKey_LShift, 0);    // Set left shift key
+            KeyboardMouseAction(Action_MouseButton, MouseButton_PM, 0);   // Set middle mouse button
             break;
 
         case CADApp_Blender:
-            KeyboardMouseAction(17, 11, 0);  // Release all mouse buttons
-            KeyboardMouseAction(5, 9, 0);    // Release all keys
-            KeyboardMouseAction(17, 3, 0);   // Set middle mouse button
+            KeyboardMouseAction(Action_MouseButton, MouseButton_RLRM, 0);  // Release all mouse buttons
+            KeyboardMouseAction(Action_Option, OptionKey_ReleaseAll, 0);    // Release all keys
+            KeyboardMouseAction(Action_MouseButton, MouseButton_PM, 0);   // Set middle mouse button
             break;
 
         case CADApp_FreeCAD:
-            KeyboardMouseAction(17, 11, 0);  // Release all mouse buttons
-            KeyboardMouseAction(5, 9, 0);    // Release all keys
-            KeyboardMouseAction(17, 3, 0);   // Set middle mouse button
-            KeyboardMouseAction(17, 2, 0);   // Set right mouse button (must set middle mouse button then right mouse button for FreeCAD)
+            KeyboardMouseAction(Action_MouseButton, MouseButton_RLRM, 0);  // Release all mouse buttons
+            KeyboardMouseAction(Action_Option, OptionKey_ReleaseAll, 0);    // Release all keys
+            KeyboardMouseAction(Action_MouseButton, MouseButton_PM, 0);   // Set middle mouse button
+            KeyboardMouseAction(Action_MouseButton, MouseButton_PR, 0);   // Set right mouse button (must set middle mouse button then right mouse button for FreeCAD)
             break;
 
         case CADApp_AC3D:
-            KeyboardMouseAction(17, 11, 0);  // Release all mouse buttons
-            KeyboardMouseAction(5, 9, 0);    // Release all keys
-            KeyboardMouseAction(5, 3, 0);    // Set left alt key
-            KeyboardMouseAction(17, 1, 0);   // Set left mouse button
+            KeyboardMouseAction(Action_MouseButton, MouseButton_RLRM, 0);  // Release all mouse buttons
+            KeyboardMouseAction(Action_Option, OptionKey_ReleaseAll, 0);    // Release all keys
+            KeyboardMouseAction(Action_Option, OptionKey_LAlt, 0);    // Set left alt key
+            KeyboardMouseAction(Action_MouseButton, MouseButton_PL, 0);   // Set left mouse button
             break;
 
         default:
-            KeyboardMouseAction(17, 11, 0);  // Release all mouse buttons
-            KeyboardMouseAction(5, 9, 0);    // Release all keys
+            KeyboardMouseAction(Action_MouseButton, MouseButton_RLRM, 0);  // Release all mouse buttons
+            KeyboardMouseAction(Action_Option, OptionKey_ReleaseAll, 0);    // Release all keys
             break;
     }
 
@@ -191,8 +191,8 @@ void set_pantilt_mode(uint8_t cadapp)
 
 void set_mouse_mode()
 {
-    KeyboardMouseAction(17, 11, 0);  // Release all mouse buttons
-    KeyboardMouseAction(5, 9, 0);    // Release all keys
+    KeyboardMouseAction(Action_MouseButton, MouseButton_RLRM, 0);  // Release all mouse buttons
+    KeyboardMouseAction(Action_Option, OptionKey_ReleaseAll, 0);    // Release all keys
     control_mode = JOYSTICK_CONTROL_MODE_MOUSE;
     MSG_DEBUGLN("[DEBUG] Set mouse mode");
 }

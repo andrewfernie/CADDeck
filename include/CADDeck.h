@@ -439,3 +439,29 @@ enum SpecialFn {
     SpecialFn_GPIO_On = 12
 
 };
+
+enum MouseButton {
+    MouseButton_PL = 1,
+    MouseButton_PR = 2,
+    MouseButton_PM = 3,
+    MouseButton_PLM = 4,
+    MouseButton_PRM = 5,
+    MouseButton_RL = 6,
+    MouseButton_RR = 7,
+    MouseButton_RM = 8,
+    MouseButton_RLM = 9,
+    MouseButton_RRM = 10,
+    MouseButton_RLRM = 11
+};
+
+enum OptionKeys {
+    OptionKey_LCtrl = 1,
+    OptionKey_LShift = 2,
+    OptionKey_LAlt = 3,
+    OptionKey_LGui = 4,
+    OptionKey_RCtrl = 5,
+    OptionKey_RShift = 6,
+    OptionKey_RAlt = 7,
+    OptionKey_RGui = 8,
+    OptionKey_ReleaseAll = 9
+};
