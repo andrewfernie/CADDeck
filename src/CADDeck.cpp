@@ -621,7 +621,7 @@ void loop(void)
         this_loop_start = millis();
         loop_count++;
 
-        // Update andf handle the joystick and physical buttons
+        // Update and handle the joystick and physical buttons
         update_io();
 
         // Check and handle any commands from the serial port
