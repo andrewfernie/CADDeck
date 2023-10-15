@@ -204,7 +204,7 @@ void update_io()
     rotateControl.Update();
     pcf857X_inputs = pcf857X.digitalReadAll();
 
-    uint8_t hw_button0_set = get_hwbutton(0);
+    uint8_t hw_button0_set = get_hwbutton(mode_select_button_pin);
 
     uint8_t joystick_x_steadyzero = joy_x_comparison.Equals(joystick.x());
     uint8_t joystick_y_steadyzero = joy_y_comparison.Equals(joystick.y());
