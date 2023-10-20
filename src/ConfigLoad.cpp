@@ -268,6 +268,13 @@ bool loadConfig(String value)
             return false;
         }
 
+        float mouse_sensitivity = doc["mouse_sensitivity"] | 20.0;
+        cadconfig.mouse_sensitivity = mouse_sensitivity;
+        if (error) {
+            MSG_ERROR2("[ERROR] deserializeJson() error mouse_sensitivity ", error.c_str(), doc.memoryUsage());
+            return false;
+        }
+
         uint8_t current_program = doc["current_program"] | 0;
         current_program = constrain(current_program, 0, NUM_CAD_PROGRAMS - 1);
         cadconfig.current_program = current_program;

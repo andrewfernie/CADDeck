@@ -3,14 +3,23 @@
 
 bool startWifiStation()
 {
+#ifdef LANGUAGE_GERMAN
+    MSG_INFO1("startWifiStation(): Verbinden mit", wificonfig.ssid);
+#else
     MSG_INFO1("startWifiStation(): Connecting to", wificonfig.ssid);
+#endif
+
     if (String(WiFi.SSID()) != String(wificonfig.ssid)) {
         WiFi.mode(WIFI_STA);
+#ifdef LANGUAGE_GERMAN
         MSG_INFO2("startWifiStation(): ssid, pwd=", wificonfig.ssid, wificonfig.password);
+#else
+        MSG_INFO2("startWifiStation(): ssid, pwd=", wificonfig.ssid, wificonfig.password);
+#endif
         WiFi.begin(wificonfig.ssid, wificonfig.password);
         uint8_t attempts = wificonfig.attempts;
-//        MSG_DEBUG1("startWifiStation(): attempts =", attempts);
-//        MSG_DEBUG1("startWifiStation(): attempt delay =", wificonfig.attemptdelay);
+        //        MSG_DEBUG1("startWifiStation(): attempts =", attempts);
+        //        MSG_DEBUG1("startWifiStation(): attempt delay =", wificonfig.attemptdelay);
         while (WiFi.status() != WL_CONNECTED) {
             if (attempts == 0) {
                 WiFi.disconnect();
@@ -24,7 +33,7 @@ bool startWifiStation()
     }
 
     // Delete the task Keyboard had create to free memory and to not interfere with AsyncWebServer
-    //Keyboard.end();
+    // Keyboard.end();
 
     // Stop BLE from interfering with our WIFI signal
     btStop();
@@ -33,8 +42,15 @@ bool startWifiStation()
     esp_bt_controller_mem_release(ESP_BT_MODE_BTDM);
 
     MSG_INFOLN("");
+
+#ifdef LANGUAGE_GERMAN
+    MSG_INFOLN("[INFO] BLE gestoppt");
+    MSG_INFO("[INFO] Verbunden! IP Adresse: ");
+#else
     MSG_INFOLN("[INFO] BLE Stopped");
     MSG_INFO("[INFO] Connected! IP address: ");
+#endif
+
     MSG_INFOLN(WiFi.localIP());
 
     MDNS.begin(wificonfig.hostname);
@@ -46,7 +62,12 @@ bool startWifiStation()
 
     // Start the webserver
     webserver.begin();
+
+#ifdef LANGUAGE_GERMAN
+    MSG_INFOLN("[INFO] Webserver gestartet");
+#else
     MSG_INFOLN("[INFO] Webserver started");
+#endif
     return true;
 }
 
@@ -57,11 +78,16 @@ void startWifiAP()
     WiFi.mode(WIFI_AP);
     WiFi.softAP(wificonfig.ssid, wificonfig.password);
     MSG_INFOLN("");
+
+#ifdef LANGUAGE_GERMAN
+    MSG_INFO("[INFO] Zugangspunkt gestartet! IP Adresse: ");
+#else
     MSG_INFO("[INFO] Access Point Started! IP address: ");
+#endif
     MSG_INFOLN(WiFi.softAPIP());
 
     // Delete the task Keyboard had create to free memory and to not interfere with AsyncWebServer
-    //Keyboard.end();
+    // Keyboard.end();
 
     // Stop BLE from interfering with our WIFI signal
     btStop();
@@ -70,7 +96,12 @@ void startWifiAP()
     esp_bt_controller_mem_release(ESP_BT_MODE_BTDM);
 
     MSG_INFOLN("");
+
+#ifdef LANGUAGE_GERMAN
+    MSG_INFOLN("[INFO] BLE gestoppt");
+#else
     MSG_INFOLN("[INFO] BLE Stopped");
+#endif
 
     MDNS.begin(wificonfig.hostname);
     MDNS.addService("http", "tcp", 80);
@@ -81,7 +112,12 @@ void startWifiAP()
 
     // Start the webserver
     webserver.begin();
+
+#ifdef LANGUAGE_GERMAN
+    MSG_INFOLN("[INFO] Webserver gestartet");
+#else
     MSG_INFOLN("[INFO] Webserver started");
+#endif
 }
 
 // Start the default AP
@@ -93,11 +129,16 @@ void startDefaultAP()
 
     WiFi.mode(WIFI_AP);
     WiFi.softAP(ssid, password);
+
+#ifdef LANGUAGE_GERMAN
+    MSG_INFO("[INFO] Zugangspunkt gestartet! IP Adresse: ");
+#else
     MSG_INFO("[INFO] Access Point Started! IP address: ");
+#endif
     MSG_INFOLN(WiFi.softAPIP());
 
     // Delete the task Keyboard had create to free memory and to not interfere with AsyncWebServer
-    //leKeyboard.end();
+    // leKeyboard.end();
 
     // Stop BLE from interfering with our WIFI signal
     btStop();
@@ -105,7 +146,11 @@ void startDefaultAP()
     esp_bt_controller_deinit();
     esp_bt_controller_mem_release(ESP_BT_MODE_BTDM);
 
+#ifdef LANGUAGE_GERMAN
+    MSG_INFOLN("[INFO] BLE gestoppt");
+#else
     MSG_INFOLN("[INFO] BLE Stopped");
+#endif
 
     MDNS.begin("CADDeck");
     MDNS.addService("http", "tcp", 80);
@@ -116,7 +161,12 @@ void startDefaultAP()
 
     // Start the webserver
     webserver.begin();
+
+#ifdef LANGUAGE_GERMAN
+    MSG_INFOLN("[INFO] Webserver gestartet");
+#else
     MSG_INFOLN("[INFO] Webserver started");
+#endif
 }
 
 /**
@@ -138,7 +188,87 @@ void configmode()
     tft.setTextSize(1);
     tft.setTextColor(TFT_WHITE, TFT_BLACK);
 
+#ifdef LANGUAGE_GERMAN
+    MSG_INFOLN("[INFO] Konfigurationsmodus aufrufen");
+    tft.println("Verbindung mit WLAN...");
+    tft.print("  SSID: ");
+    tft.println(wificonfig.ssid);
+    tft.print("  PWD: ");
+#ifdef WIFI_PASSWORD_DISPLAY
+    tft.println(wificonfig.password);
+#else
+    tft.println("********");
+#endif
+    tft.print("  Konfigurationsmodus: ");
+    tft.println(wificonfig.wifimode);
+    tft.println();
+
+    if (String(wificonfig.ssid) == "DEINE_WIFI_SSID" || String(wificonfig.password) == "DEIN_WIFI_PASSWORD")  // Still default
+    {
+        tft.println("WiFi-Konfiguration immer noch auf Standard eingestellt! Starte als AP.");
+        MSG_WARNLN("[WARNUNG]: Die WLAN-Konfiguration ist immer noch auf die Standardeinstellung eingestellt! Konfigurator gestartet als AP.");
+        startDefaultAP();
+        tft.println("Als AP gestartet, da die WLAN-Einstellungen immer noch auf die Standardeinstellungen eingestellt sind.");
+        tft.println("");
+        tft.println("Stellen Sie zum Konfigurieren eine Verbindung ");
+        tft.println("zu �CADDeck� mit dem Passwort �defaultpass� her");
+        tft.println("Dann geh zu http://CADDeck.local");
+        tft.print("Die IP ist: ");
+        tft.println(WiFi.softAPIP());
+        return;
+    }
+    else if (String(wificonfig.ssid) == "FEHLGESCHLAGEN" || String(wificonfig.password) == "FEHLGESCHLAGEN" || String(wificonfig.wifimode) == "FEHLGESCHLAGEN")  // The wificonfig.json failed to load
+    {
+        tft.println("WLAN-Konfiguration konnte nicht geladen werden! Starte als AP.");
+        MSG_WARNLN("[WARNUNG]: WLAN-Konfiguration konnte nicht geladen werden! Konfigurator gestartet als AP.");
+        startDefaultAP();
+        tft.println("Als AP gestartet, da die WLAN-Einstellungen nicht geladen werden konnten.");
+        tft.println("");
+        tft.println("Stellen Sie zum Konfigurieren eine Verbindung ");
+        tft.println("zu �CADDeck� mit dem Passwort �defaultpass� her");
+        tft.println("Dann geh zu http://CADDeck.local");
+        tft.print("Die IP ist: ");
+        tft.println(WiFi.softAPIP());
+        return;
+    }
+    else if (strcmp(wificonfig.wifimode, "WIFI_STA") == 0) {
+        if (!startWifiStation()) {
+            startDefaultAP();
+            MSG_WARNLN("[WARNUNG]: Verbindung zum AP konnte nicht hergestellt werden, daher als AP gestartet.");
+            tft.println("Als AP gestartet, da die WLAN-Verbindung fehlgeschlagen ist.");
+            tft.println("");
+            tft.println("Stellen Sie zum Konfigurieren eine Verbindung ");
+            tft.println("zu �CADDeck� mit dem Passwort �defaultpass� her");
+            tft.println("Dann geh zu http://CADDeck.local");
+            tft.print("Die IP ist: ");
+            tft.println(WiFi.softAPIP());
+        }
+        else {
+            MSG_WARNLN("[WARNUNG]: Als STA und im Konfigurationsmodus gestartet.");
+            tft.println("Als STA und im Konfigurationsmodus gestartet.");
+            tft.println("");
+            tft.println("Zur Konfiguration:");
+            tft.println("http://CADDeck.local");
+            tft.print("Die IP ist: ");
+            tft.println(WiFi.localIP());
+        }
+    }
+    else if (strcmp(wificonfig.wifimode, "WIFI_AP") == 0) {
+        MSG_WARNLN("[WARNUNG]: Als AP und im Konfigurationsmodus gestartet.");
+        startWifiAP();
+        tft.println("Als AP und im Konfigurationsmodus gestartet.");
+        tft.println("");
+        tft.println("Zur Konfiguration:");
+        tft.println("http://CADDeck.local");
+        tft.print("Die IP ist: ");
+        tft.println(WiFi.softAPIP());
+    }
+    else {
+        MSG_WARNLN("[WARNUNG]: Kein g�ltiger Konfigurationsmodus identifiziert.");
+    }
+#else
     MSG_INFOLN("[INFO] Entering Config Mode");
+
     tft.println("Connecting to Wifi...");
     tft.print("  SSID: ");
     tft.println(wificonfig.ssid);
@@ -212,6 +342,7 @@ void configmode()
     else {
         MSG_WARNLN("[WARNING]: No valid config mode identified.");
     }
+#endif
 }
 
 /**
@@ -341,9 +472,15 @@ bool checkfile(const char* filename, bool showMessage)
             tft.setTextFont(2);
             tft.setTextSize(2);
             tft.setTextColor(TFT_WHITE, TFT_BLACK);
+#ifdef LANGUAGE_GERMAN
+            tft.printf("%s nicht gefunden!\n\n", filename);
+            tft.setTextSize(1);
+            tft.printf("Sollte dies nach der Konfiguration geschehen sein, kann es sein, dass die Daten auf dem ESP \nbesch�digt sein.");
+#else
             tft.printf("%s not found!\n\n", filename);
             tft.setTextSize(1);
             tft.printf("If this has happend after confguration, the data on the ESP may \nbe corrupted.");
+#endif
         }
         return false;
     }
@@ -384,8 +521,14 @@ bool resetconfig(String file)
                 // Close the newly created file
                 newfile.close();
             }
+
+#ifdef LANGUAGE_GERMAN
+            MSG_INFOLN("[INFO] Zur�cksetzen abgeschlossen.");
+            MSG_INFOLN("[INFO] Geben Sie \"restart\" ein, um die Konfiguration neu zu laden.");
+#else
             MSG_INFOLN("[INFO] Done resetting.");
             MSG_INFOLN("[INFO] Type \"restart\" to reload configuration.");
+#endif
 
             // Close the default.json file
             defaultfile.close();
@@ -430,6 +573,7 @@ bool resetconfig(String file)
         newfile.println("\"rotate_scale\": 1.0,");
         newfile.println("\"rotate_deadzone\": 0.01,");
         newfile.println("\"rotate_sensitivity\": 10,");
+        newfile.println("\"mouse_sensitivity\": 10,");
         newfile.println("\"CADProgram\": \"Solidworks\" ");
 
         newfile.println("}");
@@ -453,7 +597,11 @@ bool CopyFile(String FileOriginal, String FileCopy)
 
     uint8_t ibuffer[64];  // declare a buffer
 
+#ifdef LANGUAGE_GERMAN
+    MSG_INFOLN("[INFO] CopyFile()");
+#else
     MSG_INFOLN("[INFO] In CopyFile()");
+#endif
 
     if (LittleFS.exists(FileCopy) == true)  // remove file copy
     {
@@ -483,7 +631,11 @@ bool CopyFile(String FileOriginal, String FileCopy)
     }
 
     if (success) {
+#ifdef LANGUAGE_GERMAN
+        MSG_INFOLN("[INFO] CopyFile() mit Erfolg beendet");
+#else
         MSG_INFOLN("[INFO] End CopyFile() with success");
+#endif
     }
     else {
         MSG_ERRORLN("[ERRROR] End CopyFile() with failure.");

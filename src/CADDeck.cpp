@@ -608,6 +608,9 @@ void setup()
 
     pageHistoryStack.push(pageNum);
     drawKeypad();
+
+    // End of setup
+    MSG_INFOLN("[INFO] End of setup()");
 }
 
 //--------------------- LOOP ---------------------------------------------------------------------

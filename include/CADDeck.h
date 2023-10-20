@@ -4,12 +4,18 @@
 // This code is being developed on two different hardware platforms with different pin allocations.
 #define NEW_PINS
 
+// Select UI language
+#define LANGUAGE_ENGLISH
+// #define LANGUAGE_GERMAN
+
 // Basic macros for debug and info messages to the serial port
 // If too many messages are being sent the web server used for the configurator may not work as well. 
 #define LOG_MSG_BASIC 1
 #define LOG_MSG_LEVEL 1  // 1=ERROR, 2=ERROR+WARN, 3=ERROR+WARN+INFO
-#define LOG_MSG_DEBUG 0
-#define LOG_MSG_TOUCH_DEBUG 0  // messages to console each time a touch is detected
+#define LOG_MSG_DEBUG 1
+#define LOG_MSG_TOUCH_DEBUG 0 // messages to console each time a touch is detected
+#define LOG_MSG_JOYSTICK_MODE 0  // messages to console for joystick mode debug
+
 //#define LOG_JSON_FILES  // log the contents of the JSON files to the console. Comment out to disable.
 
 #include "std_defs.h"
@@ -292,6 +298,7 @@ struct CADConfig {
     float rotate_scale;
     float rotate_deadzone;
     float rotate_sensitivity;
+    float mouse_sensitivity;
     uint16_t num_programs;
 };
 

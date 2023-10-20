@@ -655,6 +655,17 @@
 				<option value="50">50</option>
 				<option value="100">100</option>
 			</select>
+			<br><br>
+			&nbsp;&nbsp;Mouse Sensitivity:&nbsp;
+			<select class="mouse_sensitivity" id='mouse_sensitivity' name='mouse_sensitivity'>
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="5">5</option>
+				<option value="10">10</option>
+				<option value="20">20</option>
+				<option value="50">50</option>
+				<option value="100">100</option>
+			</select>
 
 			<br><br>
 			<table style="height: 250px; width: 100%; border: 1px solid #000088; text-align: left;">
@@ -3337,6 +3348,7 @@
 					document.getElementById("rotate_scale").value = data.rotate_scale;
 					document.getElementById("rotate_deadzone").value = data.rotate_deadzone;
 					document.getElementById("rotate_sensitivity").value = data.rotate_sensitivity;
+					document.getElementById("mouse_sensitivity").value = data.mouse_sensitivity;
 					document.getElementById("current_program").value = data.current_program;
 					document.getElementById("selected_program").value = data.current_program;
 

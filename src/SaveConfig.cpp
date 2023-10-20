@@ -241,6 +241,10 @@ int saveConfigCADParams(AsyncWebServerRequest *request)
     String SensitivityRotate = sensitivityrotate->value().c_str();
     cadparams["rotate_sensitivity"] = SensitivityRotate.toFloat();
 
+    AsyncWebParameter *sensitivitymouse = request->getParam("mouse_sensitivity", true);
+    String SensitivityMouse = sensitivitymouse->value().c_str();
+    cadparams["mouse_sensitivity"] = SensitivityMouse.toFloat();
+
     MSG_DEBUGLN("[DEBUG] Requesting current_program");
     AsyncWebParameter *current_program = request->getParam("current_program", true);
     String Current_program = current_program->value().c_str();
@@ -341,6 +345,7 @@ int saveCurrentConfigCADParams()
     cadparams["rotate_scale"] = cadconfig.rotate_scale;
     cadparams["rotate_deadzone"] = cadconfig.rotate_deadzone;
     cadparams["rotate_sensitivity"] = cadconfig.rotate_sensitivity;
+    cadparams["mouse_sensitivity"] = cadconfig.mouse_sensitivity;
     cadparams["current_program"] = cadconfig.current_program;
 
     JsonArray programObject_programarray = cadparams.createNestedArray("programs");
