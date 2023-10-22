@@ -25,6 +25,13 @@ uint8_t last_control_mode = JOYSTICK_CONTROL_MODE_MOUSE;
 
 PCF857X::DigitalInput pcf857X_inputs;
 
+Button2 joystickModeButton;
+
+byte joystickModeButtonHandler()
+{
+    return get_hwbutton(mode_select_button_pin);
+}
+
 void init_io()
 {
     MSG_INFOLN("[INFO] Init joystick");
@@ -49,6 +56,11 @@ void init_io()
     }
 
     set_pantilt_mode(cadconfig.current_program);
+
+    joystickModeButton.setButtonStateFunction(joystickModeButtonHandler);
+    joystickModeButton.setClickHandler(joystickModeButtonClick);
+    joystickModeButton.setDoubleClickHandler(joystickModeButtonDoubleClick);
+    joystickModeButton.begin(VIRTUAL_PIN);
 
     pcf857X.begin(false);  // false so as not to start the I2C bus (already done by the touch controller)
 }
@@ -197,12 +209,35 @@ void set_mouse_mode()
     MSG_DEBUGLN("[DEBUG] Set mouse mode");
 }
 
+void joystickModeButtonClick(Button2& btn)
+{
+    if (control_mode != JOYSTICK_CONTROL_MODE_MOUSE) {
+        set_mouse_mode();
+    }
+    KeyboardMouseAction(Action_MouseButton, MouseButton_PL, 0);  // Set left mouse button
+    KeyboardMouseAction(Action_MouseButton, MouseButton_RL, 0);  // Release left mouse button
+    MSG_DEBUGLN("[DEBUG] Click");
+}
+
+void joystickModeButtonDoubleClick(Button2& btn)
+{
+    if (control_mode != JOYSTICK_CONTROL_MODE_MOUSE) {
+        set_mouse_mode();
+    }
+    KeyboardMouseAction(Action_MouseButton, MouseButton_PL, 0);  // Set left mouse button
+    KeyboardMouseAction(Action_MouseButton, MouseButton_RL, 0);  // Release left mouse button
+    KeyboardMouseAction(Action_MouseButton, MouseButton_PL, 0);  // Set left mouse button
+    KeyboardMouseAction(Action_MouseButton, MouseButton_RL, 0);  // Release left mouse button
+    MSG_DEBUGLN("[DEBUG] Double click");
+}
+
 void update_io()
 {
     joystick.Update();
     zoomControl.Update();
     rotateControl.Update();
     pcf857X_inputs = pcf857X.digitalReadAll();
+    joystickModeButton.loop();
 
     uint8_t hw_button0_set = !get_hwbutton(mode_select_button_pin);
 
@@ -216,8 +251,9 @@ void update_io()
 #if (LOG_MSG_JOYSTICK_MODE > 0)
         if (!get_pcf857X_bit(pcf857X_inputs, BUTTON_10)) {
             char msg[30];
-            sprintf(msg, "[DBG] %d,%d,%d,%d,%d", all_control_steadyzero, joystick_x_steadyzero,
-                    joystick_y_steadyzero, rotate_knob_steadyzero, zoom_knob_steadyzero);
+            // sprintf(msg, "[DBG] %d,%d,%d,%d,%d", all_control_steadyzero, joystick_x_steadyzero,
+            //         joystick_y_steadyzero, rotate_knob_steadyzero, zoom_knob_steadyzero);
+            sprintf(msg, "[DBG] %d", joystickModeButton.isPressed());
             MSG_PORT.println(msg);
         }
 

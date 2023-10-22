@@ -4,7 +4,7 @@
 #include "AnalogControl.h"
 #include "PCF857X.h"
 #include "DenoiseComparison.h"
-
+#include "Button2.h" // Button library with support for clicks, etc.
 
 const uint8_t PCF857X_SCL = 19;
 const uint8_t PCF857X_SDA = 18;
@@ -72,8 +72,11 @@ void calibrate_zero_analog_controls();
 void set_rotate_mode(uint8_t cadapp);
 void set_move_mode(uint8_t cadapp);
 void set_pantilt_mode(uint8_t cadapp);
+byte joystickModeButtonHandler();
+void joystickModeButtonClick(Button2 &btn);
+void joystickModeButtonDoubleClick(Button2 &btn);
 
-extern uint8_t current_joystick_mode;
+    extern uint8_t current_joystick_mode;
 extern uint8_t previous_joystick_mode;
 
 enum JoystickControlMode {
