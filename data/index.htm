@@ -720,6 +720,8 @@
 									<br />Selected Button:
 									<input type="text" id="selected_hw_button" name="selected_hw_button"
 										style="border:0px" readonly>
+									<br><label for="hwbuttondescription">Description:</label>
+									<input type="text" id="hwbuttondescription" name="hwbuttondescription"><br>
 									<br />Action 1:
 									<select class="actions" id='joybuttonaction0' name='joybuttonaction0'></select>
 									<select class="actions" id='joybuttonvalue0' name='joybuttonvalue0'></select>
@@ -2953,6 +2955,13 @@
 				temp[this.value] = this.subitems;
 			});
 
+			$('#hwbuttondescription')
+				.change(function () {
+					update_hwbutton_description(this);
+				})
+				.change();
+
+
 			$('#joybuttonaction0')
 				.change(function () {
 					var value = $(this).val();
@@ -3299,6 +3308,15 @@
 			[["0", "0", "0"], ["0", "0", "0"]],
 			[["0", "0", "0"], ["0", "0", "0"]]]];
 
+		var hwbuttondescriptions =
+			[
+				[[""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""]],
+				[[""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""]],
+				[[""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""]],
+				[[""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""]],
+				[[""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""]]
+			];
+
 		// Five applications, each with four axis, each with action and value arrays
 		const PanAxis = 0;
 		const TiltAxis = 1;
@@ -3331,7 +3349,6 @@
 
 		function getCADParamsConfig() {
 
-
 			fetch('config/cadparams.json')
 				.then((response) => {
 					return response.json()
@@ -3356,6 +3373,7 @@
 						console.log('Loading program ' + program);
 						for (let button = 0; button <= 10; button++) {
 							console.log('   Loading defn button ' + button);
+							hwbuttondescriptions[program][button] = data.programs[program].buttons[button].description;
 							hwbuttondefs[program][button][0][0] = data.programs[program].buttons[button].actionarray[0];
 							hwbuttondefs[program][button][0][1] = data.programs[program].buttons[button].actionarray[1];
 							hwbuttondefs[program][button][0][2] = data.programs[program].buttons[button].actionarray[2];
@@ -3376,6 +3394,8 @@
 
 		function show_hwbutton_def(program_index, button_index) {
 			document.getElementById("selected_hw_button").value = "Button " + (button_index);
+
+			document.getElementById("hwbuttondescription").value = hwbuttondescriptions[program_index][button_index];
 
 			document.getElementById("joybuttonaction0").value = hwbuttondefs[program_index][button_index][0][0];
 			document.getElementById("joybuttonaction1").value = hwbuttondefs[program_index][button_index][0][1];
@@ -3401,6 +3421,14 @@
 			show_hwbutton_def(current_program_index, current_button_index);
 		}
 
+		function update_hwbutton_description(select) {
+
+			if (loadIsComplete) {
+				hwbuttondescriptions[current_program_index][current_button_index] = document.getElementById('hwbuttondescription').value;
+			}
+
+		}
+		
 
 		function update_hwbutton_def(select, actionValue, arrayIndex) {
 

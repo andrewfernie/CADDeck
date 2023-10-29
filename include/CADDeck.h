@@ -1,8 +1,6 @@
 #pragma once
 
 #define BLUETOOTH_COMMANDS   // Enable Bluetooth commands (BLE Keyboard and BLE Mouse). Otherwise only USB commands are enabled. (IN WORK)
-// This code is being developed on two different hardware platforms with different pin allocations.
-#define NEW_PINS
 
 // Select UI language
 #define LANGUAGE_ENGLISH
@@ -11,10 +9,10 @@
 // Basic macros for debug and info messages to the serial port
 // If too many messages are being sent the web server used for the configurator may not work as well. 
 #define LOG_MSG_BASIC 1
-#define LOG_MSG_LEVEL 1  // 1=ERROR, 2=ERROR+WARN, 3=ERROR+WARN+INFO
+#define LOG_MSG_LEVEL 2  // 1=ERROR, 2=ERROR+WARN, 3=ERROR+WARN+INFO
 #define LOG_MSG_DEBUG 1
 #define LOG_MSG_TOUCH_DEBUG 0 // messages to console each time a touch is detected
-#define LOG_MSG_JOYSTICK_MODE 1  // messages to console for joystick mode debug
+#define LOG_MSG_JOYSTICK_MODE 0  // messages to console for joystick mode debug
 
 //#define LOG_JSON_FILES  // log the contents of the JSON files to the console. Comment out to disable.
 
@@ -313,6 +311,7 @@ struct CADProgramConfig {
     Actions zoom[3];
     Actions rotate[3];
     uint16_t num_buttons;
+    char hw_button_descriptions[NUM_HW_BUTTONS][20];
     Actions hw_buttons[NUM_HW_BUTTONS][3];
     uint8_t hw_button_state[NUM_HW_BUTTONS];
 };
@@ -349,6 +348,7 @@ extern unsigned long previousMillis;
 extern unsigned long Interval;
 extern bool displayinginfo;
 extern bool displayingIOValues;
+extern bool displayingButtonDescriptions;
 extern char jsonFileFail[32];
 
 // Invoke the TFT_eSPI button class and create all the button objects
@@ -368,6 +368,7 @@ extern TFT_eSPI_Button key[BUTTON_ROWS][BUTTON_COLS];
 #define SPECIAL_3_PAGE (NUM_PAGES + 3)
 #define SPECIAL_4_PAGE (NUM_PAGES + 4)
 #define SPECIAL_PAGE_IO_MONITOR (NUM_PAGES + 5)
+#define SPECIAL_PAGE_BUTTON_INFO (NUM_PAGES + 6)
 
 //--------- Internal references ------------
 // (this needs to be below all structs etc..)
@@ -430,7 +431,8 @@ enum CADApplications {
     CADApp_AC3D = 4
 };
 
-enum SpecialFn {
+enum SpecialFn
+{
     SpecialFn_NoAction = 0,
     SpecialFn_ConfigMode = 1,
     SpecialFn_DisplayBrightnessDown = 2,
@@ -443,15 +445,15 @@ enum SpecialFn {
     SpecialFn_IOMonitor = 9,
     SpecialFn_GPIO_Toggle = 10,
     SpecialFn_GPIO_Off = 11,
-    SpecialFn_GPIO_On = 12
-
+    SpecialFn_GPIO_On = 12,
+    SpecialFn_ButtonInfoPage = 13
 };
 
 enum MouseButton {
     MouseButton_PL = 1,
     MouseButton_PR = 2,
     MouseButton_PM = 3,
-    MouseButton_PLM = 4,
+    MouseButton_PLM = 4, 
     MouseButton_PRM = 5,
     MouseButton_RL = 6,
     MouseButton_RR = 7,
@@ -471,4 +473,101 @@ enum OptionKeys {
     OptionKey_RAlt = 7,
     OptionKey_RGui = 8,
     OptionKey_ReleaseAll = 9
+};
+
+enum ActionNumpadKeys {
+    ActionNumpadKey_0 = 0,
+    ActionNumpadKey_1 = 1,
+    ActionNumpadKey_2 = 2,
+    ActionNumpadKey_3 = 3,
+    ActionNumpadKey_4 = 4,
+    ActionNumpadKey_5 = 5,
+    ActionNumpadKey_6 = 6,
+    ActionNumpadKey_7 = 7,
+    ActionNumpadKey_8 = 8,
+    ActionNumpadKey_9 = 9,
+    ActionNumpadKey_Slash = 10,
+    ActionNumpadKey_Asterix = 11,
+    ActionNumpadKey_Minus = 12,
+    ActionNumpadKey_Plus = 13,
+    ActionNumpadKey_Enter = 14,
+    ActionNumpadKey_Period = 15
+};
+
+enum ActionCustomFnKeys
+{
+    ActionCustomFnKey_1 = 1,
+    ActionCustomFnKey_2 = 2,
+    ActionCustomFnKey_3 = 3,
+    ActionCustomFnKey_4 = 4,
+    ActionCustomFnKey_5 = 5,
+    ActionCustomFnKey_6 = 6,
+    ActionCustomFnKey_7 = 7
+};
+
+enum ActionFnKeys
+{
+    ActionFnKey_F1 = 1,
+    ActionFnKey_F2 = 2,
+    ActionFnKey_F3 = 3,
+    ActionFnKey_F4 = 4,
+    ActionFnKey_F5 = 5,
+    ActionFnKey_F6 = 6,
+    ActionFnKey_F7 = 7,
+    ActionFnKey_F8 = 8,
+    ActionFnKey_F9 = 9,
+    ActionFnKey_F10 = 10,
+    ActionFnKey_F11 = 11,
+    ActionFnKey_F12 = 12,
+    ActionFnKey_F13 = 13,
+    ActionFnKey_F14 = 14,
+    ActionFnKey_F15 = 15,
+    ActionFnKey_F16 = 16,
+    ActionFnKey_F17 = 17,
+    ActionFnKey_F18 = 18,
+    ActionFnKey_F19 = 19,
+    ActionFnKey_F20 = 20,
+    ActionFnKey_F21 = 21,
+    ActionFnKey_F22 = 22,
+    ActionFnKey_F23 = 23,
+    ActionFnKey_F24 = 24
+};
+
+enum ActionTabArrowKeys
+{
+    ActionTabArrowKey_Up = 1,
+    ActionTabArrowKey_Down = 2,
+    ActionTabArrowKey_Left = 3,
+    ActionTabArrowKey_Right = 4,
+    ActionTabArrowKey_Backspace = 5,
+    ActionTabArrowKey_Tab = 6,
+    ActionTabArrowKey_Enter = 7,
+    ActionTabArrowKey_PageUp = 8,
+    ActionTabArrowKey_PageDown = 9,
+    ActionTabArrowKey_Delete = 10,
+    ActionTabArrowKey_PrtSc = 11,
+    ActionTabArrowKey_Esc = 12,
+    ActionTabArrowKey_Home = 13,
+    ActionTabArrowKey_End = 14
+};
+
+enum ActionMediaKeys
+{
+    ActionMediaKey_Mute = 1,
+    ActionMediaKey_VolumeDown = 2,
+    ActionMediaKey_VolumeUp = 3,
+    ActionMediaKey_PlayPause = 4,
+    ActionMediaKey_Stop = 5,
+    ActionMediaKey_NextTrack = 6,
+    ActionMediaKey_PreviousTrack = 7,
+    ActionMediaKey_WWWHome = 8,
+    ActionMediaKey_LocalMachineBrowser = 9,
+    ActionMediaKey_Calculator = 10,
+    ActionMediaKey_WWWBookmarks = 11,
+    ActionMediaKey_WWWSearch = 12,
+    ActionMediaKey_WWWStop = 13,
+    ActionMediaKey_WWWBack = 14,
+    ActionMediaKey_ConsumerControlConfiguration = 15,
+    ActionMediaKey_EmailReader = 16
+
 };

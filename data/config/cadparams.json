@@ -20,6 +20,7 @@
       "buttons": [
         {
           "name": "button0",
+          "description": "",
           "actionarray": [
             "15",
             "0",
@@ -33,6 +34,7 @@
         },
         {
           "name": "button1",
+          "description": "",
           "actionarray": [
             "4",
             "0",
@@ -46,6 +48,7 @@
         },
         {
           "name": "button2",
+          "description": "",
           "actionarray": [
             "4",
             "0",
@@ -59,6 +62,7 @@
         },
         {
           "name": "button3",
+          "description": "",
           "actionarray": [
             "2",
             "0",
@@ -72,6 +76,7 @@
         },
         {
           "name": "button4",
+          "description": "",
           "actionarray": [
             "2",
             "0",
@@ -85,6 +90,7 @@
         },
         {
           "name": "button5",
+          "description": "",
           "actionarray": [
             "15",
             "0",
@@ -98,6 +104,7 @@
         },
         {
           "name": "button6",
+          "description": "",
           "actionarray": [
             "0",
             "0",
@@ -111,6 +118,7 @@
         },
         {
           "name": "button7",
+          "description": "",
           "actionarray": [
             "0",
             "0",
@@ -124,6 +132,7 @@
         },
         {
           "name": "button8",
+          "description": "",
           "actionarray": [
             "15",
             "0",
@@ -137,6 +146,7 @@
         },
         {
           "name": "button9",
+          "description": "",
           "actionarray": [
             "17",
             "0",
@@ -150,6 +160,7 @@
         },
         {
           "name": "button10",
+          "description": "",
           "actionarray": [
             "0",
             "0",
@@ -170,6 +181,7 @@
       "buttons": [
         {
           "name": "button0",
+          "description": "Mode Select",
           "actionarray": [
             "15",
             "0",
@@ -183,6 +195,7 @@
         },
         {
           "name": "button1",
+          "description": "Design Shortcuts",
           "actionarray": [
             "4",
             "0",
@@ -196,6 +209,7 @@
         },
         {
           "name": "button2",
+          "description": "Fillet",
           "actionarray": [
             "4",
             "0",
@@ -209,6 +223,7 @@
         },
         {
           "name": "button3",
+          "description": "Press/Pull",
           "actionarray": [
             "4",
             "0",
@@ -222,6 +237,7 @@
         },
         {
           "name": "button4",
+          "description": "Extrude",
           "actionarray": [
             "4",
             "0",
@@ -235,9 +251,10 @@
         },
         {
           "name": "button5",
-          "actionarray": [
+          "description": "ESC",
+          "actionarray":[
             "2",
-            "0",
+            "0", 
             "0"
           ],
           "valuearray": [
@@ -248,6 +265,7 @@
         },
         {
           "name": "button6",
+          "description": "Line",
           "actionarray": [
             "4",
             "0",
@@ -261,6 +279,7 @@
         },
         {
           "name": "button7",
+          "description": "Rectangle",
           "actionarray": [
             "4",
             "0",
@@ -274,6 +293,7 @@
         },
         {
           "name": "button8",
+          "description": "Shell",
           "actionarray": [
             "4",
             "0",
@@ -287,6 +307,7 @@
         },
         {
           "name": "button9",
+          "description": "Circle",
           "actionarray": [
             "4",
             "0",
@@ -300,13 +321,14 @@
         },
         {
           "name": "button10",
+          "description": "Enter",
           "actionarray": [
-            "0",
+            "2",
             "0",
             "0"
           ],
           "valuearray": [
-            "0",
+            "7",
             "0",
             "0"
           ]
@@ -320,6 +342,7 @@
       "buttons": [
         {
           "name": "button0",
+          "description": "",
           "actionarray": [
             "15",
             "0",
@@ -333,6 +356,7 @@
         },
         {
           "name": "button1",
+          "description": "",
           "actionarray": [
             "0",
             "0",
@@ -346,6 +370,7 @@
         },
         {
           "name": "button2",
+          "description": "",
           "actionarray": [
             "0",
             "0",
@@ -359,6 +384,7 @@
         },
         {
           "name": "button3",
+          "description": "",
           "actionarray": [
             "0",
             "0",
@@ -372,6 +398,7 @@
         },
         {
           "name": "button4",
+          "description": "",
           "actionarray": [
             "0",
             "0",
@@ -385,6 +412,7 @@
         },
         {
           "name": "button5",
+          "description": "",
           "actionarray": [
             "15",
             "0",
@@ -398,6 +426,7 @@
         },
         {
           "name": "button6",
+          "description": "",
           "actionarray": [
             "0",
             "0",
@@ -411,6 +440,7 @@
         },
         {
           "name": "button7",
+          "description": "",
           "actionarray": [
             "0",
             "0",
@@ -424,6 +454,7 @@
         },
         {
           "name": "button8",
+          "description": "",
           "actionarray": [
             "15",
             "0",
@@ -437,6 +468,7 @@
         },
         {
           "name": "button9",
+          "description": "",
           "actionarray": [
             "17",
             "0",
@@ -450,6 +482,7 @@
         },
         {
           "name": "button10",
+          "description": "",
           "actionarray": [
             "0",
             "0",
@@ -470,6 +503,7 @@
       "buttons": [
         {
           "name": "button0",
+          "description": "",
           "actionarray": [
             "15",
             "0",
@@ -483,6 +517,7 @@
         },
         {
           "name": "button1",
+          "description": "",
           "actionarray": [
             "0",
             "0",
@@ -496,6 +531,7 @@
         },
         {
           "name": "button2",
+          "description": "",
           "actionarray": [
             "4",
             "4",
@@ -509,6 +545,7 @@
         },
         {
           "name": "button3",
+          "description": "",
           "actionarray": [
             "0",
             "0",
@@ -522,6 +559,7 @@
         },
         {
           "name": "button4",
+          "description": "",
           "actionarray": [
             "0",
             "0",
@@ -535,6 +573,7 @@
         },
         {
           "name": "button5",
+          "description": "",
           "actionarray": [
             "15",
             "0",
@@ -548,6 +587,7 @@
         },
         {
           "name": "button6",
+          "description": "",
           "actionarray": [
             "0",
             "0",
@@ -561,6 +601,7 @@
         },
         {
           "name": "button7",
+          "description": "",
           "actionarray": [
             "0",
             "0",
@@ -574,6 +615,7 @@
         },
         {
           "name": "button8",
+          "description": "",
           "actionarray": [
             "15",
             "0",
@@ -587,6 +629,7 @@
         },
         {
           "name": "button9",
+          "description": "",
           "actionarray": [
             "17",
             "0",
@@ -600,6 +643,7 @@
         },
         {
           "name": "button10",
+          "description": "",
           "actionarray": [
             "0",
             "0",
@@ -620,6 +664,7 @@
       "buttons": [
         {
           "name": "button0",
+          "description": "",
           "actionarray": [
             "15",
             "0",
@@ -633,6 +678,7 @@
         },
         {
           "name": "button1",
+          "description": "",
           "actionarray": [
             "0",
             "0",
@@ -646,6 +692,7 @@
         },
         {
           "name": "button2",
+          "description": "",
           "actionarray": [
             "0",
             "0",
@@ -659,6 +706,7 @@
         },
         {
           "name": "button3",
+          "description": "",
           "actionarray": [
             "0",
             "0",
@@ -672,6 +720,7 @@
         },
         {
           "name": "button4",
+          "description": "",
           "actionarray": [
             "0",
             "0",
@@ -685,6 +734,7 @@
         },
         {
           "name": "button5",
+          "description": "",
           "actionarray": [
             "15",
             "0",
@@ -698,6 +748,7 @@
         },
         {
           "name": "button6",
+          "description": "",
           "actionarray": [
             "0",
             "0",
@@ -711,6 +762,7 @@
         },
         {
           "name": "button7",
+          "description": "",
           "actionarray": [
             "0",
             "0",
@@ -724,6 +776,7 @@
         },
         {
           "name": "button8",
+          "description": "",
           "actionarray": [
             "15",
             "0",
@@ -737,6 +790,7 @@
         },
         {
           "name": "button9",
+          "description": "",
           "actionarray": [
             "17",
             "0",
@@ -750,6 +804,7 @@
         },
         {
           "name": "button10",
+          "description": "",
           "actionarray": [
             "0",
             "0",

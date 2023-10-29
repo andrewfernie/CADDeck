@@ -18,7 +18,7 @@
 
     This project is derived from TouchDeck by Dustin Watts. The original TouchDeck project is available at:
     https://github.com/DustinWatts/FreeTouchDeck
-
+r
 */
 
 /*
@@ -68,12 +68,22 @@
 
 #include "CADDeck.h"
 
-const char *versionnumber = "0.0.17_10Button";
+const char *versionnumber = "1.0.0_10Button";
 
 /*
+ * Version 1.0.0_10Button
+ *                   - Using button numbering scheme as defined by AFUDirk
+ *                   - Added controllable GPIO pin for LEDs on 10 button card
+ *                   - Some messages (in ConfigHelper.cpp) can be displayed in English or German (compile time option). Does not apply
+ *                     to messages on web pages, only those stored directly in the C++ code. Will eventually add the rest of AFUDirk's
+ *                     messages, but want to look at how to do this in a more elegant way.
+ *                   - Support for "click" and "double click" action for button on top of joystick (button 0). 
+ *                   - Added enumerations for actions. Makes code more readable, but not tied to the values in the
+ *                     configurator and configuration json files, so these must be kept alienged manually.
+ * 
  * Version 0.0.17.10Button
  *                   - Added controllable GPIO functions
-  *
+ *
  * Version 0.0.13.10Button
  *                   - Removed unneeded configurator code that was previously used to define which buttons were selecting
  *                     joystick actions
@@ -241,8 +251,9 @@ Generallogos generallogo;
 
 unsigned long previousMillis = 0;
 unsigned long Interval = 0;
-bool displayinginfo;
-bool displayingIOValues;
+bool displayinginfo = false;
+bool displayingIOValues = false;
+bool displayingButtonDescriptions = false;
 
 char jsonFileFail[32] = "";
 
@@ -706,6 +717,20 @@ void loop(void)
                 drawKeypad();
             }
         }
+        else if (pageNum == SPECIAL_PAGE_BUTTON_INFO) {
+            if (!displayingButtonDescriptions) {
+                printButtonInfo(cadconfig.current_program);
+            }
+
+            if (pressed) {
+                displayingButtonDescriptions = false;
+                pageHistoryStack.pop();
+                pageNum = pageHistoryStack.peek();
+
+                tft.fillScreen(generalconfig.backgroundColour);
+                drawKeypad();
+            }
+        }
         else if (pageNum == SPECIAL_3_PAGE) {
             // We were unable to connect to WiFi. Waiting for touch to get back to the settings menu.
 
@@ -870,7 +895,6 @@ void loop(void)
                         MSG_INFO1("Battery voltage:", externalBatteryVoltage);
 #endif
                     }
-                    //                    delay(10);  // UI debouncing
                 }
             }
 

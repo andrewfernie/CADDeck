@@ -583,6 +583,26 @@ bool resetconfig(String file)
         MSG_BASICLN("[INFO] Type \"restart\" to reload configuration.");
         return true;
     }
+    else if (file == "cadparams") {
+        // Reset the general config
+        // For this we do not need to open a default file because we can easily write it ourselfs
+
+        String filetoremove = "/config/" + file;
+        if (!filetoremove.endsWith(".json")) {
+            filetoremove = filetoremove + ".json";
+        }
+
+        FILESYSTEM.remove(filetoremove);
+
+        File newfile = FILESYSTEM.open(filetoremove, "w");
+        newfile.println("{");
+        newfile.println("}");
+
+        newfile.close();
+        MSG_BASICLN("[INFO] Done resetting cadparams.json.");
+        MSG_BASICLN("[INFO] Type \"restart\" to reload configuration.");
+        return true;
+    }
     else {
         MSG_WARNLN("[WARNING]: Invalid reset option. Choose: general, menu1, menu2, menu3...");
         return false;

@@ -450,6 +450,7 @@ void handlerSetup()
     webserver.on("/updatebutton", HTTP_GET, [](AsyncWebServerRequest *request) {
         String value;
         String debugString;
+        String description;
 
         int appIndex = 0;
         int buttonIndex = 0;
@@ -467,21 +468,26 @@ void handlerSetup()
             actionValue = request->getParam("actionValue")->value().toInt();
             action = request->getParam("action")->value().toInt();
             value = request->getParam("value")->value();
+            description = request->getParam("description")->value();
 
             if (appIndex >= 0 && appIndex < NUM_CAD_PROGRAMS) {
                 if (buttonIndex >= 0 && buttonIndex < NUM_HW_BUTTONS) {
-                    cadprogramconfig[appIndex].hw_buttons[buttonIndex][arrayIndex].action = value.toInt();
 
-                    cadprogramconfig[appIndex].hw_buttons[buttonIndex][arrayIndex].action = action;
+                     strcpy(cadprogramconfig[appIndex].hw_button_descriptions[buttonIndex], description.c_str());
 
-                    if (action == Action_Char || action == Action_SpecialChar) {
-                        strcpy(cadprogramconfig[appIndex].hw_buttons[buttonIndex][arrayIndex].symbol, value.c_str());
+                     cadprogramconfig[appIndex].hw_buttons[buttonIndex][arrayIndex].action = value.toInt();
+
+                     cadprogramconfig[appIndex].hw_buttons[buttonIndex][arrayIndex].action = action;
+
+                     if (action == Action_Char || action == Action_SpecialChar) {
+                         strcpy(cadprogramconfig[appIndex].hw_buttons[buttonIndex][arrayIndex].symbol, value.c_str());
                     }
                     else {
                         cadprogramconfig[appIndex].hw_buttons[buttonIndex][arrayIndex].value = value.toInt();
                     }
 
                     debugString = "appIndex: " + String(appIndex) + ", buttonIndex: " + String(buttonIndex) + 
+                                  "description: " + description +
                                   ", arrayIndex: " + String(arrayIndex) + ", action: " + action + ", value: " + value;
                     //                    MSG_DEBUG1("[DEBUG] updatebutton: ", debugString.c_str());
                 }

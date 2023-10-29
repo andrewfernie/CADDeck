@@ -329,7 +329,7 @@ void update_io()
         last_control_mode = control_mode;
     }
     else {
-        MSG_WARNLN("[DEBUG] BLE Mouse not connected");
+        MSG_WARNLN("[WARN] BLE Mouse not connected");
     }
 }
 

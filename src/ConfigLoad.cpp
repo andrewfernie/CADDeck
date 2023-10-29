@@ -328,11 +328,23 @@ bool loadConfig(String value)
             else {
                 MSG_INFO3("[INFO] Number of buttons in cadparams.jsonfor program ", cadprogramconfig[program].name, " is ", num_buttons);
             }
-
+ 
             cadprogramconfig[program].num_buttons = num_buttons;
 
             for (uint8_t button = 0; button < num_buttons; button++) {
                 MSG_INFO1("[INFO] Loading button ", button)
+
+                const char *button_description = button_array[button]["description"] | "Unknown";
+                strncpy(cadprogramconfig[program].hw_button_descriptions[button], button_description, sizeof(cadprogramconfig[program].hw_button_descriptions[button]));
+                if (cadprogramconfig[program].hw_button_descriptions[button][sizeof(cadprogramconfig[program].hw_button_descriptions[button]) - 1] != '\0') {
+                    // We have overflow, so we need to truncate the string
+                    cadprogramconfig[program].hw_button_descriptions[button][sizeof(cadprogramconfig[program].hw_button_descriptions[button]) - 1] = '\0';
+                }
+                if (error) {
+                    MSG_ERROR2("[ERROR] deserializeJson() error button_description ", error.c_str(), doc.memoryUsage());
+                    return false;
+                }
+
                 JsonArray program_button_actionarray = button_array[button]["actionarray"];
                 int program_button_actionarray_0 = program_button_actionarray[0];
                 int program_button_actionarray_1 = program_button_actionarray[1];

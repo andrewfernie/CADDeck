@@ -399,6 +399,36 @@ void printinfo()
     displayinginfo = true;
 }
 
+/**
+* @brief This function displays the description for each of the H/W buttons to the TFT screen.
+*
+* @param none
+*
+* @return none
+*
+* @note none
+*/
+void printButtonInfo(uint8_t program)
+{
+    tft.fillScreen(TFT_BLACK);
+    tft.setCursor(KEY_MARGIN_X, KEY_MARGIN_Y_TOP);
+    tft.setTextFont(2);
+    if (SCREEN_WIDTH < 480) {
+        tft.setTextSize(1);
+    }
+    else {
+        tft.setTextSize(1);
+    }
+    tft.setTextColor(TFT_WHITE, TFT_BLACK);
+    tft.printf("CAD Program: %s\n", cadprogramconfig[cadconfig.current_program].name);
+
+    for(int i = 0; i < NUM_HW_BUTTONS; i++) {
+        tft.printf("  Button %d: %s\n", i, cadprogramconfig[cadconfig.current_program].hw_button_descriptions[i]);
+    }
+
+    displayingButtonDescriptions = true;
+}
+
 uint32_t usedPSRAM()
 {
     return ESP.getPsramSize() - ESP.getFreePsram();

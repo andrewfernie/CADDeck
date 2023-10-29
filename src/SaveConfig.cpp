@@ -270,6 +270,8 @@ int saveConfigCADParams(AsyncWebServerRequest *request)
 
             programButtonObject["name"] = "button" + String(button);
 
+            programButtonObject["description"] = cadprogramconfig[program].hw_button_descriptions[button];
+
             JsonArray programButtonObject_actionarray = programButtonObject.createNestedArray("actionarray");
 
             programButtonObject_actionarray.add(String((cadprogramconfig[program].hw_buttons[button][0].action)));
@@ -362,6 +364,8 @@ int saveCurrentConfigCADParams()
             JsonObject programButtonObject = programHWButtonsArray.createNestedObject();
 
             programButtonObject["name"] = "button" + String(button);
+
+            programButtonObject["description"] = cadprogramconfig[program].hw_button_descriptions[button];
 
             JsonArray programButtonObject_actionarray = programButtonObject.createNestedArray("actionarray");
 
