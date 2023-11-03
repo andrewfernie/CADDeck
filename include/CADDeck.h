@@ -80,6 +80,7 @@
 #include "Physical_IO.h"
 #include "SerialCommands.h"
 #include "stack_queue.h"
+#include "SpaceMouse.h"
 
 #define MIN_TO_MS 60 * 1000
 
@@ -173,6 +174,16 @@ extern TFT_eSPI tft;
 extern Preferences savedStates;
 
 extern bool psramAvailable;
+
+// ---------------- SpaceMouse Support ----------------
+// enable support for SpaceMouse emulation on Serial 1
+#define SPACEMOUSE_SUPPORT  // Comment out to disable SpaceMouse support
+#define SPACEMOUSE_RX_PIN 5
+#define SPACEMOUSE_TX_PIN 4
+#define SPACEMOUSE_BAUD 115200
+#define SPACEMOUSE_CONFIG SERIAL_8N1
+#define SPACEMOUSE_SERIAL Serial1
+extern SpaceMouse spaceMouse;
 
 // ---------------- Debug pins ----------------
 // set to 1 to enable debug pins, 0 to disable
@@ -280,6 +291,7 @@ struct Config {
     uint16_t startup_menu;
     uint8_t gpio_pin;
     uint8_t gpio_pin_mode;
+    uint8_t spacemouse_mode;
 };
 
 const uint8_t CADCONFIG_VERSION = 2;
@@ -446,7 +458,8 @@ enum SpecialFn
     SpecialFn_GPIO_Toggle = 10,
     SpecialFn_GPIO_Off = 11,
     SpecialFn_GPIO_On = 12,
-    SpecialFn_ButtonInfoPage = 13
+    SpecialFn_ButtonInfoPage = 13,
+    SpecialFn_Spacemouse_Mode_Toggle = 14
 };
 
 enum MouseButton {

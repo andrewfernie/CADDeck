@@ -247,7 +247,7 @@ void update_io()
     uint8_t zoom_knob_steadyzero = zoom_comparison.Equals(zoomControl.Value());
     uint8_t all_control_steadyzero = joystick_x_steadyzero && joystick_y_steadyzero && rotate_knob_steadyzero && zoom_knob_steadyzero;
 
-    if (Keyboard.isConnected()) {
+    if (Keyboard.isConnected() && !generalconfig.spacemouse_mode) {
 #if (LOG_MSG_JOYSTICK_MODE > 0)
         if (!get_pcf857X_bit(pcf857X_inputs, BUTTON_10)) {
             char msg[30];
@@ -330,6 +330,27 @@ void update_io()
     }
     else {
         MSG_WARNLN("[WARN] BLE Mouse not connected");
+    }
+    
+    if (generalconfig.spacemouse_mode) {
+        uint16_t x, y, z, a, b, c;
+        if (hw_button0_set) {
+            x = joystick.x() * 2047.0 + 32768;
+            y = joystick.y() * 2047.0 + 32768;
+            z = zoomControl.Value() * 2047.0 + 32768;
+            a = 32768;
+            b = 32768;
+            c = 32768;
+        }
+        else {
+            x = 32768;
+            y = 32768;
+            z = 32768;
+            a = joystick.x() * 2047.0 + 32768;
+            b = joystick.y() * 2047.0 + 32768;
+            c = rotateControl.Value() * 2047.0 + 32768;
+        }
+        spaceMouse.SendViewpointDataPacket(x, y, z, a, b, c);
     }
 }
 

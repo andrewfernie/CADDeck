@@ -588,7 +588,10 @@ void KeyboardMouseAction(int action, int value, char *symbol, uint8_t hwbutton_i
                     }
                     MSG_DEBUGLN("[DEBUG] Button info.");
                     break;
-                    
+                case SpecialFn_Spacemouse_Mode_Toggle:
+                    generalconfig.spacemouse_mode = !generalconfig.spacemouse_mode;
+                    MSG_DEBUGLN("[DEBUG] Toggle Spacemouse Mode.");
+                    break;
             }
             break;
 

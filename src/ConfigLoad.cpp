@@ -156,6 +156,7 @@ bool loadConfig(String value)
 
         uint8_t gpio_pin = doc["gpio_pin"] | 255;
         generalconfig.gpio_pin = gpio_pin;
+
         uint8_t gpio_pin_mode = doc["gpio_pin_mode"] | 0;
         generalconfig.gpio_pin_mode = gpio_pin_mode;
 
@@ -163,7 +164,10 @@ bool loadConfig(String value)
             pinMode(gpio_pin, OUTPUT);
             digitalWrite(gpio_pin, gpio_pin_mode);
         }
-	
+
+        uint8_t spacemouse_mode = doc["spacemouse_mode"] | 0;
+        generalconfig.spacemouse_mode = spacemouse_mode;
+
         configfile.close();
 
         if (error) {

@@ -90,6 +90,8 @@ int saveConfigGeneral(AsyncWebServerRequest *request)
 
     general["gpio_pin_mode"] = generalconfig.gpio_pin_mode;
 
+    general["spacemouse_mode"] = generalconfig.spacemouse_mode;
+
     if (serializeJsonPretty(doc, file) == 0) {
         MSG_WARNLN("[WARNING]: Failed to write to /config/general.json file");
         status = 2;
@@ -168,7 +170,10 @@ int saveCurrentConfigGeneral()
     general["gpio_pin"] = generalconfig.gpio_pin;
     general["gpio_pin_mode"] = generalconfig.gpio_pin_mode;
 
-    if (serializeJsonPretty(doc, file) == 0) {
+    general["spacemouse_mode"] = generalconfig.spacemouse_mode;
+    
+    if (serializeJsonPretty(doc, file) == 0)
+    {
         MSG_WARNLN("[WARNING]: Failed to write to /config/general.json file");
         status = 2;
     }
