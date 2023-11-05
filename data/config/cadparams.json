@@ -12,6 +12,7 @@
   "rotate_sensitivity": 20,
   "mouse_sensitivity": 20,
   "current_program": 1,
+  "spacemouse_enable": false,
   "programs": [
     {
       "name": "Solidworks",

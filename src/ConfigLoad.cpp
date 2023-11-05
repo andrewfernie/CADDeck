@@ -165,9 +165,6 @@ bool loadConfig(String value)
             digitalWrite(gpio_pin, gpio_pin_mode);
         }
 
-        uint8_t spacemouse_mode = doc["spacemouse_mode"] | 0;
-        generalconfig.spacemouse_mode = spacemouse_mode;
-
         configfile.close();
 
         if (error) {
@@ -284,6 +281,18 @@ bool loadConfig(String value)
         cadconfig.current_program = current_program;
         if (error) {
             MSG_ERROR2("[ERROR] deserializeJson() error current_program ", error.c_str(), doc.memoryUsage());
+            return false;
+        }
+
+        bool spacemouse_enable = doc["spacemouse_enable"] | false;
+        if (spacemouse_enable) {
+            cadconfig.spacemouse_enable = true;
+        }
+        else {
+            cadconfig.spacemouse_enable = false;
+        }
+        if (error) {
+            MSG_ERROR2("[ERROR] deserializeJson() error spacemouse_enable ", error.c_str(), doc.memoryUsage());
             return false;
         }
 
@@ -499,6 +508,11 @@ bool loadConfig(String value)
                 if (menu[fileNameMenuNumber].button[row][col].actions[0].action == Action_SpecialFn &&
                     menu[fileNameMenuNumber].button[row][col].actions[0].value == 8) {
                     menu[fileNameMenuNumber].button[row][col].islatched = generalconfig.usbcommsenable;
+                }
+                // Spacemouse mode enable button
+                if (menu[fileNameMenuNumber].button[row][col].actions[0].action ==Action_SpecialFn &&
+                    menu[fileNameMenuNumber].button[row][col].actions[0].value == 14) {
+                    menu[fileNameMenuNumber].button[row][col].islatched = cadconfig.spacemouse_enable;
                 }
             }
         }

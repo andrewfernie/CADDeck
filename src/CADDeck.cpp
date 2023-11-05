@@ -68,11 +68,12 @@ r
 
 #include <Arduino.h>
 
-const char *versionnumber = "1.0.0_10Button";
+const char *versionnumber = "10Button V1.0.1WIP";
 
 /*
- * Version 1.0.1_10Button
+ * Version 10Button V1.0.1WIP
  *                   - In work
+ *                   - Added initial code for Spacemouse output to serial port. This is still in work.
  *
  * Version 1.0.0_10Button
  *                   - Using button numbering scheme as defined by AFUDirk
@@ -917,7 +918,7 @@ void loop(void)
                 if (button_state && (last_hwbutton_state[i] == 0)) {
                     //---------------------------------------- Button press handling --------------------------------------------------
 
-                    if (generalconfig.spacemouse_mode) {
+                    if (cadconfig.spacemouse_enable && (i > 0)) {
                         spaceMouse.SendKeyPacket(i + 1);
                     }
                     else {
@@ -934,7 +935,7 @@ void loop(void)
                                             cadprogramconfig[cadconfig.current_program].hw_buttons[i][2].symbol, i);
                     }
                 }
-                else if (!button_state && last_hwbutton_state[i] && generalconfig.spacemouse_mode) {
+                else if (!button_state && last_hwbutton_state[i] && cadconfig.spacemouse_enable && (i > 0)) {
                     spaceMouse.SendKeyPacket(0);
                 }
 

@@ -563,7 +563,6 @@ bool resetconfig(String file)
         newfile.println("\"startup_menu\": 0,");
         newfile.println("\"gpio_pin\": 255,");
         newfile.println("\"gpio_pin_mode\": 0,");
-        newfile.println("\"spacemouse_mode\": 0,");
 
         newfile.println("}");
 
@@ -598,6 +597,7 @@ bool resetconfig(String file)
         newfile.println("\"rotate_sensitivity\": 10,");
         newfile.println("\"mouse_sensitivity\": 10,");
         newfile.println("\"CADProgram\": \"Solidworks\" ");
+        newfile.println("\"spacemouse_enable\": true");
         newfile.println("}");
 
         newfile.close();

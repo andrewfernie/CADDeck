@@ -666,6 +666,11 @@
 				<option value="50">50</option>
 				<option value="100">100</option>
 			</select>
+			&nbsp;&nbsp;Spacemouse Mode Enable:&nbsp;
+			<select class="spacemouse_enable" id='spacemouse_enable' name='spacemouse_enable'>
+				<option value="true">Enabled</option>
+				<option value="false">Disabled</option>
+			</select>
 
 			<br><br>
 			<table style="height: 250px; width: 100%; border: 1px solid #000088; text-align: left;">
@@ -3368,6 +3373,7 @@
 					document.getElementById("mouse_sensitivity").value = data.mouse_sensitivity;
 					document.getElementById("current_program").value = data.current_program;
 					document.getElementById("selected_program").value = data.current_program;
+					document.getElementById("spacemouse_enable").value = data.spacemouse_enable;
 
 					for (let program = 0; program < 5; program++) {
 						console.log('Loading program ' + program);

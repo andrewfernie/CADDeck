@@ -13,6 +13,5 @@
   "helperdelay": 500,
   "startup_menu": 0,
   "gpio_pin": 25,
-  "gpio_pin_mode": 1,
-  "spacemouse_mode": 1
+  "gpio_pin_mode": 1
 }

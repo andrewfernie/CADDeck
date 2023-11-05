@@ -344,6 +344,13 @@ void printinfo()
         tft.println("USB Comms: Disabled");
     }
 
+    if (cadconfig.spacemouse_enable) {
+        tft.println("Spacemouse Mode: Enabled");
+    }
+    else {
+        tft.println("Spacemouse Mode: Disabled");
+    }
+
 #ifdef speakerPin
     if (generalconfig.beep) {
         tft.println("Speaker: Enabled");

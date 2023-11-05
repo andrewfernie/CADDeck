@@ -31,9 +31,9 @@
     ]
   },
   "button13": {
-    "logo": "spacemouse.bmp",
-    "latch": false,
-    "latchlogo": "",
+    "logo": "spacemouseoff.bmp",
+    "latch": true,
+    "latchlogo": "spacemouseon.bmp",
     "actionarray": [
       "11",
       "0",
