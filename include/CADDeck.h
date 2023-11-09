@@ -183,6 +183,7 @@ extern bool psramAvailable;
 #define SPACEMOUSE_BAUD 115200
 #define SPACEMOUSE_CONFIG SERIAL_8N1
 #define SPACEMOUSE_SERIAL Serial1
+#define SPACEMOUSE_MAX_BUTTON 15
 extern SpaceMouse spaceMouse;
 
 // ---------------- Debug pins ----------------
@@ -384,7 +385,8 @@ extern TFT_eSPI_Button key[BUTTON_ROWS][BUTTON_COLS];
 
 //--------- Internal references ------------
 // (this needs to be below all structs etc..)
-enum ActionEnum {
+enum ActionEnum
+{
     Action_NoAction = 0,
     Action_Delay = 1,
     Action_TabArrow = 2,
@@ -404,7 +406,8 @@ enum ActionEnum {
     Action_CADProgram = 16,
     Action_MouseButton = 17,
     Action_PreviousPage = 18,
-    Action_DefaultJoyMode = 19
+    Action_DefaultJoyMode = 19,
+    Action_SpaceMouseButton = 20
 };
 
 enum CADFnEnum {

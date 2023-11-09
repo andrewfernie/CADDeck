@@ -919,7 +919,7 @@ void loop(void)
                     //---------------------------------------- Button press handling --------------------------------------------------
 
                     if (cadconfig.spacemouse_enable && (i > 0)) {
-                        spaceMouse.SendKeyPacket(i + 1);
+                        spaceMouse.SendKeyPacket(i);
                     }
                     else {
                         KeyboardMouseAction(cadprogramconfig[cadconfig.current_program].hw_buttons[i][0].action,

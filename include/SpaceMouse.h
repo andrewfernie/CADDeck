@@ -12,6 +12,7 @@ public:
     void Init();
     void SendViewpointDataPacket(uint16_t x, uint16_t y, uint16_t z, uint16_t a, uint16_t b, uint16_t c);
     void SendKeyPacket(uint8_t);
+    void SendKeyPacketExtended(uint8_t);
 
 private:
     void SendUInt16(uint16_t data);
