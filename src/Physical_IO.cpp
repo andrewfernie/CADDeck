@@ -343,12 +343,12 @@ void update_io()
             z = zoomControl.Value() * 2047.0 + 32768;
             a = 32768;
             b = 32768;
-            c = 32768;
+            c = rotateControl.Value() * 2047.0 + 32768;
         }
         else {
             x = 32768;
             y = 32768;
-            z = 32768;
+            z = zoomControl.Value() * 2047.0 + 32768;
             a = joystick.x() * 2047.0 + 32768;
             b = joystick.y() * 2047.0 + 32768;
             c = rotateControl.Value() * 2047.0 + 32768;

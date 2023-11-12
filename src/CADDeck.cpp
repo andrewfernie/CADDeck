@@ -68,9 +68,13 @@ r
 
 #include <Arduino.h>
 
-const char *versionnumber = "10Button V1.1";
+const char *versionnumber = "10Button V1.1.1";
 
 /*
+ * Version 10Button V1.1.1
+ *                   - Enable knob push/pull (vertical move) while in rotation mode and knob rotate when in translation mode
+ *                   - Add SpaceMouse soft button support to configurator
+ * 
  * Version 10Button V1.1
  *                   - Added code for Spacemouse output to serial port. Needs to be hooked up to a Raspberry Pi Pico running this code
  *                     https://github.com/andrewfernie/magellan-spacemouse
