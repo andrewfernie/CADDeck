@@ -344,6 +344,13 @@ void printinfo()
         tft.println("USB Comms: Disabled");
     }
 
+    if (cadconfig.spacemouse_enable) {
+        tft.println("Spacemouse Mode: Enabled");
+    }
+    else {
+        tft.println("Spacemouse Mode: Disabled");
+    }
+
 #ifdef speakerPin
     if (generalconfig.beep) {
         tft.println("Speaker: Enabled");
@@ -458,13 +465,13 @@ void printIOValues()
         tft.setTextSize(1);
     }
     tft.setTextColor(TFT_WHITE, TFT_BLACK);
-    tft.printf("Version: %s    \n", versionnumber);
+    tft.printf("Version: %s       \n", versionnumber);
 
-    tft.printf("Joystick X: %f     \n", joystick.x());
-    tft.printf("Joystick Y: %f     \n", joystick.y());
+    tft.printf("Joystick X: %d,  %f     \n", joystick.RawX() , joystick.x());
+    tft.printf("Joystick Y: %d,  %f     \n", joystick.RawY(), joystick.y());
 
-    tft.printf("Zoom: %f     \n", zoomControl.Value());
-    tft.printf("Rotate: %f     \n", rotateControl.Value());
+    tft.printf("Zoom: %d,  %f     \n", zoomControl.RawValue(), zoomControl.Value());
+    tft.printf("Rotate: %d,  %f     \n", rotateControl.RawValue(), rotateControl.Value());
 
     //    PCF857X::DigitalInput di = pcf857X.digitalReadAll();
     tft.print(" Button 0: ");

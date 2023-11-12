@@ -64,23 +64,27 @@ r
         using. Also make sure TOUCH_CS is defined correctly. TFT_BL is also needed!
 
 */
-#include <Arduino.h>
-
 #include "CADDeck.h"
 
-const char *versionnumber = "1.0.0_10Button";
+#include <Arduino.h>
+
+const char *versionnumber = "10Button V1.1";
 
 /*
+ * Version 10Button V1.1
+ *                   - Added code for Spacemouse output to serial port. Needs to be hooked up to a Raspberry Pi Pico running this code
+ *                     https://github.com/andrewfernie/magellan-spacemouse
+ *
  * Version 1.0.0_10Button
  *                   - Using button numbering scheme as defined by AFUDirk
  *                   - Added controllable GPIO pin for LEDs on 10 button card
  *                   - Some messages (in ConfigHelper.cpp) can be displayed in English or German (compile time option). Does not apply
  *                     to messages on web pages, only those stored directly in the C++ code. Will eventually add the rest of AFUDirk's
  *                     messages, but want to look at how to do this in a more elegant way.
- *                   - Support for "click" and "double click" action for button on top of joystick (button 0). 
+ *                   - Support for "click" and "double click" action for button on top of joystick (button 0).
  *                   - Added enumerations for actions. Makes code more readable, but not tied to the values in the
  *                     configurator and configuration json files, so these must be kept alienged manually.
- * 
+ *
  * Version 0.0.17.10Button
  *                   - Added controllable GPIO functions
  *
@@ -276,6 +280,8 @@ long this_loop_start = 0;
 long loop_100_count = 0;
 long loop_100_time = 0;
 
+SpaceMouse spaceMouse(SPACEMOUSE_BAUD, SPACEMOUSE_CONFIG, SPACEMOUSE_RX_PIN, SPACEMOUSE_TX_PIN);
+
 //-------------------------------- SETUP --------------------------------------------------------------
 
 void setup()
@@ -292,6 +298,11 @@ void setup()
     MSG_INFOLN("[INFO] Brightness has been set");
 
     psramAvailable = psramFound();
+
+#ifdef SPACEMOUSE_SUPPORT
+    spaceMouse.Init();
+    MSG_INFOLN("[INFO] SpaceMouse support enabled");
+#endif
 
 #ifdef USECAPTOUCH
 #ifdef CUSTOM_TOUCH_SDA
@@ -592,12 +603,12 @@ void setup()
     // Setup the Font used for plain text
     tft.setFreeFont(LABEL_FONT);
 
-    //------------------BLE Initialization ------------------------
-    #ifdef BLUETOOTH_COMMANDS
+//------------------BLE Initialization ------------------------
+#ifdef BLUETOOTH_COMMANDS
     MSG_INFOLN("[INFO] Starting BLE HID devices");
-    #else
+#else
     MSG_INFOLN("[INFO] Starting USB HID devices");
-    #endif
+#endif
     Keyboard.begin();
     Mouse.begin();
 
@@ -907,20 +918,32 @@ void loop(void)
                 if (button_state && (last_hwbutton_state[i] == 0)) {
                     //---------------------------------------- Button press handling --------------------------------------------------
 
-                    KeyboardMouseAction(cadprogramconfig[cadconfig.current_program].hw_buttons[i][0].action,
-                                        cadprogramconfig[cadconfig.current_program].hw_buttons[i][0].value,
-                                        cadprogramconfig[cadconfig.current_program].hw_buttons[i][0].symbol, i);
+                    if (cadconfig.spacemouse_enable && (i > 0)) {
+                        spaceMouse.SendKeyPacketExtended(i);
+                        MSG_DEBUG1("loop:Sending extended key packet for button ", i);
+                    }
+                    else {
+                        KeyboardMouseAction(cadprogramconfig[cadconfig.current_program].hw_buttons[i][0].action,
+                                            cadprogramconfig[cadconfig.current_program].hw_buttons[i][0].value,
+                                            cadprogramconfig[cadconfig.current_program].hw_buttons[i][0].symbol, i);
 
-                    KeyboardMouseAction(cadprogramconfig[cadconfig.current_program].hw_buttons[i][1].action,
-                                        cadprogramconfig[cadconfig.current_program].hw_buttons[i][1].value,
-                                        cadprogramconfig[cadconfig.current_program].hw_buttons[i][1].symbol, i);
+                        KeyboardMouseAction(cadprogramconfig[cadconfig.current_program].hw_buttons[i][1].action,
+                                            cadprogramconfig[cadconfig.current_program].hw_buttons[i][1].value,
+                                            cadprogramconfig[cadconfig.current_program].hw_buttons[i][1].symbol, i);
 
-                    KeyboardMouseAction(cadprogramconfig[cadconfig.current_program].hw_buttons[i][2].action,
-                                        cadprogramconfig[cadconfig.current_program].hw_buttons[i][2].value,
-                                        cadprogramconfig[cadconfig.current_program].hw_buttons[i][2].symbol, i);
+                        KeyboardMouseAction(cadprogramconfig[cadconfig.current_program].hw_buttons[i][2].action,
+                                            cadprogramconfig[cadconfig.current_program].hw_buttons[i][2].value,
+                                            cadprogramconfig[cadconfig.current_program].hw_buttons[i][2].symbol, i);
+                    }
                 }
+                else if (!button_state && last_hwbutton_state[i] && cadconfig.spacemouse_enable && (i > 0)) {
+                    spaceMouse.SendKeyPacketExtended(0);
+                    MSG_DEBUG1("loop:Sending extended key packet for button ", 0);
+                }
+
                 last_hwbutton_state[i] = button_state;
             }
+
             // if (loop_count % 10 == 0) MSG_DEBUGLN("");
         }
 

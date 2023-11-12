@@ -247,89 +247,113 @@ void update_io()
     uint8_t zoom_knob_steadyzero = zoom_comparison.Equals(zoomControl.Value());
     uint8_t all_control_steadyzero = joystick_x_steadyzero && joystick_y_steadyzero && rotate_knob_steadyzero && zoom_knob_steadyzero;
 
-    if (Keyboard.isConnected()) {
+    if (!cadconfig.spacemouse_enable) {
+        if (Keyboard.isConnected()) {
 #if (LOG_MSG_JOYSTICK_MODE > 0)
-        if (!get_pcf857X_bit(pcf857X_inputs, BUTTON_10)) {
-            char msg[30];
-            // sprintf(msg, "[DBG] %d,%d,%d,%d,%d", all_control_steadyzero, joystick_x_steadyzero,
-            //         joystick_y_steadyzero, rotate_knob_steadyzero, zoom_knob_steadyzero);
-            sprintf(msg, "[DBG] %d", joystickModeButton.isPressed());
-            MSG_PORT.println(msg);
-        }
+            if (!get_pcf857X_bit(pcf857X_inputs, BUTTON_10)) {
+                char msg[30];
+                // sprintf(msg, "[DBG] %d,%d,%d,%d,%d", all_control_steadyzero, joystick_x_steadyzero,
+                //         joystick_y_steadyzero, rotate_knob_steadyzero, zoom_knob_steadyzero);
+                sprintf(msg, "[DBG] %d", joystickModeButton.isPressed());
+                MSG_PORT.println(msg);
+            }
 
 #endif
-        if (!all_control_steadyzero) {
-            switch (cadconfig.current_program) {
-                case CADApp_SolidWorks:
-                case CADApp_Fusion360:
-                case CADApp_FreeCAD:
-                case CADApp_AC3D:
-                    if (hw_button0_set) {
-                        if (!joystick_x_steadyzero || !joystick_y_steadyzero || !zoom_knob_steadyzero) {
+            if (!all_control_steadyzero) {
+                switch (cadconfig.current_program) {
+                    case CADApp_SolidWorks:
+                    case CADApp_Fusion360:
+                    case CADApp_FreeCAD:
+                    case CADApp_AC3D:
+                        if (hw_button0_set) {
+                            if (!joystick_x_steadyzero || !joystick_y_steadyzero || !zoom_knob_steadyzero) {
+                                if (control_mode != JOYSTICK_CONTROL_MODE_MOVE) {
+                                    set_move_mode(cadconfig.current_program);
+                                }
+                                Mouse.move(joystick.x() * cadconfig.joy_sensitivity, joystick.y() * cadconfig.joy_sensitivity, zoomControl.Value() * cadconfig.zoom_sensitivity);
+                            }
+                        }
+                        else {
+                            if (!zoom_knob_steadyzero || !rotate_knob_steadyzero) {
+                                if (control_mode != JOYSTICK_CONTROL_MODE_ROTATE) {
+                                    set_rotate_mode(cadconfig.current_program);
+                                }
+                                Mouse.move(rotateControl.Value() * cadconfig.rotate_sensitivity, zoomControl.Value() * cadconfig.rotate_sensitivity, 0);
+                            }
+                            else if (!joystick_x_steadyzero || !joystick_y_steadyzero) {
+                                if (control_mode != JOYSTICK_CONTROL_MODE_MOUSE) {
+                                    set_mouse_mode();
+                                }
+                                Mouse.move(joystick.x() * cadconfig.mouse_sensitivity, joystick.y() * cadconfig.mouse_sensitivity, 0.0);
+                            }
+                        }
+                        break;
+
+                    case CADApp_Blender:
+
+                        if (hw_button0_set) {
                             if (control_mode != JOYSTICK_CONTROL_MODE_MOVE) {
                                 set_move_mode(cadconfig.current_program);
                             }
-                            Mouse.move(joystick.x() * cadconfig.joy_sensitivity, joystick.y() * cadconfig.joy_sensitivity, zoomControl.Value() * cadconfig.zoom_sensitivity);
-                        }
-                    }
-                    else {
-                        if (!zoom_knob_steadyzero || !rotate_knob_steadyzero) {
-                            if (control_mode != JOYSTICK_CONTROL_MODE_ROTATE) {
-                                set_rotate_mode(cadconfig.current_program);
+
+                            if (!joystick_x_steadyzero || !joystick_y_steadyzero || !zoom_knob_steadyzero) {
+                                Mouse.move(joystick.x() * cadconfig.joy_sensitivity, joystick.y() * cadconfig.joy_sensitivity, 0.0);
                             }
-                            Mouse.move(rotateControl.Value() * cadconfig.rotate_sensitivity, zoomControl.Value() * cadconfig.rotate_sensitivity, 0);
                         }
-                        else if (!joystick_x_steadyzero || !joystick_y_steadyzero) {
-                            if (control_mode != JOYSTICK_CONTROL_MODE_MOUSE) {
-                                set_mouse_mode();
+                        else {
+                            if (!rotate_knob_steadyzero) {
+                                if (control_mode != JOYSTICK_CONTROL_MODE_ROTATE) {
+                                    set_rotate_mode(cadconfig.current_program);
+                                }
+                                Mouse.move(rotateControl.Value() * cadconfig.rotate_sensitivity, 0.0, 0.0);
                             }
-                            Mouse.move(joystick.x() * cadconfig.mouse_sensitivity, joystick.y() * cadconfig.mouse_sensitivity, 0.0);
-                        }
-                    }
-                    break;
-
-                case CADApp_Blender:
-
-                    if (hw_button0_set) {
-                        if (control_mode != JOYSTICK_CONTROL_MODE_MOVE) {
-                            set_move_mode(cadconfig.current_program);
-                        }
-
-                        if (!joystick_x_steadyzero || !joystick_y_steadyzero || !zoom_knob_steadyzero) {
-                            Mouse.move(joystick.x() * cadconfig.joy_sensitivity, joystick.y() * cadconfig.joy_sensitivity, 0.0);
-                        }
-                    }
-                    else {
-                        if (!rotate_knob_steadyzero) {
-                            if (control_mode != JOYSTICK_CONTROL_MODE_ROTATE) {
-                                set_rotate_mode(cadconfig.current_program);
+                            else if (!joystick_x_steadyzero || !joystick_y_steadyzero) {
+                                if (control_mode != JOYSTICK_CONTROL_MODE_PANTILT) {
+                                    set_pantilt_mode(cadconfig.current_program);
+                                }
+                                Mouse.move(joystick.x() * cadconfig.joy_sensitivity, joystick.y() * cadconfig.joy_sensitivity, 0.0);
                             }
-                            Mouse.move(rotateControl.Value() * cadconfig.rotate_sensitivity, 0.0, 0.0);
                         }
-                        else if (!joystick_x_steadyzero || !joystick_y_steadyzero) {
-                            if (control_mode != JOYSTICK_CONTROL_MODE_PANTILT) {
-                                set_pantilt_mode(cadconfig.current_program);
-                            }
-                            Mouse.move(joystick.x() * cadconfig.joy_sensitivity, joystick.y() * cadconfig.joy_sensitivity, 0.0);
-                        }
-                    }
 
-                    break;
+                        break;
 
-                default:
-                    break;
+                    default:
+                        break;
+                }
             }
+            else {
+                if (all_control_steadyzero && (control_mode != JOYSTICK_CONTROL_MODE_MOUSE)) {
+                    set_mouse_mode();
+                }
+            }
+
+            last_control_mode = control_mode;
+        }
+
+        else {
+            MSG_WARNLN("[WARN] BLE Mouse not connected");
+        }
+    }
+
+    else {
+        uint16_t x, y, z, a, b, c;
+        if (hw_button0_set) {
+            x = joystick.x() * 2047.0 + 32768;
+            y = joystick.y() * 2047.0 + 32768;
+            z = zoomControl.Value() * 2047.0 + 32768;
+            a = 32768;
+            b = 32768;
+            c = 32768;
         }
         else {
-            if (all_control_steadyzero && (control_mode != JOYSTICK_CONTROL_MODE_MOUSE)) {
-                set_mouse_mode();
-            }
+            x = 32768;
+            y = 32768;
+            z = 32768;
+            a = joystick.x() * 2047.0 + 32768;
+            b = joystick.y() * 2047.0 + 32768;
+            c = rotateControl.Value() * 2047.0 + 32768;
         }
-
-        last_control_mode = control_mode;
-    }
-    else {
-        MSG_WARNLN("[WARN] BLE Mouse not connected");
+        spaceMouse.SendViewpointDataPacket(x, y, z, a, b, c);
     }
 }
 

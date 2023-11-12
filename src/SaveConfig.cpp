@@ -168,7 +168,8 @@ int saveCurrentConfigGeneral()
     general["gpio_pin"] = generalconfig.gpio_pin;
     general["gpio_pin_mode"] = generalconfig.gpio_pin_mode;
 
-    if (serializeJsonPretty(doc, file) == 0) {
+    if (serializeJsonPretty(doc, file) == 0)
+    {
         MSG_WARNLN("[WARNING]: Failed to write to /config/general.json file");
         status = 2;
     }
@@ -249,6 +250,17 @@ int saveConfigCADParams(AsyncWebServerRequest *request)
     AsyncWebParameter *current_program = request->getParam("current_program", true);
     String Current_program = current_program->value().c_str();
     cadparams["current_program"] = Current_program.toInt();
+ 
+    MSG_DEBUGLN("[DEBUG] Requesting space_mouse_enable");
+    AsyncWebParameter *space_mouse_enable = request->getParam("space_mouse_enable", true);
+    String StrSpaceMouseEnable = space_mouse_enable->value().c_str();
+    if (StrSpaceMouseEnable == "true") {
+        cadparams["spacemouse_enable"] = true;
+    }
+    else {
+        cadparams["spacemouse_enable"] = false;
+    }
+
 
     // TODO: Fix this to include all of the program-specific parameters. Need to figure out how to do
     // this with the AsyncWebServerRequest object. Look at how the menu parameters are saved.
@@ -349,6 +361,7 @@ int saveCurrentConfigCADParams()
     cadparams["rotate_sensitivity"] = cadconfig.rotate_sensitivity;
     cadparams["mouse_sensitivity"] = cadconfig.mouse_sensitivity;
     cadparams["current_program"] = cadconfig.current_program;
+    cadparams["spacemouse_enable"] = cadconfig.spacemouse_enable;
 
     JsonArray programObject_programarray = cadparams.createNestedArray("programs");
 

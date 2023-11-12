@@ -80,6 +80,7 @@
 #include "Physical_IO.h"
 #include "SerialCommands.h"
 #include "stack_queue.h"
+#include "SpaceMouse.h"
 
 #define MIN_TO_MS 60 * 1000
 
@@ -173,6 +174,16 @@ extern TFT_eSPI tft;
 extern Preferences savedStates;
 
 extern bool psramAvailable;
+
+// ---------------- SpaceMouse Support ----------------
+// enable support for SpaceMouse emulation on Serial 1
+#define SPACEMOUSE_SUPPORT  // Comment out to disable SpaceMouse support
+#define SPACEMOUSE_RX_PIN 5
+#define SPACEMOUSE_TX_PIN 4
+#define SPACEMOUSE_BAUD 115200
+#define SPACEMOUSE_CONFIG SERIAL_8N1
+#define SPACEMOUSE_SERIAL Serial1
+extern SpaceMouse spaceMouse;
 
 // ---------------- Debug pins ----------------
 // set to 1 to enable debug pins, 0 to disable
@@ -298,6 +309,7 @@ struct CADConfig {
     float rotate_sensitivity;
     float mouse_sensitivity;
     uint16_t num_programs;
+    bool spacemouse_enable;
 };
 
 #define NUM_HW_BUTTONS 11
@@ -372,7 +384,8 @@ extern TFT_eSPI_Button key[BUTTON_ROWS][BUTTON_COLS];
 
 //--------- Internal references ------------
 // (this needs to be below all structs etc..)
-enum ActionEnum {
+enum ActionEnum
+{
     Action_NoAction = 0,
     Action_Delay = 1,
     Action_TabArrow = 2,
@@ -392,7 +405,8 @@ enum ActionEnum {
     Action_CADProgram = 16,
     Action_MouseButton = 17,
     Action_PreviousPage = 18,
-    Action_DefaultJoyMode = 19
+    Action_DefaultJoyMode = 19,
+    Action_SpaceMouseButton = 20
 };
 
 enum CADFnEnum {
@@ -446,7 +460,8 @@ enum SpecialFn
     SpecialFn_GPIO_Toggle = 10,
     SpecialFn_GPIO_Off = 11,
     SpecialFn_GPIO_On = 12,
-    SpecialFn_ButtonInfoPage = 13
+    SpecialFn_ButtonInfoPage = 13,
+    SpecialFn_Spacemouse_Enable_Toggle = 14
 };
 
 enum MouseButton {

@@ -563,18 +563,6 @@ bool resetconfig(String file)
         newfile.println("\"startup_menu\": 0,");
         newfile.println("\"gpio_pin\": 255,");
         newfile.println("\"gpio_pin_mode\": 0,");
-        newfile.println("\"joy_scale_x\": 1.0,");
-        newfile.println("\"joy_scale_y\": 1.0,");
-        newfile.println("\"joy_deadzone\": 0.01,");
-        newfile.println("\"joy_sensitivity\": 10,");
-        newfile.println("\"zoom_scale\": 1.0,");
-        newfile.println("\"zoom_deadzone\": 0.01,");
-        newfile.println("\"zoom_sensitivity\": 10,");
-        newfile.println("\"rotate_scale\": 1.0,");
-        newfile.println("\"rotate_deadzone\": 0.01,");
-        newfile.println("\"rotate_sensitivity\": 10,");
-        newfile.println("\"mouse_sensitivity\": 10,");
-        newfile.println("\"CADProgram\": \"Solidworks\" ");
 
         newfile.println("}");
 
@@ -596,6 +584,20 @@ bool resetconfig(String file)
 
         File newfile = FILESYSTEM.open(filetoremove, "w");
         newfile.println("{");
+        newfile.println("\"version\": 2,");
+        newfile.println("\"joy_scale_x\": 1.0,");
+        newfile.println("\"joy_scale_y\": 1.0,");
+        newfile.println("\"joy_deadzone\": 0.01,");
+        newfile.println("\"joy_sensitivity\": 10,");
+        newfile.println("\"zoom_scale\": 1.0,");
+        newfile.println("\"zoom_deadzone\": 0.01,");
+        newfile.println("\"zoom_sensitivity\": 10,");
+        newfile.println("\"rotate_scale\": 1.0,");
+        newfile.println("\"rotate_deadzone\": 0.01,");
+        newfile.println("\"rotate_sensitivity\": 10,");
+        newfile.println("\"mouse_sensitivity\": 10,");
+        newfile.println("\"CADProgram\": \"Solidworks\" ");
+        newfile.println("\"spacemouse_enable\": true");
         newfile.println("}");
 
         newfile.close();

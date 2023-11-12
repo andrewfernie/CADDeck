@@ -588,7 +588,14 @@ void KeyboardMouseAction(int action, int value, char *symbol, uint8_t hwbutton_i
                     }
                     MSG_DEBUGLN("[DEBUG] Button info.");
                     break;
-                    
+                case SpecialFn_Spacemouse_Enable_Toggle:
+                    cadconfig.spacemouse_enable = !cadconfig.spacemouse_enable;
+                    if(cadconfig.spacemouse_enable) {
+                        MSG_DEBUGLN("[DEBUG] Spacemouse Mode Enabled.");
+                    } else {
+                        MSG_DEBUGLN("[DEBUG] Spacemouse Mode Disabled.");
+                    }
+                    break;
             }
             break;
 
@@ -812,6 +819,12 @@ void KeyboardMouseAction(int action, int value, char *symbol, uint8_t hwbutton_i
                 pageHistoryStack.pop();
                 pageNum = pageHistoryStack.peek();
                 drawKeypad();
+            }
+            break;
+        case Action_SpaceMouseButton:  // Emulate a SpaceMouse button press
+            if ((value >= 0) && (value <= SPACEMOUSE_MAX_BUTTON)) {
+                spaceMouse.SendKeyPacketExtended(value);
+
             }
             break;
 
