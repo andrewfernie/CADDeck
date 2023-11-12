@@ -14,7 +14,7 @@
 *
 * @return none
 *
-* @note Case 11 is used for special functions, none bleKeyboard related.
+* @note Case Action_SpecialFn is used for special functions, not bleKeyboard related.
 */
 void KeyboardMouseAction(int action, int value, char *symbol, uint8_t hwbutton_index)
 {
@@ -31,46 +31,46 @@ void KeyboardMouseAction(int action, int value, char *symbol, uint8_t hwbutton_i
             break;
         case Action_TabArrow:  // Send TAB ARROW etc
             switch (value) {
-                case 1:
+                case ActionTabArrowKey_Up:
                     Keyboard.write(KEY_UP_ARROW);
                     break;
-                case 2:
+                case ActionTabArrowKey_Down:
                     Keyboard.write(KEY_DOWN_ARROW);
                     break;
-                case 3:
+                case ActionTabArrowKey_Left:
                     Keyboard.write(KEY_LEFT_ARROW);
                     break;
-                case 4:
+                case ActionTabArrowKey_Right:
                     Keyboard.write(KEY_RIGHT_ARROW);
                     break;
-                case 5:
+                case ActionTabArrowKey_Backspace:
                     Keyboard.write(KEY_BACKSPACE);
                     break;
-                case 6:
+                case ActionTabArrowKey_Tab:
                     Keyboard.write(KEY_TAB);
                     break;
-                case 7:
+                case ActionTabArrowKey_Enter:
                     Keyboard.write(KEY_RETURN);
                     break;
-                case 8:
+                case ActionTabArrowKey_PageUp:
                     Keyboard.write(KEY_PAGE_UP);
                     break;
-                case 9:
+                case ActionTabArrowKey_PageDown:
                     Keyboard.write(KEY_PAGE_DOWN);
                     break;
-                case 10:
+                case ActionTabArrowKey_Delete:
                     Keyboard.write(KEY_DELETE);
                     break;
-                case 11:
+                case ActionTabArrowKey_PrtSc:
                     Keyboard.write(KEY_PRTSC);
                     break;
-                case 12:
+                case ActionTabArrowKey_Esc:
                     Keyboard.write(KEY_ESC);
                     break;
-                case 13:
+                case ActionTabArrowKey_Home:
                     Keyboard.write(KEY_HOME);
                     break;
-                case 14:
+                case ActionTabArrowKey_End:
                     Keyboard.write(KEY_END);
                     break;
 
@@ -81,52 +81,52 @@ void KeyboardMouseAction(int action, int value, char *symbol, uint8_t hwbutton_i
             break;
         case Action_Media:  // Send Media Key
             switch (value) {
-                case 1:
+                case ActionMediaKey_Mute:
                     Keyboard.write(KEY_MEDIA_MUTE);
                     break;
-                case 2:
+                case ActionMediaKey_VolumeDown:
                     Keyboard.write(KEY_MEDIA_VOLUME_DOWN);
                     break;
-                case 3:
+                case ActionMediaKey_VolumeUp:
                     Keyboard.write(KEY_MEDIA_VOLUME_UP);
                     break;
-                case 4:
+                case ActionMediaKey_PlayPause:
                     Keyboard.write(KEY_MEDIA_PLAY_PAUSE);
                     break;
-                case 5:
+                case ActionMediaKey_Stop:
                     Keyboard.write(KEY_MEDIA_STOP);
                     break;
-                case 6:
+                case ActionMediaKey_NextTrack:
                     Keyboard.write(KEY_MEDIA_NEXT_TRACK);
                     break;
-                case 7:
+                case ActionMediaKey_PreviousTrack:
                     Keyboard.write(KEY_MEDIA_PREVIOUS_TRACK);
                     break;
-                case 8:
+                case ActionMediaKey_WWWHome:
                     Keyboard.write(KEY_MEDIA_WWW_HOME);
                     break;
-                case 9:
+                case ActionMediaKey_LocalMachineBrowser:
                     Keyboard.write(KEY_MEDIA_LOCAL_MACHINE_BROWSER);
                     break;
-                case 10:
+                case ActionMediaKey_Calculator:
                     Keyboard.write(KEY_MEDIA_CALCULATOR);
                     break;
-                case 11:
+                case ActionMediaKey_WWWBookmarks:
                     Keyboard.write(KEY_MEDIA_WWW_BOOKMARKS);
                     break;
-                case 12:
+                case ActionMediaKey_WWWSearch:
                     Keyboard.write(KEY_MEDIA_WWW_SEARCH);
                     break;
-                case 13:
+                case ActionMediaKey_WWWStop:
                     Keyboard.write(KEY_MEDIA_WWW_STOP);
                     break;
-                case 14:
+                case ActionMediaKey_WWWBack:
                     Keyboard.write(KEY_MEDIA_WWW_BACK);
                     break;
-                case 15:
+                case ActionMediaKey_ConsumerControlConfiguration:
                     Keyboard.write(KEY_MEDIA_CONSUMER_CONTROL_CONFIGURATION);
                     break;
-                case 16:
+                case ActionMediaKey_EmailReader:
                     Keyboard.write(KEY_MEDIA_EMAIL_READER);
                     break;
                 default:
@@ -139,31 +139,31 @@ void KeyboardMouseAction(int action, int value, char *symbol, uint8_t hwbutton_i
             break;
         case Action_Option:  // Option Keys
             switch (value) {
-                case 1:
+                case OptionKey_LCtrl:
                     Keyboard.press(KEY_LEFT_CTRL);
                     break;
-                case 2:
+                case OptionKey_LShift:
                     Keyboard.press(KEY_LEFT_SHIFT);
                     break;
-                case 3:
+                case OptionKey_LAlt:
                     Keyboard.press(KEY_LEFT_ALT);
                     break;
-                case 4:
+                case OptionKey_LGui:
                     Keyboard.press(KEY_LEFT_GUI);
                     break;
-                case 5:
+                case OptionKey_RCtrl:
                     Keyboard.press(KEY_RIGHT_CTRL);
                     break;
-                case 6:
+                case OptionKey_RShift:
                     Keyboard.press(KEY_RIGHT_SHIFT);
                     break;
-                case 7:
+                case OptionKey_RAlt:
                     Keyboard.press(KEY_RIGHT_ALT);
                     break;
-                case 8:
+                case OptionKey_RGui:
                     Keyboard.press(KEY_RIGHT_GUI);
                     break;
-                case 9:
+                case OptionKey_ReleaseAll:
                     Keyboard.releaseAll();
                     break;
                 default:
@@ -173,76 +173,76 @@ void KeyboardMouseAction(int action, int value, char *symbol, uint8_t hwbutton_i
             break;
         case Action_FnKey:  // Function Keys
             switch (value) {
-                case 1:
+                case ActionFnKey_F1:
                     Keyboard.press(KEY_F1);
                     break;
-                case 2:
+                case ActionFnKey_F2:
                     Keyboard.press(KEY_F2);
                     break;
-                case 3:
+                case ActionFnKey_F3:
                     Keyboard.press(KEY_F3);
                     break;
-                case 4:
+                case ActionFnKey_F4:
                     Keyboard.press(KEY_F4);
                     break;
-                case 5:
+                case ActionFnKey_F5:
                     Keyboard.press(KEY_F5);
                     break;
-                case 6:
+                case ActionFnKey_F6:
                     Keyboard.press(KEY_F6);
                     break;
-                case 7:
+                case ActionFnKey_F7:
                     Keyboard.press(KEY_F7);
                     break;
-                case 8:
+                case ActionFnKey_F8:
                     Keyboard.press(KEY_F8);
                     break;
-                case 9:
+                case ActionFnKey_F9:
                     Keyboard.press(KEY_F9);
                     break;
-                case 10:
+                case ActionFnKey_F10:
                     Keyboard.press(KEY_F10);
                     break;
-                case 11:
+                case ActionFnKey_F11:
                     Keyboard.press(KEY_F11);
                     break;
-                case 12:
+                case ActionFnKey_F12:
                     Keyboard.press(KEY_F12);
                     break;
-                case 13:
+                case ActionFnKey_F13:
                     Keyboard.press(KEY_F13);
                     break;
-                case 14:
+                case ActionFnKey_F14:
                     Keyboard.press(KEY_F14);
                     break;
-                case 15:
+                case ActionFnKey_F15:
                     Keyboard.press(KEY_F15);
                     break;
-                case 16:
+                case ActionFnKey_F16:
                     Keyboard.press(KEY_F16);
                     break;
-                case 17:
+                case ActionFnKey_F17:
                     Keyboard.press(KEY_F17);
                     break;
-                case 18:
+                case ActionFnKey_F18:
                     Keyboard.press(KEY_F18);
                     break;
-                case 19:
+                case ActionFnKey_F19:
                     Keyboard.press(KEY_F19);
                     break;
-                case 20:
+                case ActionFnKey_F20:
                     Keyboard.press(KEY_F20);
                     break;
-                case 21:
+                case ActionFnKey_F21:
                     Keyboard.press(KEY_F21);
                     break;
-                case 22:
+                case ActionFnKey_F22:
                     Keyboard.press(KEY_F22);
                     break;
-                case 23:
+                case ActionFnKey_F23:
                     Keyboard.press(KEY_F23);
                     break;
-                case 24:
+                case ActionFnKey_F24:
                     Keyboard.press(KEY_F24);
                     break;
                 default:
@@ -480,42 +480,41 @@ void KeyboardMouseAction(int action, int value, char *symbol, uint8_t hwbutton_i
 
         case Action_SpecialFn:  // Special functions
             switch (value) {
-                case 1:  // Enter config mode
-
+                case SpecialFn_ConfigMode:  // Enter config mode
                     configmode();
 
                     break;
-                case 2:  // Display Brightness Down
+                case SpecialFn_DisplayBrightnessDown:  // Display Brightness Down
                     if (ledBrightness > 25) {
                         ledBrightness = ledBrightness - 25;
                         ledcWrite(0, ledBrightness);
                         savedStates.putInt("ledBrightness", ledBrightness);
-                        MSG_INFOLN("[INFO] Brightness down.");
+                        MSG_DEBUGLN ("[DEBUG] Brightness down.");
                     }
                     break;
-                case 3:  // Display Brightness Up
+                case SpecialFn_DisplayBrightnessUp:  // Display Brightness Up
                     if (ledBrightness < 230) {
                         ledBrightness = ledBrightness + 25;
                         ledcWrite(0, ledBrightness);
                         savedStates.putInt("ledBrightness", ledBrightness);
-                        MSG_INFOLN("[INFO] Brightness up.");
+                        MSG_DEBUGLN ("[DEBUG] Brightness up.");
                     }
                     break;
-                case 4:  // Sleep Enabled
+                case SpecialFn_SleepEnable:  // Sleep Enabled
                     if (generalconfig.sleepenable) {
                         generalconfig.sleepenable = false;
-                        MSG_INFOLN("[INFO] Sleep disabled.");
+                        MSG_DEBUGLN ("[DEBUG] Sleep disabled.");
                     }
                     else {
                         generalconfig.sleepenable = true;
                         Interval = generalconfig.sleeptimer * MIN_TO_MS;
-                        MSG_INFOLN("[INFO] Sleep enabled.");
+                        MSG_DEBUGLN ("[DEBUG] Sleep enabled.");
                         MSG_INFO("[INFO] Timer set to: ");
                         MSG_INFOLN(generalconfig.sleeptimer);
                     }
                     break;
 
-                case 5:
+                case SpecialFn_InfoPage:
                     callingPageNum = pageNum;
                     pageNum = SPECIAL_PAGE_INFO;
                     pageHistoryStack.push(pageNum);
@@ -526,7 +525,7 @@ void KeyboardMouseAction(int action, int value, char *symbol, uint8_t hwbutton_i
                     }
                     break;
 
-                case 6:
+                case SpecialFn_HomePage:
                     callingPageNum = pageNum;
                     pageNum = 0;
                     pageHistoryStack.push(pageNum);
@@ -538,22 +537,22 @@ void KeyboardMouseAction(int action, int value, char *symbol, uint8_t hwbutton_i
                     drawKeypad();
                     break;
 
-                case 7:
+                case SpecialFn_SaveConfig:
                     saveCurrentConfigGeneral();
                     break;
 
-                case 8:  // USB Comms Enable/Disable
+                case SpecialFn_USBComm:  // USB Comms Enable/Disable
                     if (generalconfig.usbcommsenable) {
                         generalconfig.usbcommsenable = false;
-                        MSG_INFOLN("[INFO] USB Comms Disabled.");
+                        MSG_DEBUGLN ("[DEBUG] USB Comms Disabled.");
                     }
                     else {
                         generalconfig.usbcommsenable = true;
-                        MSG_INFOLN("[INFO] USB Comms Enabled.");
+                        MSG_DEBUGLN ("[DEBUG] USB Comms Enabled.");
                     }
                     break;
 
-                case 9:
+                case SpecialFn_IOMonitor:
                     callingPageNum = pageNum;
                     pageNum = SPECIAL_PAGE_IO_MONITOR;
                     pageHistoryStack.push(pageNum);
@@ -562,7 +561,40 @@ void KeyboardMouseAction(int action, int value, char *symbol, uint8_t hwbutton_i
                         snprintf(usbData, sizeof(usbData), "{NewPage, %s , %s}", menu[callingPageNum].name, "IO Monitor");
                         Serial.println(usbData);
                     }
-
+                    break;
+                case SpecialFn_GPIO_Toggle:
+                    generalconfig.gpio_pin_mode = !generalconfig.gpio_pin_mode;
+                    digitalWrite(generalconfig.gpio_pin, generalconfig.gpio_pin_mode);
+                    MSG_DEBUGLN ("[DEBUG] Toggle GPIO.");
+                    break;
+                case SpecialFn_GPIO_Off:
+                    generalconfig.gpio_pin_mode = LOW;
+                    digitalWrite(generalconfig.gpio_pin, generalconfig.gpio_pin_mode);
+                    MSG_DEBUGLN ("[DEBUG] Set GPIO off.");
+                    break;
+                case SpecialFn_GPIO_On:
+                    generalconfig.gpio_pin_mode = HIGH;
+                    digitalWrite(generalconfig.gpio_pin, generalconfig.gpio_pin_mode);
+                    MSG_DEBUGLN ("[DEBUG] Set GPIO on.");
+                    break;
+                case SpecialFn_ButtonInfoPage:
+                    callingPageNum = pageNum;
+                    pageNum = SPECIAL_PAGE_BUTTON_INFO;
+                    pageHistoryStack.push(pageNum);
+                    if (generalconfig.usbcommsenable) {
+                        char usbData[40];
+                        snprintf(usbData, sizeof(usbData), "{NewPage, %s , %s}", menu[callingPageNum].name, "ButtonInfo");
+                        Serial.println(usbData);
+                    }
+                    MSG_DEBUGLN("[DEBUG] Button info.");
+                    break;
+                case SpecialFn_Spacemouse_Enable_Toggle:
+                    cadconfig.spacemouse_enable = !cadconfig.spacemouse_enable;
+                    if(cadconfig.spacemouse_enable) {
+                        MSG_DEBUGLN("[DEBUG] Spacemouse Mode Enabled.");
+                    } else {
+                        MSG_DEBUGLN("[DEBUG] Spacemouse Mode Disabled.");
+                    }
                     break;
             }
             break;
@@ -570,77 +602,77 @@ void KeyboardMouseAction(int action, int value, char *symbol, uint8_t hwbutton_i
 
         case Action_Numpad:  // Numpad
             switch (value) {
-                case 0:
+                case ActionNumpadKey_0:
                     Keyboard.write(KEY_NUM_0);
                     break;
-                case 1:
+                case ActionNumpadKey_1:
                     Keyboard.write(KEY_NUM_1);
                     break;
-                case 2:
+                case ActionNumpadKey_2:
                     Keyboard.write(KEY_NUM_2);
                     break;
-                case 3:
+                case ActionNumpadKey_3:
                     Keyboard.write(KEY_NUM_3);
                     break;
-                case 4:
+                case ActionNumpadKey_4:
                     Keyboard.write(KEY_NUM_4);
                     break;
-                case 5:
+                case ActionNumpadKey_5:
                     Keyboard.write(KEY_NUM_5);
                     break;
-                case 6:
+                case ActionNumpadKey_6:
                     Keyboard.write(KEY_NUM_6);
                     break;
-                case 7:
+                case ActionNumpadKey_7:
                     Keyboard.write(KEY_NUM_7);
                     break;
-                case 8:
+                case ActionNumpadKey_8:
                     Keyboard.write(KEY_NUM_8);
                     break;
-                case 9:
+                case ActionNumpadKey_9:
                     Keyboard.write(KEY_NUM_9);
                     break;
-                case 10:
+                case ActionNumpadKey_Slash:
                     Keyboard.write(KEY_NUM_SLASH);
                     break;
-                case 11:
+                case ActionNumpadKey_Asterix:
                     Keyboard.write(KEY_NUM_ASTERIX);
                     break;
-                case 12:
+                case ActionNumpadKey_Minus:
                     Keyboard.write(KEY_NUM_MINUS);
                     break;
-                case 13:
+                case ActionNumpadKey_Plus:
                     Keyboard.write(KEY_NUM_PLUS);
                     break;
-                case 14:
+                case ActionNumpadKey_Enter:
                     Keyboard.write(KEY_NUM_ENTER);
                     break;
-                case 15:
+                case ActionNumpadKey_Period:
                     Keyboard.write(KEY_NUM_PERIOD);
                     break;
             }
             break;
         case Action_CustomFn:  // Custom functions
             switch (value) {
-                case 1:
+                case ActionCustomFnKey_1:
                     userAction1();
                     break;
-                case 2:
+                case ActionCustomFnKey_2:
                     userAction2();
                     break;
-                case 3:
+                case ActionCustomFnKey_3:
                     userAction3();
                     break;
-                case 4:
+                case ActionCustomFnKey_4:
                     userAction4();
                     break;
-                case 5:
+                case ActionCustomFnKey_5:
                     userAction5();
                     break;
-                case 6:
+                case ActionCustomFnKey_6:
                     userAction6();
                     break;
-                case 7:
+                case ActionCustomFnKey_7:
                     userAction7();
                     break;
             }
@@ -665,13 +697,19 @@ void KeyboardMouseAction(int action, int value, char *symbol, uint8_t hwbutton_i
                     break;
 
                 case CADFn_CalibrateZero:
-                    joystick.CalibrateZeroAll();
+                    calibrate_zero_analog_controls();
                     break;
 
-                case CADFn_CalibrateJoyScale:
-                    joystick.CalibrateScale();
-                    cadconfig.joy_scale_x = joystick.GetScale(0);
-                    cadconfig.joy_scale_y = joystick.GetScale(1);
+                case CADFn_CalibrateControlScale:
+                    calibrate_scale_analog_controls();
+                    break;
+
+                case CADFn_Spare1:
+                    MSG_ERRORLN("[ERROR] Invalid CAD Function 4");
+                    break;
+
+                case CADFn_Spare2:
+                    MSG_ERRORLN("[ERROR] Invalid CAD Function 5");
                     break;
 
                 case CADFn_InvertJoyScaleX:
@@ -684,20 +722,38 @@ void KeyboardMouseAction(int action, int value, char *symbol, uint8_t hwbutton_i
                     cadconfig.joy_scale_y = joystick.GetScale(1);
                     break;
 
+                case CADFn_InvertScaleZoom:
+                    zoomControl.SetScale(zoomControl.GetScale() * -1.0);
+                    cadconfig.zoom_scale = zoomControl.GetScale();
+                    break;
+
+                case CADFn_InvertScaleRotate:
+                    rotateControl.SetScale(rotateControl.GetScale() * -1.0);
+                    cadconfig.rotate_scale = rotateControl.GetScale();
+                    break;
+
                 case CADFn_SaveCADConfig:
                     saveCurrentConfigCADParams();
                     break;
 
-                case CADFn_JoystickPan:
-                    joystick_mode_pins[JoystickMode_Pan] = HWButton_Pins[hwbutton_index];
+                case CADFn_Spare3:
+                    MSG_ERRORLN("[ERROR] Invalid CAD Function 11");
                     break;
 
-                case CADFn_JoystickRotate:
-                    joystick_mode_pins[JoystickMode_Rotate] = HWButton_Pins[hwbutton_index];
+                case CADFn_Spare4:
+                    MSG_ERRORLN("[ERROR] Invalid CAD Function 12");
                     break;
 
-                case CADFn_JoystickZoom:
-                    joystick_mode_pins[JoystickMode_Zoom] = HWButton_Pins[hwbutton_index];
+                case CADFn_Spare5:
+                    MSG_ERRORLN("[ERROR] Invalid CAD Function 13");
+                    break;
+
+                case CADFn_Spare6:
+                    MSG_ERRORLN("[ERROR] Invalid CAD Function 14");
+                    break;
+
+                case CADFn_ModeSelect:
+                    mode_select_button_pin = HWButton_Pins[hwbutton_index];
                     break;
             }
             break;
@@ -714,41 +770,41 @@ void KeyboardMouseAction(int action, int value, char *symbol, uint8_t hwbutton_i
             break;
         case Action_MouseButton:
             switch (value) {
-                case 1:
+                case MouseButton_PL:
                     Mouse.press(MOUSE_LEFT);
                     break;
-                case 2:
+                case MouseButton_PR:
                     Mouse.press(MOUSE_RIGHT);
                     break;
-                case 3:
+                case MouseButton_PM:
                     Mouse.press(MOUSE_MIDDLE);
                     break;
-                case 4:
+                case MouseButton_PLM:
                     Mouse.press(MOUSE_LEFT);
                     Mouse.press(MOUSE_MIDDLE);
                     break;
-                case 5:
+                case MouseButton_PRM:
                     Mouse.press(MOUSE_RIGHT);
                     Mouse.press(MOUSE_MIDDLE);
                     break;
-                case 6:
+                case MouseButton_RL:
                     Mouse.release(MOUSE_LEFT);
                     break;
-                case 7:
+                case MouseButton_RR:
                     Mouse.release(MOUSE_RIGHT);
                     break;
-                case 8:
+                case MouseButton_RM:
                     Mouse.release(MOUSE_MIDDLE);
                     break;
-                case 9:
+                case MouseButton_RLM:
                     Mouse.release(MOUSE_LEFT);
                     Mouse.release(MOUSE_MIDDLE);
                     break;
-                case 10:
+                case MouseButton_RRM:
                     Mouse.release(MOUSE_RIGHT);
                     Mouse.release(MOUSE_MIDDLE);
                     break;
-                case 11:
+                case MouseButton_RLRM:
                     Mouse.release(MOUSE_LEFT);
                     Mouse.release(MOUSE_RIGHT);
                     Mouse.release(MOUSE_MIDDLE);
@@ -763,6 +819,12 @@ void KeyboardMouseAction(int action, int value, char *symbol, uint8_t hwbutton_i
                 pageHistoryStack.pop();
                 pageNum = pageHistoryStack.peek();
                 drawKeypad();
+            }
+            break;
+        case Action_SpaceMouseButton:  // Emulate a SpaceMouse button press
+            if ((value >= 0) && (value <= SPACEMOUSE_MAX_BUTTON)) {
+                spaceMouse.SendKeyPacketExtended(value);
+
             }
             break;
 

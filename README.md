@@ -177,7 +177,6 @@ The top section includes:
 3. Joystick deadzone. Any X or Y value with an absolute value below this number is set to zero.
 4. Joystick sensitivity. Joystick values are multiplied by this as they are converted to mouse movement commands
 5. Thumbwheel sensitivity. The encoder value is multiplied by this as it is converted to mouse movement commands
-6. Steady Time: After the joystick has been centered for more than this amount of time, without a pan or rotate button selection, the joystick will return to its default mode (typically mouse pointer)
 
 Below that is the button action definition. The same approach to defining the actions is used as for the LCD panel buttons. The actions are:
 1. Selected CAD program. The program whose settings are being modifed in that part of the configurator. Separate definitions of these settings are kept for each of the five CAD programs available.

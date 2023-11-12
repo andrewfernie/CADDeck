@@ -8,6 +8,7 @@ void drawKeypad();
 void drawErrorMessage(String message);
 void printDeviceAddress();
 void printinfo();
+void printButtonInfo(uint8_t program);
 void printIOValues();
 void drawTopStatusBar(bool force_redraw);
 void drawBottomStatusBar(bool force_redraw);

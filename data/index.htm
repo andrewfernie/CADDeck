@@ -50,8 +50,8 @@
 
 			<button style="float: right;" class="tablinks" onclick="openMenu(event, 'editor')">File editor</button>
 
-			<button style="float: right;" class="tablinks" onclick="openMenu(event, 'uploadjson')">Upload Menu
-				Config</button>
+			<button style="float: right;" class="tablinks" onclick="openMenu(event, 'uploadjson')">Upload JSON
+				File</button>
 
 			<button style="float: right;" class="tablinks" onclick="openMenu(event, 'downloadjson')">Download Menu
 				Config</button>
@@ -238,6 +238,18 @@
 				<option value="8">8</option>
 				<option value="9">9</option>
 			</select>
+
+			<br>
+			
+			&nbsp;&nbsp;Controllable GPIO Pin:&nbsp;
+			<select class="gpio_pin" id='gpio_pin' name='gpio_pin'>
+				<option value="255">None</option>
+				<option value="4">4</option>
+				<option value="5">5</option>
+				<option value="25">25</option>
+				<option value="26">26</option>
+			</select>
+
 
 			<div class="form" style="width: 50%; text-align: : center; margin: auto;">
 				<input type="hidden" id='save' name='save' value="general">
@@ -578,10 +590,10 @@
 			<br><br>
 
 			&nbsp;&nbsp;Joystick Scale X:&nbsp;
-			<input type="number" id="joy_scale_x" name="joy_scale_x" min="-5.0" max="5.0" step="0.01" value="3.00">
+			<input type="number" id="joy_scale_x" name="joy_scale_x" min="-5.0" max="5.0" value="3.00" step="any">
 
 			&nbsp;&nbsp;Joystick Scale Y:&nbsp;
-			<input type="number" id="joy_scale_y" name="joy_scale_y" min="-5.0" max="5.0" step="0.01" value="3.00">
+			<input type="number" id="joy_scale_y" name="joy_scale_y" min="-5.0" max="5.0" value="3.00" step="any">
 
 			&nbsp;&nbsp;Joystick Deadzone:&nbsp;
 			<select class="joy_deadzone" id='joy_deadzone' name='joy_deadzone'>
@@ -591,33 +603,73 @@
 				<option value="0.05">0.05</option>
 				<option value="0.1">0.1</option>
 			</select>
-			<br><br>
 			&nbsp;&nbsp;Joystick Sensitivity:&nbsp;
 			<select class="joy_sensitivity" id='joy_sensitivity' name='joy_sensitivity'>
+				<option value="1">1</option>
+				<option value="2">2</option>
 				<option value="5">5</option>
 				<option value="10">10</option>
 				<option value="20">20</option>
 				<option value="50">50</option>
 				<option value="100">100</option>
-				<option value="200">200</option>
 			</select>
-
-			&nbsp;&nbsp;Thumbwheel Sensitivity:&nbsp;
-			<select class="thumbwheel_sensitivity" id='thumbwheel_sensitivity' name='thumbwheel_sensitivity'>
+			<br><br>
+			&nbsp;&nbsp;Zoom Scale:&nbsp;
+			<input type="number" id="zoom_scale" name="zoom_scale" min="-5.0" max="5.0" value="3.00" step="any">
+			&nbsp;&nbsp;Zoom Deadzone:&nbsp;
+			<select class="zoom_deadzone" id='zoom_deadzone' name='zoom_deadzone'>
+				<option value="0">0</option>
+				<option value="0.01">0.01</option>
+				<option value="0.02">0.02</option>
+				<option value="0.05">0.05</option>
+				<option value="0.1">0.1</option>
+			</select>
+			&nbsp;&nbsp;Zoom Sensitivity:&nbsp;
+			<select class="zoom_sensitivity" id='zoom_sensitivity' name='zoom_sensitivity'>
 				<option value="1">1</option>
 				<option value="2">2</option>
-				<option value="3">3</option>
-				<option value="4">4</option>
 				<option value="5">5</option>
-			</select>
-
-			&nbsp;&nbsp;Steady Time (ms):&nbsp;
-			<select class="joy_steady_time" id='joy_steady_time' name='joy_steady_time'>
+				<option value="10">10</option>
+				<option value="20">20</option>
 				<option value="50">50</option>
 				<option value="100">100</option>
-				<option value="150">150</option>
-				<option value="200">200</option>
-				<option value="250">250</option>
+			</select>
+			<br><br>
+			&nbsp;&nbsp;Rotate Scale:&nbsp;
+			<input type="number" id="rotate_scale" name="rotate_scale" min="-5.0" max="5.0" value="3.00" step="any">
+			&nbsp;&nbsp;Rotate Deadzone:&nbsp;
+			<select class="rotate_deadzone" id='rotate_deadzone' name='rotate_deadzone'>
+				<option value="0">0</option>
+				<option value="0.01">0.01</option>
+				<option value="0.02">0.02</option>
+				<option value="0.05">0.05</option>
+				<option value="0.1">0.1</option>
+			</select>
+			&nbsp;&nbsp;Rotate Sensitivity:&nbsp;
+			<select class="rotate_sensitivity" id='rotate_sensitivity' name='rotate_sensitivity'>
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="5">5</option>
+				<option value="10">10</option>
+				<option value="20">20</option>
+				<option value="50">50</option>
+				<option value="100">100</option>
+			</select>
+			<br><br>
+			&nbsp;&nbsp;Mouse Sensitivity:&nbsp;
+			<select class="mouse_sensitivity" id='mouse_sensitivity' name='mouse_sensitivity'>
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="5">5</option>
+				<option value="10">10</option>
+				<option value="20">20</option>
+				<option value="50">50</option>
+				<option value="100">100</option>
+			</select>
+			&nbsp;&nbsp;Spacemouse Mode Enable:&nbsp;
+			<select class="spacemouse_enable" id='spacemouse_enable' name='spacemouse_enable'>
+				<option value="true">Enabled</option>
+				<option value="false">Disabled</option>
 			</select>
 
 			<br><br>
@@ -626,28 +678,33 @@
 					<tr>
 						<!-- <td style="width: 50%;"> -->
 						<td>
-							<!-- Image Map Generated by http://www.image-map.net/ -->
-							<img src="ButtonLayout.png" usemap="#image-map-buttons">
 
-							<map name="image-map-buttons">
-								<area alt="Base Button 1" title="Base Button 1" href="#" coords="52,133,40"
-									shape="circle" onclick="select_new_button(0)">
-								<area alt="Base Button 2" title="Base Button 2" href="#" coords="494,134,40"
-									shape="circle" onclick="select_new_button(1)">
-								<area alt="Base Button 3" title="Base Button 3" href="#" coords="48,276,40"
-									shape="circle" onclick="select_new_button(2)">
-								<area alt="Base Button 4" title="Base Button 4" href="#" coords="494,276,40"
-									shape="circle" onclick="select_new_button(3)">
-								<area alt="Joystick Button 1" title="Joystick Button 1" href="#" coords="191,119,30"
-									shape="circle" onclick="select_new_button(4)">
-								<area alt="Joystick Button 2" title="Joystick Button 2" href="#" coords="362,115,30"
-									shape="circle" onclick="select_new_button(5)">
-								<area alt="Joystick Button 3" title="Joystick Button 3" href="#" coords="189,291,30"
-									shape="circle" onclick="select_new_button(6)">
-								<area alt="Joystick Button 4" title="Joystick Button 4" href="#" coords="360,296,30"
-									shape="circle" onclick="select_new_button(7)">
-								<area alt="Encoder Button" title="Encoder Button" href="#" coords="272,202,30"
-									shape="circle" onclick="select_new_button(8)">
+							<!-- Image Map Generated by http://www.image-map.net/ -->
+							<img src="ButtonLayout10.png" usemap="#image-map">
+
+							<map name="image-map">
+								<area target="" alt="Button 0" title="Button 0" href="#" coords="247,133,285,166"
+									shape="rect" onclick="select_new_button(0)">
+								<area target="" alt="Button 1" title="Button 1" href="#" coords="67,74,103,110"
+									shape="rect" onclick="select_new_button(1)">
+								<area target="" alt="Button 2" title="Button 2" href="#" coords="120,74,151,106"
+									shape="rect" onclick="select_new_button(2)">
+								<area target="" alt="Button 3" title="Button 3" href="#" coords="63,125,101,164"
+									shape="rect" onclick="select_new_button(3)">
+								<area target="" alt="Button 4" title="Button 4" href="#" coords="116,131,156,165"
+									shape="rect" onclick="select_new_button(4)">
+								<area target="" alt="Button 5" title="Button 5" href="#" coords="114,184,157,224"
+									shape="rect" onclick="select_new_button(5)">
+								<area target="" alt="Button 6" title="Button 6" href="#" coords="378,76,417,110"
+									shape="rect" onclick="select_new_button(6)">
+								<area target="" alt="Button 7" title="Button 7" href="#" coords="430,73,473,111"
+									shape="rect" onclick="select_new_button(7)">
+								<area target="" alt="Button 8" title="Button 8" href="#" coords="377,126,420,167"
+									shape="rect" onclick="select_new_button(8)">
+								<area target="" alt="Button 9" title="Button 9" href="#" coords="431,129,474,171"
+									shape="rect" onclick="select_new_button(9)">
+								<area target="" alt="Button 10" title="Button 10" href="#" coords="376,179,421,224"
+									shape="rect" onclick="select_new_button(10)">
 							</map>
 						</td>
 						<!-- <td style="width: 50%;"> -->
@@ -664,48 +721,12 @@
 							<br><br>
 							<table style="height: 250px; width: 100%;">
 								<tr>
-									<td style="width: 33%;">
-										<br />Joystick Pan
-										<br />Action 1:
-										<select class="actions" id='panmodeaction0' name='panmodeaction0'></select>
-										<select class="actions" id='panmodevalue0' name='panmodevalue0'></select>
-										<br />Action 2:
-										<select class="actions" id='panmodeaction1' name='panmodeaction1'></select>
-										<select class="actions" id='panmodevalue1' name='panmodevalue1'></select>
-										<br />Action 3:
-										<select class="actions" id='panmodeaction2' name='panmodeaction2'></select>
-										<select class="actions" id='panmodevalue2' name='panmodevalue2'></select>
-									</td>
-									<td style="width: 33%;">
-										<br />Joystick Rotate
-										<br />Action 1:
-										<select class="actions" id='rotatemodeaction0'
-											name='rotatemodeaction0'></select>
-										<select class="actions" id='rotatemodevalue0' name='rotatemodevalue0'></select>
-										<br />Action 2:
-										<select class="actions" id='rotatemodeaction1'
-											name='rotatemodeaction1'></select>
-										<select class="actions" id='rotatemodevalue1' name='rotatemodevalue1'></select>
-										<br />Action 3:
-										<select class="actions" id='rotatemodeaction2'
-											name='rotatemodeaction2'></select>
-										<select class="actions" id='rotatemodevalue2' name='rotatemodevalue2'></select>
-									</td>
-									<td style="width: 34%;">
-										<br />Joystick Zoom
-										<br />Action 1:
-										<select class="actions" id='zoommodeaction0' name='zoommodeaction0'></select>
-										<select class="actions" id='zoommodevalue0' name='zoommodevalue0'></select>
-										<br />Action 2:
-										<select class="actions" id='zoommodeaction1' name='zoommodeaction1'></select>
-										<select class="actions" id='zoommodevalue1' name='zoommodevalue1'></select>
-										<br />Action 3:
-										<select class="actions" id='zoommodeaction2' name='zoommodeaction2'></select>
-										<select class="actions" id='zoommodevalue2' name='zoommodevalue2'></select>
-									</td>
-								</tr>
-								<tr>
-									<br />Selected Button
+									<br>
+									<br />Selected Button:
+									<input type="text" id="selected_hw_button" name="selected_hw_button"
+										style="border:0px" readonly>
+									<br><label for="hwbuttondescription">Description:</label>
+									<input type="text" id="hwbuttondescription" name="hwbuttondescription"><br>
 									<br />Action 1:
 									<select class="actions" id='joybuttonaction0' name='joybuttonaction0'></select>
 									<select class="actions" id='joybuttonvalue0' name='joybuttonvalue0'></select>
@@ -827,23 +848,6 @@
 
 	<!-- ---------------------- javscript includes ---------------------- -->
 
-	<!--  Password toggle -->
-	<!--<script src="togglepassword.js"></script>-->
-
-	<!-- Menu Handler -->
-	<!--<script src="openmenu.js"></script>-->
-
-	<!-- Load the array with all the dropdown menu items  -->
-	<!--<script src="selecteditems.js"></script>-->
-
-	<!-- Look for change in savemenu form. Then find out what was changed so that value lists can be updated -->
-	<!--<script src="savemenu.js"></script>-->
-
-	<!-- Loading button function -->
-	<!--<script src="loadbuttons.js"></script>-->
-
-	<!--  Load Config data from JSON -->
-	<!--<script src="loadconfig.js"></script>-->
 
 	<script>
 		function togglepassword() {
@@ -1563,6 +1567,22 @@
 			{
 				name: 'Enable USB Comms',
 				value: '8'
+			},
+			{
+				name: 'IO Monitor Page',
+				value: '9'
+			},
+			{
+				name: 'Toggle GPIO Pin',
+				value: '10'
+			},
+			{
+				name: 'Set GPIO Pin Low',
+				value: '11'
+			},
+			{
+				name: 'Set GPIO Pin High',
+				value: '12'
 			}
 			]
 		},
@@ -1723,28 +1743,36 @@
 				value: '3'
 			},
 			{
-				name: 'Joystick Invert X',
+				name: 'Zoom Scale',
 				value: '4'
 			},
 			{
-				name: 'Joystick Invert Y',
+				name: 'Rotate Scale',
 				value: '5'
 			},
 			{
-				name: 'Save Settings',
+				name: 'Joystick Invert X',
 				value: '6'
 			},
 			{
-				name: 'Joystick Pan',
+				name: 'Joystick Invert Y',
 				value: '7'
 			},
 			{
-				name: 'Joystick Rotate',
+				name: 'Zoom Invert',
 				value: '8'
 			},
 			{
-				name: 'Joystick Zoom',
+				name: 'Rotate Invert',
 				value: '9'
+			},
+			{
+				name: 'Save Settings',
+				value: '10'
+			},
+			{
+				name: 'Mode Button',
+				value: '15'
 			}
 			]
 		},
@@ -1841,7 +1869,59 @@
 				value: '4'
 			}
 			]
-		}
+		},
+		{
+			name: 'SpaceMouse Buttons',
+			value: '20',
+			subitems: [{
+				name: 'Button 1',
+				value: '1'
+			}, {
+				name: 'Button 2',
+				value: '2'
+			}, {
+				name: 'Button 3',
+				value: '3'
+			}, {
+				name: 'Button 4',
+				value: '4'
+			}, {
+				name: 'Button 5',
+				value: '5'
+			}, {
+				name: 'Button 6',
+				value: '6'
+			}, {
+				name: 'Button 7',
+				value: '7'
+			}, {
+				name: 'Button 8',
+				value: '8'
+			}, {
+				name: 'Button 9',
+				value: '9'
+			}, {
+				name: 'Button 10',
+				value: '10'
+			}, {
+				name: 'Button 11',
+				value: '11'
+			}, {
+				name: 'Button 12',
+				value: '12'
+			}, {
+				name: 'Button 13',
+				value: '13'
+			}, {
+				name: 'Button 14',
+				value: '14'
+			}, {
+				name: 'Button 15',
+				value: '15'
+			}
+
+			]
+		},
 		];
 	</script>
 	<script>
@@ -2932,6 +3012,13 @@
 				temp[this.value] = this.subitems;
 			});
 
+			$('#hwbuttondescription')
+				.change(function () {
+					update_hwbutton_description(this);
+				})
+				.change();
+
+
 			$('#joybuttonaction0')
 				.change(function () {
 					var value = $(this).val();
@@ -3011,281 +3098,6 @@
 			$('#joybuttonvalue2')
 				.change(function () {
 					update_hwbutton_def(this, 2, 2);
-				})
-				.change();
-
-			// joystick pan mode actions
-			$.each(items, function () {
-				$('<option />')
-					.attr('value', this.value)
-					.html(this.name)
-					.appendTo('#panmodeaction0');
-				temp[this.value] = this.subitems;
-			});
-
-			$('#panmodeaction0')
-				.change(function () {
-					var value = $(this).val();
-					var menu = $('#panmodevalue0');
-
-					menu.empty();
-					$.each(temp[value], function () {
-						$('<option />')
-							.attr('value', this.value)
-							.html(this.name)
-							.appendTo(menu);
-					});
-
-					update_axisbutton_def(this, PanAxis, 1, 0);
-				})
-				.change();
-
-			$('#panmodevalue0')
-				.change(function () {
-					update_axisbutton_def(this, PanAxis, 2, 0);
-				})
-				.change();
-
-			$.each(items, function () {
-				$('<option />')
-					.attr('value', this.value)
-					.html(this.name)
-					.appendTo('#panmodeaction1');
-				temp[this.value] = this.subitems;
-			});
-
-			$('#panmodeaction1')
-				.change(function () {
-					var value = $(this).val();
-					var menu = $('#panmodevalue1');
-
-					menu.empty();
-					$.each(temp[value], function () {
-						$('<option />')
-							.attr('value', this.value)
-							.html(this.name)
-							.appendTo(menu);
-					});
-					update_axisbutton_def(this, PanAxis, 1, 1);
-				})
-				.change();
-
-			$('#panmodevalue1')
-				.change(function () {
-					update_axisbutton_def(this, PanAxis, 2, 1);
-				})
-				.change();
-
-			$.each(items, function () {
-				$('<option />')
-					.attr('value', this.value)
-					.html(this.name)
-					.appendTo('#panmodeaction2');
-				temp[this.value] = this.subitems;
-			});
-
-			$('#panmodeaction2')
-				.change(function () {
-					var value = $(this).val();
-					var menu = $('#panmodevalue2');
-
-					menu.empty();
-					$.each(temp[value], function () {
-						$('<option />')
-							.attr('value', this.value)
-							.html(this.name)
-							.appendTo(menu);
-					});
-					update_axisbutton_def(this, PanAxis, 1, 2);
-				})
-				.change();
-
-			$('#panmodevalue2')
-				.change(function () {
-					update_axisbutton_def(this, PanAxis, 2, 2);
-				})
-				.change();
-
-			// joystick button actions
-			$.each(items, function () {
-				$('<option />')
-					.attr('value', this.value)
-					.html(this.name)
-					.appendTo('#rotatemodeaction0');
-				temp[this.value] = this.subitems;
-			});
-
-			$('#rotatemodeaction0')
-				.change(function () {
-					var value = $(this).val();
-					var menu = $('#rotatemodevalue0');
-
-					menu.empty();
-					$.each(temp[value], function () {
-						$('<option />')
-							.attr('value', this.value)
-							.html(this.name)
-							.appendTo(menu);
-					});
-					update_axisbutton_def(this, RotateAxis, 1, 0);
-				})
-				.change();
-
-			$('#rotatemodevalue0')
-				.change(function () {
-					update_axisbutton_def(this, RotateAxis, 2, 0);
-				})
-				.change();
-
-			$.each(items, function () {
-				$('<option />')
-					.attr('value', this.value)
-					.html(this.name)
-					.appendTo('#rotatemodeaction1');
-				temp[this.value] = this.subitems;
-			});
-
-			$('#rotatemodeaction1')
-				.change(function () {
-					var value = $(this).val();
-					var menu = $('#rotatemodevalue1');
-
-					menu.empty();
-					$.each(temp[value], function () {
-						$('<option />')
-							.attr('value', this.value)
-							.html(this.name)
-							.appendTo(menu);
-					});
-					update_axisbutton_def(this, RotateAxis, 1, 1);
-				})
-				.change();
-
-			$('#rotatemodevalue1')
-				.change(function () {
-					update_axisbutton_def(this, RotateAxis, 2, 1);
-				})
-				.change();
-
-			$.each(items, function () {
-				$('<option />')
-					.attr('value', this.value)
-					.html(this.name)
-					.appendTo('#rotatemodeaction2');
-				temp[this.value] = this.subitems;
-			});
-
-			$('#rotatemodeaction2')
-				.change(function () {
-					var value = $(this).val();
-					var menu = $('#rotatemodevalue2');
-
-					menu.empty();
-					$.each(temp[value], function () {
-						$('<option />')
-							.attr('value', this.value)
-							.html(this.name)
-							.appendTo(menu);
-					});
-					update_axisbutton_def(this, RotateAxis, 1, 2);
-				})
-				.change();
-
-			$('#rotatemodevalue2')
-				.change(function () {
-					update_axisbutton_def(this, RotateAxis, 2, 2);
-				})
-				.change();
-
-
-			// joystick zoom mode actions
-			$.each(items, function () {
-				$('<option />')
-					.attr('value', this.value)
-					.html(this.name)
-					.appendTo('#zoommodeaction0');
-				temp[this.value] = this.subitems;
-			});
-
-			$('#zoommodeaction0')
-				.change(function () {
-					var value = $(this).val();
-					var menu = $('#zoommodevalue0');
-
-					menu.empty();
-					$.each(temp[value], function () {
-						$('<option />')
-							.attr('value', this.value)
-							.html(this.name)
-							.appendTo(menu);
-					});
-					update_axisbutton_def(this, ZoomAxis, 1, 0);
-				})
-				.change();
-
-			$('#zoommodevalue0')
-				.change(function () {
-					update_axisbutton_def(this, ZoomAxis, 2, 0);
-				})
-				.change();
-
-			$.each(items, function () {
-				$('<option />')
-					.attr('value', this.value)
-					.html(this.name)
-					.appendTo('#zoommodeaction1');
-				temp[this.value] = this.subitems;
-			});
-
-			$('#zoommodeaction1')
-				.change(function () {
-					var value = $(this).val();
-					var menu = $('#zoommodevalue1');
-
-					menu.empty();
-					$.each(temp[value], function () {
-						$('<option />')
-							.attr('value', this.value)
-							.html(this.name)
-							.appendTo(menu);
-					});
-					update_axisbutton_def(this, ZoomAxis, 1, 1);
-				})
-				.change();
-
-			$('#zoommodevalue1')
-				.change(function () {
-					update_axisbutton_def(this, ZoomAxis, 2, 1);
-				})
-				.change();
-
-			$.each(items, function () {
-				$('<option />')
-					.attr('value', this.value)
-					.html(this.name)
-					.appendTo('#zoommodeaction2');
-				temp[this.value] = this.subitems;
-			});
-
-			$('#zoommodeaction2')
-				.change(function () {
-					var value = $(this).val();
-					var menu = $('#zoommodevalue2');
-
-					menu.empty();
-					$.each(temp[value], function () {
-						$('<option />')
-							.attr('value', this.value)
-							.html(this.name)
-							.appendTo(menu);
-					});
-					update_axisbutton_def(this, ZoomAxis, 1, 2);
-				})
-				.change();
-
-			$('#zoommodevalue2')
-				.change(function () {
-					update_axisbutton_def(this, ZoomAxis, 2, 2);
 				})
 				.change();
 
@@ -3495,7 +3307,7 @@
 				})
 		}
 
-		// Five applications, each with nine buttons, each with action and value arrays
+		// Five applications, each with eleven buttons, each with action and value arrays
 		var hwbuttondefs =
 			[[[["0", "0", "0"], ["0", "0", "0"]],
 			[["0", "0", "0"], ["0", "0", "0"]],
@@ -3505,13 +3317,6 @@
 			[["0", "0", "0"], ["0", "0", "0"]],
 			[["0", "0", "0"], ["0", "0", "0"]],
 			[["0", "0", "0"], ["0", "0", "0"]],
-			[["0", "0", "0"], ["0", "0", "0"]]],
-			[[["0", "0", "0"], ["0", "0", "0"]],
-			[["0", "0", "0"], ["0", "0", "0"]],
-			[["0", "0", "0"], ["0", "0", "0"]],
-			[["0", "0", "0"], ["0", "0", "0"]],
-			[["0", "0", "0"], ["0", "0", "0"]],
-			[["0", "0", "0"], ["0", "0", "0"]],
 			[["0", "0", "0"], ["0", "0", "0"]],
 			[["0", "0", "0"], ["0", "0", "0"]],
 			[["0", "0", "0"], ["0", "0", "0"]]],
@@ -3523,6 +3328,19 @@
 			[["0", "0", "0"], ["0", "0", "0"]],
 			[["0", "0", "0"], ["0", "0", "0"]],
 			[["0", "0", "0"], ["0", "0", "0"]],
+			[["0", "0", "0"], ["0", "0", "0"]],
+			[["0", "0", "0"], ["0", "0", "0"]],
+			[["0", "0", "0"], ["0", "0", "0"]]],
+			[[["0", "0", "0"], ["0", "0", "0"]],
+			[["0", "0", "0"], ["0", "0", "0"]],
+			[["0", "0", "0"], ["0", "0", "0"]],
+			[["0", "0", "0"], ["0", "0", "0"]],
+			[["0", "0", "0"], ["0", "0", "0"]],
+			[["0", "0", "0"], ["0", "0", "0"]],
+			[["0", "0", "0"], ["0", "0", "0"]],
+			[["0", "0", "0"], ["0", "0", "0"]],
+			[["0", "0", "0"], ["0", "0", "0"]],
+			[["0", "0", "0"], ["0", "0", "0"]],
 			[["0", "0", "0"], ["0", "0", "0"]]],
 			[[["0", "0", "0"], ["0", "0", "0"]],
 			[["0", "0", "0"], ["0", "0", "0"]],
@@ -3532,8 +3350,12 @@
 			[["0", "0", "0"], ["0", "0", "0"]],
 			[["0", "0", "0"], ["0", "0", "0"]],
 			[["0", "0", "0"], ["0", "0", "0"]],
+			[["0", "0", "0"], ["0", "0", "0"]],
+			[["0", "0", "0"], ["0", "0", "0"]],
 			[["0", "0", "0"], ["0", "0", "0"]]],
 			[[["0", "0", "0"], ["0", "0", "0"]],
+			[["0", "0", "0"], ["0", "0", "0"]],
+			[["0", "0", "0"], ["0", "0", "0"]],
 			[["0", "0", "0"], ["0", "0", "0"]],
 			[["0", "0", "0"], ["0", "0", "0"]],
 			[["0", "0", "0"], ["0", "0", "0"]],
@@ -3543,24 +3365,39 @@
 			[["0", "0", "0"], ["0", "0", "0"]],
 			[["0", "0", "0"], ["0", "0", "0"]]]];
 
-		// Five applications, each with three axis, each with action and value arrays
+		var hwbuttondescriptions =
+			[
+				[[""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""]],
+				[[""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""]],
+				[[""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""]],
+				[[""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""]],
+				[[""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""]]
+			];
+
+		// Five applications, each with four axis, each with action and value arrays
 		const PanAxis = 0;
-		const RotateAxis = 1;
+		const TiltAxis = 1;
 		const ZoomAxis = 2;
+		const RotateAxis = 3;
 		axisbuttondefs =
 			[[[["0", "0", "0"], ["0", "0", "0"]],
 			[["0", "0", "0"], ["0", "0", "0"]],
-			[["0", "0", "0"], ["0", "0", "0"]]],
-			[[["0", "0", "0"], ["0", "0", "0"]],
 			[["0", "0", "0"], ["0", "0", "0"]],
 			[["0", "0", "0"], ["0", "0", "0"]]],
 			[[["0", "0", "0"], ["0", "0", "0"]],
 			[["0", "0", "0"], ["0", "0", "0"]],
-			[["0", "0", "0"], ["0", "0", "0"]]],
-			[[["0", "0", "0"], ["0", "0", "0"]],
 			[["0", "0", "0"], ["0", "0", "0"]],
 			[["0", "0", "0"], ["0", "0", "0"]]],
 			[[["0", "0", "0"], ["0", "0", "0"]],
+			[["0", "0", "0"], ["0", "0", "0"]],
+			[["0", "0", "0"], ["0", "0", "0"]],
+			[["0", "0", "0"], ["0", "0", "0"]]],
+			[[["0", "0", "0"], ["0", "0", "0"]],
+			[["0", "0", "0"], ["0", "0", "0"]],
+			[["0", "0", "0"], ["0", "0", "0"]],
+			[["0", "0", "0"], ["0", "0", "0"]]],
+			[[["0", "0", "0"], ["0", "0", "0"]],
+			[["0", "0", "0"], ["0", "0", "0"]],
 			[["0", "0", "0"], ["0", "0", "0"]],
 			[["0", "0", "0"], ["0", "0", "0"]]]];
 
@@ -3568,7 +3405,6 @@
 		var current_button_index = 0;
 
 		function getCADParamsConfig() {
-
 
 			fetch('config/cadparams.json')
 				.then((response) => {
@@ -3580,34 +3416,22 @@
 					document.getElementById("joy_scale_y").value = data.joy_scale_y;
 					document.getElementById("joy_deadzone").value = data.joy_deadzone;
 					document.getElementById("joy_sensitivity").value = data.joy_sensitivity;
-					document.getElementById("thumbwheel_sensitivity").value = data.thumbwheel_sensitivity;
-					document.getElementById("joy_steady_time").value = data.joy_steady_time;
+					document.getElementById("zoom_scale").value = data.zoom_scale;
+					document.getElementById("zoom_deadzone").value = data.zoom_deadzone;
+					document.getElementById("zoom_sensitivity").value = data.zoom_sensitivity;
+					document.getElementById("rotate_scale").value = data.rotate_scale;
+					document.getElementById("rotate_deadzone").value = data.rotate_deadzone;
+					document.getElementById("rotate_sensitivity").value = data.rotate_sensitivity;
+					document.getElementById("mouse_sensitivity").value = data.mouse_sensitivity;
 					document.getElementById("current_program").value = data.current_program;
 					document.getElementById("selected_program").value = data.current_program;
+					document.getElementById("spacemouse_enable").value = data.spacemouse_enable;
 
 					for (let program = 0; program < 5; program++) {
-						axisbuttondefs[program][PanAxis][0][0] = data.programs[program].pan.actionarray[0];
-						axisbuttondefs[program][PanAxis][0][1] = data.programs[program].pan.actionarray[1];
-						axisbuttondefs[program][PanAxis][0][2] = data.programs[program].pan.actionarray[2];
-						axisbuttondefs[program][PanAxis][1][0] = data.programs[program].pan.valuearray[0];
-						axisbuttondefs[program][PanAxis][1][1] = data.programs[program].pan.valuearray[1];
-						axisbuttondefs[program][PanAxis][1][2] = data.programs[program].pan.valuearray[2];
-
-						axisbuttondefs[program][RotateAxis][0][0] = data.programs[program].rotate.actionarray[0];
-						axisbuttondefs[program][RotateAxis][0][1] = data.programs[program].rotate.actionarray[1];
-						axisbuttondefs[program][RotateAxis][0][2] = data.programs[program].rotate.actionarray[2];
-						axisbuttondefs[program][RotateAxis][1][0] = data.programs[program].rotate.valuearray[0];
-						axisbuttondefs[program][RotateAxis][1][1] = data.programs[program].rotate.valuearray[1];
-						axisbuttondefs[program][RotateAxis][1][2] = data.programs[program].rotate.valuearray[2];
-
-						axisbuttondefs[program][ZoomAxis][0][0] = data.programs[program].zoom.actionarray[0];
-						axisbuttondefs[program][ZoomAxis][0][1] = data.programs[program].zoom.actionarray[1];
-						axisbuttondefs[program][ZoomAxis][0][2] = data.programs[program].zoom.actionarray[2];
-						axisbuttondefs[program][ZoomAxis][1][0] = data.programs[program].zoom.valuearray[0];
-						axisbuttondefs[program][ZoomAxis][1][1] = data.programs[program].zoom.valuearray[1];
-						axisbuttondefs[program][ZoomAxis][1][2] = data.programs[program].zoom.valuearray[2];
-
-						for (let button = 0; button < 9; button++) {
+						console.log('Loading program ' + program);
+						for (let button = 0; button <= 10; button++) {
+							console.log('   Loading defn button ' + button);
+							hwbuttondescriptions[program][button] = data.programs[program].buttons[button].description;
 							hwbuttondefs[program][button][0][0] = data.programs[program].buttons[button].actionarray[0];
 							hwbuttondefs[program][button][0][1] = data.programs[program].buttons[button].actionarray[1];
 							hwbuttondefs[program][button][0][2] = data.programs[program].buttons[button].actionarray[2];
@@ -3617,10 +3441,9 @@
 						}
 					}
 
-					current_program_index = 0;
+					current_program_index = data.current_program;
 					current_button_index = 0;
 					show_hwbutton_def(current_program_index, current_button_index);
-					show_joystickmode_def(current_program_index);
 				})
 				.catch((err) => {
 					console.log(err)
@@ -3628,6 +3451,10 @@
 		}
 
 		function show_hwbutton_def(program_index, button_index) {
+			document.getElementById("selected_hw_button").value = "Button " + (button_index);
+
+			document.getElementById("hwbuttondescription").value = hwbuttondescriptions[program_index][button_index];
+
 			document.getElementById("joybuttonaction0").value = hwbuttondefs[program_index][button_index][0][0];
 			document.getElementById("joybuttonaction1").value = hwbuttondefs[program_index][button_index][0][1];
 			document.getElementById("joybuttonaction2").value = hwbuttondefs[program_index][button_index][0][2];
@@ -3640,40 +3467,6 @@
 			document.getElementById("joybuttonvalue2").value = hwbuttondefs[program_index][button_index][1][2];
 		}
 
-		function show_joystickmode_def(program_index) {
-			document.getElementById('panmodeaction0').value = axisbuttondefs[program_index][PanAxis][0][0];
-			document.getElementById('panmodeaction1').value = axisbuttondefs[program_index][PanAxis][0][1];
-			document.getElementById('panmodeaction2').value = axisbuttondefs[program_index][PanAxis][0][2];
-
-			fillvaluelist(document.getElementById('panmodevalue0'), selecteditems[axisbuttondefs[program_index][PanAxis][0][0]].subitems);
-			document.getElementById('panmodevalue0').value = axisbuttondefs[program_index][PanAxis][1][0];
-			fillvaluelist(document.getElementById('panmodevalue1'), selecteditems[axisbuttondefs[program_index][PanAxis][0][1]].subitems);
-			document.getElementById('panmodevalue1').value = axisbuttondefs[program_index][PanAxis][1][1];
-			fillvaluelist(document.getElementById('panmodevalue2'), selecteditems[axisbuttondefs[program_index][PanAxis][0][2]].subitems);
-			document.getElementById('panmodevalue2').value = axisbuttondefs[program_index][PanAxis][1][2];
-
-			document.getElementById('rotatemodeaction0').value = axisbuttondefs[program_index][RotateAxis][0][0];
-			document.getElementById('rotatemodeaction1').value = axisbuttondefs[program_index][RotateAxis][0][1];
-			document.getElementById('rotatemodeaction2').value = axisbuttondefs[program_index][RotateAxis][0][2];
-
-			fillvaluelist(document.getElementById('rotatemodevalue0'), selecteditems[axisbuttondefs[program_index][RotateAxis][0][0]].subitems);
-			document.getElementById('rotatemodevalue0').value = axisbuttondefs[program_index][RotateAxis][1][0];
-			fillvaluelist(document.getElementById('rotatemodevalue1'), selecteditems[axisbuttondefs[program_index][RotateAxis][0][1]].subitems);
-			document.getElementById('rotatemodevalue1').value = axisbuttondefs[program_index][RotateAxis][1][1];
-			fillvaluelist(document.getElementById('rotatemodevalue2'), selecteditems[axisbuttondefs[program_index][RotateAxis][0][2]].subitems);
-			document.getElementById('rotatemodevalue2').value = axisbuttondefs[program_index][RotateAxis][1][2];
-
-			document.getElementById('zoommodeaction0').value = axisbuttondefs[program_index][ZoomAxis][0][0];
-			document.getElementById('zoommodeaction1').value = axisbuttondefs[program_index][ZoomAxis][0][1];
-			document.getElementById('zoommodeaction2').value = axisbuttondefs[program_index][ZoomAxis][0][2];
-
-			fillvaluelist(document.getElementById('zoommodevalue0'), selecteditems[axisbuttondefs[program_index][ZoomAxis][0][0]].subitems);
-			document.getElementById('zoommodevalue0').value = axisbuttondefs[program_index][ZoomAxis][1][0];
-			fillvaluelist(document.getElementById('zoommodevalue1'), selecteditems[axisbuttondefs[program_index][ZoomAxis][0][1]].subitems);
-			document.getElementById('zoommodevalue1').value = axisbuttondefs[program_index][ZoomAxis][1][1];
-			fillvaluelist(document.getElementById('zoommodevalue2'), selecteditems[axisbuttondefs[program_index][ZoomAxis][0][2]].subitems);
-			document.getElementById('zoommodevalue2').value = axisbuttondefs[program_index][ZoomAxis][1][2];
-		}
 
 		function select_new_button(button_index) {
 			current_button_index = button_index;
@@ -3683,65 +3476,17 @@
 		function update_selected_program_items(select) {
 			var selectedOption = select.options[select.selectedIndex];
 			current_program_index = selectedOption.value;
-			show_joystickmode_def(current_program_index);
 			show_hwbutton_def(current_program_index, current_button_index);
 		}
 
-		function update_axisbutton_def(select, axis, actionValue, arrayIndex) {
+		function update_hwbutton_description(select) {
 
 			if (loadIsComplete) {
-				let axisPrefix = "";
-				if (axis == PanAxis) {
-					axisPrefix = "pan";
-				} else if (axis == RotateAxis) {
-					axisPrefix = "rotate";
-				} else if (axis == ZoomAxis) {
-					axisPrefix = "zoom";
-				}
-
-				if (axisPrefix != "") {
-					let validArrayIndex = false;
-					switch (arrayIndex) {
-						case 0:
-							axisbuttondefs[current_program_index][axis][0][0] = document.getElementById(axisPrefix + 'modeaction0').value;
-							axisbuttondefs[current_program_index][axis][1][0] = document.getElementById(axisPrefix + 'modevalue0').value;
-							validArrayIndex = true;
-							break;
-
-						case 1:
-							axisbuttondefs[current_program_index][axis][1][1] = document.getElementById(axisPrefix + 'modevalue1').value;
-							axisbuttondefs[current_program_index][axis][0][1] = document.getElementById(axisPrefix + 'modeaction1').value;
-							validArrayIndex = true;
-							break;
-
-						case 2:
-							axisbuttondefs[current_program_index][axis][0][2] = document.getElementById(axisPrefix + 'modeaction2').value;
-							axisbuttondefs[current_program_index][axis][1][2] = document.getElementById(axisPrefix + 'modevalue2').value;
-							validArrayIndex = true;
-							break;
-
-						default:
-					}
-
-					if (validArrayIndex) {
-						let xhr = new XMLHttpRequest();
-
-						xhr.open("GET", "/updatebutton?app=" + current_program_index + "&button=" + current_button_index + "&buttonType=" + axis +
-							"&arrayIndex=" + arrayIndex + "&actionValue=" + actionValue +
-							"&action=" + axisbuttondefs[current_program_index][axis][0][arrayIndex] +
-							"&value=" + axisbuttondefs[current_program_index][axis][1][arrayIndex], true);
-
-						xhr.send();
-
-						console.log("updatebutton?app=" + current_program_index + "&button=" + current_button_index + "&buttonType=" + axis +
-							"&arrayIndex=" + arrayIndex + "&actionValue=" + actionValue +
-							"&action=" + axisbuttondefs[current_program_index][axis][0][arrayIndex] +
-							"&value=" + axisbuttondefs[current_program_index][axis][1][arrayIndex]);
-					}
-				}
+				hwbuttondescriptions[current_program_index][current_button_index] = document.getElementById('hwbuttondescription').value;
 			}
-		}
 
+		}
+		
 
 		function update_hwbutton_def(select, actionValue, arrayIndex) {
 
@@ -3773,14 +3518,14 @@
 				if (validArrayIndex) {
 					let xhr = new XMLHttpRequest();
 
-					xhr.open("GET", "/updatebutton?app=" + current_program_index + "&button=" + current_button_index + "&buttonType=3" +
+					xhr.open("GET", "/updatebutton?app=" + current_program_index + "&button=" + current_button_index +
 						"&arrayIndex=" + arrayIndex + "&actionValue=" + actionValue +
 						"&action=" + hwbuttondefs[current_program_index][current_button_index][0][arrayIndex] +
 						"&value=" + hwbuttondefs[current_program_index][current_button_index][1][arrayIndex], true);
 
 					xhr.send();
 
-					console.log("updatebutton?app=" + current_program_index + "&button=" + current_button_index + "&buttonType=3" +
+					console.log("updatebutton?app=" + current_program_index + "&button=" + current_button_index +
 						"&arrayIndex=" + arrayIndex + "&actionValue=" + actionValue +
 						"&action=" + hwbuttondefs[current_program_index][current_button_index][0][arrayIndex] +
 						"&value=" + hwbuttondefs[current_program_index][current_button_index][1][arrayIndex]);
@@ -3810,6 +3555,7 @@
 				document.getElementById("modifier3").value = data.modifier3;
 				document.getElementById("helperdelay").value = data.helperdelay;
 				document.getElementById("startup_menu").value = data.startup_menu;
+				document.getElementById("gpio_pin").value = data.gpio_pin;
 			}).then(() => {
 				getwificonfig();
 			})

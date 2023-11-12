@@ -1,3 +1,26 @@
+/*                                          CADDeck
+
+    Author: Andrew Fernie
+    Date: 2023-05-20
+
+    CADDeck is a combined joystick and touch panel display suitable for use with common CAD programs. It includes:
+
+        1. Two axis joystick (e.g. for X, Y pan)
+        2. Thumbwheel encoder in the joystick grip (e.g. for zoom) with push switch (e.g. for select)
+        3. Four switches around joystick grip (e.g. hold one down while moving joystick for pan and another for rotate)
+        4. Four switches around the base (e.g. measure, ESC...)
+        5. LCD touch panel with up to 10 screens of 12 buttons
+
+    All H/W buttons as well as the touch panel buttons are programmable through a web page.
+
+    It connects to the PC via Bluetooth using the HID interface (i.e. it looks like a keyboard and mouse to the PC).
+    A USB-C port is provided for power and to download code.
+
+    This project is derived from TouchDeck by Dustin Watts. The original TouchDeck project is available at:
+    https://github.com/DustinWatts/FreeTouchDeck
+r
+*/
+
 /*
   Author: Dustin Watts
   Date: 27-08-2020
@@ -41,14 +64,55 @@
         using. Also make sure TOUCH_CS is defined correctly. TFT_BL is also needed!
 
 */
-#include <Arduino.h>
-
 #include "CADDeck.h"
 
-const char *versionnumber = "0.0.8WIP";
+#include <Arduino.h>
+
+const char *versionnumber = "10Button V1.1.1";
 
 /*
- * Version 0.0.8     - In work
+ * Version 10Button V1.1.1
+ *                   - Enable knob push/pull (vertical move) while in rotation mode and knob rotate when in translation mode
+ *                   - Add SpaceMouse soft button support to configurator
+ * 
+ * Version 10Button V1.1
+ *                   - Added code for Spacemouse output to serial port. Needs to be hooked up to a Raspberry Pi Pico running this code
+ *                     https://github.com/andrewfernie/magellan-spacemouse
+ *
+ * Version 1.0.0_10Button
+ *                   - Using button numbering scheme as defined by AFUDirk
+ *                   - Added controllable GPIO pin for LEDs on 10 button card
+ *                   - Some messages (in ConfigHelper.cpp) can be displayed in English or German (compile time option). Does not apply
+ *                     to messages on web pages, only those stored directly in the C++ code. Will eventually add the rest of AFUDirk's
+ *                     messages, but want to look at how to do this in a more elegant way.
+ *                   - Support for "click" and "double click" action for button on top of joystick (button 0).
+ *                   - Added enumerations for actions. Makes code more readable, but not tied to the values in the
+ *                     configurator and configuration json files, so these must be kept alienged manually.
+ *
+ * Version 0.0.17.10Button
+ *                   - Added controllable GPIO functions
+ *
+ * Version 0.0.13.10Button
+ *                   - Removed unneeded configurator code that was previously used to define which buttons were selecting
+ *                     joystick actions
+ *
+ * Version 0.0.12.10Button
+ *                   - Fix initialization of active CAD program for configurator
+ *                   - Disable sleep timer to see if this is the cause of losing bluetooth connection
+ *                   - To help setup debug, the default behavior of button_1 to button_10 (not including button 0) in
+ *                     cadparams.json is to send a letter "a" through "j". This can be changed in the configurator.
+ *
+ * Version 0.0.11.10Button
+ *                   - Zoom control active without pushing button
+ *
+ * Version 0.0.10.10Button
+ *                   - Added hardcoded control functionality for Solidworks, Fusion360, Blender, FreeCAD, and AC3D
+ *
+ * Version 0.0.9.10Button.WIP
+ *                   - More support for 10 buttons, analog zoom control, and analog rotate control. Hardcoded for Fusion360 only.
+ *
+ * Version 0.0.8.10Button.WIP
+ *                   - Added support for 10 buttons, analog zoom control, and analog rotate control
  *
  * Version 0.0.7     - Adapted for four button knob.
  *                   - Added support for AC3D as fifth CAD program
@@ -195,14 +259,15 @@ Generallogos generallogo;
 
 unsigned long previousMillis = 0;
 unsigned long Interval = 0;
-bool displayinginfo;
-bool displayingIOValues;
+bool displayinginfo = false;
+bool displayingIOValues = false;
+bool displayingButtonDescriptions = false;
 
 char jsonFileFail[32] = "";
 
 bool psramAvailable = false;
 
-uint8_t last_hwbutton_state[NUM_HW_BUTTONS] = {0, 0, 0, 0, 0, 0, 0, 0, 0};
+uint8_t last_hwbutton_state[NUM_HW_BUTTONS] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
 // Invoke the TFT_eSPI button class and create all the button objects
 TFT_eSPI_Button key[BUTTON_ROWS][BUTTON_COLS];
@@ -218,6 +283,8 @@ long loop_count = 0;
 long this_loop_start = 0;
 long loop_100_count = 0;
 long loop_100_time = 0;
+
+SpaceMouse spaceMouse(SPACEMOUSE_BAUD, SPACEMOUSE_CONFIG, SPACEMOUSE_RX_PIN, SPACEMOUSE_TX_PIN);
 
 //-------------------------------- SETUP --------------------------------------------------------------
 
@@ -235,6 +302,11 @@ void setup()
     MSG_INFOLN("[INFO] Brightness has been set");
 
     psramAvailable = psramFound();
+
+#ifdef SPACEMOUSE_SUPPORT
+    spaceMouse.Init();
+    MSG_INFOLN("[INFO] SpaceMouse support enabled");
+#endif
 
 #ifdef USECAPTOUCH
 #ifdef CUSTOM_TOUCH_SDA
@@ -535,10 +607,12 @@ void setup()
     // Setup the Font used for plain text
     tft.setFreeFont(LABEL_FONT);
 
-    //------------------BLE Initialization ------------------------
-    MSG_INFOLN("[INFO] Starting BLE");
-    // bleKeyboard.begin();
-    // bleMouse.begin();
+//------------------BLE Initialization ------------------------
+#ifdef BLUETOOTH_COMMANDS
+    MSG_INFOLN("[INFO] Starting BLE HID devices");
+#else
+    MSG_INFOLN("[INFO] Starting USB HID devices");
+#endif
     Keyboard.begin();
     Mouse.begin();
 
@@ -560,6 +634,9 @@ void setup()
 
     pageHistoryStack.push(pageNum);
     drawKeypad();
+
+    // End of setup
+    MSG_INFOLN("[INFO] End of setup()");
 }
 
 //--------------------- LOOP ---------------------------------------------------------------------
@@ -573,7 +650,7 @@ void loop(void)
         this_loop_start = millis();
         loop_count++;
 
-        // Update andf handle the joystick and physical buttons
+        // Update and handle the joystick and physical buttons
         update_io();
 
         // Check and handle any commands from the serial port
@@ -651,6 +728,20 @@ void loop(void)
                 displayingIOValues = false;
                 pageHistoryStack.pop();
                 pageNum = pageHistoryStack.peek();
+                tft.fillScreen(generalconfig.backgroundColour);
+                drawKeypad();
+            }
+        }
+        else if (pageNum == SPECIAL_PAGE_BUTTON_INFO) {
+            if (!displayingButtonDescriptions) {
+                printButtonInfo(cadconfig.current_program);
+            }
+
+            if (pressed) {
+                displayingButtonDescriptions = false;
+                pageHistoryStack.pop();
+                pageNum = pageHistoryStack.peek();
+
                 tft.fillScreen(generalconfig.backgroundColour);
                 drawKeypad();
             }
@@ -819,7 +910,6 @@ void loop(void)
                         MSG_INFO1("Battery voltage:", externalBatteryVoltage);
 #endif
                     }
-                    //                    delay(10);  // UI debouncing
                 }
             }
 
@@ -832,20 +922,32 @@ void loop(void)
                 if (button_state && (last_hwbutton_state[i] == 0)) {
                     //---------------------------------------- Button press handling --------------------------------------------------
 
-                    KeyboardMouseAction(cadprogramconfig[cadconfig.current_program].hw_buttons[i][0].action,
-                                        cadprogramconfig[cadconfig.current_program].hw_buttons[i][0].value,
-                                        cadprogramconfig[cadconfig.current_program].hw_buttons[i][0].symbol, i);
+                    if (cadconfig.spacemouse_enable && (i > 0)) {
+                        spaceMouse.SendKeyPacketExtended(i);
+                        MSG_DEBUG1("loop:Sending extended key packet for button ", i);
+                    }
+                    else {
+                        KeyboardMouseAction(cadprogramconfig[cadconfig.current_program].hw_buttons[i][0].action,
+                                            cadprogramconfig[cadconfig.current_program].hw_buttons[i][0].value,
+                                            cadprogramconfig[cadconfig.current_program].hw_buttons[i][0].symbol, i);
 
-                    KeyboardMouseAction(cadprogramconfig[cadconfig.current_program].hw_buttons[i][1].action,
-                                        cadprogramconfig[cadconfig.current_program].hw_buttons[i][1].value,
-                                        cadprogramconfig[cadconfig.current_program].hw_buttons[i][1].symbol, i);
+                        KeyboardMouseAction(cadprogramconfig[cadconfig.current_program].hw_buttons[i][1].action,
+                                            cadprogramconfig[cadconfig.current_program].hw_buttons[i][1].value,
+                                            cadprogramconfig[cadconfig.current_program].hw_buttons[i][1].symbol, i);
 
-                    KeyboardMouseAction(cadprogramconfig[cadconfig.current_program].hw_buttons[i][2].action,
-                                        cadprogramconfig[cadconfig.current_program].hw_buttons[i][2].value,
-                                        cadprogramconfig[cadconfig.current_program].hw_buttons[i][2].symbol, i);
+                        KeyboardMouseAction(cadprogramconfig[cadconfig.current_program].hw_buttons[i][2].action,
+                                            cadprogramconfig[cadconfig.current_program].hw_buttons[i][2].value,
+                                            cadprogramconfig[cadconfig.current_program].hw_buttons[i][2].symbol, i);
+                    }
                 }
+                else if (!button_state && last_hwbutton_state[i] && cadconfig.spacemouse_enable && (i > 0)) {
+                    spaceMouse.SendKeyPacketExtended(0);
+                    MSG_DEBUG1("loop:Sending extended key packet for button ", 0);
+                }
+
                 last_hwbutton_state[i] = button_state;
             }
+
             // if (loop_count % 10 == 0) MSG_DEBUGLN("");
         }
 

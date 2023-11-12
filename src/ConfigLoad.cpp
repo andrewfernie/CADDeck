@@ -154,6 +154,16 @@ bool loadConfig(String value)
         uint16_t startup_menu = doc["startup_menu"] | 0;
         generalconfig.startup_menu = startup_menu;
 
+        uint8_t gpio_pin = doc["gpio_pin"] | 255;
+        generalconfig.gpio_pin = gpio_pin;
+
+        uint8_t gpio_pin_mode = doc["gpio_pin_mode"] | 0;
+        generalconfig.gpio_pin_mode = gpio_pin_mode;
+
+        if(gpio_pin != 255) {
+            pinMode(gpio_pin, OUTPUT);
+            digitalWrite(gpio_pin, gpio_pin_mode);
+        }
 
         configfile.close();
 
@@ -171,7 +181,7 @@ bool loadConfig(String value)
 
         // How to decide on the size of the buffer? Edit the JSON file that will be loaded and use the
         // ArduinoJSON Assistant (https://arduinojson.org/v6/assistant/#/step1) to get the size.
-        DynamicJsonDocument doc(12288);
+        DynamicJsonDocument doc(14000);
 
         DeserializationError error = deserializeJson(doc, configfile);
 
@@ -201,31 +211,68 @@ bool loadConfig(String value)
             return false;
         }
 
-        float deadzone = doc["joy_deadzone"] | 0.0;
-        cadconfig.joy_deadzone = deadzone;
+        float joy_deadzone = doc["joy_deadzone"] | 20.0;
+        cadconfig.joy_deadzone = joy_deadzone;
         if (error) {
             MSG_ERROR2("[ERROR] deserializeJson() error joy_deadzone ", error.c_str(), doc.memoryUsage());
             return false;
         }
 
-        float sensitivity = doc["joy_sensitivity"] | 20.0;
-        cadconfig.joy_sensitivity = sensitivity;
+        float joy_sensitivity = doc["joy_sensitivity"] | 20.0;
+        cadconfig.joy_sensitivity = joy_sensitivity;
         if (error) {
             MSG_ERROR2("[ERROR] deserializeJson() error joy_sensitivity ", error.c_str(), doc.memoryUsage());
             return false;
         }
 
-        float tw_sensitivity = doc["thumbwheel_sensitivity"] | 1.0;
-        cadconfig.thumbwheel_sensitivity = tw_sensitivity;
+        float zoom_scale = doc["zoom_scale"] | 1.0;
+        cadconfig.zoom_scale = zoom_scale;
+
         if (error) {
-            MSG_ERROR2("[ERROR] deserializeJson() error thumbwheel_sensitivity ", error.c_str(), doc.memoryUsage());
+            MSG_ERROR2("[ERROR] deserializeJson() error zoom_scale ", error.c_str(), doc.memoryUsage());
             return false;
         }
 
-        float steady_time = doc["joy_steady_time"] | 100;
-        cadconfig.joy_steady_time = steady_time;
+        float zoom_deadzone = doc["zoom_deadzone"] | 20.0;
+        cadconfig.zoom_deadzone = zoom_deadzone;
         if (error) {
-            MSG_ERROR2("[ERROR] deserializeJson() error joy_steady_time ", error.c_str(), doc.memoryUsage());
+            MSG_ERROR2("[ERROR] deserializeJson() error zoom_deadzone ", error.c_str(), doc.memoryUsage());
+            return false;
+        }
+
+        float zoom_sensitivity = doc["zoom_sensitivity"] | 20.0;
+        cadconfig.zoom_sensitivity = zoom_sensitivity;
+        if (error) {
+            MSG_ERROR2("[ERROR] deserializeJson() error zoom_sensitivity ", error.c_str(), doc.memoryUsage());
+            return false;
+        }
+
+        float rotate_scale = doc["rotate_scale"] | 1.0;
+        cadconfig.rotate_scale = rotate_scale;
+
+        if (error) {
+            MSG_ERROR2("[ERROR] deserializeJson() error rotate_scale ", error.c_str(), doc.memoryUsage());
+            return false;
+        }
+
+        float rotate_deadzone = doc["rotate_deadzone"] | 20.0;
+        cadconfig.rotate_deadzone = rotate_deadzone;
+        if (error) {
+            MSG_ERROR2("[ERROR] deserializeJson() error rotate_deadzone ", error.c_str(), doc.memoryUsage());
+            return false;
+        }
+
+        float rotate_sensitivity = doc["rotate_sensitivity"] | 20.0;
+        cadconfig.rotate_sensitivity = rotate_sensitivity;
+        if (error) {
+            MSG_ERROR2("[ERROR] deserializeJson() error rotate_sensitivity ", error.c_str(), doc.memoryUsage());
+            return false;
+        }
+
+        float mouse_sensitivity = doc["mouse_sensitivity"] | 20.0;
+        cadconfig.mouse_sensitivity = mouse_sensitivity;
+        if (error) {
+            MSG_ERROR2("[ERROR] deserializeJson() error mouse_sensitivity ", error.c_str(), doc.memoryUsage());
             return false;
         }
 
@@ -234,6 +281,18 @@ bool loadConfig(String value)
         cadconfig.current_program = current_program;
         if (error) {
             MSG_ERROR2("[ERROR] deserializeJson() error current_program ", error.c_str(), doc.memoryUsage());
+            return false;
+        }
+
+        bool spacemouse_enable = doc["spacemouse_enable"] | false;
+        if (spacemouse_enable) {
+            cadconfig.spacemouse_enable = true;
+        }
+        else {
+            cadconfig.spacemouse_enable = false;
+        }
+        if (error) {
+            MSG_ERROR2("[ERROR] deserializeJson() error spacemouse_enable ", error.c_str(), doc.memoryUsage());
             return false;
         }
 
@@ -265,128 +324,8 @@ bool loadConfig(String value)
             strlcpy(cadprogramconfig[program].logo, logo, sizeof(cadprogramconfig[program].logo));
             MSG_INFO2("[INFO] load_config loading logo", program_name, templogopath);
 
-            cadprogramconfig[program].default_joystick_mode = program_array[program]["default_joystick_mode"] | JoystickMode_Rotate;
-
-            ///  pan
-            JsonArray joystickkey_pan_actionarray = program_array[program]["pan"]["actionarray"];
-
-            int joystickkey_pan_actionarray_0 = joystickkey_pan_actionarray[0];
-            int joystickkey_pan_actionarray_1 = joystickkey_pan_actionarray[1];
-            int joystickkey_pan_actionarray_2 = joystickkey_pan_actionarray[2];
-
-            JsonArray joystickkey_pan_valuearray = program_array[program]["pan"]["valuearray"];
-
-            if (joystickkey_pan_actionarray_0 == Action_Char || joystickkey_pan_actionarray_0 == Action_SpecialChar) {
-                const char *button_symbolarray_0 = joystickkey_pan_valuearray[0];
-                strcpy(cadprogramconfig[program].pan[0].symbol, button_symbolarray_0);
-            }
-            else {
-                int joystickkey_pan_valuearray_0 = joystickkey_pan_valuearray[0];
-                cadprogramconfig[program].pan[0].value = joystickkey_pan_valuearray_0;
-            }
-
-            if (joystickkey_pan_actionarray_1 == Action_Char || joystickkey_pan_actionarray_1 == Action_SpecialChar) {
-                const char *button_symbolarray_1 = joystickkey_pan_valuearray[1];
-                strcpy(cadprogramconfig[program].pan[1].symbol, button_symbolarray_1);
-            }
-            else {
-                int joystickkey_pan_valuearray_1 = joystickkey_pan_valuearray[1];
-                cadprogramconfig[program].pan[1].value = joystickkey_pan_valuearray_1;
-            }
-
-            if (joystickkey_pan_actionarray_2 == Action_Char || joystickkey_pan_actionarray_2 == Action_SpecialChar) {
-                const char *button_symbolarray_2 = joystickkey_pan_valuearray[2];
-                strcpy(cadprogramconfig[program].pan[2].symbol, button_symbolarray_2);
-            }
-            else {
-                int joystickkey_pan_valuearray_2 = joystickkey_pan_valuearray[2];
-                cadprogramconfig[program].pan[2].value = joystickkey_pan_valuearray_2;
-            }
-
-            cadprogramconfig[program].pan[0].action = joystickkey_pan_actionarray_0;
-            cadprogramconfig[program].pan[1].action = joystickkey_pan_actionarray_1;
-            cadprogramconfig[program].pan[2].action = joystickkey_pan_actionarray_2;
-
-            /// rotate
-            JsonArray joystickkey_rotate_actionarray = program_array[program]["rotate"]["actionarray"];
-
-            int joystickkey_rotate_actionarray_0 = joystickkey_rotate_actionarray[0];
-            int joystickkey_rotate_actionarray_1 = joystickkey_rotate_actionarray[1];
-            int joystickkey_rotate_actionarray_2 = joystickkey_rotate_actionarray[2];
-
-            JsonArray joystickkey_rotate_valuearray = program_array[program]["rotate"]["valuearray"];
-
-            if (joystickkey_rotate_actionarray_0 == Action_Char || joystickkey_rotate_actionarray_0 == Action_SpecialChar) {
-                const char *button_symbolarray_0 = joystickkey_rotate_valuearray[0];
-                strcpy(cadprogramconfig[program].rotate[0].symbol, button_symbolarray_0);
-            }
-            else {
-                int joystickkey_rotate_valuearray_0 = joystickkey_rotate_valuearray[0];
-                cadprogramconfig[program].rotate[0].value = joystickkey_rotate_valuearray_0;
-            }
-
-            if (joystickkey_rotate_actionarray_1 == Action_Char || joystickkey_rotate_actionarray_1 == Action_SpecialChar) {
-                const char *button_symbolarray_1 = joystickkey_rotate_valuearray[1];
-                strcpy(cadprogramconfig[program].rotate[1].symbol, button_symbolarray_1);
-            }
-            else {
-                int joystickkey_rotate_valuearray_1 = joystickkey_rotate_valuearray[1];
-                cadprogramconfig[program].rotate[1].value = joystickkey_rotate_valuearray_1;
-            }
-
-            if (joystickkey_rotate_actionarray_2 == Action_Char || joystickkey_rotate_actionarray_2 == Action_SpecialChar) {
-                const char *button_symbolarray_2 = joystickkey_rotate_valuearray[2];
-                strcpy(cadprogramconfig[program].rotate[2].symbol, button_symbolarray_2);
-            }
-            else {
-                int joystickkey_rotate_valuearray_2 = joystickkey_rotate_valuearray[2];
-                cadprogramconfig[program].rotate[2].value = joystickkey_rotate_valuearray_2;
-            }
-
-            cadprogramconfig[program].rotate[0].action = joystickkey_rotate_actionarray_0;
-            cadprogramconfig[program].rotate[1].action = joystickkey_rotate_actionarray_1;
-            cadprogramconfig[program].rotate[2].action = joystickkey_rotate_actionarray_2;
-
-            /// zoom
-            JsonArray joystickkey_zoom_actionarray = program_array[program]["zoom"]["actionarray"];
-
-            int joystickkey_zoom_actionarray_0 = joystickkey_zoom_actionarray[0];
-            int joystickkey_zoom_actionarray_1 = joystickkey_zoom_actionarray[1];
-            int joystickkey_zoom_actionarray_2 = joystickkey_zoom_actionarray[2];
-
-            JsonArray joystickkey_zoomvaluearray = program_array[program]["zoom"]["valuearray"];
-
-            if (joystickkey_zoom_actionarray_0 == Action_Char || joystickkey_zoom_actionarray_0 == Action_SpecialChar) {
-                const char *button_symbolarray_0 = joystickkey_zoomvaluearray[0];
-                strcpy(cadprogramconfig[program].zoom[0].symbol, button_symbolarray_0);
-            }
-            else {
-                int joystickkey_zoomvaluearray_0 = joystickkey_zoomvaluearray[0];
-                cadprogramconfig[program].zoom[0].value = joystickkey_zoomvaluearray_0;
-            }
-
-            if (joystickkey_zoom_actionarray_1 == Action_Char || joystickkey_zoom_actionarray_1 == Action_SpecialChar) {
-                const char *button_symbolarray_1 = joystickkey_zoomvaluearray[1];
-                strcpy(cadprogramconfig[program].zoom[1].symbol, button_symbolarray_1);
-            }
-            else {
-                int joystickkey_zoomvaluearray_1 = joystickkey_zoomvaluearray[1];
-                cadprogramconfig[program].zoom[1].value = joystickkey_zoomvaluearray_1;
-            }
-
-            if (joystickkey_zoom_actionarray_2 == Action_Char || joystickkey_zoom_actionarray_2 == Action_SpecialChar) {
-                const char *button_symbolarray_2 = joystickkey_zoomvaluearray[2];
-                strcpy(cadprogramconfig[program].zoom[2].symbol, button_symbolarray_2);
-            }
-            else {
-                int joystickkey_zoomvaluearray_2 = joystickkey_zoomvaluearray[2];
-                cadprogramconfig[program].zoom[2].value = joystickkey_zoomvaluearray_2;
-            }
-
-            cadprogramconfig[program].zoom[0].action = joystickkey_zoom_actionarray_0;
-            cadprogramconfig[program].zoom[1].action = joystickkey_zoom_actionarray_1;
-            cadprogramconfig[program].zoom[2].action = joystickkey_zoom_actionarray_2;
-
+            cadprogramconfig[program].default_joystick_mode = program_array[program]["default_joystick_mode"] | JoystickModeTilt;          
+            
             // Button assignments
 
             JsonArray button_array = program_array[program]["buttons"];
@@ -402,11 +341,23 @@ bool loadConfig(String value)
             else {
                 MSG_INFO3("[INFO] Number of buttons in cadparams.jsonfor program ", cadprogramconfig[program].name, " is ", num_buttons);
             }
-
+ 
             cadprogramconfig[program].num_buttons = num_buttons;
 
             for (uint8_t button = 0; button < num_buttons; button++) {
                 MSG_INFO1("[INFO] Loading button ", button)
+
+                const char *button_description = button_array[button]["description"] | "Unknown";
+                strncpy(cadprogramconfig[program].hw_button_descriptions[button], button_description, sizeof(cadprogramconfig[program].hw_button_descriptions[button]));
+                if (cadprogramconfig[program].hw_button_descriptions[button][sizeof(cadprogramconfig[program].hw_button_descriptions[button]) - 1] != '\0') {
+                    // We have overflow, so we need to truncate the string
+                    cadprogramconfig[program].hw_button_descriptions[button][sizeof(cadprogramconfig[program].hw_button_descriptions[button]) - 1] = '\0';
+                }
+                if (error) {
+                    MSG_ERROR2("[ERROR] deserializeJson() error button_description ", error.c_str(), doc.memoryUsage());
+                    return false;
+                }
+
                 JsonArray program_button_actionarray = button_array[button]["actionarray"];
                 int program_button_actionarray_0 = program_button_actionarray[0];
                 int program_button_actionarray_1 = program_button_actionarray[1];
@@ -454,7 +405,7 @@ bool loadConfig(String value)
             return false;
         }
         else {
-            MSG_DEBUG1("[INFO] cadparams.json load_config() success. Memory usage: ", doc.memoryUsage());
+            MSG_INFO1("[INFO] cadparams.json load_config() success. Memory usage: ", doc.memoryUsage());
         }
 
         cadconfig.version = CADCONFIG_VERSION;
@@ -557,6 +508,11 @@ bool loadConfig(String value)
                 if (menu[fileNameMenuNumber].button[row][col].actions[0].action == Action_SpecialFn &&
                     menu[fileNameMenuNumber].button[row][col].actions[0].value == 8) {
                     menu[fileNameMenuNumber].button[row][col].islatched = generalconfig.usbcommsenable;
+                }
+                // Spacemouse mode enable button
+                if (menu[fileNameMenuNumber].button[row][col].actions[0].action ==Action_SpecialFn &&
+                    menu[fileNameMenuNumber].button[row][col].actions[0].value == 14) {
+                    menu[fileNameMenuNumber].button[row][col].islatched = cadconfig.spacemouse_enable;
                 }
             }
         }
