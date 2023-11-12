@@ -2,6 +2,7 @@
 #include "Arduino.h"
 #include <stdint.h>
 #include <std_defs.h>
+#define SPACEMOUSE_MAX_BUTTON 19
 
 class SpaceMouse
 {
@@ -26,8 +27,9 @@ private:
     uint32_t configParameters;
     uint8_t pinRx;
     uint8_t pinTx;
+    uint8_t button_set[SPACEMOUSE_MAX_BUTTON] = {0};
 
-    uint8_t button_bits[15] = {12, 13, 14, 15, 22, 25, 23, 24, 0, 1, 2, 4, 5, 8, 26};
+    uint8_t button_bits[SPACEMOUSE_MAX_BUTTON] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18};
 
     char cmd_end;
    

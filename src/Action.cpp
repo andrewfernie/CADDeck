@@ -823,7 +823,7 @@ void KeyboardMouseAction(int action, int value, char *symbol, uint8_t hwbutton_i
             break;
         case Action_SpaceMouseButton:  // Emulate a SpaceMouse button press
             if ((value >= 0) && (value <= SPACEMOUSE_MAX_BUTTON)) {
-                spaceMouse.SendKeyPacket(value);
+                spaceMouse.SendKeyPacketExtended(value);
 
             }
             break;

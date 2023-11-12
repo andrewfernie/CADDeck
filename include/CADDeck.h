@@ -183,7 +183,6 @@ extern bool psramAvailable;
 #define SPACEMOUSE_BAUD 115200
 #define SPACEMOUSE_CONFIG SERIAL_8N1
 #define SPACEMOUSE_SERIAL Serial1
-#define SPACEMOUSE_MAX_BUTTON 15
 extern SpaceMouse spaceMouse;
 
 // ---------------- Debug pins ----------------

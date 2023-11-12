@@ -68,12 +68,12 @@ r
 
 #include <Arduino.h>
 
-const char *versionnumber = "10Button V1.0.1WIP";
+const char *versionnumber = "10Button V1.1";
 
 /*
- * Version 10Button V1.0.1WIP
- *                   - In work
- *                   - Added initial code for Spacemouse output to serial port. This is still in work.
+ * Version 10Button V1.1
+ *                   - Added code for Spacemouse output to serial port. Needs to be hooked up to a Raspberry Pi Pico running this code
+ *                     https://github.com/andrewfernie/magellan-spacemouse
  *
  * Version 1.0.0_10Button
  *                   - Using button numbering scheme as defined by AFUDirk
@@ -919,7 +919,8 @@ void loop(void)
                     //---------------------------------------- Button press handling --------------------------------------------------
 
                     if (cadconfig.spacemouse_enable && (i > 0)) {
-                        spaceMouse.SendKeyPacket(i);
+                        spaceMouse.SendKeyPacketExtended(i);
+                        MSG_DEBUG1("loop:Sending extended key packet for button ", i);
                     }
                     else {
                         KeyboardMouseAction(cadprogramconfig[cadconfig.current_program].hw_buttons[i][0].action,
@@ -936,7 +937,8 @@ void loop(void)
                     }
                 }
                 else if (!button_state && last_hwbutton_state[i] && cadconfig.spacemouse_enable && (i > 0)) {
-                    spaceMouse.SendKeyPacket(0);
+                    spaceMouse.SendKeyPacketExtended(0);
+                    MSG_DEBUG1("loop:Sending extended key packet for button ", 0);
                 }
 
                 last_hwbutton_state[i] = button_state;

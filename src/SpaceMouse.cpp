@@ -85,17 +85,22 @@ void SpaceMouse::SendKeyPacket(uint8_t button_index)
 }
 
 // This function is to allow more than the 12 buttons allowed by
-// the standard SpaceMouse protocol so as to support the 15
-// buttons on a SpaceMouse Pro.  One more byte is added to the
-// packet to allow for 16 buttons (although only 15 are actually
-// supported by the pro).
+// the standard SpaceMouse protocol so as to support the extra
+// buttons on a SpaceMouse Pro. the 3dconnexxion information says that 
+// 15 are supported, but there is other information that there are
+// actually 19 (15 + 4 for long press on 1-4).
+//
+// Two more bytes are added to the packet to allow for the full
+// complement of 20 buttons to be supported.
 // TODO: Rework to allow multiple buttons to be pressed at once
 void SpaceMouse::SendKeyPacketExtended(uint8_t button_index)
 {
-    Serial1.write('K');
+    Serial1.write('k');
     uint8_t nibble = 0;
     char encoded_zero = EncodeNibble(0);
     if (button_index == 0) {
+        Serial1.write(encoded_zero);
+        Serial1.write(encoded_zero);
         Serial1.write(encoded_zero);
         Serial1.write(encoded_zero);
         Serial1.write(encoded_zero);
@@ -106,11 +111,13 @@ void SpaceMouse::SendKeyPacketExtended(uint8_t button_index)
         Serial1.write(encoded_zero);
         Serial1.write(encoded_zero);
         Serial1.write(encoded_zero);
+        Serial1.write(encoded_zero);
     }
     else if (button_index < 9) {
         Serial1.write(encoded_zero);
         nibble = 1 << (button_index - 5);
         Serial1.write(EncodeNibble(nibble));
+        Serial1.write(encoded_zero);
         Serial1.write(encoded_zero);
         Serial1.write(encoded_zero);
     }
@@ -120,15 +127,28 @@ void SpaceMouse::SendKeyPacketExtended(uint8_t button_index)
         nibble = 1 << (button_index - 9);
         Serial1.write(EncodeNibble(nibble));
         Serial1.write(encoded_zero);
+        Serial1.write(encoded_zero);
     }
-    else if (button_index < 16) {
+    else if (button_index < 17) {
         Serial1.write(encoded_zero);
         Serial1.write(encoded_zero);
         Serial1.write(encoded_zero);
         nibble = 1 << (button_index - 13);
-        Serial1.write(EncodeNibble(nibble));    }
+        Serial1.write(EncodeNibble(nibble));
+        Serial1.write(encoded_zero);
+    }
+    else if (button_index < 21) {
+        Serial1.write(encoded_zero);
+        Serial1.write(encoded_zero);
+        Serial1.write(encoded_zero);
+        Serial1.write(encoded_zero);
+        nibble = 1 << (button_index - 17);
+        Serial1.write(EncodeNibble(nibble));
+    }
     else {
         MSG_ERRORLN("[ERROR] Invalid button index");
+        Serial1.write(encoded_zero);
+        Serial1.write(encoded_zero);
         Serial1.write(encoded_zero);
         Serial1.write(encoded_zero);
         Serial1.write(encoded_zero);
