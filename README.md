@@ -1,16 +1,29 @@
 # CADDeck
-![System Photo](images/systemphoto.jpg)
-
-This is a combined joystick and touch panel display suitable for use with common CAD programs. It includes:
+This is the source repository for the software for CADDeck, a combined joystick and touch panel display suitable for use with common CAD programs. 
+## Hardware Configuration
+### Current "AFUDirk" hardware
+It is configured to use the hardware designed by AFUDirk here (https://github.com/AFUDIrk/CADDeck)
+![AFUDirk System Photo](images/systemphoto_afudirk.png)
+It includes:
 1. Two axis joystick (e.g. for X, Y pan)
-2. Thumbwheel encoder in the joystick grip (e.g. for zoom) with push switch (e.g. for select)
-3. Four switches around joystick grip (e.g. hold one down while moving joystick for pan and another for rotate)
-4. Four switches around the base (e.g. measure, ESC...)
+2. Two axis knob (up/down and rotate left/right) with a capacitive switch for mode select 
+3. Ten switches around the base (e.g. measure, ESC...)
 5. LCD touch panel with up to 10 screens of 12 buttons
 
 All H/W buttons as well as the touch panel buttons are programmable through a web page.
 
+Basic principles of operation and software build still apply, and are described below, but details may differ so some updates to the text are needed.
+
+### Version 1 (deprecated)
+Initial versions of the software were built for this hardware that has a knob with four buttons and a thumbwheel encoder. No work is currently being done on this version of the hardware, but details can be found in the branch Version_1-Four_Buttons.
+![Original Version 1 System](images/systemphoto.jpg)
+
+
+## PC Interface
 It connects to the PC via Bluetooth using the HID interface (i.e. it looks like a keyboard and mouse to the PC). A USB-C port is provided for power and to download code. Location of the USB-C port on the left side is not ideal, but that is where it is on the screen being used. It should be possble to run power to the unit and hardwire it to the screen rather than using the USB-C for power but I have not tried this.
+
+## SpaceMouse Emulation
+While the basic mode uses mouse/keyboard combinations for viewpoint control, a SpaceMouse emulation mode is also available. This requires an external Raspberry Pi Pico board running this software (https://github.com/andrewfernie/magellan-spacemouse), as a fork from the project of the same name by "jfedor2". This board is connected to a serial port on the CADDeck WT32-SC01 board, and is also connected to the PC via USB. Further work is required to avoid the need for simultaneous use of Bluetooth and USB interfaces.
 
 ## Touch Panel
 The touch panel is adapted from Dustin Watt's FreeTouchDeck project (https://github.com/DustinWatts/FreeTouchDeck.git) which I modified to increase the button count, etc.  (https://github.com/andrewfernie/FreeTouchDeckWT32.git). For this project I added support for the joystick, encoder, and buttons.  The easiest way to get it going is to use a WT32-SC01 board (http://www.wireless-tag.com/portfolio/wt32-sc01/). Purchase the basic board, not the "Plus" version as the Plus uses a parallel interface to the LCD panel and doesn't leave enough IO lines free for the joystick and buttons, etc. The board includes an ESP32 module, and a 3.5" LCD with capacitive touchscreen.
@@ -50,73 +63,6 @@ The touch panel is adapted from Dustin Watt's FreeTouchDeck project (https://git
 
    Try setting LOG_MSG_LEVEL to 3 and you will get quite a few more status messages
 
-
-# Hardware Build
-
-![Assembly](images/Assembly.png)
-
-Most assembly is basic and is primarily wiring.  Complete 3D CAD models are provided in both Fusion360 and STEP formats in the hardware/model folder.
-
-References to button numbers are as shown in this diagram:
-![Button Numbers](images/ButtonLayout.png)
-
-
-## Case
-A Fusion360 model of the case, as well as STL files, are included in the CADDeck repository. The main case is printed in four pieces. The two top sections are bolted together internal to the case with M3 cap screws and nuts. M3 threaded inserts are used in the top front piece (six places), then the bottom is attached to the top with M3 flat head screws. 
-
-
-![Case](images/Case.png)
-
-
-There is no obvious way to attach the screen to the case, so I soldered four 6mm long M2.5 brass standoffs to the PCB.
-![Screen Attachment](images/ScreenAttachment.png)
-M2.5 flathead screews come through the bottom part of the case and are used to both hold the case closed and to attach the screen.
-
-## Joystick knob
-The joystick knob consists of two more 3D printed parts.  Two M3 screws are used to hold the two parts together, with threaded inserts in the bottom part. The perfboard to which the encoder and debounce/pullup components are mounted is clamped by the top and bottom parts. 
-
-Four tactile buttons are located around the knob. I used a little hot glue to hold them in place against the bottom part of the knob. 
-
-The first version of the knob only had two buttons, equivalent to Buttons 5 and 6. The idea was to hold one down while moving the joystick to pan the view and the other to rotate the view. The problem was that I found it awkward to use Button 6 while holding the joystick in my left hand, and the same problem with Button 5 while holding the joystick in my right hand. So, I added Buttons 7 and 8.  I find that Buttons 5 and 8 work well with the left hand, and Buttons 6 and 7 work well with the right hand.
-
-## Wiring
-A [wiring diagram](hardware/Electrical/Wiring%20Diagram.pdf) is included in the hardware/electrical folder. Most of it is straighjtforward.
-
-The touchy part is the joystick grip, and in particular the resistors and capacitors to debounce the encoder and pull the switches high. I used a small piece of perfboard to which I soldered 0805 size SMD components. I also used 30AWG silicon stranded wire to connect the perfboard into the base. Too many wires, and not enough space.
-
-![Perfboard for knob](images/pcb.png)
-
-![Knob Interior](images/KnobInterior.png)
-
-## Parts List
-Qty 1 [ESP32-SC01 LCD touchscreen](https://www.aliexpress.com/item/1005004399769442.html)
-
-Qty 1 [2mm 2x20 Male Header](https://www.aliexpress.com/item/1005001852671581.html)
-
-Qty 1 [EVQWGD001 Encoder](https://www.aliexpress.com/item/1005002824178689.html)
-
-
-Qty 4 [12mm x 12mm x 8.5mm High Tactile Pushbuttons](https://www.aliexpress.com/item/1005004735827784.html) 8mm, 9mm, or 10mm high wouild also work fine 
-
-Qty 4 [8mm momentary pushbuttons](https://www.aliexpress.com/item/1005002898978166.html) (these are the ones I used, but are not great - I would prefer something with a better tactile feel)
-
-Qty 1 [FrSky M9 joystick](https://www.aliexpress.com/item/32829691785.html)   This one is a bit pricey, but it is a good quality unit. Nothing special in terms of functionality - you just need something with analog X and Y outputs.
-
-
-Qty 1 [PCF8575 I2C IO Expander](https://www.aliexpress.com/item/1005004433286881.html)
-
-Qty5 10k 0805 SMD resistors for the encoder debounce and joystick button pullups
-
-Qty5 10k 1/8W throughhole resistors for 8mm button pullups
-
-Qty2 100nF 0805 SMD capacitors for the encoder debounce
-
-Qty 8 M3 Brass inserts
-
-Misc M3 hardware (nuts, screws, etc)
-
-30AWG silicon stranded wire
-r
 
 # Setup
 Once the unit is assembled and the display is coming up you should see the main page.
@@ -184,32 +130,4 @@ Below that is the button action definition. The same approach to defining the ac
 3. The actions that must be taken to enable pan/rotate/zoom to be controlled by the joystick (i.e. the mouse) within the selected CAD program. Note that the definition of what is needed to control pan/rotate/zoom is separate from which button enables that mode. As an example, Solidworks needs the middle mouse button to be held down to rotate the view. So, JoystickRotate/Action1 is set to "Mouse Buttons" and Value1 is set to "Press Middle Button". To assign the Rotate function to button 8, click "8" in the image to the left, then set SelectedButton/Action1 to "CAD Functions" and Value1 to "Joystick Rotate"
 ![Configuring the Rotate function](images/ConfigureRotate.png)
 At the very bottom is the "Save CAD Config" button. When selected the settings for all CAD programs are saved on the ESP32 in file cadparams.json
-
-## Default Configuration
-While everything can be changed via the configurator, there are some default settings provided with the code. These are:
-
-### Control assignments
-1. Joystick moves the mouse pointer
-2. Joystick with Button 5 held down pans the view
-3. Joystick with Button 6 held down rotates the view
-4. The encoder zooms in and out
-5. The encoder Button 9 is the same as the left mouse button (select)
-6. Button 1 is measure ("i" in Fusion360) (I assigned "i" as a keyboard shortcut to measure in Solidworks)
-7. Button 2 sets the zoom to fit ("F6" in Fusion360), ("f" in Solidworks)
-8. Button 3 unselects ("ESC" in Fusion360 and Solidworks)
-9. Button 4 toggles object visibility ("v" in Fusion360) or hides object ("TAB" in Solidworks)
-
-### Menus
-Menu numbers are assigned as follows:
-1. Menu 0: Main menu
-2. Menu 1: System Settings
-3. Menu 2: CAD Settings
-4. Menu 3: Not used
-5. Menu 4: Not used
-6. Menu 5: Not used
-7. Menu 6: Not used
-8. Menu 7: Select active CAD program
-9. Menu 8: Fusion360 actions
-10. Menu 9: Not used
- 
 
