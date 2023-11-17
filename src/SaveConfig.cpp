@@ -251,8 +251,8 @@ int saveConfigCADParams(AsyncWebServerRequest *request)
     String Current_program = current_program->value().c_str();
     cadparams["current_program"] = Current_program.toInt();
  
-    MSG_DEBUGLN("[DEBUG] Requesting space_mouse_enable");
-    AsyncWebParameter *space_mouse_enable = request->getParam("space_mouse_enable", true);
+    MSG_DEBUGLN("[DEBUG] Requesting spacemouse_enable");
+    AsyncWebParameter *space_mouse_enable = request->getParam("spacemouse_enable", true);
     String StrSpaceMouseEnable = space_mouse_enable->value().c_str();
     if (StrSpaceMouseEnable == "true") {
         cadparams["spacemouse_enable"] = true;
@@ -269,7 +269,7 @@ int saveConfigCADParams(AsyncWebServerRequest *request)
     JsonArray programObject_programarray = cadparams.createNestedArray("programs");
 
     for (int program = 0; program < cadconfig.num_programs; program++) {
-        MSG_DEBUG1("[DEBUG] Requesting partameters for program", program);
+        MSG_DEBUG1("[DEBUG] Requesting parameters for program", program);
         JsonObject programObject = programObject_programarray.createNestedObject();
 
         programObject["name"] = cadprogramconfig[program].name;
@@ -364,7 +364,6 @@ int saveCurrentConfigCADParams()
     cadparams["spacemouse_enable"] = cadconfig.spacemouse_enable;
 
     JsonArray programObject_programarray = cadparams.createNestedArray("programs");
-
     for (int program = 0; program < cadconfig.num_programs; program++) {
         JsonObject programObject = programObject_programarray.createNestedObject();
 

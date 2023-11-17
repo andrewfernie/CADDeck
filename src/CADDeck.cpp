@@ -68,7 +68,7 @@ r
 
 #include <Arduino.h>
 
-const char *versionnumber = "10Button V1.1.1";
+const char *versionnumber = "10Button V1.1.2";
 
 /*
  * Version 10Button V1.1.1

@@ -120,11 +120,11 @@ String handleInfo()
     output += String(freemem / 1000);
     output += " kB\"},";
 
-    // output += "{\"";
-    // output += "BLE Keyboard Version";
-    // output += "\":\"";
-    // output += String(BLE_COMBO_VERSION);
-    // output += "\"},";
+    output += "{\"";
+    output += "BLE Keyboard-Mouse Combo Version";
+    output += "\":\"";
+    output += String(BLE_COMBO_VERSION);
+    output += "\"},";
 
     output += "{\"";
     output += "ArduinoJson Version";
@@ -159,18 +159,18 @@ String handleInfo()
         output += String("Timer: ");
         output += String(generalconfig.sleeptimer);
         output += String(" minutes");
-        output += "\"}";
+        output += "\"},";
     }
     else {
         output += String("Disabled");
-        output += "\"}";
+        output += "\"},";
     }
 #else
     output += "{\"";
     output += "Sleep";
     output += "\":\"";
     output += String("Disabled");
-    output += "\"}";
+    output += "\"},";
 
 #endif
     output += "{\"";

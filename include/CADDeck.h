@@ -10,7 +10,7 @@
 // If too many messages are being sent the web server used for the configurator may not work as well. 
 #define LOG_MSG_BASIC 1
 #define LOG_MSG_LEVEL 2  // 1=ERROR, 2=ERROR+WARN, 3=ERROR+WARN+INFO
-#define LOG_MSG_DEBUG 1
+#define LOG_MSG_DEBUG 0
 #define LOG_MSG_TOUCH_DEBUG 0 // messages to console each time a touch is detected
 #define LOG_MSG_JOYSTICK_MODE 0  // messages to console for joystick mode debug
 
@@ -101,6 +101,7 @@ const long loop_period = 20;  // 20ms loop period
 // and if you are using the original ESP32-BLE-Keyboard library by T-VK -------
 // #define USE_NIMBLE
 
+// CADDeck version number
 extern const char* versionnumber;
 
 // ------- Uncomment the define below if you want to preload the logos to PSRAM at start (adds about 10s to startup) -------
