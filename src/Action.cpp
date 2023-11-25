@@ -18,8 +18,8 @@
 */
 void KeyboardMouseAction(int action, int value, char *symbol, uint8_t hwbutton_index)
 {
-    MSG_DEBUG("[DEBUG] Action received: ");
-    MSG_DEBUG3(action, value, symbol, hwbutton_index);
+    // MSG_DEBUG("[DEBUG] Action received: ");
+    // MSG_DEBUG3(action, value, symbol, hwbutton_index);
     int callingPageNum;
     
     switch (action) {
@@ -489,7 +489,7 @@ void KeyboardMouseAction(int action, int value, char *symbol, uint8_t hwbutton_i
                         ledBrightness = ledBrightness - 25;
                         ledcWrite(0, ledBrightness);
                         savedStates.putInt("ledBrightness", ledBrightness);
-                        MSG_DEBUGLN ("[DEBUG] Brightness down.");
+                        // MSG_DEBUGLN ("[DEBUG] Brightness down.");
                     }
                     break;
                 case SpecialFn_DisplayBrightnessUp:  // Display Brightness Up
@@ -497,20 +497,20 @@ void KeyboardMouseAction(int action, int value, char *symbol, uint8_t hwbutton_i
                         ledBrightness = ledBrightness + 25;
                         ledcWrite(0, ledBrightness);
                         savedStates.putInt("ledBrightness", ledBrightness);
-                        MSG_DEBUGLN ("[DEBUG] Brightness up.");
+                        // MSG_DEBUGLN ("[DEBUG] Brightness up.");
                     }
                     break;
                 case SpecialFn_SleepEnable:  // Sleep Enabled
                     if (generalconfig.sleepenable) {
                         generalconfig.sleepenable = false;
-                        MSG_DEBUGLN ("[DEBUG] Sleep disabled.");
+                        // MSG_DEBUGLN ("[DEBUG] Sleep disabled.");
                     }
                     else {
                         generalconfig.sleepenable = true;
                         Interval = generalconfig.sleeptimer * MIN_TO_MS;
-                        MSG_DEBUGLN ("[DEBUG] Sleep enabled.");
-                        MSG_INFO("[INFO] Timer set to: ");
-                        MSG_INFOLN(generalconfig.sleeptimer);
+                        // MSG_DEBUGLN ("[DEBUG] Sleep enabled.");
+                        // MSG_INFO("[INFO] Timer set to: ");
+                        // MSG_INFOLN(generalconfig.sleeptimer);
                     }
                     break;
 
@@ -544,11 +544,11 @@ void KeyboardMouseAction(int action, int value, char *symbol, uint8_t hwbutton_i
                 case SpecialFn_USBComm:  // USB Comms Enable/Disable
                     if (generalconfig.usbcommsenable) {
                         generalconfig.usbcommsenable = false;
-                        MSG_DEBUGLN ("[DEBUG] USB Comms Disabled.");
+                        // MSG_DEBUGLN ("[DEBUG] USB Comms Disabled.");
                     }
                     else {
                         generalconfig.usbcommsenable = true;
-                        MSG_DEBUGLN ("[DEBUG] USB Comms Enabled.");
+                        // MSG_DEBUGLN ("[DEBUG] USB Comms Enabled.");
                     }
                     break;
 
@@ -565,17 +565,17 @@ void KeyboardMouseAction(int action, int value, char *symbol, uint8_t hwbutton_i
                 case SpecialFn_GPIO_Toggle:
                     generalconfig.gpio_pin_mode = !generalconfig.gpio_pin_mode;
                     digitalWrite(generalconfig.gpio_pin, generalconfig.gpio_pin_mode);
-                    MSG_DEBUGLN ("[DEBUG] Toggle GPIO.");
+                    // MSG_DEBUGLN ("[DEBUG] Toggle GPIO.");
                     break;
                 case SpecialFn_GPIO_Off:
                     generalconfig.gpio_pin_mode = LOW;
                     digitalWrite(generalconfig.gpio_pin, generalconfig.gpio_pin_mode);
-                    MSG_DEBUGLN ("[DEBUG] Set GPIO off.");
+                    // MSG_DEBUGLN ("[DEBUG] Set GPIO off.");
                     break;
                 case SpecialFn_GPIO_On:
                     generalconfig.gpio_pin_mode = HIGH;
                     digitalWrite(generalconfig.gpio_pin, generalconfig.gpio_pin_mode);
-                    MSG_DEBUGLN ("[DEBUG] Set GPIO on.");
+                    // MSG_DEBUGLN ("[DEBUG] Set GPIO on.");
                     break;
                 case SpecialFn_ButtonInfoPage:
                     callingPageNum = pageNum;
@@ -586,15 +586,15 @@ void KeyboardMouseAction(int action, int value, char *symbol, uint8_t hwbutton_i
                         snprintf(usbData, sizeof(usbData), "{NewPage, %s , %s}", menu[callingPageNum].name, "ButtonInfo");
                         Serial.println(usbData);
                     }
-                    MSG_DEBUGLN("[DEBUG] Button info.");
+                    // MSG_DEBUGLN("[DEBUG] Button info.");
                     break;
                 case SpecialFn_Spacemouse_Enable_Toggle:
                     cadconfig.spacemouse_enable = !cadconfig.spacemouse_enable;
-                    if(cadconfig.spacemouse_enable) {
-                        MSG_DEBUGLN("[DEBUG] Spacemouse Mode Enabled.");
-                    } else {
-                        MSG_DEBUGLN("[DEBUG] Spacemouse Mode Disabled.");
-                    }
+                    // if(cadconfig.spacemouse_enable) {
+                    //     MSG_DEBUGLN("[DEBUG] Spacemouse Mode Enabled.");
+                    // } else {
+                    //     MSG_DEBUGLN("[DEBUG] Spacemouse Mode Disabled.");
+                    // }
                     break;
             }
             break;

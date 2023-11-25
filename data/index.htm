@@ -240,7 +240,7 @@
 			</select>
 
 			<br>
-			
+
 			&nbsp;&nbsp;Controllable GPIO Pin:&nbsp;
 			<select class="gpio_pin" id='gpio_pin' name='gpio_pin'>
 				<option value="255">None</option>
@@ -3469,11 +3469,13 @@
 
 
 		function select_new_button(button_index) {
+			console.log('select_new_button(): called with ' + button_index);
 			current_button_index = button_index;
 			show_hwbutton_def(current_program_index, current_button_index);
 		}
 
 		function update_selected_program_items(select) {
+			console.log('update_selected_program_items(): called with ' + select.value);
 			var selectedOption = select.options[select.selectedIndex];
 			current_program_index = selectedOption.value;
 			show_hwbutton_def(current_program_index, current_button_index);
@@ -3482,17 +3484,32 @@
 		function update_hwbutton_description(select) {
 
 			if (loadIsComplete) {
+				console.log('update_hwbutton_description(): called with ' + select.value);
 				hwbuttondescriptions[current_program_index][current_button_index] = document.getElementById('hwbuttondescription').value;
+
+				console.log('update_hwbutton_def(): validArrayIndex');
+				
+				let xhr = new XMLHttpRequest();
+
+				xhr.open("GET", "/updatebuttondescription?app=" + current_program_index + "&button=" + current_button_index +
+					"&description=" + hwbuttondescriptions[current_program_index][current_button_index], true);
+
+				xhr.send();
+
+				console.log("updatebuttondescription?app=" + current_program_index + "&button=" + current_button_index +
+					"&description=" + hwbuttondescriptions[current_program_index][current_button_index]);
 			}
 
 		}
-		
+
 
 		function update_hwbutton_def(select, actionValue, arrayIndex) {
-
+			console.log('update_hwbutton_def(): called with ' + select.value + ' ' + actionValue + ' ' + arrayIndex);
 			let validArrayIndex = false;
 
 			if (loadIsComplete) {
+				console.log('update_hwbutton_def(): loadIsComplete');
+
 				switch (arrayIndex) {
 					case 0:
 						hwbuttondefs[current_program_index][current_button_index][0][0] = document.getElementById('joybuttonaction0').value;
@@ -3516,19 +3533,22 @@
 				}
 
 				if (validArrayIndex) {
+					console.log('update_hwbutton_def(): validArrayIndex');
 					let xhr = new XMLHttpRequest();
 
 					xhr.open("GET", "/updatebutton?app=" + current_program_index + "&button=" + current_button_index +
 						"&arrayIndex=" + arrayIndex + "&actionValue=" + actionValue +
 						"&action=" + hwbuttondefs[current_program_index][current_button_index][0][arrayIndex] +
-						"&value=" + hwbuttondefs[current_program_index][current_button_index][1][arrayIndex], true);
+						"&value=" + hwbuttondefs[current_program_index][current_button_index][1][arrayIndex] +
+						"&description=" + hwbuttondescriptions[current_program_index][current_button_index], true);
 
 					xhr.send();
 
 					console.log("updatebutton?app=" + current_program_index + "&button=" + current_button_index +
 						"&arrayIndex=" + arrayIndex + "&actionValue=" + actionValue +
 						"&action=" + hwbuttondefs[current_program_index][current_button_index][0][arrayIndex] +
-						"&value=" + hwbuttondefs[current_program_index][current_button_index][1][arrayIndex]);
+						"&value=" + hwbuttondefs[current_program_index][current_button_index][1][arrayIndex] +
+						"&description=" + hwbuttondescriptions[current_program_index][current_button_index]);
 				}
 			}
 		}

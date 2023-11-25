@@ -86,6 +86,10 @@
 
 const long loop_period = 20;  // 20ms loop period
 
+const uint8_t LEN_FILENAME = 32;    // length of filenames (e.g. for logos, menus, etc). Includes the file extension
+const uint8_t LEN_DESCRIPTION = 32; // length of h/W and menu button descriptions
+const uint8_t LEN_NAME = 32;        // length of menu name
+
 // ------- Uncomment the define below if you want to use a piezo buzzer and specify the pin where the speaker is connected -------
 // #define speakerPin 26
 
@@ -240,8 +244,9 @@ struct Button {
     Actions actions[3];
     bool latch;
     bool islatched;
-    char logo[32];
-    char latchlogo[32];
+    char logo[LEN_FILENAME];
+    char latchlogo[LEN_FILENAME];
+    char description[LEN_DESCRIPTION];
     uint16_t imageBGColour;
     uint16_t latchImageBGColour;
     uint8_t imageBGColourValid;
@@ -264,7 +269,7 @@ struct MenuLayout {
 };
 
 struct Menu {
-    char name[32];
+    char name[LEN_NAME];
     MenuLayout layout;
     Button button[BUTTON_ROWS][BUTTON_COLS];
 };
@@ -316,15 +321,15 @@ struct CADConfig {
 #define NUM_HW_BUTTONS 11
 struct CADProgramConfig {
     uint8_t version;
-    char name[32];
-    char logo[32];
+    char name[LEN_NAME];
+    char logo[LEN_FILENAME];
     uint8_t default_joystick_mode;
     Actions pan[3];
     Actions tilt[3];
     Actions zoom[3];
     Actions rotate[3];
     uint16_t num_buttons;
-    char hw_button_descriptions[NUM_HW_BUTTONS][20];
+    char hw_button_descriptions[NUM_HW_BUTTONS][LEN_DESCRIPTION];
     Actions hw_buttons[NUM_HW_BUTTONS][3];
     uint8_t hw_button_state[NUM_HW_BUTTONS];
 };
