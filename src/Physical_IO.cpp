@@ -106,7 +106,7 @@ void set_move_mode(uint8_t cadapp)
             break;
     }
     control_mode = JOYSTICK_CONTROL_MODE_MOVE;
-    MSG_DEBUGLN("[DEBUG] Set move mode");
+    // MSG_DEBUGLN("[DEBUG] Set move mode");
 }
 
 void set_rotate_mode(uint8_t cadapp)
@@ -152,7 +152,7 @@ void set_rotate_mode(uint8_t cadapp)
     }
 
     control_mode = JOYSTICK_CONTROL_MODE_ROTATE;
-    MSG_DEBUGLN("[DEBUG] Set rotate mode");
+    // MSG_DEBUGLN("[DEBUG] Set rotate mode");
 }
 
 void set_pantilt_mode(uint8_t cadapp)
@@ -198,7 +198,7 @@ void set_pantilt_mode(uint8_t cadapp)
     }
 
     control_mode = JOYSTICK_CONTROL_MODE_PANTILT;
-    MSG_DEBUGLN("[DEBUG] Set pantilt mode");
+    // MSG_DEBUGLN("[DEBUG] Set pantilt mode");
 }
 
 void set_mouse_mode()
@@ -206,7 +206,7 @@ void set_mouse_mode()
     KeyboardMouseAction(Action_MouseButton, MouseButton_RLRM, 0);  // Release all mouse buttons
     KeyboardMouseAction(Action_Option, OptionKey_ReleaseAll, 0);   // Release all keys
     control_mode = JOYSTICK_CONTROL_MODE_MOUSE;
-    MSG_DEBUGLN("[DEBUG] Set mouse mode");
+    // MSG_DEBUGLN("[DEBUG] Set mouse mode");
 }
 
 void joystickModeButtonClick(Button2& btn)
@@ -216,7 +216,7 @@ void joystickModeButtonClick(Button2& btn)
     }
     KeyboardMouseAction(Action_MouseButton, MouseButton_PL, 0);  // Set left mouse button
     KeyboardMouseAction(Action_MouseButton, MouseButton_RL, 0);  // Release left mouse button
-    MSG_DEBUGLN("[DEBUG] Click");
+    // MSG_DEBUGLN("[DEBUG] Click");
 }
 
 void joystickModeButtonDoubleClick(Button2& btn)
@@ -228,7 +228,7 @@ void joystickModeButtonDoubleClick(Button2& btn)
     KeyboardMouseAction(Action_MouseButton, MouseButton_RL, 0);  // Release left mouse button
     KeyboardMouseAction(Action_MouseButton, MouseButton_PL, 0);  // Set left mouse button
     KeyboardMouseAction(Action_MouseButton, MouseButton_RL, 0);  // Release left mouse button
-    MSG_DEBUGLN("[DEBUG] Double click");
+    // MSG_DEBUGLN("[DEBUG] Double click");
 }
 
 void update_io()

@@ -491,7 +491,7 @@ bool checkfile(const char* filename, bool showMessage)
 
 bool resetconfig(String file)
 {
-    char fileNameType[20];
+    char fileNameType[LEN_FILENAME];
     int fileNameMenuNumber = 0;
     int numConverted = 0;
     numConverted = sscanf("%4s%d", file.c_str(), fileNameType, &fileNameMenuNumber);

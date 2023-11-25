@@ -11,7 +11,7 @@
   "rotate_deadzone": 0.1,
   "rotate_sensitivity": 20,
   "mouse_sensitivity": 20,
-  "current_program": 1,
+  "current_program": 0,
   "spacemouse_enable": true,
   "programs": [
     {
@@ -21,9 +21,9 @@
       "buttons": [
         {
           "name": "button0",
-          "description": "",
+          "description": "Mode Select",
           "actionarray": [
-            "15",
+            "0",
             "0",
             "0"
           ],
@@ -35,7 +35,7 @@
         },
         {
           "name": "button1",
-          "description": "",
+          "description": "SpaceMouse Pro - 1",
           "actionarray": [
             "4",
             "0",
@@ -49,7 +49,7 @@
         },
         {
           "name": "button2",
-          "description": "",
+          "description": "SpaceMouse Pro - 2",
           "actionarray": [
             "4",
             "0",
@@ -63,7 +63,7 @@
         },
         {
           "name": "button3",
-          "description": "",
+          "description": "SpaceMouse Pro - 3",
           "actionarray": [
             "2",
             "0",
@@ -77,7 +77,7 @@
         },
         {
           "name": "button4",
-          "description": "",
+          "description": "SpaceMouse Pro - 4",
           "actionarray": [
             "2",
             "0",
@@ -91,21 +91,21 @@
         },
         {
           "name": "button5",
-          "description": "",
+          "description": "SpaceMouse Pro - ESC",
           "actionarray": [
-            "15",
+            "2",
             "0",
             "0"
           ],
           "valuearray": [
-            "7",
+            "12",
             "0",
             "0"
           ]
         },
         {
           "name": "button6",
-          "description": "",
+          "description": "SpaceMouse Pro - CTRL",
           "actionarray": [
             "0",
             "0",
@@ -119,7 +119,7 @@
         },
         {
           "name": "button7",
-          "description": "",
+          "description": "SpaceMouse Pro - ALT",
           "actionarray": [
             "0",
             "0",
@@ -133,7 +133,7 @@
         },
         {
           "name": "button8",
-          "description": "",
+          "description": "SpaceMouse Pro - SHIFT",
           "actionarray": [
             "15",
             "0",
@@ -147,7 +147,7 @@
         },
         {
           "name": "button9",
-          "description": "",
+          "description": "SpaceMouse Pro - MENU",
           "actionarray": [
             "17",
             "0",
@@ -161,7 +161,7 @@
         },
         {
           "name": "button10",
-          "description": "",
+          "description": "SpaceMouse Pro - FIT",
           "actionarray": [
             "0",
             "0",
@@ -184,7 +184,7 @@
           "name": "button0",
           "description": "Mode Select",
           "actionarray": [
-            "15",
+            "0",
             "0",
             "0"
           ],
@@ -196,21 +196,21 @@
         },
         {
           "name": "button1",
-          "description": "Design Shortcuts",
+          "description": "SpaceMouse Pro - 1",
           "actionarray": [
             "4",
             "0",
             "0"
           ],
           "valuearray": [
-            "s",
+            "i",
             "0",
             "0"
           ]
         },
         {
           "name": "button2",
-          "description": "Fillet",
+          "description": "SpaceMouse Pro - 2",
           "actionarray": [
             "4",
             "0",
@@ -224,38 +224,38 @@
         },
         {
           "name": "button3",
-          "description": "Press/Pull",
+          "description": "SpaceMouse Pro - 3",
           "actionarray": [
-            "4",
+            "2",
             "0",
             "0"
           ],
           "valuearray": [
-            "q",
+            "12",
             "0",
             "0"
           ]
         },
         {
           "name": "button4",
-          "description": "Extrude",
+          "description": "SpaceMouse Pro - 4",
           "actionarray": [
-            "4",
+            "2",
             "0",
             "0"
           ],
           "valuearray": [
-            "e",
+            "6",
             "0",
             "0"
           ]
         },
         {
           "name": "button5",
-          "description": "ESC",
-          "actionarray":[
+          "description": "SpaceMouse Pro - ESC",
+          "actionarray": [
             "2",
-            "0", 
+            "0",
             "0"
           ],
           "valuearray": [
@@ -266,168 +266,7 @@
         },
         {
           "name": "button6",
-          "description": "Line",
-          "actionarray": [
-            "4",
-            "0",
-            "0"
-          ],
-          "valuearray": [
-            "l",
-            "0",
-            "0"
-          ]
-        },
-        {
-          "name": "button7",
-          "description": "Rectangle",
-          "actionarray": [
-            "4",
-            "0",
-            "0"
-          ],
-          "valuearray": [
-            "r",
-            "0",
-            "0"
-          ]
-        },
-        {
-          "name": "button8",
-          "description": "Shell",
-          "actionarray": [
-            "4",
-            "0",
-            "0"
-          ],
-          "valuearray": [
-            "w",
-            "0",
-            "0"
-          ]
-        },
-        {
-          "name": "button9",
-          "description": "Circle",
-          "actionarray": [
-            "4",
-            "0",
-            "0"
-          ],
-          "valuearray": [
-            "c",
-            "0",
-            "0"
-          ]
-        },
-        {
-          "name": "button10",
-          "description": "Enter",
-          "actionarray": [
-            "2",
-            "0",
-            "0"
-          ],
-          "valuearray": [
-            "7",
-            "0",
-            "0"
-          ]
-        }
-      ]
-    },
-    {
-      "name": "Blender",
-      "logo": "blender.bmp",
-      "default_joystick_mode": 4,
-      "buttons": [
-        {
-          "name": "button0",
-          "description": "",
-          "actionarray": [
-            "15",
-            "0",
-            "0"
-          ],
-          "valuearray": [
-            "15",
-            "0",
-            "0"
-          ]
-        },
-        {
-          "name": "button1",
-          "description": "",
-          "actionarray": [
-            "0",
-            "0",
-            "0"
-          ],
-          "valuearray": [
-            "0",
-            "0",
-            "0"
-          ]
-        },
-        {
-          "name": "button2",
-          "description": "",
-          "actionarray": [
-            "0",
-            "0",
-            "0"
-          ],
-          "valuearray": [
-            "0",
-            "0",
-            "0"
-          ]
-        },
-        {
-          "name": "button3",
-          "description": "",
-          "actionarray": [
-            "0",
-            "0",
-            "0"
-          ],
-          "valuearray": [
-            "0",
-            "0",
-            "0"
-          ]
-        },
-        {
-          "name": "button4",
-          "description": "",
-          "actionarray": [
-            "0",
-            "0",
-            "0"
-          ],
-          "valuearray": [
-            "0",
-            "0",
-            "0"
-          ]
-        },
-        {
-          "name": "button5",
-          "description": "",
-          "actionarray": [
-            "15",
-            "0",
-            "0"
-          ],
-          "valuearray": [
-            "7",
-            "0",
-            "0"
-          ]
-        },
-        {
-          "name": "button6",
-          "description": "",
+          "description": "SpaceMouse Pro - CTRL",
           "actionarray": [
             "0",
             "0",
@@ -441,7 +280,7 @@
         },
         {
           "name": "button7",
-          "description": "",
+          "description": "SpaceMouse Pro - ALT",
           "actionarray": [
             "0",
             "0",
@@ -455,7 +294,7 @@
         },
         {
           "name": "button8",
-          "description": "",
+          "description": "SpaceMouse Pro - SHIFT",
           "actionarray": [
             "15",
             "0",
@@ -469,7 +308,7 @@
         },
         {
           "name": "button9",
-          "description": "",
+          "description": "SpaceMouse Pro - MENU",
           "actionarray": [
             "17",
             "0",
@@ -483,7 +322,168 @@
         },
         {
           "name": "button10",
-          "description": "",
+          "description": "SpaceMouse Pro - FIT",
+          "actionarray": [
+            "0",
+            "0",
+            "0"
+          ],
+          "valuearray": [
+            "0",
+            "0",
+            "0"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Blender",
+      "logo": "blender.bmp",
+      "default_joystick_mode": 4,
+      "buttons": [
+        {
+          "name": "button0",
+          "description": "Mode Select",
+          "actionarray": [
+            "0",
+            "0",
+            "0"
+          ],
+          "valuearray": [
+            "15",
+            "0",
+            "0"
+          ]
+        },
+        {
+          "name": "button1",
+          "description": "SpaceMouse Pro - 1",
+          "actionarray": [
+            "4",
+            "0",
+            "0"
+          ],
+          "valuearray": [
+            "i",
+            "0",
+            "0"
+          ]
+        },
+        {
+          "name": "button2",
+          "description": "SpaceMouse Pro - 2",
+          "actionarray": [
+            "4",
+            "0",
+            "0"
+          ],
+          "valuearray": [
+            "f",
+            "0",
+            "0"
+          ]
+        },
+        {
+          "name": "button3",
+          "description": "SpaceMouse Pro - 3",
+          "actionarray": [
+            "2",
+            "0",
+            "0"
+          ],
+          "valuearray": [
+            "12",
+            "0",
+            "0"
+          ]
+        },
+        {
+          "name": "button4",
+          "description": "SpaceMouse Pro - 4",
+          "actionarray": [
+            "2",
+            "0",
+            "0"
+          ],
+          "valuearray": [
+            "6",
+            "0",
+            "0"
+          ]
+        },
+        {
+          "name": "button5",
+          "description": "SpaceMouse Pro - ESC",
+          "actionarray": [
+            "2",
+            "0",
+            "0"
+          ],
+          "valuearray": [
+            "12",
+            "0",
+            "0"
+          ]
+        },
+        {
+          "name": "button6",
+          "description": "SpaceMouse Pro - CTRL",
+          "actionarray": [
+            "0",
+            "0",
+            "0"
+          ],
+          "valuearray": [
+            "0",
+            "0",
+            "0"
+          ]
+        },
+        {
+          "name": "button7",
+          "description": "SpaceMouse Pro - ALT",
+          "actionarray": [
+            "0",
+            "0",
+            "0"
+          ],
+          "valuearray": [
+            "0",
+            "0",
+            "0"
+          ]
+        },
+        {
+          "name": "button8",
+          "description": "SpaceMouse Pro - SHIFT",
+          "actionarray": [
+            "15",
+            "0",
+            "0"
+          ],
+          "valuearray": [
+            "8",
+            "0",
+            "0"
+          ]
+        },
+        {
+          "name": "button9",
+          "description": "SpaceMouse Pro - MENU",
+          "actionarray": [
+            "17",
+            "0",
+            "0"
+          ],
+          "valuearray": [
+            "1",
+            "0",
+            "0"
+          ]
+        },
+        {
+          "name": "button10",
+          "description": "SpaceMouse Pro - FIT",
           "actionarray": [
             "0",
             "0",
@@ -504,9 +504,9 @@
       "buttons": [
         {
           "name": "button0",
-          "description": "",
+          "description": "Mode Select",
           "actionarray": [
-            "15",
+            "0",
             "0",
             "0"
           ],
@@ -518,77 +518,77 @@
         },
         {
           "name": "button1",
-          "description": "",
+          "description": "SpaceMouse Pro - 1",
           "actionarray": [
-            "0",
+            "4",
             "0",
             "0"
           ],
           "valuearray": [
-            "0",
+            "i",
             "0",
             "0"
           ]
         },
         {
           "name": "button2",
-          "description": "",
+          "description": "SpaceMouse Pro - 2",
           "actionarray": [
             "4",
-            "4",
+            "0",
             "0"
           ],
           "valuearray": [
-            "v",
             "f",
+            "0",
             "0"
           ]
         },
         {
           "name": "button3",
-          "description": "",
+          "description": "SpaceMouse Pro - 3",
           "actionarray": [
-            "0",
+            "2",
             "0",
             "0"
           ],
           "valuearray": [
-            "0",
+            "12",
             "0",
             "0"
           ]
         },
         {
           "name": "button4",
-          "description": "",
+          "description": "SpaceMouse Pro - 4",
           "actionarray": [
-            "0",
+            "2",
             "0",
             "0"
           ],
           "valuearray": [
-            "0",
+            "6",
             "0",
             "0"
           ]
         },
         {
           "name": "button5",
-          "description": "",
+          "description": "SpaceMouse Pro - ESC",
           "actionarray": [
-            "15",
+            "2",
             "0",
             "0"
           ],
           "valuearray": [
-            "7",
+            "12",
             "0",
             "0"
           ]
         },
         {
           "name": "button6",
-          "description": "",
+          "description": "SpaceMouse Pro - CTRL",
           "actionarray": [
             "0",
             "0",
@@ -602,7 +602,7 @@
         },
         {
           "name": "button7",
-          "description": "",
+          "description": "SpaceMouse Pro - ALT",
           "actionarray": [
             "0",
             "0",
@@ -616,7 +616,7 @@
         },
         {
           "name": "button8",
-          "description": "",
+          "description": "SpaceMouse Pro - SHIFT",
           "actionarray": [
             "15",
             "0",
@@ -630,7 +630,7 @@
         },
         {
           "name": "button9",
-          "description": "",
+          "description": "SpaceMouse Pro - MENU",
           "actionarray": [
             "17",
             "0",
@@ -644,7 +644,7 @@
         },
         {
           "name": "button10",
-          "description": "",
+          "description": "SpaceMouse Pro - FIT",
           "actionarray": [
             "0",
             "0",
@@ -665,9 +665,9 @@
       "buttons": [
         {
           "name": "button0",
-          "description": "",
+          "description": "Mode Select",
           "actionarray": [
-            "15",
+            "0",
             "0",
             "0"
           ],
@@ -679,77 +679,77 @@
         },
         {
           "name": "button1",
-          "description": "",
+          "description": "SpaceMouse Pro - 1",
           "actionarray": [
-            "0",
+            "4",
             "0",
             "0"
           ],
           "valuearray": [
-            "0",
+            "i",
             "0",
             "0"
           ]
         },
         {
           "name": "button2",
-          "description": "",
+          "description": "SpaceMouse Pro - 2",
           "actionarray": [
-            "0",
+            "4",
             "0",
             "0"
           ],
           "valuearray": [
-            "0",
+            "f",
             "0",
             "0"
           ]
         },
         {
           "name": "button3",
-          "description": "",
+          "description": "SpaceMouse Pro - 3",
           "actionarray": [
-            "0",
+            "2",
             "0",
             "0"
           ],
           "valuearray": [
-            "0",
+            "12",
             "0",
             "0"
           ]
         },
         {
           "name": "button4",
-          "description": "",
+          "description": "SpaceMouse Pro - 4",
           "actionarray": [
-            "0",
+            "2",
             "0",
             "0"
           ],
           "valuearray": [
-            "0",
+            "6",
             "0",
             "0"
           ]
         },
         {
           "name": "button5",
-          "description": "",
+          "description": "SpaceMouse Pro - ESC",
           "actionarray": [
-            "15",
+            "2",
             "0",
             "0"
           ],
           "valuearray": [
-            "7",
+            "12",
             "0",
             "0"
           ]
         },
         {
           "name": "button6",
-          "description": "",
+          "description": "SpaceMouse Pro - CTRL",
           "actionarray": [
             "0",
             "0",
@@ -763,7 +763,7 @@
         },
         {
           "name": "button7",
-          "description": "",
+          "description": "SpaceMouse Pro - ALT",
           "actionarray": [
             "0",
             "0",
@@ -777,7 +777,7 @@
         },
         {
           "name": "button8",
-          "description": "",
+          "description": "SpaceMouse Pro - SHIFT",
           "actionarray": [
             "15",
             "0",
@@ -791,7 +791,7 @@
         },
         {
           "name": "button9",
-          "description": "",
+          "description": "SpaceMouse Pro - MENU",
           "actionarray": [
             "17",
             "0",
@@ -805,7 +805,7 @@
         },
         {
           "name": "button10",
-          "description": "",
+          "description": "SpaceMouse Pro - FIT",
           "actionarray": [
             "0",
             "0",

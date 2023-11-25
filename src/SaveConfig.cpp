@@ -200,12 +200,12 @@ int saveConfigCADParams(AsyncWebServerRequest *request)
 
     cadparams["version"] = CADCONFIG_VERSION;
 
-    MSG_DEBUGLN("[DEBUG] Requesting joy_scale_x");
+    // MSG_DEBUGLN("[DEBUG] Requesting joy_scale_x");
     AsyncWebParameter *scalex = request->getParam("joy_scale_x", true);
     String ScaleX = scalex->value().c_str();
     cadparams["joy_scale_x"] = ScaleX.toFloat();
 
-    MSG_DEBUGLN("[DEBUG] Requesting joy_scale_y");
+    // MSG_DEBUGLN("[DEBUG] Requesting joy_scale_y");
     AsyncWebParameter *scaley = request->getParam("joy_scale_y", true);
     String ScaleY = scaley->value().c_str();
     cadparams["joy_scale_y"] = ScaleY.toFloat();
@@ -246,12 +246,12 @@ int saveConfigCADParams(AsyncWebServerRequest *request)
     String SensitivityMouse = sensitivitymouse->value().c_str();
     cadparams["mouse_sensitivity"] = SensitivityMouse.toFloat();
 
-    MSG_DEBUGLN("[DEBUG] Requesting current_program");
+    // MSG_DEBUGLN("[DEBUG] Requesting current_program");
     AsyncWebParameter *current_program = request->getParam("current_program", true);
     String Current_program = current_program->value().c_str();
     cadparams["current_program"] = Current_program.toInt();
  
-    MSG_DEBUGLN("[DEBUG] Requesting spacemouse_enable");
+    // MSG_DEBUGLN("[DEBUG] Requesting spacemouse_enable");
     AsyncWebParameter *space_mouse_enable = request->getParam("spacemouse_enable", true);
     String StrSpaceMouseEnable = space_mouse_enable->value().c_str();
     if (StrSpaceMouseEnable == "true") {

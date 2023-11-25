@@ -71,10 +71,14 @@ r
 const char *versionnumber = "10Button V1.1.2";
 
 /*
+ * Version 10Button V1.1.2
+ *                   - Fix issues with H/W button description handling (wasn't saving, and possible buffer overflows)
+ *                   - Prevent possible buffer overflow in filenames (mainly logos)
+ * 
  * Version 10Button V1.1.1
  *                   - Enable knob push/pull (vertical move) while in rotation mode and knob rotate when in translation mode
  *                   - Add SpaceMouse soft button support to configurator
- * 
+ *
  * Version 10Button V1.1
  *                   - Added code for Spacemouse output to serial port. Needs to be hooked up to a Raspberry Pi Pico running this code
  *                     https://github.com/andrewfernie/magellan-spacemouse
@@ -263,7 +267,7 @@ bool displayinginfo = false;
 bool displayingIOValues = false;
 bool displayingButtonDescriptions = false;
 
-char jsonFileFail[32] = "";
+char jsonFileFail[LEN_FILENAME] = "";
 
 bool psramAvailable = false;
 
@@ -432,12 +436,12 @@ void setup()
     }
 
     for (size_t i = 0; i < NUM_PAGES; i++) {
-        char filename[32];
+        char filename[LEN_FILENAME];
         char filenumber[4];
-        strcpy(filename, "/config/menu");
+        strlcpy(filename, "/config/menu",sizeof(filename));
         sprintf(filenumber, "%d", i);
-        strcat(filename, filenumber);
-        strcat(filename, ".json");
+        strlcat(filename, filenumber, sizeof(filename));
+        strlcat(filename, ".json", sizeof(filename));
         MSG_INFO1("[INFO] Check for ", filename);
 
         if (!checkfile(filename, false)) {
@@ -522,12 +526,12 @@ void setup()
 
     // Next, load the menu pages
     for (size_t i = 0; i < NUM_PAGES; i++) {
-        char menuName[16];
+        char menuName[LEN_FILENAME];
         char menuNumber[4];
         char menuNumberZeroIndex[4];
-        strcpy(menuName, "menu");
+        strlcpy(menuName, "menu", sizeof(menuName));
         sprintf(menuNumber, "%d", i);
-        strcat(menuName, menuNumber);
+        strlcat(menuName, menuNumber, sizeof(menuName));
 
         if (!loadConfig(menuName)) {
             Serial.print("[WARNING]: menu");
@@ -537,7 +541,7 @@ void setup()
             Serial.print("[WARNING]: To reset to default type 'reset ");
             Serial.print(menuName);
             MSG_INFOLN("'.");
-            strcpy(jsonFileFail, menuName);
+            strlcpy(jsonFileFail, menuName, sizeof(jsonFileFail));
             pageNum = SPECIAL_4_PAGE;
             pageHistoryStack.push(pageNum);
         }
@@ -881,13 +885,13 @@ void loop(void)
 
                                 if (generalconfig.usbcommsenable) {
                                     // separate filename from menu[pageNum].button[row][col].logo path
-                                    char logoname[20];
+                                    char logoname[LEN_FILENAME];
                                     char *p = strrchr(menu[pageNum].button[row][col].logo, '/');
                                     if (p != NULL) {
-                                        strcpy(logoname, p + 1);
+                                        strlcpy(logoname, p + 1,sizeof(logoname));
                                     }
                                     else {
-                                        strcpy(logoname, menu[pageNum].button[row][col].logo);
+                                        strlcpy(logoname, menu[pageNum].button[row][col].logo, sizeof(logoname));
                                     }
 
                                     // remove extension from logoname
