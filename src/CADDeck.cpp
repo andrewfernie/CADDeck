@@ -930,9 +930,9 @@ void loop(void)
                 uint8_t button_state = get_hwbutton(i);
                 // if (loop_count % 10 == 0) MSG_DEBUG2("hw:",i, button_state);
 
-                button_mask |= (1 << i);
+                // button_mask |= (1 << i);
                 
-                spaceMouse.SendButtonsUInt32(button_mask);
+                // spaceMouse.SendButtonsUInt32(button_mask);
 
                 if (button_state && (last_hwbutton_state[i] == 0)) {
                     //---------------------------------------- Button press handling --------------------------------------------------
@@ -962,9 +962,9 @@ void loop(void)
 
                 last_hwbutton_state[i] = button_state;
             }
-            if (cadconfig.spacemouse_enable) {
-                spaceMouse.SendButtonsUInt32(button_mask);
-            }
+            // if (cadconfig.spacemouse_enable) {
+            //     spaceMouse.SendButtonsUInt32(button_mask);
+            // }
 
             // if (loop_count % 10 == 0) MSG_DEBUGLN("");
         }
