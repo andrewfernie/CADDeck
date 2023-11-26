@@ -14,6 +14,7 @@ public:
     void SendViewpointDataPacket(uint16_t x, uint16_t y, uint16_t z, uint16_t a, uint16_t b, uint16_t c);
     void SendKeyPacket(uint8_t);
     void SendKeyPacketExtended(uint8_t);
+    void SendButtonsUInt32(uint32_t buttons);
 
 private:
     void SendUInt16(uint16_t data);
@@ -32,7 +33,7 @@ private:
     uint8_t button_bits[SPACEMOUSE_MAX_BUTTON] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18};
 
     char cmd_end;
-   
+
     struct data_packet
     {
         uint8_t x[4];

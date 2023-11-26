@@ -68,13 +68,17 @@ r
 
 #include <Arduino.h>
 
-const char *versionnumber = "10Button V1.1.2";
+const char *versionnumber = "10Button V1.1.3 WIP";
 
 /*
+ * Version 10Button V1.1.3 WIP
+ *                   - Started work on support for multiple H/W buttons held down at the same time
+ *                   - Renamed BLE device to "CADDeck"
+ *
  * Version 10Button V1.1.2
  *                   - Fix issues with H/W button description handling (wasn't saving, and possible buffer overflows)
  *                   - Prevent possible buffer overflow in filenames (mainly logos)
- * 
+ *
  * Version 10Button V1.1.1
  *                   - Enable knob push/pull (vertical move) while in rotation mode and knob rotate when in translation mode
  *                   - Add SpaceMouse soft button support to configurator
@@ -438,7 +442,7 @@ void setup()
     for (size_t i = 0; i < NUM_PAGES; i++) {
         char filename[LEN_FILENAME];
         char filenumber[4];
-        strlcpy(filename, "/config/menu",sizeof(filename));
+        strlcpy(filename, "/config/menu", sizeof(filename));
         sprintf(filenumber, "%d", i);
         strlcat(filename, filenumber, sizeof(filename));
         strlcat(filename, ".json", sizeof(filename));
@@ -617,6 +621,8 @@ void setup()
 #else
     MSG_INFOLN("[INFO] Starting USB HID devices");
 #endif
+    Keyboard.deviceManufacturer = "CADDeck";
+    Keyboard.deviceName = "CADDeck";
     Keyboard.begin();
     Mouse.begin();
 
@@ -888,7 +894,7 @@ void loop(void)
                                     char logoname[LEN_FILENAME];
                                     char *p = strrchr(menu[pageNum].button[row][col].logo, '/');
                                     if (p != NULL) {
-                                        strlcpy(logoname, p + 1,sizeof(logoname));
+                                        strlcpy(logoname, p + 1, sizeof(logoname));
                                     }
                                     else {
                                         strlcpy(logoname, menu[pageNum].button[row][col].logo, sizeof(logoname));
@@ -919,9 +925,14 @@ void loop(void)
 
             // Check if any hw button has been pressed
             // if(loop_count % 10 == 0) MSG_DEBUG("Checking HW buttons:");
+            uint32_t button_mask = 0;
             for (uint8_t i = 0; i < cadprogramconfig[cadconfig.current_program].num_buttons; i++) {
                 uint8_t button_state = get_hwbutton(i);
                 // if (loop_count % 10 == 0) MSG_DEBUG2("hw:",i, button_state);
+
+                button_mask |= (1 << i);
+                
+                spaceMouse.SendButtonsUInt32(button_mask);
 
                 if (button_state && (last_hwbutton_state[i] == 0)) {
                     //---------------------------------------- Button press handling --------------------------------------------------
@@ -950,6 +961,9 @@ void loop(void)
                 }
 
                 last_hwbutton_state[i] = button_state;
+            }
+            if (cadconfig.spacemouse_enable) {
+                spaceMouse.SendButtonsUInt32(button_mask);
             }
 
             // if (loop_count % 10 == 0) MSG_DEBUGLN("");
