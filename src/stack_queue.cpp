@@ -37,20 +37,24 @@ void Stack::push(int item)
     stack[top] = item;
 }
 
-
 // Pop an item from the stack
 int Stack::pop()
 {
+    int item = 0;
     // Check if the stack is empty
     if (top == -1) {
         // The stack is empty
         // Throw an exception
-        throw "Stack is empty";
+        MSG_ERRORLN("Stack is empty. Returning 0");
+        item = 0;
     }
-    // Get the item from the top of the stack
-    int item = stack[top];
-    // Decrement the top of the stack
-    top--;
+    else {
+        // Get the item from the top of the stack
+        item = stack[top];
+        // Decrement the top of the stack
+        top--;
+    }
+
     // Return the item
     return item;
 }
@@ -58,26 +62,15 @@ int Stack::pop()
 // Check if the stack is empty
 bool Stack::isEmpty()
 {
-    // Check if the top of the stack is -1
-    if (top == -1) {
-        // The stack is empty
-        return true;
-    }
-    // The stack is not empty
-    return false;
+    // If the top of the stack is -1 return true, otherwise false
+    return (top == -1);
 }
 
 // Check if the stack is full
 
 bool Stack::isFull()
 {
-    // Check if the top of the stack is equal to the stack size - 1
-    if (top == stack_size - 1) {
-        // The stack is full
-        return true;
-    }
-    // The stack is not full
-    return false;
+    return (top == stack_size - 1);
 }
 
 // Get the size of the stack
@@ -98,14 +91,19 @@ int Stack::count()
 
 int Stack::peek()
 {
+    int item = 0;
     // Check if the stack is empty
     if (top == -1) {
         // The stack is empty
         // Throw an exception
-        throw "Stack is empty";
+        MSG_ERRORLN("Stack is empty. Returning 0");
+        item = 0;
     }
-    // Get the item from the top of the stack
-    int item = stack[top];
+    else {
+        // Get the item from the top of the stack
+        item = stack[top];
+    }
+
     // Return the item
     return item;
 }

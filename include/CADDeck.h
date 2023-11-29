@@ -10,7 +10,7 @@
 // If too many messages are being sent the web server used for the configurator may not work as well. 
 #define LOG_MSG_BASIC 1
 #define LOG_MSG_LEVEL 2  // 1=ERROR, 2=ERROR+WARN, 3=ERROR+WARN+INFO
-#define LOG_MSG_DEBUG 0
+#define LOG_MSG_DEBUG 1
 #define LOG_MSG_TOUCH_DEBUG 0 // messages to console each time a touch is detected
 #define LOG_MSG_JOYSTICK_MODE 0  // messages to console for joystick mode debug
 
@@ -387,6 +387,7 @@ extern TFT_eSPI_Button key[BUTTON_ROWS][BUTTON_COLS];
 #define SPECIAL_4_PAGE (NUM_PAGES + 4)
 #define SPECIAL_PAGE_IO_MONITOR (NUM_PAGES + 5)
 #define SPECIAL_PAGE_BUTTON_INFO (NUM_PAGES + 6)
+#define MAX_PAGE_NUM (NUM_PAGES + 6)  // update this to the highest special page number
 
 //--------- Internal references ------------
 // (this needs to be below all structs etc..)

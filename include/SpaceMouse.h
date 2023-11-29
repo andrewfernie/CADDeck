@@ -14,11 +14,17 @@ public:
     void SendViewpointDataPacket(uint16_t x, uint16_t y, uint16_t z, uint16_t a, uint16_t b, uint16_t c);
     void SendKeyPacket(uint8_t);
     void SendKeyPacketExtended(uint8_t);
-    void SendButtonsUInt32(uint32_t buttons);
+    void SendButtonPacket();
+
+    void SetButtonMask(uint32_t newButtonMask);
+    void SetButton(uint8_t button_index);
+    void ClearButtonMask();
+    void ClearButton(uint8_t button_index);
 
 private:
     void SendUInt16(uint16_t data);
     char EncodeNibble(uint8_t nibble);
+    void SendButtonsUInt32(uint32_t buttons);
 
 public:
 private:
@@ -26,6 +32,8 @@ private:
     //    HardwareSerial &serialPort;
     unsigned long baudRate;
     uint32_t configParameters;
+    uint32_t buttonMask;
+    uint32_t lastButtonMask;
     uint8_t pinRx;
     uint8_t pinTx;
     uint8_t button_set[SPACEMOUSE_MAX_BUTTON] = {0};

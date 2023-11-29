@@ -236,7 +236,7 @@ void drawKeypad()
             }
         }
 
-        drawTopStatusBar(true);  // Draw the top status bar, with a forced redraw
+        drawTopStatusBar(true);     // Draw the top status bar, with a forced redraw
         drawBottomStatusBar(true);  // Draw the bottom status bar, with a forced redraw
     }
 
@@ -407,14 +407,14 @@ void printinfo()
 }
 
 /**
-* @brief This function displays the description for each of the H/W buttons to the TFT screen.
-*
-* @param none
-*
-* @return none
-*
-* @note none
-*/
+ * @brief This function displays the description for each of the H/W buttons to the TFT screen.
+ *
+ * @param none
+ *
+ * @return none
+ *
+ * @note none
+ */
 void printButtonInfo(uint8_t program)
 {
     tft.fillScreen(TFT_BLACK);
@@ -429,7 +429,7 @@ void printButtonInfo(uint8_t program)
     tft.setTextColor(TFT_WHITE, TFT_BLACK);
     tft.printf("CAD Program: %s\n", cadprogramconfig[cadconfig.current_program].name);
 
-    for(int i = 0; i < NUM_HW_BUTTONS; i++) {
+    for (int i = 0; i < NUM_HW_BUTTONS; i++) {
         tft.printf("  Button %d: %s\n", i, cadprogramconfig[cadconfig.current_program].hw_button_descriptions[i]);
     }
 
@@ -467,7 +467,7 @@ void printIOValues()
     tft.setTextColor(TFT_WHITE, TFT_BLACK);
     tft.printf("Version: %s       \n", versionnumber);
 
-    tft.printf("Joystick X: %d,  %f     \n", joystick.RawX() , joystick.x());
+    tft.printf("Joystick X: %d,  %f     \n", joystick.RawX(), joystick.x());
     tft.printf("Joystick Y: %d,  %f     \n", joystick.RawY(), joystick.y());
 
     tft.printf("Zoom: %d,  %f     \n", zoomControl.RawValue(), zoomControl.Value());
@@ -622,4 +622,22 @@ void drawBottomStatusBar(bool force_redraw = true)
 
         strncpy(bottomStatusBarTextRight, buffer, sizeof(bottomStatusBarTextRight));
     }
+}
+
+/**
+ * @brief This function validates a page number 
+ *
+ * @param page uint8_t. The page number to be validated
+ *
+ * @return true if the page number is valid, false otherwise
+ *
+ * @note  It is not currently being used, but is provided for potential future use.
+ */
+uint8_t isValidPageNumber(uint8_t page)
+{
+    uint8_t valid = false;
+
+    valid = (page >= 0) && (page <= MAX_PAGE_NUM);
+
+    return valid;
 }

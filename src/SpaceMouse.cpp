@@ -13,6 +13,8 @@ SpaceMouse::SpaceMouse(
     pinRx = rx;
     pinTx = tx;
     cmd_end = '\r';
+    buttonMask = 0;
+    lastButtonMask = 0;
 }
 
 SpaceMouse::~SpaceMouse()
@@ -64,6 +66,46 @@ void SpaceMouse::SendButtonsUInt32(uint32_t buttons)
 
     nibble = (buttons >> 16) & 0x0000000f;
     Serial1.write(EncodeNibble(nibble));
+
+    Serial1.write(cmd_end);
+}
+
+void SpaceMouse::SendButtonPacket()
+{
+    if (buttonMask != lastButtonMask) {
+        SendButtonsUInt32(buttonMask);
+    }
+    lastButtonMask = buttonMask;
+}
+
+void SpaceMouse::SetButtonMask(uint32_t newButtonMask)
+{
+    buttonMask = newButtonMask;
+}
+
+void SpaceMouse::SetButton(uint8_t button_index)
+{
+    if ((button_index < SPACEMOUSE_MAX_BUTTON) && (button_index > 0)) {
+        buttonMask |= (1 << (button_index - 1));
+    }
+    else {
+        MSG_ERRORLN("[ERROR] Invalid button index");
+    }
+}
+
+void SpaceMouse::ClearButtonMask()
+{
+    buttonMask = 0;
+}
+
+void SpaceMouse::ClearButton(uint8_t button_index)
+{
+    if ((button_index < SPACEMOUSE_MAX_BUTTON) && (button_index > 0)) {
+        buttonMask &= ~(1 << (button_index - 1));
+    }
+    else {
+        MSG_ERRORLN("[ERROR] Invalid button index");
+    }
 }
 
 // TODO: Rework to allow multiple buttons to be pressed at once

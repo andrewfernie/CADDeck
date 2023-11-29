@@ -1,5 +1,7 @@
 // Header file for stack_queue.cpp
 #pragma once
+#include <Arduino.h>
+#include "std_defs.h"
 
 // Create a stack class
 class Stack {

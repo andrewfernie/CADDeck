@@ -488,10 +488,10 @@ void handlerSetup()
                         cadprogramconfig[appIndex].hw_buttons[buttonIndex][arrayIndex].value = value.toInt();
                     }
 
-                    debugString = "appIndex: " + String(appIndex) + ", buttonIndex: " + String(buttonIndex) + 
-                                  "description: " + description +
-                                  ", arrayIndex: " + String(arrayIndex) + ", action: " + action + ", value: " + value;
-                    MSG_DEBUG1("[DEBUG] updatebutton: ", debugString.c_str());
+                    // debugString = "appIndex: " + String(appIndex) + ", buttonIndex: " + String(buttonIndex) + 
+                    //               "description: " + description +
+                    //               ", arrayIndex: " + String(arrayIndex) + ", action: " + action + ", value: " + value;
+                    // MSG_DEBUG1("[DEBUG] updatebutton: ", debugString.c_str());
                 }
                 else {
                     MSG_ERROR1("[ERROR] updatebutton: invalid button index: ", buttonIndex);
@@ -528,9 +528,9 @@ void handlerSetup()
                     strlcpy(cadprogramconfig[appIndex].hw_button_descriptions[buttonIndex], description.c_str(),
                             sizeof(cadprogramconfig[appIndex].hw_button_descriptions[buttonIndex]));
 
-                    debugString = "appIndex: " + String(appIndex) + ", buttonIndex: " + String(buttonIndex) +
-                                  "description: " + description ;
-                    MSG_DEBUG1("[DEBUG] updatebuttondescription: ", debugString.c_str());
+                    // debugString = "appIndex: " + String(appIndex) + ", buttonIndex: " + String(buttonIndex) +
+                    //               "description: " + description ;
+                    // MSG_DEBUG1("[DEBUG] updatebuttondescription: ", debugString.c_str());
                 }
                 else {
                     MSG_ERROR1("[ERROR] updatebuttondescription: invalid button index: ", buttonIndex);
