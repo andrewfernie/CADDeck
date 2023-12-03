@@ -20,6 +20,7 @@
 void KeyboardMouseAction(int action, int value, char *symbol, uint8_t hwbutton_index)
 {
     int callingPageNum;
+    uint8_t status;
 
     switch (action) {
         case Action_NoAction:
@@ -508,8 +509,13 @@ void KeyboardMouseAction(int action, int value, char *symbol, uint8_t hwbutton_i
 
                 case SpecialFn_InfoPage:
                     callingPageNum = pageNum;
+
+                    status = pageHistoryStack.push(pageNum);
+                    if (status == STACK_STATUS_FULL) {
+                        MSG_INFOLN("[INFO] Page History Stack is full. Dropped oldest value..");
+                    }
                     pageNum = SPECIAL_PAGE_INFO;
-                    pageHistoryStack.push(pageNum);
+
                     if (generalconfig.usbcommsenable) {
                         char usbData[40];
                         snprintf(usbData, sizeof(usbData), "{NewPage, %s , %s}", menu[callingPageNum].name, "Info");
@@ -519,8 +525,13 @@ void KeyboardMouseAction(int action, int value, char *symbol, uint8_t hwbutton_i
 
                 case SpecialFn_HomePage:
                     callingPageNum = pageNum;
+
+                    status = pageHistoryStack.push(pageNum);
+                    if (status == STACK_STATUS_FULL) {
+                        MSG_INFOLN("[INFO] Page History Stack is full. Dropped oldest value..");
+                    }
                     pageNum = 0;
-                    pageHistoryStack.push(pageNum);
+
                     if (generalconfig.usbcommsenable) {
                         char usbData[40];
                         snprintf(usbData, sizeof(usbData), "{NewPage, %s , %s}", menu[callingPageNum].name, "Home");
@@ -544,8 +555,13 @@ void KeyboardMouseAction(int action, int value, char *symbol, uint8_t hwbutton_i
 
                 case SpecialFn_IOMonitor:
                     callingPageNum = pageNum;
+
+                    status = pageHistoryStack.push(pageNum);
+                    if (status == STACK_STATUS_FULL) {
+                        MSG_INFOLN("[INFO] Page History Stack is full. Dropped oldest value..");
+                    }
                     pageNum = SPECIAL_PAGE_IO_MONITOR;
-                    pageHistoryStack.push(pageNum);
+
                     if (generalconfig.usbcommsenable) {
                         char usbData[40];
                         snprintf(usbData, sizeof(usbData), "{NewPage, %s , %s}", menu[callingPageNum].name, "IO Monitor");
@@ -566,8 +582,13 @@ void KeyboardMouseAction(int action, int value, char *symbol, uint8_t hwbutton_i
                     break;
                 case SpecialFn_ButtonInfoPage:
                     callingPageNum = pageNum;
+
+                    status = pageHistoryStack.push(pageNum);
+                    if (status == STACK_STATUS_FULL) {
+                        MSG_INFOLN("[INFO] Page History Stack is full. Dropped oldest value..");
+                    }
                     pageNum = SPECIAL_PAGE_BUTTON_INFO;
-                    pageHistoryStack.push(pageNum);
+
                     if (generalconfig.usbcommsenable) {
                         char usbData[40];
                         snprintf(usbData, sizeof(usbData), "{NewPage, %s , %s}", menu[callingPageNum].name, "ButtonInfo");
@@ -576,9 +597,10 @@ void KeyboardMouseAction(int action, int value, char *symbol, uint8_t hwbutton_i
                     break;
                 case SpecialFn_Spacemouse_Enable_Toggle:
                     cadconfig.spacemouse_enable = !cadconfig.spacemouse_enable;
-                    if(cadconfig.spacemouse_enable) {
+                    if (cadconfig.spacemouse_enable) {
                         MSG_INFOLN("[DEBUG] Spacemouse Mode Enabled.");
-                    } else {
+                    }
+                    else {
                         MSG_INFOLN("[DEBUG] Spacemouse Mode Disabled.");
                     }
                     break;
@@ -665,8 +687,13 @@ void KeyboardMouseAction(int action, int value, char *symbol, uint8_t hwbutton_i
         case Action_ChangePage:  // Custom functions
             if ((value >= 0) && (value < NUM_PAGES)) {
                 int callingPageNum = pageNum;
+
+                status = pageHistoryStack.push(pageNum);
+                if (status == STACK_STATUS_FULL) {
+                    MSG_INFOLN("[INFO] Page History Stack is full. Dropped oldest value..");
+                }
                 pageNum = value;
-                pageHistoryStack.push(pageNum);
+
                 if (generalconfig.usbcommsenable) {
                     char usbData[40];
                     snprintf(usbData, sizeof(usbData), "{NewPage, %s , %s}", menu[callingPageNum].name, menu[pageNum].name);
@@ -802,8 +829,8 @@ void KeyboardMouseAction(int action, int value, char *symbol, uint8_t hwbutton_i
         case Action_PreviousPage:  // Previous page
             callingPageNum = pageNum;
             if (pageHistoryStack.size() > 1) {
-                pageHistoryStack.pop();
-                pageNum = pageHistoryStack.peek();
+                pageNum = pageHistoryStack.pop(&status);
+
                 if (!isValidPageNumber(pageNum)) {
                     MSG_WARN1("[WARN] Action_PreviousPage: Invalid page number: ", pageNum);
                     pageNum = 0;
@@ -811,8 +838,8 @@ void KeyboardMouseAction(int action, int value, char *symbol, uint8_t hwbutton_i
             }
             else {
                 // If the stack is empty, go to the home page
+                status = pageHistoryStack.push(pageNum);
                 pageNum = 0;
-                pageHistoryStack.push(pageNum);
                 MSG_WARN1("[WARN] Action_PreviousPage: Stack was empty. Switching to home page: ", pageNum);
             }
 

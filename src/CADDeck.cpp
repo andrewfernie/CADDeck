@@ -68,15 +68,18 @@ r
 
 #include <Arduino.h>
 
-const char *versionnumber = "10Button V1.1.3";
+const char *versionnumber = "10Button V1.1.4";
 
 /*
+ * Version V1.1.4
+ *                   - Use stack properly (push current page number then change it, and pop when returning to previous page)
+ * 
  * Version V1.1.3
  *                   - Started work on support for multiple H/W buttons held down at the same time
  *                   - Renamed BLE device to "CADDeck"
  *                   - Fixed issues with "return to previous page" stack when not on page 0 at start
  *                   - removed a bunch of MSG_DEBUG statements
- *                   - Added images with my SpaceMouse button assignments for Solidworks and F360, and included 
+ *                   - Added images with my SpaceMouse button assignments for Solidworks and F360, and included
  *                     corresponding 3dxz files that can be imported in the 3dx settings app.
  *
  * Version V1.1.2
@@ -302,6 +305,8 @@ SpaceMouse spaceMouse(SPACEMOUSE_BAUD, SPACEMOUSE_CONFIG, SPACEMOUSE_RX_PIN, SPA
 
 void setup()
 {
+    uint8_t status;
+
     // Use serial port
     Serial.begin(115200);
     Serial.setDebugOutput(true);
@@ -500,20 +505,30 @@ void setup()
     if (!loadConfig("general")) {
         MSG_WARNLN("[WARNING]: general.json failed to load!");
         MSG_WARNLN("[WARNING]: To reset to default type \'reset general\'");
+
+        status = pageHistoryStack.push(pageNum);
+        if (status == STACK_STATUS_FULL) {
+            MSG_INFOLN("[INFO] Page History Stack is full. Dropped oldest value..");
+        }
         pageNum = SPECIAL_4_PAGE;
-        pageHistoryStack.push(pageNum);
     }
     else if (!loadConfig("cadparams")) {
         MSG_WARNLN("[WARNING]: cadparams.json failed to load!");
         MSG_WARNLN("[WARNING]: To reset to default type \'reset cadparams\'");
+        status = pageHistoryStack.push(pageNum);
+        if (status == STACK_STATUS_FULL) {
+            MSG_INFOLN("[INFO] Page History Stack is full. Dropped oldest value..");
+        }
         pageNum = SPECIAL_4_PAGE;
-        pageHistoryStack.push(pageNum);
     }
     else {
 
         // Menu to display on startup
+        status = pageHistoryStack.push(pageNum);
+        if (status == STACK_STATUS_FULL) {
+            MSG_INFOLN("[INFO] Page History Stack is full. Dropped oldest value..");
+        }
         pageNum = constrain(generalconfig.startup_menu, 0, NUM_PAGES - 1);
-        pageHistoryStack.push(pageNum);
 
 #ifdef TOUCH_INTERRUPT_PIN
         Interval = generalconfig.sleeptimer * MIN_TO_MS;
@@ -551,8 +566,12 @@ void setup()
             Serial.print(menuName);
             MSG_INFOLN("'.");
             strlcpy(jsonFileFail, menuName, sizeof(jsonFileFail));
+            status = pageHistoryStack.push(pageNum);
+            if (status == STACK_STATUS_FULL) {
+                MSG_INFOLN("[INFO] Page History Stack is full. Dropped oldest value..");
+            }
             pageNum = SPECIAL_4_PAGE;
-            pageHistoryStack.push(pageNum);
+
         }
     }
 
@@ -656,6 +675,7 @@ void loop(void)
 {
     bool pressed = false;
     uint16_t t_x = 0, t_y = 0;
+    uint8_t status;
 
     if (millis() > (last_loop_start + loop_period)) {
         this_loop_start = millis();
@@ -727,11 +747,14 @@ void loop(void)
 
             if (pressed) {
                 displayinginfo = false;
-                pageHistoryStack.pop();
-                
-                pageNum = pageHistoryStack.peek();
+
+                pageNum = pageHistoryStack.pop(&status);
                 if(!isValidPageNumber(pageNum)){
                     MSG_ERROR1("[ERROR] Invalid page number: ", pageNum);
+                    pageNum = 0;
+                }
+                else if (status == STACK_STATUS_EMPTY) {
+                    MSG_ERRORLN("[ERROR] Page History Stack is empty. Cannot pop page so switching to home page.");
                     pageNum = 0;
                 }
 
@@ -744,11 +767,14 @@ void loop(void)
 
             if (pressed) {
                 displayingIOValues = false;
-                pageHistoryStack.pop();
-               
-                pageNum = pageHistoryStack.peek();
+                pageNum = pageHistoryStack.pop(&status);
+
                 if (!isValidPageNumber(pageNum)) {
                     MSG_ERROR1("[ERROR] Invalid page number: ", pageNum);
+                    pageNum = 0;
+                }
+                else if (status == STACK_STATUS_EMPTY) {
+                    MSG_ERRORLN("[ERROR] Page History Stack is empty. Cannot pop page so switching to home page.");
                     pageNum = 0;
                 }
 
@@ -764,10 +790,13 @@ void loop(void)
             if (pressed) {
                 displayingButtonDescriptions = false;
 
-                pageHistoryStack.pop();
-                pageNum = pageHistoryStack.peek();
+                pageNum = pageHistoryStack.pop(&status);
                 if (!isValidPageNumber(pageNum)) {
                     MSG_ERROR1("[ERROR] Invalid page number: ", pageNum);
+                    pageNum = 0;
+                }
+                else if (status == STACK_STATUS_EMPTY) {
+                    MSG_ERRORLN("[ERROR] Page History Stack is empty. Cannot pop page so switching to home page.");
                     pageNum = 0;
                 }
 
@@ -782,10 +811,13 @@ void loop(void)
                 // Return to Settings page
                 displayinginfo = false;
 
-                pageHistoryStack.pop();
-                pageNum = pageHistoryStack.peek();
+                pageNum = pageHistoryStack.pop(&status);
                 if (!isValidPageNumber(pageNum)) {
                     MSG_ERROR1("[ERROR] Invalid page number: ", pageNum);
+                    pageNum = 0;
+                }
+                else if (status == STACK_STATUS_EMPTY) {
+                    MSG_ERRORLN("[ERROR] Page History Stack is empty. Cannot pop page so switching to home page.");
                     pageNum = 0;
                 }
 
@@ -799,14 +831,16 @@ void loop(void)
             if (pressed) {
                 // Load home screen
                 displayinginfo = false;
-                pageHistoryStack.pop();
 
-                pageNum = pageHistoryStack.peek();
+                pageNum = pageHistoryStack.pop(&status);
                 if (!isValidPageNumber(pageNum)) {
                     MSG_ERROR1("[ERROR] Invalid page number: ", pageNum);
                     pageNum = 0;
                 }
-
+                else if (status == STACK_STATUS_EMPTY) {
+                    MSG_ERRORLN("[ERROR] Page History Stack is empty. Cannot pop page so switching to home page.");
+                    pageNum = 0;
+                }
                 tft.fillScreen(generalconfig.backgroundColour);
                 drawKeypad();
             }
