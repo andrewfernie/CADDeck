@@ -13,6 +13,8 @@ SpaceMouse::SpaceMouse(
     pinRx = rx;
     pinTx = tx;
     cmd_end = '\r';
+    buttonMask = 0;
+    lastButtonMask = 0;
 }
 
 SpaceMouse::~SpaceMouse()
@@ -20,7 +22,7 @@ SpaceMouse::~SpaceMouse()
 }
 
 void SpaceMouse::Init()
-{ 
+{
     Serial1.begin(baudRate, configParameters, pinRx, pinTx);
 }
 
@@ -44,6 +46,67 @@ void SpaceMouse::SendUInt16(uint16_t data)
     Serial1.write(EncodeNibble((uint8_t)(data & 0x000f)));
 }
 
+void SpaceMouse::SendButtonsUInt32(uint32_t buttons)
+{
+    uint8_t nibble = 0;
+
+    Serial1.write('k');
+
+    nibble = buttons & 0x0000000f;
+    Serial1.write(EncodeNibble(nibble));
+
+    nibble = (buttons >> 4) & 0x0000000f;
+    Serial1.write(EncodeNibble(nibble));
+
+    nibble = (buttons >> 8) & 0x0000000f;
+    Serial1.write(EncodeNibble(nibble));
+
+    nibble = (buttons >> 12) & 0x0000000f;
+    Serial1.write(EncodeNibble(nibble));
+
+    nibble = (buttons >> 16) & 0x0000000f;
+    Serial1.write(EncodeNibble(nibble));
+
+    Serial1.write(cmd_end);
+}
+
+void SpaceMouse::SendButtonPacket()
+{
+    if (buttonMask != lastButtonMask) {
+        SendButtonsUInt32(buttonMask);
+    }
+    lastButtonMask = buttonMask;
+}
+
+void SpaceMouse::SetButtonMask(uint32_t newButtonMask)
+{
+    buttonMask = newButtonMask;
+}
+
+void SpaceMouse::SetButton(uint8_t button_index)
+{
+    if ((button_index < SPACEMOUSE_MAX_BUTTON) && (button_index > 0)) {
+        buttonMask |= (1 << (button_index - 1));
+    }
+    else {
+        MSG_ERRORLN("[ERROR] Invalid button index");
+    }
+}
+
+void SpaceMouse::ClearButtonMask()
+{
+    buttonMask = 0;
+}
+
+void SpaceMouse::ClearButton(uint8_t button_index)
+{
+    if ((button_index < SPACEMOUSE_MAX_BUTTON) && (button_index > 0)) {
+        buttonMask &= ~(1 << (button_index - 1));
+    }
+    else {
+        MSG_ERRORLN("[ERROR] Invalid button index");
+    }
+}
 
 // TODO: Rework to allow multiple buttons to be pressed at once
 void SpaceMouse::SendKeyPacket(uint8_t button_index)
@@ -86,7 +149,7 @@ void SpaceMouse::SendKeyPacket(uint8_t button_index)
 
 // This function is to allow more than the 12 buttons allowed by
 // the standard SpaceMouse protocol so as to support the extra
-// buttons on a SpaceMouse Pro. the 3dconnexxion information says that 
+// buttons on a SpaceMouse Pro. the 3dconnexxion information says that
 // 15 are supported, but there is other information that there are
 // actually 19 (15 + 4 for long press on 1-4).
 //
@@ -165,8 +228,8 @@ char SpaceMouse::EncodeNibble(uint8_t nibble)
     //                    0x36, 0x47, 0x48, 0x39, 0x3a, 0x4b,
     //                    0x3c, 0x4d, 0x4e, 0x3f};
 
-    char char_codes[] = {'0', 'A', 'B', '3', 
-                         'D', '5', '6', 'G', 
+    char char_codes[] = {'0', 'A', 'B', '3',
+                         'D', '5', '6', 'G',
                          'H', '9', ':', 'K',
                          '<', 'M', 'N', '?'};
 
@@ -174,4 +237,3 @@ char SpaceMouse::EncodeNibble(uint8_t nibble)
 
     return encoded_nibble;
 }
-

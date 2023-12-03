@@ -10,28 +10,13 @@
       "0"
     ],
     "valuearray": [
-      "10",
-      "0",
-      "0"
-    ]
-  },
-  "button12": {
-    "logo": "F360_Extrude.bmp",
-    "latch": false,
-    "latchlogo": "",
-    "actionarray": [
-      "20",
-      "0",
-      "0"
-    ],
-    "valuearray": [
       "11",
       "0",
       "0"
     ]
   },
-  "button13": {
-    "logo": "F360_Form.bmp",
+  "button12": {
+    "logo": "F360_Schale.bmp",
     "latch": false,
     "latchlogo": "",
     "actionarray": [
@@ -45,7 +30,7 @@
       "0"
     ]
   },
-  "button14": {
+  "button13": {
     "logo": "F360_Hole.bmp",
     "latch": false,
     "latchlogo": "",
@@ -56,6 +41,21 @@
     ],
     "valuearray": [
       "13",
+      "0",
+      "0"
+    ]
+  },
+  "button14": {
+    "logo": "F360_RPattern.bmp",
+    "latch": false,
+    "latchlogo": "",
+    "actionarray": [
+      "20",
+      "0",
+      "0"
+    ],
+    "valuearray": [
+      "14",
       "0",
       "0"
     ]
@@ -76,22 +76,7 @@
     ]
   },
   "button21": {
-    "logo": "F360_Kombinieren.bmp",
-    "latch": false,
-    "latchlogo": "",
-    "actionarray": [
-      "20",
-      "0",
-      "0"
-    ],
-    "valuearray": [
-      "14",
-      "0",
-      "0"
-    ]
-  },
-  "button22": {
-    "logo": "F360_Move.bmp",
+    "logo": "F360_CPattern.bmp",
     "latch": false,
     "latchlogo": "",
     "actionarray": [
@@ -105,32 +90,47 @@
       "0"
     ]
   },
-  "button23": {
-    "logo": "F360_Revolve.bmp",
+  "button22": {
+    "logo": "blank.bmp",
     "latch": false,
     "latchlogo": "",
     "actionarray": [
-      "20",
+      "0",
       "0",
       "0"
     ],
     "valuearray": [
-      "16",
+      "0",
+      "0",
+      "0"
+    ]
+  },
+  "button23": {
+    "logo": "blank.bmp",
+    "latch": false,
+    "latchlogo": "",
+    "actionarray": [
+      "0",
+      "0",
+      "0"
+    ],
+    "valuearray": [
+      "0",
       "0",
       "0"
     ]
   },
   "button24": {
-    "logo": "F360_RPattern.bmp",
+    "logo": "blank.bmp",
     "latch": false,
     "latchlogo": "",
     "actionarray": [
-      "20",
+      "0",
       "0",
       "0"
     ],
     "valuearray": [
-      "17",
+      "0",
       "0",
       "0"
     ]
@@ -151,31 +151,31 @@
     ]
   },
   "button31": {
-    "logo": "F360_Schale.bmp",
+    "logo": "blank.bmp",
     "latch": false,
     "latchlogo": "",
     "actionarray": [
-      "20",
+      "0",
       "0",
       "0"
     ],
     "valuearray": [
-      "18",
+      "0",
       "0",
       "0"
     ]
   },
   "button32": {
-    "logo": "F360_Sketch.bmp",
+    "logo": "blank.bmp",
     "latch": false,
     "latchlogo": "",
     "actionarray": [
-      "20",
+      "0",
       "0",
       "0"
     ],
     "valuearray": [
-      "19",
+      "0",
       "0",
       "0"
     ]

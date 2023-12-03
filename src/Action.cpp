@@ -1,6 +1,7 @@
 #include "Action.h"
-#include "SaveConfig.h"
+
 #include "BleCombo.h"
+#include "SaveConfig.h"
 
 /**
 * @brief This function takes an int as an "action" and "value". It uses
@@ -18,10 +19,9 @@
 */
 void KeyboardMouseAction(int action, int value, char *symbol, uint8_t hwbutton_index)
 {
-    // MSG_DEBUG("[DEBUG] Action received: ");
-    // MSG_DEBUG3(action, value, symbol, hwbutton_index);
     int callingPageNum;
-    
+    uint8_t status;
+
     switch (action) {
         case Action_NoAction:
             // No Action
@@ -477,7 +477,6 @@ void KeyboardMouseAction(int action, int value, char *symbol, uint8_t hwbutton_i
             }
             break;
 
-
         case Action_SpecialFn:  // Special functions
             switch (value) {
                 case SpecialFn_ConfigMode:  // Enter config mode
@@ -489,7 +488,6 @@ void KeyboardMouseAction(int action, int value, char *symbol, uint8_t hwbutton_i
                         ledBrightness = ledBrightness - 25;
                         ledcWrite(0, ledBrightness);
                         savedStates.putInt("ledBrightness", ledBrightness);
-                        // MSG_DEBUGLN ("[DEBUG] Brightness down.");
                     }
                     break;
                 case SpecialFn_DisplayBrightnessUp:  // Display Brightness Up
@@ -497,27 +495,27 @@ void KeyboardMouseAction(int action, int value, char *symbol, uint8_t hwbutton_i
                         ledBrightness = ledBrightness + 25;
                         ledcWrite(0, ledBrightness);
                         savedStates.putInt("ledBrightness", ledBrightness);
-                        // MSG_DEBUGLN ("[DEBUG] Brightness up.");
                     }
                     break;
                 case SpecialFn_SleepEnable:  // Sleep Enabled
                     if (generalconfig.sleepenable) {
                         generalconfig.sleepenable = false;
-                        // MSG_DEBUGLN ("[DEBUG] Sleep disabled.");
                     }
                     else {
                         generalconfig.sleepenable = true;
                         Interval = generalconfig.sleeptimer * MIN_TO_MS;
-                        // MSG_DEBUGLN ("[DEBUG] Sleep enabled.");
-                        // MSG_INFO("[INFO] Timer set to: ");
-                        // MSG_INFOLN(generalconfig.sleeptimer);
                     }
                     break;
 
                 case SpecialFn_InfoPage:
                     callingPageNum = pageNum;
+
+                    status = pageHistoryStack.push(pageNum);
+                    if (status == STACK_STATUS_FULL) {
+                        MSG_INFOLN("[INFO] Page History Stack is full. Dropped oldest value..");
+                    }
                     pageNum = SPECIAL_PAGE_INFO;
-                    pageHistoryStack.push(pageNum);
+
                     if (generalconfig.usbcommsenable) {
                         char usbData[40];
                         snprintf(usbData, sizeof(usbData), "{NewPage, %s , %s}", menu[callingPageNum].name, "Info");
@@ -527,8 +525,13 @@ void KeyboardMouseAction(int action, int value, char *symbol, uint8_t hwbutton_i
 
                 case SpecialFn_HomePage:
                     callingPageNum = pageNum;
+
+                    status = pageHistoryStack.push(pageNum);
+                    if (status == STACK_STATUS_FULL) {
+                        MSG_INFOLN("[INFO] Page History Stack is full. Dropped oldest value..");
+                    }
                     pageNum = 0;
-                    pageHistoryStack.push(pageNum);
+
                     if (generalconfig.usbcommsenable) {
                         char usbData[40];
                         snprintf(usbData, sizeof(usbData), "{NewPage, %s , %s}", menu[callingPageNum].name, "Home");
@@ -544,18 +547,21 @@ void KeyboardMouseAction(int action, int value, char *symbol, uint8_t hwbutton_i
                 case SpecialFn_USBComm:  // USB Comms Enable/Disable
                     if (generalconfig.usbcommsenable) {
                         generalconfig.usbcommsenable = false;
-                        // MSG_DEBUGLN ("[DEBUG] USB Comms Disabled.");
                     }
                     else {
                         generalconfig.usbcommsenable = true;
-                        // MSG_DEBUGLN ("[DEBUG] USB Comms Enabled.");
                     }
                     break;
 
                 case SpecialFn_IOMonitor:
                     callingPageNum = pageNum;
+
+                    status = pageHistoryStack.push(pageNum);
+                    if (status == STACK_STATUS_FULL) {
+                        MSG_INFOLN("[INFO] Page History Stack is full. Dropped oldest value..");
+                    }
                     pageNum = SPECIAL_PAGE_IO_MONITOR;
-                    pageHistoryStack.push(pageNum);
+
                     if (generalconfig.usbcommsenable) {
                         char usbData[40];
                         snprintf(usbData, sizeof(usbData), "{NewPage, %s , %s}", menu[callingPageNum].name, "IO Monitor");
@@ -565,40 +571,41 @@ void KeyboardMouseAction(int action, int value, char *symbol, uint8_t hwbutton_i
                 case SpecialFn_GPIO_Toggle:
                     generalconfig.gpio_pin_mode = !generalconfig.gpio_pin_mode;
                     digitalWrite(generalconfig.gpio_pin, generalconfig.gpio_pin_mode);
-                    // MSG_DEBUGLN ("[DEBUG] Toggle GPIO.");
                     break;
                 case SpecialFn_GPIO_Off:
                     generalconfig.gpio_pin_mode = LOW;
                     digitalWrite(generalconfig.gpio_pin, generalconfig.gpio_pin_mode);
-                    // MSG_DEBUGLN ("[DEBUG] Set GPIO off.");
                     break;
                 case SpecialFn_GPIO_On:
                     generalconfig.gpio_pin_mode = HIGH;
                     digitalWrite(generalconfig.gpio_pin, generalconfig.gpio_pin_mode);
-                    // MSG_DEBUGLN ("[DEBUG] Set GPIO on.");
                     break;
                 case SpecialFn_ButtonInfoPage:
                     callingPageNum = pageNum;
+
+                    status = pageHistoryStack.push(pageNum);
+                    if (status == STACK_STATUS_FULL) {
+                        MSG_INFOLN("[INFO] Page History Stack is full. Dropped oldest value..");
+                    }
                     pageNum = SPECIAL_PAGE_BUTTON_INFO;
-                    pageHistoryStack.push(pageNum);
+
                     if (generalconfig.usbcommsenable) {
                         char usbData[40];
                         snprintf(usbData, sizeof(usbData), "{NewPage, %s , %s}", menu[callingPageNum].name, "ButtonInfo");
                         Serial.println(usbData);
                     }
-                    // MSG_DEBUGLN("[DEBUG] Button info.");
                     break;
                 case SpecialFn_Spacemouse_Enable_Toggle:
                     cadconfig.spacemouse_enable = !cadconfig.spacemouse_enable;
-                    // if(cadconfig.spacemouse_enable) {
-                    //     MSG_DEBUGLN("[DEBUG] Spacemouse Mode Enabled.");
-                    // } else {
-                    //     MSG_DEBUGLN("[DEBUG] Spacemouse Mode Disabled.");
-                    // }
+                    if (cadconfig.spacemouse_enable) {
+                        MSG_INFOLN("[DEBUG] Spacemouse Mode Enabled.");
+                    }
+                    else {
+                        MSG_INFOLN("[DEBUG] Spacemouse Mode Disabled.");
+                    }
                     break;
             }
             break;
-
 
         case Action_Numpad:  // Numpad
             switch (value) {
@@ -680,8 +687,13 @@ void KeyboardMouseAction(int action, int value, char *symbol, uint8_t hwbutton_i
         case Action_ChangePage:  // Custom functions
             if ((value >= 0) && (value < NUM_PAGES)) {
                 int callingPageNum = pageNum;
+
+                status = pageHistoryStack.push(pageNum);
+                if (status == STACK_STATUS_FULL) {
+                    MSG_INFOLN("[INFO] Page History Stack is full. Dropped oldest value..");
+                }
                 pageNum = value;
-                pageHistoryStack.push(pageNum);
+
                 if (generalconfig.usbcommsenable) {
                     char usbData[40];
                     snprintf(usbData, sizeof(usbData), "{NewPage, %s , %s}", menu[callingPageNum].name, menu[pageNum].name);
@@ -815,16 +827,37 @@ void KeyboardMouseAction(int action, int value, char *symbol, uint8_t hwbutton_i
             break;
 
         case Action_PreviousPage:  // Previous page
+            callingPageNum = pageNum;
             if (pageHistoryStack.size() > 1) {
-                pageHistoryStack.pop();
-                pageNum = pageHistoryStack.peek();
-                drawKeypad();
-            }
-            break;
-        case Action_SpaceMouseButton:  // Emulate a SpaceMouse button press
-            if ((value >= 0) && (value <= SPACEMOUSE_MAX_BUTTON)) {
-                spaceMouse.SendKeyPacketExtended(value);
+                pageNum = pageHistoryStack.pop(&status);
 
+                if (!isValidPageNumber(pageNum)) {
+                    MSG_WARN1("[WARN] Action_PreviousPage: Invalid page number: ", pageNum);
+                    pageNum = 0;
+                }
+            }
+            else {
+                // If the stack is empty, go to the home page
+                status = pageHistoryStack.push(pageNum);
+                pageNum = 0;
+                MSG_WARN1("[WARN] Action_PreviousPage: Stack was empty. Switching to home page: ", pageNum);
+            }
+
+            if (generalconfig.usbcommsenable) {
+                char usbData[40];
+                snprintf(usbData, sizeof(usbData), "{NewPage, %s , %s}", menu[callingPageNum].name, menu[pageNum].name);
+                Serial.println(usbData);
+            }
+
+            drawKeypad();
+            break;
+
+        case Action_SpaceMouseButton:  // Emulate a SpaceMouse button press as long as the button number is valid
+            if ((value > (cadprogramconfig[cadconfig.current_program].num_buttons - 1)) && (value <= SPACEMOUSE_MAX_BUTTON)) {
+                spaceMouse.SetButton(value);
+            }
+            else {
+                MSG_WARN1("[WARN] Action_SpaceMouseButton: Invalid SpaceMouse button number", value);
             }
             break;
 

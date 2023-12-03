@@ -18,8 +18,6 @@ bool startWifiStation()
 #endif
         WiFi.begin(wificonfig.ssid, wificonfig.password);
         uint8_t attempts = wificonfig.attempts;
-        //        MSG_DEBUG1("startWifiStation(): attempts =", attempts);
-        //        MSG_DEBUG1("startWifiStation(): attempt delay =", wificonfig.attemptdelay);
         while (WiFi.status() != WL_CONNECTED) {
             if (attempts == 0) {
                 WiFi.disconnect();
@@ -57,8 +55,11 @@ bool startWifiStation()
     MDNS.addService("http", "tcp", 80);
 
     // Set pageNum to 7 so no buttons are displayed and touches are ignored
+    uint8_t status = pageHistoryStack.push(pageNum);
+    if (status == STACK_STATUS_FULL) {
+        MSG_INFOLN("[INFO] Page History Stack is full. Dropped oldest value..");
+    }
     pageNum = WEB_REQUEST_PAGE;
-    pageHistoryStack.push(pageNum);
 
     // Start the webserver
     webserver.begin();
@@ -107,8 +108,11 @@ void startWifiAP()
     MDNS.addService("http", "tcp", 80);
 
     // Set pageNum to WEB_REQUEST_PAGE so no buttons are displayed and touches are ignored
+    uint8_t status = pageHistoryStack.push(pageNum);
+    if (status == STACK_STATUS_FULL) {
+        MSG_INFOLN("[INFO] Page History Stack is full. Dropped oldest value..");
+    }
     pageNum = WEB_REQUEST_PAGE;
-    pageHistoryStack.push(pageNum);
 
     // Start the webserver
     webserver.begin();
@@ -156,8 +160,11 @@ void startDefaultAP()
     MDNS.addService("http", "tcp", 80);
 
     // Set pageNum to WEB_REQUEST_PAGE so no buttons are displayed and touches are ignored
+    uint8_t status = pageHistoryStack.push(pageNum);
+    if (status == STACK_STATUS_FULL) {
+        MSG_INFOLN("[INFO] Page History Stack is full. Dropped oldest value..");
+    }
     pageNum = WEB_REQUEST_PAGE;
-    pageHistoryStack.push(pageNum);
 
     // Start the webserver
     webserver.begin();
