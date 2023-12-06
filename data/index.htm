@@ -618,11 +618,14 @@
 			<input type="number" id="zoom_scale" name="zoom_scale" min="-5.0" max="5.0" value="3.00" step="any">
 			&nbsp;&nbsp;Zoom Deadzone:&nbsp;
 			<select class="zoom_deadzone" id='zoom_deadzone' name='zoom_deadzone'>
-				<option value="0">0</option>
-				<option value="0.01">0.01</option>
-				<option value="0.02">0.02</option>
-				<option value="0.05">0.05</option>
-				<option value="0.1">0.1</option>
+				<option value="0">0 </option>
+				<option value="0.01"> 0.01 </option>
+				<option value="0.02"> 0.02 </option>
+				<option value="0.05"> 0.05 </option>
+				<option value="0.1"> 0.1 </option>
+				<option value="0.15"> 0.15 </option>
+				<option value="0.2"> 0.2 </option>
+				<option value="0.25"> 0.25 </option>
 			</select>
 			&nbsp;&nbsp;Zoom Sensitivity:&nbsp;
 			<select class="zoom_sensitivity" id='zoom_sensitivity' name='zoom_sensitivity'>
@@ -639,11 +642,14 @@
 			<input type="number" id="rotate_scale" name="rotate_scale" min="-5.0" max="5.0" value="3.00" step="any">
 			&nbsp;&nbsp;Rotate Deadzone:&nbsp;
 			<select class="rotate_deadzone" id='rotate_deadzone' name='rotate_deadzone'>
-				<option value="0">0</option>
-				<option value="0.01">0.01</option>
-				<option value="0.02">0.02</option>
-				<option value="0.05">0.05</option>
-				<option value="0.1">0.1</option>
+				<option value="0">0 </option>
+				<option value="0.01"> 0.01 </option>
+				<option value="0.02"> 0.02 </option>
+				<option value="0.05"> 0.05 </option>
+				<option value="0.1"> 0.1 </option>
+				<option value="0.15"> 0.15 </option>
+				<option value="0.2"> 0.2 </option>
+				<option value="0.25"> 0.25 </option>
 			</select>
 			&nbsp;&nbsp;Rotate Sensitivity:&nbsp;
 			<select class="rotate_sensitivity" id='rotate_sensitivity' name='rotate_sensitivity'>
@@ -3488,7 +3494,7 @@
 				hwbuttondescriptions[current_program_index][current_button_index] = document.getElementById('hwbuttondescription').value;
 
 				console.log('update_hwbutton_def(): validArrayIndex');
-				
+
 				let xhr = new XMLHttpRequest();
 
 				xhr.open("GET", "/updatebuttondescription?app=" + current_program_index + "&button=" + current_button_index +

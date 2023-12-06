@@ -68,12 +68,16 @@ r
 
 #include <Arduino.h>
 
-const char *versionnumber = "10Button V1.1.4";
+const char *versionnumber = "10Button V1.1.5 WIP";
 
 /*
+
+ * Version V1.1.5 WIP
+ *                   - Additional values for zoom_deadzone and rotate_deadzone in configurator
+ * 
  * Version V1.1.4
  *                   - Use stack properly (push current page number then change it, and pop when returning to previous page)
- * 
+ *
  * Version V1.1.3
  *                   - Started work on support for multiple H/W buttons held down at the same time
  *                   - Renamed BLE device to "CADDeck"
