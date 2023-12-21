@@ -4,6 +4,7 @@
     "logo": "wifi.bmp",
     "latch": false,
     "latchlogo": "",
+    "buttontext":"",
     "actionarray": [
       "11",
       "0",
@@ -19,6 +20,7 @@
     "logo": "brightnessdown.bmp",
     "latch": false,
     "latchlogo": "",
+    "buttontext":"",
     "actionarray": [
       "11",
       "0",
@@ -34,6 +36,7 @@
     "logo": "brightnessup.bmp",
     "latch": false,
     "latchlogo": "",
+    "buttontext":"",
     "actionarray": [
       "11",
       "0",
@@ -49,6 +52,7 @@
     "logo": "USBComm2_off.bmp",
     "latch": true,
     "latchlogo": "USBComm2.bmp",
+    "buttontext":"",
     "actionarray": [
       "11",
       "0",
@@ -64,6 +68,7 @@
     "logo": "sleep_off.bmp",
     "latch": true,
     "latchlogo": "sleep_on.bmp",
+    "buttontext":"",
     "actionarray": [
       "11",
       "0",
@@ -79,6 +84,7 @@
     "logo": "info.bmp",
     "latch": false,
     "latchlogo": "",
+    "buttontext":"",
     "actionarray": [
       "11",
       "0",
@@ -94,6 +100,7 @@
     "logo": "floppy.bmp",
     "latch": false,
     "latchlogo": "",
+    "buttontext":"",
     "actionarray": [
       "11",
       "0",
@@ -109,6 +116,7 @@
     "logo": "GreenLED.bmp",
     "latch": false,
     "latchlogo": "",
+    "buttontext":"",
     "actionarray": [
       "11",
       "0",
@@ -124,6 +132,7 @@
     "logo": "volumedown.bmp",
     "latch": false,
     "latchlogo": "",
+    "buttontext":"",
     "actionarray": [
       "3",
       "0",
@@ -139,6 +148,7 @@
     "logo": "volumeup.bmp",
     "latch": false,
     "latchlogo": "",
+    "buttontext":"",
     "actionarray": [
       "3",
       "0",
@@ -154,6 +164,7 @@
     "logo": "nosound.bmp",
     "latch": false,
     "latchlogo": "",
+    "buttontext":"",
     "actionarray": [
       "3",
       "0",
@@ -169,6 +180,7 @@
     "logo": "home.bmp",
     "latch": false,
     "latchlogo": "",
+    "buttontext":"",
     "actionarray": [
       "14",
       "0",

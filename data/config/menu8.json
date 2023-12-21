@@ -4,6 +4,7 @@
     "logo": "F360_Sketch.bmp",
     "latch": false,
     "latchlogo": "",
+    "buttontext":"",
     "actionarray": [
       "9",
       "4",
@@ -19,6 +20,7 @@
     "logo": "F360_Extrude.bmp",
     "latch": false,
     "latchlogo": "",
+    "buttontext":"",
     "actionarray": [
       "4",
       "0",
@@ -34,6 +36,7 @@
     "logo": "F360_Revolve.bmp",
     "latch": false,
     "latchlogo": "",
+    "buttontext":"",
     "actionarray": [
       "9",
       "4",
@@ -49,6 +52,7 @@
     "logo": "F360_Hole.bmp",
     "latch": false,
     "latchlogo": "",
+    "buttontext":"",
     "actionarray": [
       "4",
       "0",
@@ -64,6 +68,7 @@
     "logo": "blank.bmp",
     "latch": false,
     "latchlogo": "",
+    "buttontext":"",
     "actionarray": [
       "0",
       "0",
@@ -79,6 +84,7 @@
     "logo": "F360_RPattern.bmp",
     "latch": false,
     "latchlogo": "",
+    "buttontext":"",
     "actionarray": [
       "5",
       "7",
@@ -94,6 +100,7 @@
     "logo": "F360_Kombinieren.bmp",
     "latch": false,
     "latchlogo": "",
+    "buttontext":"",
     "actionarray": [
       "4",
       "0",
@@ -109,6 +116,7 @@
     "logo": "F360_Teilen.bmp",
     "latch": false,
     "latchlogo": "",
+    "buttontext":"",
     "actionarray": [
       "4",
       "0",
@@ -124,6 +132,7 @@
     "logo": "F360_Ziehen.bmp",
     "latch": false,
     "latchlogo": "",
+    "buttontext":"",
     "actionarray": [
       "4",
       "0",
@@ -139,6 +148,7 @@
     "logo": "blank.bmp",
     "latch": false,
     "latchlogo": "",
+    "buttontext":"",
     "actionarray": [
       "0",
       "0",
@@ -154,6 +164,7 @@
     "logo": "F360_Move.bmp",
     "latch": false,
     "latchlogo": "",
+    "buttontext":"",
     "actionarray": [
       "4",
       "0",
@@ -169,6 +180,7 @@
     "logo": "blank.bmp",
     "latch": false,
     "latchlogo": "",
+    "buttontext":"",
     "actionarray": [
       "0",
       "0",
@@ -184,6 +196,7 @@
     "logo": "blank.bmp",
     "latch": false,
     "latchlogo": "",
+    "buttontext":"",
     "actionarray": [
       "0",
       "0",
@@ -199,6 +212,7 @@
     "logo": "return.bmp",
     "latch": false,
     "latchlogo": "",
+    "buttontext":"",
     "actionarray": [
       "18",
       "0",
@@ -214,6 +228,7 @@
     "logo": "return.bmp",
     "latch": false,
     "latchlogo": "",
+    "buttontext":"",
     "actionarray": [
       "18",
       "0",

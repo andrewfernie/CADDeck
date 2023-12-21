@@ -4,6 +4,7 @@
     "logo": "question.bmp",
     "latch": false,
     "latchlogo": "",
+    "buttontext":"",
     "actionarray": [
       "0",
       "0",
@@ -19,6 +20,7 @@
     "logo": "question.bmp",
     "latch": false,
     "latchlogo": "",
+    "buttontext":"",
     "actionarray": [
       "0",
       "0",
@@ -34,6 +36,7 @@
     "logo": "question.bmp",
     "latch": false,
     "latchlogo": "",
+    "buttontext":"",
     "actionarray": [
       "0",
       "0",
@@ -49,6 +52,7 @@
     "logo": "question.bmp",
     "latch": false,
     "latchlogo": "",
+    "buttontext":"",
     "actionarray": [
       "0",
       "0",
@@ -64,6 +68,7 @@
     "logo": "question.bmp",
     "latch": false,
     "latchlogo": "",
+    "buttontext":"",
     "actionarray": [
       "0",
       "0",
@@ -79,6 +84,7 @@
     "logo": "question.bmp",
     "latch": false,
     "latchlogo": "",
+    "buttontext":"",
     "actionarray": [
       "0",
       "0",
@@ -94,6 +100,7 @@
     "logo": "question.bmp",
     "latch": false,
     "latchlogo": "",
+    "buttontext":"",
     "actionarray": [
       "0",
       "0",
@@ -109,6 +116,7 @@
     "logo": "home.bmp",
     "latch": false,
     "latchlogo": "",
+    "buttontext":"",
     "actionarray": [
       "14",
       "0",
@@ -124,6 +132,7 @@
     "logo": "question.bmp",
     "latch": false,
     "latchlogo": "",
+    "buttontext":"",
     "actionarray": [
       "0",
       "0",
@@ -139,6 +148,7 @@
     "logo": "question.bmp",
     "latch": false,
     "latchlogo": "",
+    "buttontext":"",
     "actionarray": [
       "0",
       "0",
@@ -154,6 +164,7 @@
     "logo": "question.bmp",
     "latch": false,
     "latchlogo": "",
+    "buttontext":"",
     "actionarray": [
       "0",
       "0",
@@ -169,6 +180,7 @@
     "logo": "question.bmp",
     "latch": false,
     "latchlogo": "",
+    "buttontext":"",
     "actionarray": [
       "0",
       "0",
@@ -184,6 +196,7 @@
     "logo": "question.bmp",
     "latch": false,
     "latchlogo": "",
+    "buttontext":"",
     "actionarray": [
       "0",
       "0",
@@ -199,6 +212,7 @@
     "logo": "home.bmp",
     "latch": false,
     "latchlogo": "",
+    "buttontext":"",
     "actionarray": [
       "14",
       "0",
@@ -214,6 +228,7 @@
     "logo": "home.bmp",
     "latch": false,
     "latchlogo": "",
+    "buttontext":"",
     "actionarray": [
       "14",
       "0",

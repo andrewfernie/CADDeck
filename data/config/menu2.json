@@ -4,6 +4,7 @@
     "logo": "calibrate.bmp",
     "latch": false,
     "latchlogo": "",
+    "buttontext":"",
     "actionarray": [
       "15",
       "0",
@@ -19,6 +20,7 @@
     "logo": "zero.bmp",
     "latch": false,
     "latchlogo": "",
+    "buttontext":"",
     "actionarray": [
       "15",
       "0",
@@ -34,6 +36,7 @@
     "logo": "spacemouseoff.bmp",
     "latch": true,
     "latchlogo": "spacemouseon.bmp",
+    "buttontext":"",
     "actionarray": [
       "11",
       "0",
@@ -49,6 +52,7 @@
     "logo": "blank.bmp",
     "latch": false,
     "latchlogo": "",
+    "buttontext":"",
     "actionarray": [
       "0",
       "0",
@@ -64,6 +68,7 @@
     "logo": "blank.bmp",
     "latch": false,
     "latchlogo": "",
+    "buttontext":"",
     "actionarray": [
       "0",
       "0",
@@ -79,6 +84,7 @@
     "logo": "flip_x.bmp",
     "latch": false,
     "latchlogo": "",
+    "buttontext":"",
     "actionarray": [
       "15",
       "0",
@@ -94,6 +100,7 @@
     "logo": "flip_y.bmp",
     "latch": false,
     "latchlogo": "",
+    "buttontext":"",
     "actionarray": [
       "15",
       "0",
@@ -109,6 +116,7 @@
     "logo": "flip_z.bmp",
     "latch": false,
     "latchlogo": "",
+    "buttontext":"",
     "actionarray": [
       "15",
       "0",
@@ -124,6 +132,7 @@
     "logo": "flip_r.bmp",
     "latch": false,
     "latchlogo": "",
+    "buttontext":"",
     "actionarray": [
       "15",
       "0",
@@ -139,6 +148,7 @@
     "logo": "blank.bmp",
     "latch": false,
     "latchlogo": "",
+    "buttontext":"",
     "actionarray": [
       "0",
       "0",
@@ -154,6 +164,7 @@
     "logo": "floppy.bmp",
     "latch": false,
     "latchlogo": "",
+    "buttontext":"",
     "actionarray": [
       "15",
       "0",
@@ -169,6 +180,7 @@
     "logo": "app.bmp",
     "latch": false,
     "latchlogo": "",
+    "buttontext":"",
     "actionarray": [
       "14",
       "0",
@@ -184,6 +196,7 @@
     "logo": "ones_zeros.bmp",
     "latch": false,
     "latchlogo": "",
+    "buttontext":"",
     "actionarray": [
       "11",
       "0",
@@ -199,6 +212,7 @@
     "logo": "home.bmp",
     "latch": false,
     "latchlogo": "",
+    "buttontext":"",
     "actionarray": [
       "14",
       "0",
@@ -214,6 +228,7 @@
     "logo": "home.bmp",
     "latch": false,
     "latchlogo": "",
+    "buttontext":"",
     "actionarray": [
       "14",
       "0",
