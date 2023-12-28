@@ -160,6 +160,7 @@ bool loadConfigMenu(String menuToLoad)
             menu[fileNameMenuNumber].button[buttonIndex].latchImageBGColourValid = false;
 
             menu[fileNameMenuNumber].button[buttonIndex].state = ButtonState::ButtonState_NoAction;
+            menu[fileNameMenuNumber].button[buttonIndex].islatched = false;
         }
 
         configfile.close();

@@ -113,6 +113,26 @@ void drawButtonNumber(uint8_t page, uint8_t button_index)
     }
 }
 
+void drawButtonCircle(uint8_t button_index,uint16_t color)
+{
+    uint16_t x;
+    uint16_t y;
+
+    if (button_index == 0)
+    {
+        x = SCREEN_CENTER_X;
+        y = SCREEN_CENTER_Y;
+    }
+    else
+    {
+        float angle = (button_index - 1 + 0.5) * 2.0 * 3.1416 / (BUTTONS_PER_PAGE - 1);
+        x = SCREEN_CENTER_X + sin(angle) * BUTTON_CIRCLE_RADIUS;
+        y = SCREEN_CENTER_Y + cos(angle) * BUTTON_CIRCLE_RADIUS;
+    }
+    tft.fillCircle(x, y, 30, TFT_RED);
+}
+
+
 /**
 * @brief This function draws the set buttons that are on each page.
          Pagenumber is global and doesn't need to be passed.
@@ -131,7 +151,6 @@ void drawKeypad()
         // Draw the button outlines and fill them with colours
         for (uint8_t buttonIndex = 0; buttonIndex < BUTTONS_PER_PAGE; buttonIndex++)
         {
-            // MSG_DEBUGLN("drawKeypad: drawing button = " + String(buttonIndex));
             drawButtonNumber(pageNum, buttonIndex);
         }
     }

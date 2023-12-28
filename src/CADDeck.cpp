@@ -68,11 +68,11 @@ r
 
 #include <Arduino.h>
 
-const char *versionnumber = "10Button V1.2 WIP";
+const char *versionnumber = "V1.2";
 
 /*
  * Version V1.2
- *                   - Added support for LCDKnob
+ *                   - Added support for LCDKnob. Released along with LCDKnob firmware V1.0.0
  * Version V1.1.5
  *                   - Additional values for zoom_deadzone and rotate_deadzone in configurator
  *
@@ -1087,9 +1087,9 @@ float readExternalBattery()
 #endif
 
 #ifdef LCDKNOB_SUPPORT
+uint8_t lcdmenu = 0;
 void executeLCDKnobButtonClick(uint8_t buttonNumber)
 {
-    // MSG_DEBUGLN("LCD Knob Button Pressed: " + String(buttonNumber));
 
     //---------------------------------------- Button press handling --------------------------------------------------
 
@@ -1106,6 +1106,7 @@ void executeLCDKnobButtonClick(uint8_t buttonNumber)
         KeyboardMouseAction(cadprogramconfig[cadconfig.current_program].lcdknob_buttons[buttonNumber][2].action,
                             cadprogramconfig[cadconfig.current_program].lcdknob_buttons[buttonNumber][2].value,
                             cadprogramconfig[cadconfig.current_program].lcdknob_buttons[buttonNumber][2].symbol, buttonNumber);
+
     }
     else {
         MSG_ERRORLN("LCD Knob Button Index out of range: " + String(buttonNumber));

@@ -14,6 +14,10 @@
 #define LCDKNOB_EVENT_TOUCH_XY 'p'
 #define LCDKNOB_EVENT_BUTTON_STATE 'q'
 
+#define LCDKNOB_SEND_BUTTON_STATE_REQUEST 't'
+#define LCDKNOB_SEND_SET_BUTTON_STATE 'u'
+#define LCDKNOB_SEND_SET_MENU 'v'
+
 const uint8_t LCDKNOB_MAX_BUTTON = 7;
 const uint8_t LCDKNOB_BUTTON_INVALID = 255;
 
@@ -24,7 +28,9 @@ public:
     LCDKnobComms(unsigned long baud, uint32_t config, uint8_t rx, uint8_t tx);
     ~LCDKnobComms();
     void Begin();
-    void SendStateRequest(uint8_t button_number);
+    void SendSetMenu(uint8_t menu_number);
+    void SendButtonStateRequest(uint8_t button_number);
+    void SendSetButtonState(uint8_t button_number, uint8_t state);
     uint8_t ReceiveData();
     uint8_t GetLastEventType();
     uint8_t GetLastEventButtonNumber();
@@ -46,7 +52,6 @@ private:
     uint32_t ReadUInt32(char *hex_value);
 
 public:
-
 private:
     unsigned long baudRate;
     uint32_t configParameters;

@@ -10,3 +10,4 @@ void drawKeypad();
 void drawButtonNumber(uint8_t page, uint8_t button_index);
 bool isActiveButton(uint8_t page, uint8_t row, uint8_t col);
 uint8_t getButtonPressedNumber(uint16_t x, uint16_t y);
+void drawButtonCircle(uint8_t button_index,uint16_t color);

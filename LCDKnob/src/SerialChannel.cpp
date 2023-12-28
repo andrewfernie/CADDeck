@@ -100,123 +100,85 @@ void SerialChannel::SendButtonState(uint8_t button_number, bool isLatched)
 uint8_t SerialChannel::ReceiveData()
 {
     lastEventType = LCDKNOB_EVENT_NONE;
-    if (Serial1.available() > 0) {
+    if (Serial1.available() > 0)
+    {
         char c = Serial1.read();
         buf[idx] = c;
-        // MSG_PORT.print(c,HEX);
-        // MSG_PORT.print(' ');
-        // MSG_PORT.println(idx);
+        Serial.print(c,HEX);
+        Serial.print(' ');
+        Serial.println(idx);
         idx = (idx + 1) % sizeof(buf);
 
-        if (c == LCDKNOB_EVENT_END) {
-            // switch (buf[0]) {
-            //     case LCDKNOB_EVENT_CLICK: {
-            //         if (idx != 12) {
-            //             break;
-            //         }
-            //         lastEventButtonNumber = ReadUInt8(&buf[1]);
-            //         lastEventX = ReadUInt16(&buf[3]);
-            //         lastEventY = ReadUInt16(&buf[7]);
-            //         lastEventType = LCDKNOB_EVENT_CLICK;
+        if (c == LCDKNOB_EVENT_END)
+        {
+            switch (buf[0])
+            {
+            case LCDKNOB_SEND_SET_BUTTON_STATE:
+            {
+                if (idx != 6)
+                {
+                    break;
+                }
+                lastEventType = LCDKNOB_SEND_SET_BUTTON_STATE;
+                lastEventButtonNumber = ReadUInt8(&buf[1]);
+                lastEventState = ReadUInt8(&buf[3]);
 
-            //         // MSG_PORT.println("Click event received for button " + String(lastEventButtonNumber));
-            //         buf[idx] = 0;
-            //         break;
-            //     }
-            //     case LCDKNOB_EVENT_DBL_CLICK: {
-            //         if (idx != 12) {
-            //             break;
-            //         }
-            //         lastEventButtonNumber = ReadUInt8(&buf[1]);
-            //         lastEventX = ReadUInt16(&buf[3]);
-            //         lastEventY = ReadUInt16(&buf[7]);
-            //         lastEventType = LCDKNOB_EVENT_DBL_CLICK;
+                Serial.println("Set button state received for button " + String(lastEventButtonNumber) + " state " + String(lastEventState));
 
-            //         // MSG_DEBUGLN("Double click event received for button " + String(button_number));
-            //         buf[idx] = 0;
-            //         break;
-            //     }
-            //     case LCDKNOB_EVENT_LONG_PRESS_START: {
-            //         if (idx != 12) {
-            //             break;
-            //         }
-            //         lastEventButtonNumber = ReadUInt8(&buf[1]);
-            //         lastEventX = ReadUInt16(&buf[3]);
-            //         lastEventY = ReadUInt16(&buf[7]);
-            //         lastEventType = LCDKNOB_EVENT_LONG_PRESS_START;
+                buf[idx] = 0;
+                break;
+            }
+            case LCDKNOB_SEND_BUTTON_STATE_REQUEST:
+            {
+                if (idx != 4)
+                {
 
-            //         // MSG_DEBUGLN("Long press start event received for button " + String(button_number));
-            //         buf[idx] = 0;
-            //         break;
-            //     }
-            //     case LCDKNOB_EVENT_LONG_PRESS_END: {
-            //         if (idx != 12) {
-            //             break;
-            //         }
-            //         lastEventButtonNumber = ReadUInt8(&buf[1]);
-            //         lastEventX = ReadUInt16(&buf[3]);
-            //         lastEventY = ReadUInt16(&buf[7]);
-            //         lastEventType = LCDKNOB_EVENT_LONG_PRESS_END;
+                    break;
+                }
+                lastEventType = LCDKNOB_SEND_BUTTON_STATE_REQUEST;
+                lastEventButtonNumber = ReadUInt8(&buf[1]);
+                Serial.println("Button state request received for button " + String(lastEventButtonNumber));
 
-            //         // MSG_DEBUGLN("Long press end event received for button " + String(button_number));
-            //         buf[idx] = 0;
-            //         break;
-            //     }
-            //     case LCDKNOB_EVENT_TOUCH_XY: {
-            //         if (idx != 10) {
-            //             break;
-            //         }
-            //         lastEventX = ReadUInt16(&buf[1]);
-            //         lastEventY = ReadUInt16(&buf[5]);
-            //         lastEventType = LCDKNOB_EVENT_TOUCH_XY;
+                buf[idx] = 0;
+                break;
+            }
+            case LCDKNOB_SEND_SET_MENU:
+            {
+                if (idx != 4)
+                {
+                    break;
+                }
+                lastEventType = LCDKNOB_SEND_SET_MENU;
+                lastEventMenuNumber = ReadUInt8(&buf[1]);
+                Serial.println("Set menu received for menu " + String(lastEventMenuNumber));
 
-            //         // MSG_DEBUGLN("TouchXY event received for button " + String(button_number));
-            //         buf[idx] = 0;
-            //         break;
-            //     }
-            //     case LCDKNOB_EVENT_BUTTON_STATE: {
-            //         if (idx != 5) {
-            //             break;
-            //         }
-            //         lastEventType = LCDKNOB_EVENT_BUTTON_STATE;
-            //         lastEventButtonNumber = ReadUInt8(&buf[1]);
-            //         char state = buf[3];
+                buf[idx] = 0;
+                break;
+            }
 
-            //         if (state == '1') {
-            //             SetButtonMask(lastEventButtonNumber);
-            //         }
-            //         else {
-            //             ClearButton(lastEventButtonNumber);
-            //         }
-
-            //         Serial.println("Button state event received for button " + String(lastEventButtonNumber) + " state " + state);
-            //         buf[idx] = 0;
-            //         break;
-            //     }
-
-            //     default:
-            //         break;
-            // }
+            default:
+                break;
+            }
             idx = 0;
         }
     }
     return lastEventType;
 }
-uint8_t SerialChannel::ReadUInt8(char* hex_value)
+uint8_t SerialChannel::ReadUInt8(char *hex_value)
 {
     uint8_t data = 0;
     sscanf(hex_value, "%2X", &data);
     return data;
 }
 
-uint16_t SerialChannel::ReadUInt16(char* hex_value)
+uint16_t SerialChannel::ReadUInt16(char *hex_value)
 {
     uint16_t data = 0;
     sscanf(hex_value, "%4X", &data);
     return data;
 }
 
-uint32_t SerialChannel::ReadUInt32(char* hex_value)
+uint32_t SerialChannel::ReadUInt32(char *hex_value)
 {
     uint32_t data = 0;
     sscanf(hex_value, "%8X", &data);
@@ -233,6 +195,16 @@ uint8_t SerialChannel::GetLastEventButtonNumber()
     return lastEventButtonNumber;
 }
 
+uint8_t SerialChannel::GetLastEventMenuNumber()
+{
+    return lastEventMenuNumber;
+}
+
+uint8_t SerialChannel::GetLastEventState()
+{
+    return lastEventState;
+}
+
 uint16_t SerialChannel::GetLastEventX()
 {
     return lastEventX;
@@ -243,44 +215,4 @@ uint16_t SerialChannel::GetLastEventY()
     return lastEventY;
 }
 
-void SerialChannel::SetButtonMask(uint16_t newButtonMask)
-{
-    buttonStateMask = newButtonMask;
-}
 
-void SerialChannel::SetButton(uint8_t button_index)
-{
-    // if ((button_index < LCDKNOB_MAX_BUTTON) && (button_index > 0)) {
-    //     buttonStateMask |= (1 << (button_index - 1));
-    // }
-    // else {
-    //     MSG_ERRORLN("[ERROR] SerialChannel::SetButton invalid button index");
-    // }
-}
-
-void SerialChannel::ClearButtonMask()
-{
-    buttonStateMask = 0;
-}
-
-void SerialChannel::ClearButton(uint8_t button_index)
-{
-    // if ((button_index < LCDKNOB_MAX_BUTTON) && (button_index > 0)) {
-    //     buttonStateMask &= ~(1 << (button_index - 1));
-    // }
-    // else {
-    //     MSG_ERRORLN("[ERROR] SerialChannel::ClearButton invalid button index");
-    // }
-}
-bool SerialChannel::GetButtonState(uint8_t button_index)
-{
-    // if ((button_index < LCDKNOB_MAX_BUTTON) && (button_index >= 0)) {
-    //     return (buttonStateMask & (1 << (button_index)));
-    // }
-    // else {
-    //     MSG_ERROR1("[ERROR] SerialChannel::GetButtonState invalid button index ", button_index);
-    //     return false;
-    // }
-
-    return false;
-}

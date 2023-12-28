@@ -13,11 +13,11 @@
 #include "Arduino.h"
 #include "LCDKnob.h"
 
-const char *versionnumber = "V0.0.1 WIP";
+const char *versionnumber = "V1.0.0";
 /*
 
- * Version V0.0.1 WIP
- *                   - Initial version (non-functional)
+ * Version V1.0.0 
+ *                   - Initial version
  *
  * */
 
@@ -67,6 +67,15 @@ void setup()
     tft.initDMA();
     tft.startWrite();
     tft.setColor(0, 0, 0);
+
+    tft.setCursor(20, 100);
+    tft.setTextColor(TFT_WHITE, TFT_BLACK);
+    tft.setTextSize(2);
+    tft.print("LCDKnob " + String(versionnumber));
+    tft.setCursor(20, 120);
+    tft.print(+" starting up...");
+    delay(5000);
+    tft.clearDisplay();
 
     // -------------- Start filesystem ----------------------
 
@@ -181,8 +190,8 @@ void setup()
     tft.BLOn();
 
     MSG_INFOLN("[INFO] Initial screen content");
-    drawGrid();
     drawKeypad();
+    drawGrid();
 
     // move = true;
     // draw_logo(SCREEN_CENTER_X, SCREEN_CENTER_Y, "/logos/move_64.png", true);
@@ -198,6 +207,60 @@ void loop()
         this_loop_start = time_now;
 
         processTouchEvents();
+
+        uint8_t eventType = serialChannel.ReceiveData();
+
+        switch (eventType)
+        {
+        case LCDKNOB_SEND_SET_BUTTON_STATE:
+        {
+            uint8_t buttonNumber = serialChannel.GetLastEventButtonNumber();
+            uint8_t buttonState = serialChannel.GetLastEventState();
+
+            MSG_DEBUGLN("Set button state received for button " + String(buttonNumber) + " state " + String(buttonState));
+
+            if (buttonState == 1)
+            {
+                menu[pageNum].button[buttonNumber].state = ButtonState::ButtonState_Latched;
+                menu[pageNum].button[buttonNumber].islatched = true;
+            }
+            else
+            {
+                menu[pageNum].button[buttonNumber].state = ButtonState::ButtonState_NoAction;
+                menu[pageNum].button[buttonNumber].islatched = false;
+            }
+
+            drawButtonNumber(pageNum, buttonNumber);
+            drawGrid();
+            break;
+        }
+
+        case LCDKNOB_SEND_BUTTON_STATE_REQUEST:
+        {
+            uint8_t buttonNumber = serialChannel.GetLastEventButtonNumber();
+            MSG_DEBUGLN("Button state request received for button " + String(buttonNumber));
+
+            if (menu[pageNum].button[buttonNumber].islatched)
+                serialChannel.SendButtonState(buttonNumber, true);
+            else
+                serialChannel.SendButtonState(buttonNumber, false);
+
+            break;
+        }
+
+        case LCDKNOB_SEND_SET_MENU:
+        {
+            uint8_t menuNumber = serialChannel.GetLastEventMenuNumber();
+            MSG_DEBUGLN("Set menu received for menu " + String(menuNumber));
+            pageNum = menuNumber;
+            drawKeypad();
+            drawGrid();
+            break;
+        }
+
+        default:
+            break;
+        }
 
         last_loop_start = this_loop_start;
     }

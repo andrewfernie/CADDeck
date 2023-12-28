@@ -2,8 +2,21 @@
 #include "Arduino.h"
 #include <stdint.h>
 
-const uint8_t MAX_BUTTON = 7;
+const uint8_t LCDKNOB_MAX_BUTTON = 7;
 const uint8_t BUTTON_INVALID = 255;
+
+#define LCDKNOB_EVENT_END '\n'
+#define LCDKNOB_EVENT_NONE 'j'
+#define LCDKNOB_EVENT_CLICK 'k'
+#define LCDKNOB_EVENT_DBL_CLICK 'm'
+#define LCDKNOB_EVENT_LONG_PRESS_START 'n'
+#define LCDKNOB_EVENT_LONG_PRESS_END 'o'
+#define LCDKNOB_EVENT_TOUCH_XY 'p'
+#define LCDKNOB_EVENT_BUTTON_STATE 'q'
+
+#define LCDKNOB_SEND_BUTTON_STATE_REQUEST 't'
+#define LCDKNOB_SEND_SET_BUTTON_STATE 'u'
+#define LCDKNOB_SEND_SET_MENU 'v'
 
 class SerialChannel
 {
@@ -19,17 +32,14 @@ public:
     void SendTouchXY(uint16_t x, uint16_t y);
     void SendButtonState(uint8_t button_number, bool isLatched);
     uint8_t ReceiveData();
-    void SetButtonMask(uint16_t newButtonMask);
-    void SetButton(uint8_t button_index);
-    void ClearButtonMask();
-    void ClearButton(uint8_t button_index);
-    bool GetButtonState(uint8_t button_index);
     uint8_t GetLastEventType();
     uint8_t GetLastEventButtonNumber();
     uint16_t GetLastEventX();
     uint16_t GetLastEventY();
+    uint8_t GetLastEventMenuNumber();
+    uint8_t GetLastEventState();
 
-   private:
+private:
     void SendUInt8(uint8_t data);
     void SendUInt16(uint16_t data);
     void SendUInt32(uint32_t data);
@@ -38,14 +48,7 @@ public:
     uint32_t ReadUInt32(char *hex_value);
 
    public:
-    const uint8_t LCDKNOB_EVENT_END = '\n';
-    const uint8_t LCDKNOB_EVENT_NONE = 'j';
-    const uint8_t LCDKNOB_EVENT_CLICK = 'k';
-    const uint8_t LCDKNOB_EVENT_DBL_CLICK = 'm';
-    const uint8_t LCDKNOB_EVENT_LONG_PRESS_START = 'n';
-    const uint8_t LCDKNOB_EVENT_LONG_PRESS_END = 'o';
-    const uint8_t LCDKNOB_EVENT_TOUCH_XY = 'p';
-    const uint8_t LCDKNOB_EVENT_BUTTON_STATE = 'q';
+
 
 private:
     unsigned long baudRate;
@@ -54,12 +57,14 @@ private:
     uint32_t lastButtonMask;
     uint8_t pinRx;
     uint8_t pinTx;
-    uint8_t button_set[MAX_BUTTON] = {0};
+    uint8_t button_set[LCDKNOB_MAX_BUTTON] = {0};
     uint8_t longPressActive;
     char buf[64] = {0};
     uint8_t idx;
     uint8_t lastEventType;
+    uint8_t lastEventMenuNumber;
     uint8_t lastEventButtonNumber;
+    uint8_t lastEventState;
     uint16_t buttonStateMask;
     uint16_t lastEventX;
     uint16_t lastEventY;

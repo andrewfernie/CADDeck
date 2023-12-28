@@ -47,10 +47,25 @@ void LCDKnobComms::SendUInt32(uint32_t data)
     Serial2.print(hex_value);
 }
 
-void LCDKnobComms::SendStateRequest(uint8_t button_number)
+void LCDKnobComms::SendSetMenu(uint8_t menu_number)
 {
-    Serial2.write(LCDKNOB_EVENT_BUTTON_STATE);
+    Serial2.write(LCDKNOB_SEND_SET_MENU);
+    SendUInt8(menu_number);
+    Serial2.write(LCDKNOB_EVENT_END);
+}
+
+void LCDKnobComms::SendButtonStateRequest(uint8_t button_number)
+{
+    Serial2.write(LCDKNOB_SEND_BUTTON_STATE_REQUEST);
     SendUInt8(button_number);
+    Serial2.write(LCDKNOB_EVENT_END);
+}
+
+void LCDKnobComms::SendSetButtonState(uint8_t button_number, uint8_t state)
+{
+    Serial2.write(LCDKNOB_SEND_SET_BUTTON_STATE);
+    SendUInt8(button_number);
+    SendUInt8(state);
     Serial2.write(LCDKNOB_EVENT_END);
 }
 
