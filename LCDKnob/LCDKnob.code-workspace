@@ -2,7 +2,17 @@
 	"folders": [
 		{
 			"path": "."
+		},
+		{
+			"name": "CST816_Test",
+			"path": "../../1.28inch_ESP32-2424S012_Demo/CST816_Test"
 		}
 	],
-	"settings": {}
+	"settings": {
+		"files.associations": {
+			"*.cps": "javascript",
+			"functional": "cpp",
+			"cmath": "cpp"
+		}
+	}
 }

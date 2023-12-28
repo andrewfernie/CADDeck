@@ -168,8 +168,7 @@ int saveCurrentConfigGeneral()
     general["gpio_pin"] = generalconfig.gpio_pin;
     general["gpio_pin_mode"] = generalconfig.gpio_pin_mode;
 
-    if (serializeJsonPretty(doc, file) == 0)
-    {
+    if (serializeJsonPretty(doc, file) == 0) {
         MSG_WARNLN("[WARNING]: Failed to write to /config/general.json file");
         status = 2;
     }
@@ -257,7 +256,6 @@ int saveConfigCADParams(AsyncWebServerRequest *request)
         cadparams["spacemouse_enable"] = false;
     }
 
-
     // TODO: Fix this to include all of the program-specific parameters. Need to figure out how to do
     // this with the AsyncWebServerRequest object. Look at how the menu parameters are saved.
     // For the moment, ignore the web page and just save back the currently loaded parameters.
@@ -305,6 +303,44 @@ int saveConfigCADParams(AsyncWebServerRequest *request)
             }
             else {
                 programButtonObject_valuearray.add(String((cadprogramconfig[program].hw_buttons[button][2].value)));
+            }
+        }
+
+        // Saving LCDKnob buttons
+        JsonArray programLCDKnobButtonsArray = programObject.createNestedArray("lcdknob_buttons");
+        for (int button = 0; button < cadprogramconfig[program].num_lcdknob_buttons; button++) {
+            JsonObject programButtonObject = programLCDKnobButtonsArray.createNestedObject();
+
+            programButtonObject["name"] = "button" + String(button);
+
+            programButtonObject["description"] = cadprogramconfig[program].lcdknob_button_descriptions[button];
+
+            JsonArray programButtonObject_actionarray = programButtonObject.createNestedArray("actionarray");
+
+            programButtonObject_actionarray.add(String((cadprogramconfig[program].lcdknob_buttons[button][0].action)));
+            programButtonObject_actionarray.add(String((cadprogramconfig[program].lcdknob_buttons[button][1].action)));
+            programButtonObject_actionarray.add(String((cadprogramconfig[program].lcdknob_buttons[button][2].action)));
+
+            JsonArray programButtonObject_valuearray = programButtonObject.createNestedArray("valuearray");
+            if (cadprogramconfig[program].lcdknob_buttons[button][0].action == Action_Char || cadprogramconfig[program].lcdknob_buttons[button][0].action == Action_SpecialChar) {
+                programButtonObject_valuearray.add(cadprogramconfig[program].lcdknob_buttons[button][0].symbol);
+            }
+            else {
+                programButtonObject_valuearray.add(String((cadprogramconfig[program].lcdknob_buttons[button][0].value)));
+            }
+
+            if (cadprogramconfig[program].lcdknob_buttons[button][1].action == Action_Char || cadprogramconfig[program].lcdknob_buttons[button][1].action == Action_SpecialChar) {
+                programButtonObject_valuearray.add(cadprogramconfig[program].lcdknob_buttons[button][1].symbol);
+            }
+            else {
+                programButtonObject_valuearray.add(String((cadprogramconfig[program].lcdknob_buttons[button][1].value)));
+            }
+
+            if (cadprogramconfig[program].lcdknob_buttons[button][2].action == Action_Char || cadprogramconfig[program].lcdknob_buttons[button][2].action == Action_SpecialChar) {
+                programButtonObject_valuearray.add(cadprogramconfig[program].lcdknob_buttons[button][2].symbol);
+            }
+            else {
+                programButtonObject_valuearray.add(String((cadprogramconfig[program].lcdknob_buttons[button][2].value)));
             }
         }
     }
@@ -400,6 +436,44 @@ int saveCurrentConfigCADParams()
             }
             else {
                 programButtonObject_valuearray.add(String((cadprogramconfig[program].hw_buttons[button][2].value)));
+            }
+        }
+        
+        // Saving LCDKnob buttons
+        JsonArray programLCDKnobButtonsArray = programObject.createNestedArray("lcdknob_buttons");
+        for (int button = 0; button < cadprogramconfig[program].num_lcdknob_buttons; button++) {
+            JsonObject programButtonObject = programLCDKnobButtonsArray.createNestedObject();
+
+            programButtonObject["name"] = "button" + String(button);
+
+            programButtonObject["description"] = cadprogramconfig[program].lcdknob_button_descriptions[button];
+
+            JsonArray programButtonObject_actionarray = programButtonObject.createNestedArray("actionarray");
+
+            programButtonObject_actionarray.add(String((cadprogramconfig[program].lcdknob_buttons[button][0].action)));
+            programButtonObject_actionarray.add(String((cadprogramconfig[program].lcdknob_buttons[button][1].action)));
+            programButtonObject_actionarray.add(String((cadprogramconfig[program].lcdknob_buttons[button][2].action)));
+
+            JsonArray programButtonObject_valuearray = programButtonObject.createNestedArray("valuearray");
+            if (cadprogramconfig[program].lcdknob_buttons[button][0].action == Action_Char || cadprogramconfig[program].lcdknob_buttons[button][0].action == Action_SpecialChar) {
+                programButtonObject_valuearray.add(cadprogramconfig[program].lcdknob_buttons[button][0].symbol);
+            }
+            else {
+                programButtonObject_valuearray.add(String((cadprogramconfig[program].lcdknob_buttons[button][0].value)));
+            }
+
+            if (cadprogramconfig[program].lcdknob_buttons[button][1].action == Action_Char || cadprogramconfig[program].lcdknob_buttons[button][1].action == Action_SpecialChar) {
+                programButtonObject_valuearray.add(cadprogramconfig[program].lcdknob_buttons[button][1].symbol);
+            }
+            else {
+                programButtonObject_valuearray.add(String((cadprogramconfig[program].lcdknob_buttons[button][1].value)));
+            }
+
+            if (cadprogramconfig[program].lcdknob_buttons[button][2].action == Action_Char || cadprogramconfig[program].lcdknob_buttons[button][2].action == Action_SpecialChar) {
+                programButtonObject_valuearray.add(cadprogramconfig[program].lcdknob_buttons[button][2].symbol);
+            }
+            else {
+                programButtonObject_valuearray.add(String((cadprogramconfig[program].lcdknob_buttons[button][2].value)));
             }
         }
     }

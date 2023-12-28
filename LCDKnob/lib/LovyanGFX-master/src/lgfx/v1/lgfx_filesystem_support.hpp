@@ -58,7 +58,7 @@ namespace lgfx
     using Base::loadFont;
 
 #if defined (ARDUINO)
- #if defined (FS_H) || defined (__SEEED_FS__) || defined (__LITTLEFS_H) || defined (_LiffleFS_H_) || defined (SDFS_H)
+ #if defined (FS_H) || defined (__SEEED_FS__) || defined (__LITTLEFS_H) || defined (_LiffleFS_H_) || defined (SDFS_H) 
 
     /// load vlw fontdata from filesystem.
     void loadFont(const char *path, fs::FS &fs

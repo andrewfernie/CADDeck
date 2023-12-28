@@ -1,20 +1,20 @@
 #pragma once
 
-#define BLUETOOTH_COMMANDS   // Enable Bluetooth commands (BLE Keyboard and BLE Mouse). Otherwise only USB commands are enabled. (IN WORK)
+#define BLUETOOTH_COMMANDS // Enable Bluetooth commands (BLE Keyboard and BLE Mouse). Otherwise only USB commands are enabled. (IN WORK)
 
 // Select UI language
 #define LANGUAGE_ENGLISH
 // #define LANGUAGE_GERMAN
 
 // Basic macros for debug and info messages to the serial port
-// If too many messages are being sent the web server used for the configurator may not work as well. 
+// If too many messages are being sent the web server used for the configurator may not work as well.
 #define LOG_MSG_BASIC 1
-#define LOG_MSG_LEVEL 2  // 1=ERROR, 2=ERROR+WARN, 3=ERROR+WARN+INFO
+#define LOG_MSG_LEVEL 2 // 1=ERROR, 2=ERROR+WARN, 3=ERROR+WARN+INFO
 #define LOG_MSG_DEBUG 1
-#define LOG_MSG_TOUCH_DEBUG 0 // messages to console each time a touch is detected
-#define LOG_MSG_JOYSTICK_MODE 0  // messages to console for joystick mode debug
+#define LOG_MSG_TOUCH_DEBUG 0   // messages to console each time a touch is detected
+#define LOG_MSG_JOYSTICK_MODE 0 // messages to console for joystick mode debug
 
-//#define LOG_JSON_FILES  // log the contents of the JSON files to the console. Comment out to disable.
+// #define LOG_JSON_FILES  // log the contents of the JSON files to the console. Comment out to disable.
 
 #include "std_defs.h"
 
@@ -22,52 +22,52 @@
 // This avoids the need to modify files in the TFT_eSPI library, which would be overwritten when the library is updated.
 
 #ifdef BLUETOOTH_COMMANDS
-#include <BleCombo.h>     // BLE combo library (Keyboard and Mouse)
+#include <BleCombo.h> // BLE combo library (Keyboard and Mouse)
 #else
 #endif
-#include <FS.h>           // Filesystem support header
-#include <Preferences.h>  // Used to store states before sleep/reboot
-#include <TFT_eSPI.h>     // The TFT_eSPI library
-#include <pgmspace.h>     // PROGMEM support header
+#include <FS.h>          // Filesystem support header
+#include <Preferences.h> // Used to store states before sleep/reboot
+#include <TFT_eSPI.h>    // The TFT_eSPI library
+#include <pgmspace.h>    // PROGMEM support header
 
 // Define the storage to be used.
 #define FILESYSTEM_LITTLEFS
 
 #ifdef FILESYSTEM_LITTLEFS
 #define FILESYSTEM LittleFS
-#include <LittleFS.h>  // https://github.com/lorol/LITTLEFS
+#include <LittleFS.h> // https://github.com/lorol/LITTLEFS
 #else
 #define FILESYSTEM SPIFFS
-#include <SPIFFS.h>  // Filesystem support header
+#include <SPIFFS.h> // Filesystem support header
 #endif
 
 #ifdef BLUETOOTH_COMMANDS
 #if defined(USE_NIMBLE)
 
-#include "NimBLEBeacon.h"  // Additional BLE functionaity using NimBLE
-#include "NimBLEDevice.h"  // Additional BLE functionaity using NimBLE
-#include "NimBLEUtils.h"   // Additional BLE functionaity using NimBLE
+#include "NimBLEBeacon.h" // Additional BLE functionaity using NimBLE
+#include "NimBLEDevice.h" // Additional BLE functionaity using NimBLE
+#include "NimBLEUtils.h"  // Additional BLE functionaity using NimBLE
 
 #else
 
-#include "BLEBeacon.h"  // Additional BLE functionaity
-#include "BLEDevice.h"  // Additional BLE functionaity
-#include "BLEUtils.h"   // Additional BLE functionaity
+#include "BLEBeacon.h" // Additional BLE functionaity
+#include "BLEDevice.h" // Additional BLE functionaity
+#include "BLEUtils.h"  // Additional BLE functionaity
 
-#endif  // USE_NIMBLE
+#endif // USE_NIMBLE
 #endif
 
-#include <ArduinoJson.h>        // Using ArduinoJson to read and write config files
-#include <AsyncTCP.h>           //Async Webserver support header
-#include <ESPAsyncWebServer.h>  //Async Webserver support header
-#include <ESPmDNS.h>            // DNS functionality
-#include <WiFi.h>               // Wifi support
+#include <ArduinoJson.h>       // Using ArduinoJson to read and write config files
+#include <AsyncTCP.h>          //Async Webserver support header
+#include <ESPAsyncWebServer.h> //Async Webserver support header
+#include <ESPmDNS.h>           // DNS functionality
+#include <WiFi.h>              // Wifi support
 
 #ifdef BLUETOOTH_COMMANDS
-#include "esp_bt_device.h"  // Additional BLE functionaity
-#include "esp_bt_main.h"    // Additional BLE functionaity
+#include "esp_bt_device.h" // Additional BLE functionaity
+#include "esp_bt_main.h"   // Additional BLE functionaity
 #endif
-#include "esp_sleep.h"      // Additional BLE functionaity
+#include "esp_sleep.h" // Additional BLE functionaity
 
 #include "DrawHelper.h"
 #include "Action.h"
@@ -82,9 +82,14 @@
 #include "stack_queue.h"
 #include "SpaceMouse.h"
 
+#define LCDKNOB_SUPPORT 1
+#ifdef LCDKNOB_SUPPORT
+#include "LCDKnobComms.h"
+#endif
+
 #define MIN_TO_MS 60 * 1000
 
-const long loop_period = 20;  // 20ms loop period
+const long loop_period = 20; // 20ms loop period
 
 const uint8_t LEN_FILENAME = 32;    // length of filenames (e.g. for logos, menus, etc). Includes the file extension
 const uint8_t LEN_DESCRIPTION = 32; // length of h/W and menu button descriptions
@@ -94,11 +99,11 @@ const uint8_t LEN_NAME = 32;        // length of menu name
 // #define speakerPin 26
 
 // ------- Enable to read and report battery voltage.  -------
-//#define READ_EXTERNAL_BATTERY
+// #define READ_EXTERNAL_BATTERY
 #ifdef READ_EXTERNAL_BATTERY
 #define EXTERNAL_BATTERY_PIN 33
-#define EXTERNAL_BATTERY_ADC_SCALE (3.3 / 4095.0)                   // Default attenuation results in 2.6V for full scale on ADC
-#define EXTERNAL_BATTERY_SCALE (EXTERNAL_BATTERY_ADC_SCALE * 2.13)  // include any input voltage dividers here
+#define EXTERNAL_BATTERY_ADC_SCALE (3.3 / 4095.0)                  // Default attenuation results in 2.6V for full scale on ADC
+#define EXTERNAL_BATTERY_SCALE (EXTERNAL_BATTERY_ADC_SCALE * 2.13) // include any input voltage dividers here
 #endif
 
 // ------- NimBLE definition, use only if the NimBLE library is installed
@@ -106,7 +111,7 @@ const uint8_t LEN_NAME = 32;        // length of menu name
 // #define USE_NIMBLE
 
 // CADDeck version number
-extern const char* versionnumber;
+extern const char *versionnumber;
 
 // ------- Uncomment the define below if you want to preload the logos to PSRAM at start (adds about 10s to startup) -------
 // #define PRELOAD_LOGOS
@@ -118,7 +123,7 @@ extern const char* versionnumber;
 #define BUTTON_ROWS 3
 #define BUTTON_COLS 4
 #define BUTTONS_PER_PAGE (BUTTON_ROWS * BUTTON_COLS)
-#define NUM_PAGES 10  // Includes Menu0 which is the home page
+#define NUM_PAGES 10 // Includes Menu0 which is the home page
 
 // Gaps between buttons
 // First - strictly define the gap between each button
@@ -182,13 +187,19 @@ extern bool psramAvailable;
 
 // ---------------- SpaceMouse Support ----------------
 // enable support for SpaceMouse emulation on Serial 1
-#define SPACEMOUSE_SUPPORT  // Comment out to disable SpaceMouse support
+#define SPACEMOUSE_SUPPORT // Comment out to disable SpaceMouse support
 #define SPACEMOUSE_RX_PIN 5
 #define SPACEMOUSE_TX_PIN 4
 #define SPACEMOUSE_BAUD 115200
 #define SPACEMOUSE_CONFIG SERIAL_8N1
 #define SPACEMOUSE_SERIAL Serial1
 extern SpaceMouse spaceMouse;
+
+extern LCDKnobComms lcdKnobComms;
+#define LCD_KNOB_BAUD 115200
+#define LCD_KNOB_CONFIG SERIAL_8N1
+#define LCD_KNOB_RX_PIN 26
+#define LCD_KNOB_TX_PIN 25
 
 // ---------------- Debug pins ----------------
 // set to 1 to enable debug pins, 0 to disable
@@ -232,15 +243,18 @@ extern uint8_t last_hwbutton_state[];
 
 extern long loop_count;
 
+
 // Struct Action: actions and value
-struct Actions {
+struct Actions
+{
     uint8_t action;
     uint8_t value;
     char symbol[64];
 };
 
 // Each button has an action struct in it
-struct Button {
+struct Button
+{
     Actions actions[3];
     bool latch;
     bool islatched;
@@ -251,13 +265,14 @@ struct Button {
     uint16_t latchImageBGColour;
     uint8_t imageBGColourValid;
     uint8_t latchImageBGColourValid;
-    uint16_t* pImage;
-    uint16_t* pLatchImage;
+    uint16_t *pImage;
+    uint16_t *pLatchImage;
 };
 
 // Each menu has an array of buttons
 
-struct MenuLayout {
+struct MenuLayout
+{
     uint16_t logo_size_x_y;
     uint16_t button_rows;
     uint16_t button_cols;
@@ -268,20 +283,16 @@ struct MenuLayout {
     uint16_t status_bar_height_bottom;
 };
 
-struct Menu {
+struct Menu
+{
     char name[LEN_NAME];
     MenuLayout layout;
     Button button[BUTTON_ROWS][BUTTON_COLS];
 };
 
-// Struct to hold the general logos.
-struct Generallogos {
-    char homebutton[64];
-    char configurator[64];
-};
-
 // Struct to hold the general config like colours.
-struct Config {
+struct Config
+{
     uint16_t menuButtonColour;
     uint16_t functionButtonColour;
     uint16_t backgroundColour;
@@ -289,7 +300,7 @@ struct Config {
     bool sleepenable;
     uint16_t sleeptimer;
     bool usbcommsenable;
-    bool beep; 
+    bool beep;
     uint8_t modifier1;
     uint8_t modifier2;
     uint8_t modifier3;
@@ -300,7 +311,8 @@ struct Config {
 };
 
 const uint8_t CADCONFIG_VERSION = 2;
-struct CADConfig {
+struct CADConfig
+{
     uint8_t version;
     uint8_t current_program;
     float joy_scale_x;
@@ -316,10 +328,19 @@ struct CADConfig {
     float mouse_sensitivity;
     uint16_t num_programs;
     bool spacemouse_enable;
+    bool joystick_mode = 0; // not saved or recalled
 };
 
 #define NUM_HW_BUTTONS 11
-struct CADProgramConfig {
+
+
+#ifdef LCDKNOB_SUPPORT
+#define NUM_LCDKNOB_BUTTONS 7
+void executeLCDKnobButtonClick(uint8_t buttonNumber);
+#endif
+
+struct CADProgramConfig
+{
     uint8_t version;
     char name[LEN_NAME];
     char logo[LEN_FILENAME];
@@ -332,9 +353,16 @@ struct CADProgramConfig {
     char hw_button_descriptions[NUM_HW_BUTTONS][LEN_DESCRIPTION];
     Actions hw_buttons[NUM_HW_BUTTONS][3];
     uint8_t hw_button_state[NUM_HW_BUTTONS];
+#ifdef LCDKNOB_SUPPORT
+    uint16_t num_lcdknob_buttons;
+    char lcdknob_button_descriptions[NUM_LCDKNOB_BUTTONS][LEN_DESCRIPTION];
+    Actions lcdknob_buttons[NUM_LCDKNOB_BUTTONS][3];
+    uint8_t lcdknob_button_state[NUM_LCDKNOB_BUTTONS];
+#endif
 };
 
-struct Wificonfig {
+struct Wificonfig
+{
     char ssid[64];
     char password[64];
     char wifimode[9];
@@ -355,10 +383,6 @@ extern CADProgramConfig cadprogramconfig[];
 
 // And finally, we have an array of menus
 extern Menu menu[NUM_PAGES];
-
-extern Generallogos generallogo;
-
-
 
 // struct Logos screen[NUM_PAGES];
 
@@ -387,7 +411,7 @@ extern TFT_eSPI_Button key[BUTTON_ROWS][BUTTON_COLS];
 #define SPECIAL_4_PAGE (NUM_PAGES + 4)
 #define SPECIAL_PAGE_IO_MONITOR (NUM_PAGES + 5)
 #define SPECIAL_PAGE_BUTTON_INFO (NUM_PAGES + 6)
-#define MAX_PAGE_NUM (NUM_PAGES + 6)  // update this to the highest special page number
+#define MAX_PAGE_NUM (NUM_PAGES + 6) // update this to the highest special page number
 
 //--------- Internal references ------------
 // (this needs to be below all structs etc..)
@@ -416,7 +440,8 @@ enum ActionEnum
     Action_SpaceMouseButton = 20
 };
 
-enum CADFnEnum {
+enum CADFnEnum
+{
     CADFn_NoAction = 0,
     CADFn_SetCADProgram = 1,
     CADFn_CalibrateZero = 2,
@@ -432,10 +457,13 @@ enum CADFnEnum {
     CADFn_Spare4 = 12,
     CADFn_Spare5 = 13,
     CADFn_Spare6 = 14,
-    CADFn_ModeSelect = 15
+    CADFn_ModeSelect = 15,
+    CADFn_SetModeRotate = 16,
+    CADFn_SetModeMove = 17
 };
 
-enum JoystickMode {
+enum JoystickMode
+{
     JoystickModeNone = 0,
     JoystickModePan = 1,
     JoystickModeTilt = 2,
@@ -444,7 +472,8 @@ enum JoystickMode {
     JoystickModeMouse = 5
 };
 
-enum CADApplications {
+enum CADApplications
+{
     CADApp_SolidWorks = 0,
     CADApp_Fusion360 = 1,
     CADApp_Blender = 2,
@@ -471,11 +500,12 @@ enum SpecialFn
     SpecialFn_Spacemouse_Enable_Toggle = 14
 };
 
-enum MouseButton {
+enum MouseButton
+{
     MouseButton_PL = 1,
     MouseButton_PR = 2,
     MouseButton_PM = 3,
-    MouseButton_PLM = 4, 
+    MouseButton_PLM = 4,
     MouseButton_PRM = 5,
     MouseButton_RL = 6,
     MouseButton_RR = 7,
@@ -485,7 +515,8 @@ enum MouseButton {
     MouseButton_RLRM = 11
 };
 
-enum OptionKeys {
+enum OptionKeys
+{
     OptionKey_LCtrl = 1,
     OptionKey_LShift = 2,
     OptionKey_LAlt = 3,
@@ -497,7 +528,8 @@ enum OptionKeys {
     OptionKey_ReleaseAll = 9
 };
 
-enum ActionNumpadKeys {
+enum ActionNumpadKeys
+{
     ActionNumpadKey_0 = 0,
     ActionNumpadKey_1 = 1,
     ActionNumpadKey_2 = 2,

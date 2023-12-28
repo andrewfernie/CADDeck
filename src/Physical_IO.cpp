@@ -231,9 +231,14 @@ void update_io()
     zoomControl.Update();
     rotateControl.Update();
     pcf857X_inputs = pcf857X.digitalReadAll();
-    joystickModeButton.loop();
 
-    uint8_t hw_button0_set = !get_hwbutton(mode_select_button_pin);
+    uint8_t mode_buttton_set = 0;
+#ifdef LCDKNOB_SUPPORT
+    mode_buttton_set = cadconfig.joystick_mode;
+#else
+    joystickModeButton.loop();
+    mode_buttton_set = !get_hwbutton(mode_select_button_pin);
+#endif
 
     uint8_t joystick_x_steadyzero = joy_x_comparison.Equals(joystick.x());
     uint8_t joystick_y_steadyzero = joy_y_comparison.Equals(joystick.y());
@@ -259,7 +264,7 @@ void update_io()
                     case CADApp_Fusion360:
                     case CADApp_FreeCAD:
                     case CADApp_AC3D:
-                        if (hw_button0_set) {
+                        if (mode_buttton_set) {
                             if (!joystick_x_steadyzero || !joystick_y_steadyzero || !zoom_knob_steadyzero) {
                                 if (control_mode != JOYSTICK_CONTROL_MODE_MOVE) {
                                     set_move_mode(cadconfig.current_program);
@@ -285,7 +290,7 @@ void update_io()
 
                     case CADApp_Blender:
 
-                        if (hw_button0_set) {
+                        if (mode_buttton_set) {
                             if (control_mode != JOYSTICK_CONTROL_MODE_MOVE) {
                                 set_move_mode(cadconfig.current_program);
                             }
@@ -331,7 +336,7 @@ void update_io()
 
     else {
         uint16_t x, y, z, a, b, c;
-        if (hw_button0_set) {
+        if (mode_buttton_set) {
             x = joystick.x() * 2047.0 + 32768;
             y = joystick.y() * 2047.0 + 32768;
             z = zoomControl.Value() * 2047.0 + 32768;

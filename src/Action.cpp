@@ -21,7 +21,7 @@ void KeyboardMouseAction(int action, int value, char *symbol, uint8_t hwbutton_i
 {
     int callingPageNum;
     uint8_t status;
-
+    // MSG_WARN2("[WARN] KeyboardMouseAction", action, value);
     switch (action) {
         case Action_NoAction:
             // No Action
@@ -767,6 +767,14 @@ void KeyboardMouseAction(int action, int value, char *symbol, uint8_t hwbutton_i
                 case CADFn_ModeSelect:
                     mode_select_button_pin = HWButton_Pins[hwbutton_index];
                     break;
+
+                case CADFn_SetModeRotate:
+                    cadconfig.joystick_mode = 1;
+                    break;
+
+                case CADFn_SetModeMove:
+                    cadconfig.joystick_mode = 0;
+                    break;
             }
             break;
 
@@ -853,7 +861,8 @@ void KeyboardMouseAction(int action, int value, char *symbol, uint8_t hwbutton_i
             break;
 
         case Action_SpaceMouseButton:  // Emulate a SpaceMouse button press as long as the button number is valid
-            if ((value > (cadprogramconfig[cadconfig.current_program].num_buttons - 1)) && (value <= SPACEMOUSE_MAX_BUTTON)) {
+            if ((value >= 0 ) && (value <= SPACEMOUSE_MAX_BUTTON)) {
+                // MSG_DEBUG1("[INFO] Action_SpaceMouseButton: Sending SpaceMouse button number", value);
                 spaceMouse.SetButton(value);
             }
             else {

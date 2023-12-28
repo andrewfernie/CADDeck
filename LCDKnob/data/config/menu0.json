@@ -1,0 +1,45 @@
+{
+  "menuname": "Home",
+  "button1": {
+    "logo": "move_64.png",
+    "latch": true,
+    "latchlogo": "rotate_64.png",
+    "buttontext": ""
+  },
+  "button2": {
+    "logo": "visible_64.png",
+    "latch": false,
+    "latchlogo": "",
+    "buttontext": ""
+  },
+  "button3": {
+    "logo": "fit_64.png",
+    "latch": false,
+    "latchlogo": "",
+    "buttontext": ""
+  },
+  "button4": {
+    "logo": "top_64.png",
+    "latch": false,
+    "latchlogo": "",
+    "buttontext": ""
+  },
+  "button5": {
+    "logo": "front_64.png",
+    "latch": false,
+    "latchlogo": "",
+    "buttontext": ""
+  },
+  "button6": {
+    "logo": "rightside_64.png",
+    "latch": false,
+    "latchlogo": "",
+    "buttontext": ""
+  },
+  "button7": {
+    "logo": "measure_64.png",
+    "latch": false,
+    "latchlogo": "",
+    "buttontext": ""
+  }
+}

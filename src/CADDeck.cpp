@@ -68,13 +68,14 @@ r
 
 #include <Arduino.h>
 
-const char *versionnumber = "10Button V1.1.5 WIP";
+const char *versionnumber = "10Button V1.2 WIP";
 
 /*
-
- * Version V1.1.5 WIP
+ * Version V1.2
+ *                   - Added support for LCDKnob
+ * Version V1.1.5
  *                   - Additional values for zoom_deadzone and rotate_deadzone in configurator
- * 
+ *
  * Version V1.1.4
  *                   - Use stack properly (push current page number then change it, and pop when returning to previous page)
  *
@@ -274,8 +275,6 @@ Config generalconfig;
 CADConfig cadconfig;
 CADProgramConfig cadprogramconfig[NUM_CAD_PROGRAMS];
 
-Generallogos generallogo;
-
 unsigned long previousMillis = 0;
 unsigned long Interval = 0;
 bool displayinginfo = false;
@@ -305,6 +304,10 @@ long loop_100_time = 0;
 
 SpaceMouse spaceMouse(SPACEMOUSE_BAUD, SPACEMOUSE_CONFIG, SPACEMOUSE_RX_PIN, SPACEMOUSE_TX_PIN);
 
+#ifdef LCDKNOB_SUPPORT
+LCDKnobComms lcdKnobComms(LCD_KNOB_BAUD, LCD_KNOB_CONFIG, LCD_KNOB_RX_PIN, LCD_KNOB_TX_PIN);
+#endif
+
 //-------------------------------- SETUP --------------------------------------------------------------
 
 void setup()
@@ -327,6 +330,10 @@ void setup()
 #ifdef SPACEMOUSE_SUPPORT
     spaceMouse.Init();
     MSG_INFOLN("[INFO] SpaceMouse support enabled");
+#endif
+
+#ifdef LCDKNOB_SUPPORT
+    lcdKnobComms.Begin();
 #endif
 
 #ifdef USECAPTOUCH
@@ -526,7 +533,6 @@ void setup()
         pageNum = SPECIAL_4_PAGE;
     }
     else {
-
         // Menu to display on startup
         status = pageHistoryStack.push(pageNum);
         if (status == STACK_STATUS_FULL) {
@@ -575,7 +581,6 @@ void setup()
                 MSG_INFOLN("[INFO] Page History Stack is full. Dropped oldest value..");
             }
             pageNum = SPECIAL_4_PAGE;
-
         }
     }
 
@@ -753,7 +758,7 @@ void loop(void)
                 displayinginfo = false;
 
                 pageNum = pageHistoryStack.pop(&status);
-                if(!isValidPageNumber(pageNum)){
+                if (!isValidPageNumber(pageNum)) {
                     MSG_ERROR1("[ERROR] Invalid page number: ", pageNum);
                     pageNum = 0;
                 }
@@ -995,44 +1000,68 @@ void loop(void)
             // Check if any hw button has been pressed
             for (uint8_t i = 0; i < cadprogramconfig[cadconfig.current_program].num_buttons; i++) {
                 uint8_t button_state = get_hwbutton(i);
+                if (button_state) {
+                    //---------------------------------------- Button press handling --------------------------------------------------
 
-                if (cadconfig.spacemouse_enable) {
-                    // Button 0 is the mode select button. It does not go to the SpaceMouse emulation
-                    if (i > 0) {
-                        if (button_state) {
-                            spaceMouse.SetButton(i);
-                        }
-                        else {
-                            spaceMouse.ClearButton(i);
-                        }
-                    }
+                    KeyboardMouseAction(cadprogramconfig[cadconfig.current_program].hw_buttons[i][0].action,
+                                        cadprogramconfig[cadconfig.current_program].hw_buttons[i][0].value,
+                                        cadprogramconfig[cadconfig.current_program].hw_buttons[i][0].symbol, i);
+
+                    KeyboardMouseAction(cadprogramconfig[cadconfig.current_program].hw_buttons[i][1].action,
+                                        cadprogramconfig[cadconfig.current_program].hw_buttons[i][1].value,
+                                        cadprogramconfig[cadconfig.current_program].hw_buttons[i][1].symbol, i);
+
+                    KeyboardMouseAction(cadprogramconfig[cadconfig.current_program].hw_buttons[i][2].action,
+                                        cadprogramconfig[cadconfig.current_program].hw_buttons[i][2].value,
+                                        cadprogramconfig[cadconfig.current_program].hw_buttons[i][2].symbol, i);
                 }
-                else {
-                    if (button_state && (last_hwbutton_state[i] == 0)) {
-                        //---------------------------------------- Button press handling --------------------------------------------------
-
-                        KeyboardMouseAction(cadprogramconfig[cadconfig.current_program].hw_buttons[i][0].action,
-                                            cadprogramconfig[cadconfig.current_program].hw_buttons[i][0].value,
-                                            cadprogramconfig[cadconfig.current_program].hw_buttons[i][0].symbol, i);
-
-                        KeyboardMouseAction(cadprogramconfig[cadconfig.current_program].hw_buttons[i][1].action,
-                                            cadprogramconfig[cadconfig.current_program].hw_buttons[i][1].value,
-                                            cadprogramconfig[cadconfig.current_program].hw_buttons[i][1].symbol, i);
-
-                        KeyboardMouseAction(cadprogramconfig[cadconfig.current_program].hw_buttons[i][2].action,
-                                            cadprogramconfig[cadconfig.current_program].hw_buttons[i][2].value,
-                                            cadprogramconfig[cadconfig.current_program].hw_buttons[i][2].symbol, i);
-                    }
-                    last_hwbutton_state[i] = button_state;
-                }
+                last_hwbutton_state[i] = button_state;
             }
         }
+
+#ifdef LCDKNOB_SUPPORT
+        // Receive the LCD Knob button events
+        uint8_t eventType = lcdKnobComms.ReceiveData();
+
+        if (eventType != LCDKNOB_EVENT_NONE) {
+            // MSG_DEBUG1("LCD Knob Event: ", eventType);
+
+            switch (eventType) {
+                case LCDKNOB_EVENT_NONE:
+                    break;
+
+                case LCDKNOB_EVENT_CLICK:
+                    executeLCDKnobButtonClick(lcdKnobComms.GetLastEventButtonNumber());
+                    break;
+
+                case LCDKNOB_EVENT_DBL_CLICK:
+                    break;
+
+                case LCDKNOB_EVENT_LONG_PRESS_START:
+                    break;
+
+                case LCDKNOB_EVENT_LONG_PRESS_END:
+                    break;
+
+                case LCDKNOB_EVENT_BUTTON_STATE:
+                    if(lcdKnobComms.GetLastEventButtonNumber() == 0) {
+                        cadconfig.joystick_mode = lcdKnobComms.GetButtonState(0);
+                        MSG_DEBUG1("LCD Knob Mode state : ", lcdKnobComms.GetButtonState(0));
+                    }
+ 
+                    break;
+
+                default:
+                    break;
+            }
+        }
+#endif
 
         // Send the SpaceMouse button presses
         if (cadconfig.spacemouse_enable) {
             spaceMouse.SendButtonPacket();
         }
-        
+
         // Draw top status bar.
         drawTopStatusBar(false);
 
@@ -1054,5 +1083,32 @@ float readExternalBattery()
     uint16_t voltage = analogRead(EXTERNAL_BATTERY_PIN);
     float scaledVoltage = (float)voltage * EXTERNAL_BATTERY_SCALE;
     return scaledVoltage;
+}
+#endif
+
+#ifdef LCDKNOB_SUPPORT
+void executeLCDKnobButtonClick(uint8_t buttonNumber)
+{
+    // MSG_DEBUGLN("LCD Knob Button Pressed: " + String(buttonNumber));
+
+    //---------------------------------------- Button press handling --------------------------------------------------
+
+    if (buttonNumber < cadprogramconfig[cadconfig.current_program].num_lcdknob_buttons) {
+        // MSG_DEBUGLN("Indexing to LCD Knob Button: " + String(buttonNumber));
+        KeyboardMouseAction(cadprogramconfig[cadconfig.current_program].lcdknob_buttons[buttonNumber][0].action,
+                            cadprogramconfig[cadconfig.current_program].lcdknob_buttons[buttonNumber][0].value,
+                            cadprogramconfig[cadconfig.current_program].lcdknob_buttons[buttonNumber][0].symbol, buttonNumber);
+
+        KeyboardMouseAction(cadprogramconfig[cadconfig.current_program].lcdknob_buttons[buttonNumber][1].action,
+                            cadprogramconfig[cadconfig.current_program].lcdknob_buttons[buttonNumber][1].value,
+                            cadprogramconfig[cadconfig.current_program].lcdknob_buttons[buttonNumber][1].symbol, buttonNumber);
+
+        KeyboardMouseAction(cadprogramconfig[cadconfig.current_program].lcdknob_buttons[buttonNumber][2].action,
+                            cadprogramconfig[cadconfig.current_program].lcdknob_buttons[buttonNumber][2].value,
+                            cadprogramconfig[cadconfig.current_program].lcdknob_buttons[buttonNumber][2].symbol, buttonNumber);
+    }
+    else {
+        MSG_ERRORLN("LCD Knob Button Index out of range: " + String(buttonNumber));
+    }
 }
 #endif

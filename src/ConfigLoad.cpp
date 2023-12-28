@@ -181,7 +181,7 @@ bool loadConfig(String value)
 
         // How to decide on the size of the buffer? Edit the JSON file that will be loaded and use the
         // ArduinoJSON Assistant (https://arduinojson.org/v6/assistant/#/step1) to get the size.
-        DynamicJsonDocument doc(14000);
+        DynamicJsonDocument doc(32768);
 
         DeserializationError error = deserializeJson(doc, configfile);
 
@@ -395,6 +395,78 @@ bool loadConfig(String value)
                 cadprogramconfig[program].hw_buttons[button][1].action = program_button_actionarray_1;
                 cadprogramconfig[program].hw_buttons[button][2].action = program_button_actionarray_2;
             }
+
+// Load LCDKnob buttons
+#ifdef LCDKNOB_SUPPORT
+            // Button assignments
+            JsonArray lcdknob_button_array = program_array[program]["lcdknob_buttons"];
+            int num_lcdknob_buttons = lcdknob_button_array.size();
+
+            if (num_lcdknob_buttons > NUM_LCDKNOB_BUTTONS) {
+                MSG_WARN3("[WARN] Too many lcdknobbuttons in cadparams.json for program ", cadprogramconfig[program].name, ". Max is ", NUM_LCDKNOB_BUTTONS);
+                num_buttons = NUM_LCDKNOB_BUTTONS;
+            }
+            else if (num_lcdknob_buttons < 1) {
+                MSG_WARN2("[WARN] No lcdknob buttons in cadparams.json for program ", cadprogramconfig[program].name, ". Will use defaults");
+            }
+            else {
+                MSG_INFO3("[INFO] Number of lcdknob buttons in cadparams.jsonfor program ", cadprogramconfig[program].name, " is ", num_lcdknob_buttons);
+            }
+
+            cadprogramconfig[program].num_lcdknob_buttons = num_lcdknob_buttons;
+
+            for (uint8_t button = 0; button < num_lcdknob_buttons; button++) {
+                MSG_INFO1("[INFO] Loading lcdknob button ", button)
+
+                const char *lcdknob_button_description = lcdknob_button_array[button]["description"] | "Unknown";
+                strlcpy(cadprogramconfig[program].lcdknob_button_descriptions[button], lcdknob_button_description, sizeof(cadprogramconfig[program].lcdknob_button_descriptions[button]));
+                if (cadprogramconfig[program].lcdknob_button_descriptions[button][sizeof(cadprogramconfig[program].lcdknob_button_descriptions[button]) - 1] != '\0') {
+                    // We have overflow, so we need to truncate the string
+                    cadprogramconfig[program].lcdknob_button_descriptions[button][sizeof(cadprogramconfig[program].lcdknob_button_descriptions[button]) - 1] = '\0';
+                }
+                if (error) {
+                    MSG_ERROR2("[ERROR] deserializeJson() error lcdknob_button_description ", error.c_str(), doc.memoryUsage());
+                    return false;
+                }
+
+                JsonArray program_lcdknob_button_actionarray = lcdknob_button_array[button]["actionarray"];
+                int program_lcdknob_button_actionarray_0 = program_lcdknob_button_actionarray[0];
+                int program_lcdknob_button_actionarray_1 = program_lcdknob_button_actionarray[1];
+                int program_lcdknob_button_actionarray_2 = program_lcdknob_button_actionarray[2];
+
+                JsonArray program_lcdknob_button_valuearray = lcdknob_button_array[button]["valuearray"];
+                if (program_lcdknob_button_actionarray_0 == Action_Char || program_lcdknob_button_actionarray_0 == Action_SpecialChar) {
+                    const char *program_lcdknob_button_symbolarray_0 = program_lcdknob_button_valuearray[0];
+                    strcpy(cadprogramconfig[program].lcdknob_buttons[button][0].symbol, program_lcdknob_button_symbolarray_0);
+                }
+                else {
+                    int program_lcdknob_button_valuearray_0 = program_lcdknob_button_valuearray[0];
+                    cadprogramconfig[program].lcdknob_buttons[button][0].value = program_lcdknob_button_valuearray_0;
+                }
+
+                if (program_lcdknob_button_actionarray_1 == Action_Char || program_lcdknob_button_actionarray_1 == Action_SpecialChar) {
+                    const char *program_lcdknob_button_symbolarray_1 = program_lcdknob_button_valuearray[1];
+                    strcpy(cadprogramconfig[program].lcdknob_buttons[button][1].symbol, program_lcdknob_button_symbolarray_1);
+                }
+                else {
+                    int program_lcdknob_button_valuearray_1 = program_lcdknob_button_valuearray[1];
+                    cadprogramconfig[program].lcdknob_buttons[button][1].value = program_lcdknob_button_valuearray_1;
+                }
+
+                if (program_lcdknob_button_actionarray_2 == Action_Char || program_lcdknob_button_actionarray_2 == Action_SpecialChar) {
+                    const char *program_lcdknob_button_symbolarray_2 = program_lcdknob_button_valuearray[2];
+                    strcpy(cadprogramconfig[program].lcdknob_buttons[button][2].symbol, program_lcdknob_button_symbolarray_2);
+                }
+                else {
+                    int program_lcdknob_button_valuearray_2 = program_lcdknob_button_valuearray[2];
+                    cadprogramconfig[program].lcdknob_buttons[button][2].value = program_lcdknob_button_valuearray_2;
+                }
+
+                cadprogramconfig[program].lcdknob_buttons[button][0].action = program_lcdknob_button_actionarray_0;
+                cadprogramconfig[program].lcdknob_buttons[button][1].action = program_lcdknob_button_actionarray_1;
+                cadprogramconfig[program].lcdknob_buttons[button][2].action = program_lcdknob_button_actionarray_2;
+            }
+#endif
         }
 
         configfile.close();
@@ -450,8 +522,8 @@ bool loadConfig(String value)
 
                 strlcpy(templogopath, logopath, sizeof(templogopath));
                 strlcat(templogopath, latchlogo, sizeof(templogopath));
-                strlcpy(menu[fileNameMenuNumber].button[row][col].latchlogo, templogopath, 
-                    sizeof(menu[fileNameMenuNumber].button[row][col].latchlogo));
+                strlcpy(menu[fileNameMenuNumber].button[row][col].latchlogo, templogopath,
+                        sizeof(menu[fileNameMenuNumber].button[row][col].latchlogo));
                 MSG_INFO2("[INFO] load_config loading latchlogo", objectName, templogopath);
 
                 menu[fileNameMenuNumber].button[row][col].imageBGColourValid = false;
