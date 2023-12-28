@@ -306,6 +306,7 @@ int saveConfigCADParams(AsyncWebServerRequest *request)
             }
         }
 
+#ifdef LCDKNOB_SUPPORT
         // Saving LCDKnob buttons
         JsonArray programLCDKnobButtonsArray = programObject.createNestedArray("lcdknob_buttons");
         for (int button = 0; button < cadprogramconfig[program].num_lcdknob_buttons; button++) {
@@ -343,6 +344,7 @@ int saveConfigCADParams(AsyncWebServerRequest *request)
                 programButtonObject_valuearray.add(String((cadprogramconfig[program].lcdknob_buttons[button][2].value)));
             }
         }
+#endif
     }
 
     if (serializeJsonPretty(doc, file) == 0) {
@@ -438,7 +440,8 @@ int saveCurrentConfigCADParams()
                 programButtonObject_valuearray.add(String((cadprogramconfig[program].hw_buttons[button][2].value)));
             }
         }
-        
+
+#ifdef LCDKNOB_SUPPORT
         // Saving LCDKnob buttons
         JsonArray programLCDKnobButtonsArray = programObject.createNestedArray("lcdknob_buttons");
         for (int button = 0; button < cadprogramconfig[program].num_lcdknob_buttons; button++) {
@@ -476,6 +479,7 @@ int saveCurrentConfigCADParams()
                 programButtonObject_valuearray.add(String((cadprogramconfig[program].lcdknob_buttons[button][2].value)));
             }
         }
+#endif
     }
 
     if (serializeJsonPretty(doc, file) == 0) {

@@ -195,12 +195,13 @@ extern bool psramAvailable;
 #define SPACEMOUSE_SERIAL Serial1
 extern SpaceMouse spaceMouse;
 
+#ifdef LCDKNOB_SUPPORT
 extern LCDKnobComms lcdKnobComms;
 #define LCD_KNOB_BAUD 115200
 #define LCD_KNOB_CONFIG SERIAL_8N1
 #define LCD_KNOB_RX_PIN 26
 #define LCD_KNOB_TX_PIN 25
-
+#endif
 // ---------------- Debug pins ----------------
 // set to 1 to enable debug pins, 0 to disable
 #define USE_DEBUG_PINS 0
