@@ -323,7 +323,7 @@ void printinfo()
         tft.setTextSize(1);
     }
     tft.setTextColor(TFT_WHITE, TFT_BLACK);
-    tft.printf("Version: %s\n", versionnumber);
+    tft.printf("CADDeck version: %s\n", versionnumber);
 
 #ifdef TOUCH_INTERRUPT_PIN
     if (generalconfig.sleepenable) {
@@ -465,7 +465,7 @@ void printIOValues()
         tft.setTextSize(1);
     }
     tft.setTextColor(TFT_WHITE, TFT_BLACK);
-    tft.printf("Version: %s       \n", versionnumber);
+    tft.printf("CADDeck version: %s       \n", versionnumber);
 
     tft.printf("Joystick X: %d,  %f     \n", joystick.RawX(), joystick.x());
     tft.printf("Joystick Y: %d,  %f     \n", joystick.RawY(), joystick.y());

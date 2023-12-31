@@ -433,8 +433,8 @@ void setup()
         tft.setTextFont(2);
         tft.setTextSize(1);
         tft.setTextColor(TFT_WHITE, TFT_BLACK);
-        tft.printf("Loading version %s\n", versionnumber);
-        MSG_INFO1F("[INFO] Loading version %s\n", versionnumber);
+        tft.printf("CADDeck version %s\n", versionnumber);
+        MSG_INFO1F("[INFO] CADDeck version %s\n", versionnumber);
     }
 
 // Calibrate the touch screen and retrieve the scaling factors
@@ -685,69 +685,72 @@ void loop(void)
     bool pressed = false;
     uint16_t t_x = 0, t_y = 0;
     uint8_t status;
+    bool webserver_active = false;
 
     if (millis() > (last_loop_start + loop_period)) {
         this_loop_start = millis();
         loop_count++;
 
-        // Update and handle the joystick and physical buttons
-        update_io();
+        if (!webserver_active) {
+            // Update and handle the joystick and physical buttons
+            update_io();
 
-        // Check and handle any commands from the serial port
-        serial_commands();
+            // Check and handle any commands from the serial port
+            serial_commands();
 
-        // The SpaceMouse Pro button reset
-        spaceMouse.ClearButtonMask();
+            // The SpaceMouse Pro button reset
+            spaceMouse.ClearButtonMask();
 
-        // Handle the touch screen
+            // Handle the touch screen
 #ifdef USECAPTOUCH
 #ifdef USE_FT6336U_LIB
-        FT6336U_TouchPointType touchPos;
-        touchPos = ts.scan();
+            FT6336U_TouchPointType touchPos;
+            touchPos = ts.scan();
 
-        if (touchPos.tp[0].tapped) {
-            MSG_TOUCH_DEBUG(" Tap Detected: ");
-            MSG_TOUCH_DEBUGLN(touchPos.touch_count);
-            MSG_TOUCH_DEBUG(" pageNum: ");
-            MSG_TOUCH_DEBUGLN(pageNum);
-            MSG_TOUCH_DEBUG(" x,y: ");
-            MSG_TOUCH_DEBUG(touchPos.tp[0].x);
-            MSG_TOUCH_DEBUG(" : ");
-            MSG_TOUCH_DEBUGLN(touchPos.tp[0].y);
+            if (touchPos.tp[0].tapped) {
+                MSG_TOUCH_DEBUG(" Tap Detected: ");
+                MSG_TOUCH_DEBUGLN(touchPos.touch_count);
+                MSG_TOUCH_DEBUG(" pageNum: ");
+                MSG_TOUCH_DEBUGLN(pageNum);
+                MSG_TOUCH_DEBUG(" x,y: ");
+                MSG_TOUCH_DEBUG(touchPos.tp[0].x);
+                MSG_TOUCH_DEBUG(" : ");
+                MSG_TOUCH_DEBUGLN(touchPos.tp[0].y);
 
-            // Flip things around so it matches our screen rotation
-            //         p.x = map(p.x, 0, 320, 320, 0);
+                // Flip things around so it matches our screen rotation
+                //         p.x = map(p.x, 0, 320, 320, 0);
 
-            t_x = touchPos.tp[0].y;
-            t_y = 320 - touchPos.tp[0].x;
-            pressed = true;
-        }
-        else {
-            pressed = false;
-        }
+                t_x = touchPos.tp[0].y;
+                t_y = 320 - touchPos.tp[0].x;
+                pressed = true;
+            }
+            else {
+                pressed = false;
+            }
 #else
-        if (ts.touched()) {
-            // Retrieve a point
-            TS_Point p = ts.getPoint();
+            if (ts.touched()) {
+                // Retrieve a point
+                TS_Point p = ts.getPoint();
 
-            // Flip things around so it matches our screen rotation
-            p.x = map(p.x, 0, 320, 320, 0);
-            t_y = p.x;
-            t_x = p.y;
+                // Flip things around so it matches our screen rotation
+                p.x = map(p.x, 0, 320, 320, 0);
+                t_y = p.x;
+                t_x = p.y;
 
-            pressed = true;
-        }
-        else {
-            pressed = false;
-        }
+                pressed = true;
+            }
+            else {
+                pressed = false;
+            }
 #endif
 #else
-        pressed = tft.getTouch(&t_x, &t_y);
+            pressed = tft.getTouch(&t_x, &t_y);
 #endif
-
+        }
         if (pageNum == WEB_REQUEST_PAGE) {
             // If the pageNum is set to NUM_PAGES+1, do not draw anything on screen or check for touch
             // and start handling incomming web requests.
+            webserver_active = true;
         }
         else if (pageNum == SPECIAL_PAGE_INFO) {
             if (!displayinginfo) {
@@ -891,177 +894,178 @@ void loop(void)
                 }
             }
 #endif
+            if (!webserver_active) {
+                // // Touch coordinates are stored here
 
-            // // Touch coordinates are stored here
+                // Check if the X and Y coordinates of the touch are within one of our buttons
+                for (uint8_t i = 0; i < BUTTON_ROWS; i++) {
+                    for (uint8_t j = 0; j < BUTTON_COLS; j++) {
+                        if (pressed && key[i][j].contains(t_x, t_y)) {
+                            key[i][j].press(true);  // tell the button it is pressed
 
-            // Check if the X and Y coordinates of the touch are within one of our buttons
-            for (uint8_t i = 0; i < BUTTON_ROWS; i++) {
-                for (uint8_t j = 0; j < BUTTON_COLS; j++) {
-                    if (pressed && key[i][j].contains(t_x, t_y)) {
-                        key[i][j].press(true);  // tell the button it is pressed
-
-                        // After receiving a valid touch reset the sleep timer
-                        previousMillis = millis();
-                    }
-                    else {
-                        key[i][j].press(false);  // tell the button it is NOT pressed
-                    }
-                }
-            }
-            // Check if any key has changed state
-            for (uint8_t row = 0; row < BUTTON_ROWS; row++) {
-                for (uint8_t col = 0; col < BUTTON_COLS; col++) {
-                    if (key[row][col].justReleased()) {
-                        // Draw normal button space (non inverted)
-                        drawButtonRowCol(pageNum, row, col);
-                    }
-
-                    if (key[row][col].justPressed()) {
-// Beep
-#ifdef speakerPin
-                        if (generalconfig.beep) {
-                            ledcAttachPin(speakerPin, 2);
-                            ledcWriteTone(2, 600);
-                            delay(50);
-                            ledcDetachPin(speakerPin);
-                            ledcWrite(2, 0);
-                        }
-#endif
-
-                        bool activeButton = isActiveButton(pageNum, row, col);
-
-                        tft.setFreeFont(LABEL_FONT);
-                        if (activeButton) {
-                            // Draw inverted button space
-                            key[row][col].initButton(&tft, KEY_X + col * (KEY_W + KEY_SPACING_X),
-                                                     KEY_Y + row * (KEY_H + KEY_SPACING_Y),  // x, y, w, h, outline, fill, text
-                                                     KEY_W, KEY_H, TFT_WHITE, TFT_WHITE, TFT_WHITE,
-                                                     (char *)"", KEY_TEXTSIZE);
+                            // After receiving a valid touch reset the sleep timer
+                            previousMillis = millis();
                         }
                         else {
-                            // Draw black button if inactive
-                            key[row][col].initButton(&tft, KEY_X + col * (KEY_W + KEY_SPACING_X),
-                                                     KEY_Y + row * (KEY_H + KEY_SPACING_Y),  // x, y, w, h, outline, fill, text
-                                                     KEY_W, KEY_H, TFT_BLACK, TFT_BLACK, TFT_BLACK,
-                                                     (char *)"", KEY_TEXTSIZE);
+                            key[i][j].press(false);  // tell the button it is NOT pressed
                         }
-                        key[row][col].drawButton();
+                    }
+                }
+                // Check if any key has changed state
+                for (uint8_t row = 0; row < BUTTON_ROWS; row++) {
+                    for (uint8_t col = 0; col < BUTTON_COLS; col++) {
+                        if (key[row][col].justReleased()) {
+                            // Draw normal button space (non inverted)
+                            drawButtonRowCol(pageNum, row, col);
+                        }
+
+                        if (key[row][col].justPressed()) {
+// Beep
+#ifdef speakerPin
+                            if (generalconfig.beep) {
+                                ledcAttachPin(speakerPin, 2);
+                                ledcWriteTone(2, 600);
+                                delay(50);
+                                ledcDetachPin(speakerPin);
+                                ledcWrite(2, 0);
+                            }
+#endif
+
+                            bool activeButton = isActiveButton(pageNum, row, col);
+
+                            tft.setFreeFont(LABEL_FONT);
+                            if (activeButton) {
+                                // Draw inverted button space
+                                key[row][col].initButton(&tft, KEY_X + col * (KEY_W + KEY_SPACING_X),
+                                                         KEY_Y + row * (KEY_H + KEY_SPACING_Y),  // x, y, w, h, outline, fill, text
+                                                         KEY_W, KEY_H, TFT_WHITE, TFT_WHITE, TFT_WHITE,
+                                                         (char *)"", KEY_TEXTSIZE);
+                            }
+                            else {
+                                // Draw black button if inactive
+                                key[row][col].initButton(&tft, KEY_X + col * (KEY_W + KEY_SPACING_X),
+                                                         KEY_Y + row * (KEY_H + KEY_SPACING_Y),  // x, y, w, h, outline, fill, text
+                                                         KEY_W, KEY_H, TFT_BLACK, TFT_BLACK, TFT_BLACK,
+                                                         (char *)"", KEY_TEXTSIZE);
+                            }
+                            key[row][col].drawButton();
+                            //---------------------------------------- Button press handling --------------------------------------------------
+
+                            if ((pageNum >= 0) && (pageNum < NUM_PAGES)) {
+                                if (row < BUTTON_ROWS && col < BUTTON_COLS) {
+                                    KeyboardMouseAction(menu[pageNum].button[row][col].actions[0].action, menu[pageNum].button[row][col].actions[0].value, menu[pageNum].button[row][col].actions[0].symbol);
+                                    KeyboardMouseAction(menu[pageNum].button[row][col].actions[1].action, menu[pageNum].button[row][col].actions[1].value, menu[pageNum].button[row][col].actions[1].symbol);
+                                    KeyboardMouseAction(menu[pageNum].button[row][col].actions[2].action, menu[pageNum].button[row][col].actions[2].value, menu[pageNum].button[row][col].actions[2].symbol);
+                                    Keyboard.releaseAll();
+                                    if (menu[pageNum].button[row][col].latch) {
+                                        if (menu[pageNum].button[row][col].islatched) {
+                                            menu[pageNum].button[row][col].islatched = false;
+                                        }
+                                        else {
+                                            menu[pageNum].button[row][col].islatched = true;
+                                        }
+                                    }
+
+                                    if (generalconfig.usbcommsenable) {
+                                        // separate filename from menu[pageNum].button[row][col].logo path
+                                        char logoname[LEN_FILENAME];
+                                        char *p = strrchr(menu[pageNum].button[row][col].logo, '/');
+                                        if (p != NULL) {
+                                            strlcpy(logoname, p + 1, sizeof(logoname));
+                                        }
+                                        else {
+                                            strlcpy(logoname, menu[pageNum].button[row][col].logo, sizeof(logoname));
+                                        }
+
+                                        // remove extension from logoname
+                                        char *dot = strrchr(logoname, '.');
+                                        if (dot != NULL) {
+                                            *dot = '\0';
+                                        }
+                                        char usbData[40];
+                                        snprintf(usbData, sizeof(usbData), "{ButtonPress, %s , %s}", menu[pageNum].name, logoname);
+                                        Serial.println(usbData);
+                                    }
+                                }
+                                else  // Back home
+                                {
+                                    pageNum = 0;
+                                    drawKeypad();
+                                }
+                            }
+#ifdef READ_BATTERY_VOLTAGE
+                            MSG_INFO1("Battery voltage:", externalBatteryVoltage);
+#endif
+                        }
+                    }
+                }
+
+                // Check if any hw button has been pressed
+                for (uint8_t i = 0; i < cadprogramconfig[cadconfig.current_program].num_buttons; i++) {
+                    uint8_t button_state = get_hwbutton(i);
+                    if (button_state) {
                         //---------------------------------------- Button press handling --------------------------------------------------
 
-                        if ((pageNum >= 0) && (pageNum < NUM_PAGES)) {
-                            if (row < BUTTON_ROWS && col < BUTTON_COLS) {
-                                KeyboardMouseAction(menu[pageNum].button[row][col].actions[0].action, menu[pageNum].button[row][col].actions[0].value, menu[pageNum].button[row][col].actions[0].symbol);
-                                KeyboardMouseAction(menu[pageNum].button[row][col].actions[1].action, menu[pageNum].button[row][col].actions[1].value, menu[pageNum].button[row][col].actions[1].symbol);
-                                KeyboardMouseAction(menu[pageNum].button[row][col].actions[2].action, menu[pageNum].button[row][col].actions[2].value, menu[pageNum].button[row][col].actions[2].symbol);
-                                Keyboard.releaseAll();
-                                if (menu[pageNum].button[row][col].latch) {
-                                    if (menu[pageNum].button[row][col].islatched) {
-                                        menu[pageNum].button[row][col].islatched = false;
-                                    }
-                                    else {
-                                        menu[pageNum].button[row][col].islatched = true;
-                                    }
-                                }
+                        KeyboardMouseAction(cadprogramconfig[cadconfig.current_program].hw_buttons[i][0].action,
+                                            cadprogramconfig[cadconfig.current_program].hw_buttons[i][0].value,
+                                            cadprogramconfig[cadconfig.current_program].hw_buttons[i][0].symbol, i);
 
-                                if (generalconfig.usbcommsenable) {
-                                    // separate filename from menu[pageNum].button[row][col].logo path
-                                    char logoname[LEN_FILENAME];
-                                    char *p = strrchr(menu[pageNum].button[row][col].logo, '/');
-                                    if (p != NULL) {
-                                        strlcpy(logoname, p + 1, sizeof(logoname));
-                                    }
-                                    else {
-                                        strlcpy(logoname, menu[pageNum].button[row][col].logo, sizeof(logoname));
-                                    }
+                        KeyboardMouseAction(cadprogramconfig[cadconfig.current_program].hw_buttons[i][1].action,
+                                            cadprogramconfig[cadconfig.current_program].hw_buttons[i][1].value,
+                                            cadprogramconfig[cadconfig.current_program].hw_buttons[i][1].symbol, i);
 
-                                    // remove extension from logoname
-                                    char *dot = strrchr(logoname, '.');
-                                    if (dot != NULL) {
-                                        *dot = '\0';
-                                    }
-                                    char usbData[40];
-                                    snprintf(usbData, sizeof(usbData), "{ButtonPress, %s , %s}", menu[pageNum].name, logoname);
-                                    Serial.println(usbData);
-                                }
-                            }
-                            else  // Back home
-                            {
-                                pageNum = 0;
-                                drawKeypad();
-                            }
-                        }
-#ifdef READ_BATTERY_VOLTAGE
-                        MSG_INFO1("Battery voltage:", externalBatteryVoltage);
-#endif
+                        KeyboardMouseAction(cadprogramconfig[cadconfig.current_program].hw_buttons[i][2].action,
+                                            cadprogramconfig[cadconfig.current_program].hw_buttons[i][2].value,
+                                            cadprogramconfig[cadconfig.current_program].hw_buttons[i][2].symbol, i);
                     }
+                    last_hwbutton_state[i] = button_state;
                 }
-            }
-
-            // Check if any hw button has been pressed
-            for (uint8_t i = 0; i < cadprogramconfig[cadconfig.current_program].num_buttons; i++) {
-                uint8_t button_state = get_hwbutton(i);
-                if (button_state) {
-                    //---------------------------------------- Button press handling --------------------------------------------------
-
-                    KeyboardMouseAction(cadprogramconfig[cadconfig.current_program].hw_buttons[i][0].action,
-                                        cadprogramconfig[cadconfig.current_program].hw_buttons[i][0].value,
-                                        cadprogramconfig[cadconfig.current_program].hw_buttons[i][0].symbol, i);
-
-                    KeyboardMouseAction(cadprogramconfig[cadconfig.current_program].hw_buttons[i][1].action,
-                                        cadprogramconfig[cadconfig.current_program].hw_buttons[i][1].value,
-                                        cadprogramconfig[cadconfig.current_program].hw_buttons[i][1].symbol, i);
-
-                    KeyboardMouseAction(cadprogramconfig[cadconfig.current_program].hw_buttons[i][2].action,
-                                        cadprogramconfig[cadconfig.current_program].hw_buttons[i][2].value,
-                                        cadprogramconfig[cadconfig.current_program].hw_buttons[i][2].symbol, i);
-                }
-                last_hwbutton_state[i] = button_state;
             }
         }
-
+        if (!webserver_active) {
 #ifdef LCDKNOB_SUPPORT
-        // Receive the LCD Knob button events
-        uint8_t eventType = lcdKnobComms.ReceiveData();
+            // Receive the LCD Knob button events
+            uint8_t eventType = lcdKnobComms.ReceiveData();
 
-        if (eventType != LCDKNOB_EVENT_NONE) {
-            // MSG_DEBUG1("LCD Knob Event: ", eventType);
+            if (eventType != LCDKNOB_EVENT_NONE) {
+                // MSG_DEBUG1("LCD Knob Event: ", eventType);
 
-            switch (eventType) {
-                case LCDKNOB_EVENT_NONE:
-                    break;
+                switch (eventType) {
+                    case LCDKNOB_EVENT_NONE:
+                        break;
 
-                case LCDKNOB_EVENT_CLICK:
-                    executeLCDKnobButtonClick(lcdKnobComms.GetLastEventButtonNumber());
-                    break;
+                    case LCDKNOB_EVENT_CLICK:
+                        executeLCDKnobButtonClick(lcdKnobComms.GetLastEventButtonNumber());
+                        break;
 
-                case LCDKNOB_EVENT_DBL_CLICK:
-                    break;
+                    case LCDKNOB_EVENT_DBL_CLICK:
+                        break;
 
-                case LCDKNOB_EVENT_LONG_PRESS_START:
-                    break;
+                    case LCDKNOB_EVENT_LONG_PRESS_START:
+                        break;
 
-                case LCDKNOB_EVENT_LONG_PRESS_END:
-                    break;
+                    case LCDKNOB_EVENT_LONG_PRESS_END:
+                        break;
 
-                case LCDKNOB_EVENT_BUTTON_STATE:
-                    if(lcdKnobComms.GetLastEventButtonNumber() == 0) {
-                        cadconfig.joystick_mode = lcdKnobComms.GetButtonState(0);
-                        MSG_DEBUG1("LCD Knob Mode state : ", lcdKnobComms.GetButtonState(0));
-                    }
- 
-                    break;
+                    case LCDKNOB_EVENT_BUTTON_STATE:
+                        if (lcdKnobComms.GetLastEventButtonNumber() == 0) {
+                            cadconfig.joystick_mode = lcdKnobComms.GetButtonState(0);
+                            // MSG_DEBUG1("LCD Knob Mode state : ", lcdKnobComms.GetButtonState(0));
+                        }
 
-                default:
-                    break;
+                        break;
+
+                    default:
+                        break;
+                }
             }
-        }
 #endif
 
-        // Send the SpaceMouse button presses
-        if (cadconfig.spacemouse_enable) {
-            spaceMouse.SendButtonPacket();
+            // Send the SpaceMouse button presses
+            if (cadconfig.spacemouse_enable) {
+                spaceMouse.SendButtonPacket();
+            }
         }
-
         // Draw top status bar.
         drawTopStatusBar(false);
 
@@ -1073,6 +1077,14 @@ void loop(void)
             lastADCRead = millis();
         }
 #endif
+
+        loop_100_time += millis() - this_loop_start;
+        loop_100_count++;
+        if (loop_100_count >= 100) {
+            MSG_DEBUG1("Loop time: ", loop_100_time / 100);
+            loop_100_time = 0;
+            loop_100_count = 0;
+        }
         last_loop_start = this_loop_start;
     }
 }
@@ -1090,7 +1102,6 @@ float readExternalBattery()
 uint8_t lcdmenu = 0;
 void executeLCDKnobButtonClick(uint8_t buttonNumber)
 {
-
     //---------------------------------------- Button press handling --------------------------------------------------
 
     if (buttonNumber < cadprogramconfig[cadconfig.current_program].num_lcdknob_buttons) {
@@ -1106,7 +1117,6 @@ void executeLCDKnobButtonClick(uint8_t buttonNumber)
         KeyboardMouseAction(cadprogramconfig[cadconfig.current_program].lcdknob_buttons[buttonNumber][2].action,
                             cadprogramconfig[cadconfig.current_program].lcdknob_buttons[buttonNumber][2].value,
                             cadprogramconfig[cadconfig.current_program].lcdknob_buttons[buttonNumber][2].symbol, buttonNumber);
-
     }
     else {
         MSG_ERRORLN("LCD Knob Button Index out of range: " + String(buttonNumber));

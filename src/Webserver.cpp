@@ -415,7 +415,7 @@ void handlerSetup()
 {
     webserver.serveStatic("/", FILESYSTEM, "/").setDefaultFile("index.htm");
 
-    //----------- index.htm handler -----------------
+    // ----------- index.htm handler -----------------
 
     webserver.on("/index.htm", HTTP_POST, [](AsyncWebServerRequest *request) {
         request->send(FILESYSTEM, "/index.htm");

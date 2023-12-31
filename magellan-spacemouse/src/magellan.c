@@ -82,7 +82,7 @@ int main() {
                     case 'd': {
                         if (idx != 26) {
                             break;
-                        }
+                        } 
 
                         int16_t values[6];
                         for (int i = 0; i < 6; i++) {

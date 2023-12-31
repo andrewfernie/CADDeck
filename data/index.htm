@@ -8,7 +8,6 @@
 	<meta name=\"viewport\" content=\"width=device-width, initial-scale=1, user-scalable=no\" />
 	<title>CADDeck Configurator</title>
 	<link rel="stylesheet" type="text/css" href="style.css">
-
 	<script src="jquery-3.5.1.slim.min.js"></script>
 </head>
 
@@ -61,13 +60,7 @@
 		<div id="intro" class="tabcontent">
 			<h3>Welcome</h3>
 			<p>
-				Welcome to the configurator! Select an option/page from the top menu. If you have any questions,
-				join my
-				Discord server: <a href="https://discord.gg/RE3XevS"
-					target="_blank">https://discord.gg/RE3XevS</a><br />
-				A guide on how to use the configurator can be found here: <a
-					href="https://github.com/DustinWatts/FreeTouchDeck/wiki/3.-The-Configurator" target="_blank">
-					FreeTouchDeck Wiki</a>
+				Welcome to the configurator! Select an option/page from the top menu.
 			</p>
 		</div>
 		<!-- Tab WiFi -->
@@ -77,8 +70,6 @@
 			<h3>WiFi Settings</h3>
 			<p>
 			<form method='post' id="savewifi" action='/saveconfig'>
-
-
 
 				<div style="font-family: Arial, Helvetica, Sans-Serif; Color: #000088;">
 
@@ -373,22 +364,6 @@
 							<br />Latch? <input type="checkbox" id="button14latch" name="button14latch">
 							latch to: <select class="images" id='button14latchlogo' name='button14latchlogo'></select>
 						</td>
-						<td style="width: 18%;">
-							Button 1-5
-							<br />Image:
-							<select class="images" id='button15logo' name='button15logo'></select>
-							<br />Action 1:
-							<select class="actions" id='button15action0' name='button15action0'></select>
-							<select class="actions" id='button15value0' name='button15value0'></select>
-							<br />Action 2:
-							<select class="actions" id='button15action1' name='button15action1'></select>
-							<select class="actions" id='button15value1' name='button15value1'></select>
-							<br />Action 3:
-							<select class="actions" id='button15action2' name='button15action2'></select>
-							<select class="actions" id='button15value2' name='button15value2'></select>
-							<br />Latch? <input type="checkbox" id="button15latch" name="button15latch">
-							latch to: <select class="images" id='button15latchlogo' name='button15latchlogo'></select>
-						</td>
 					</tr>
 					<tr>
 						<td style="width: 10%;">
@@ -458,22 +433,6 @@
 							<br />Latch? <input type="checkbox" id="button24latch" name="button24latch">
 							latch to: <select class="images" id='button24latchlogo' name='button24latchlogo'></select>
 						</td>
-						<td style="width: 18%;">
-							Button 2-5
-							<br />Image:
-							<select class="images" id='button25logo' name='button25logo'></select>
-							<br />Action 1:
-							<select class="actions" id='button25action0' name='button25action0'></select>
-							<select class="actions" id='button25value0' name='button25value0'></select>
-							<br />Action 2:
-							<select class="actions" id='button25action1' name='button25action1'></select>
-							<select class="actions" id='button25value1' name='button25value1'></select>
-							<br />Action 3:
-							<select class="actions" id='button25action2' name='button25action2'></select>
-							<select class="actions" id='button25value2' name='button25value2'></select>
-							<br />Latch? <input type="checkbox" id="button25latch" name="button25latch">
-							latch to: <select class="images" id='button25latchlogo' name='button25latchlogo'></select>
-						</td>
 					</tr>
 					<tr>
 						<td style="width: 10%;">
@@ -542,22 +501,6 @@
 							<select class="actions" id='button34value2' name='button34value2'></select>
 							<br />Latch? <input type="checkbox" id="button34latch" name="button34latch">
 							latch to: <select class="images" id='button34latchlogo' name='button34latchlogo'></select>
-						</td>
-						<td style="width: 18%;">
-							Button 3-5
-							<br />Image:
-							<select class="images" id='button35logo' name='button35logo'></select>
-							<br />Action 1:
-							<select class="actions" id='button35action0' name='button35action0'></select>
-							<select class="actions" id='button35value0' name='button35value0'></select>
-							<br />Action 2:
-							<select class="actions" id='button35action1' name='button35action1'></select>
-							<select class="actions" id='button35value1' name='button35value1'></select>
-							<br />Action 3:
-							<select class="actions" id='button35action2' name='button35action2'></select>
-							<select class="actions" id='button35value2' name='button35value2'></select>
-							<br />Latch? <input type="checkbox" id="button35latch" name="button35latch">
-							latch to: <select class="images" id='button35latchlogo' name='button35latchlogo'></select>
 						</td>
 					</tr>
 				</tbody>
@@ -892,6 +835,9 @@
 			evt.currentTarget.className += " active";
 		}
 
+		// document.addEventListener("DOMContentLoaded", (event) => {
+		// 		console.log("DOM fully loaded and parsed");
+		// 	});
 		document.addEventListener('DOMContentLoaded', openMenu(event, 'intro'), false);
 	</script>
 	<script>
@@ -1927,7 +1873,7 @@
 			}
 
 			]
-		},
+		}
 		];
 	</script>
 	<script>
@@ -2238,75 +2184,7 @@
 				})
 				.change();
 
-			// menu button15
-			$.each(items, function () {
-				$('<option />')
-					.attr('value', this.value)
-					.html(this.name)
-					.appendTo('#button15action0');
-				temp[this.value] = this.subitems;
-			});
-
-			$('#button15action0')
-				.change(function () {
-					var value = $(this).val();
-					var menu = $('#button15value0');
-
-					menu.empty();
-					$.each(temp[value], function () {
-						$('<option />')
-							.attr('value', this.value)
-							.html(this.name)
-							.appendTo(menu);
-					});
-				})
-				.change();
-
-			$.each(items, function () {
-				$('<option />')
-					.attr('value', this.value)
-					.html(this.name)
-					.appendTo('#button15action1');
-				temp[this.value] = this.subitems;
-			});
-
-			$('#button15action1')
-				.change(function () {
-					var value = $(this).val();
-					var menu = $('#button15value1');
-
-					menu.empty();
-					$.each(temp[value], function () {
-						$('<option />')
-							.attr('value', this.value)
-							.html(this.name)
-							.appendTo(menu);
-					});
-				})
-				.change();
-
-			$.each(items, function () {
-				$('<option />')
-					.attr('value', this.value)
-					.html(this.name)
-					.appendTo('#button15action2');
-				temp[this.value] = this.subitems;
-			});
-
-			$('#button15action2')
-				.change(function () {
-					var value = $(this).val();
-					var menu = $('#button15value2');
-
-					menu.empty();
-					$.each(temp[value], function () {
-						$('<option />')
-							.attr('value', this.value)
-							.html(this.name)
-							.appendTo(menu);
-					});
-				})
-				.change();
+			
 			////////////////////////// Row 2 ///////////////////////////
 			// menu button21
 			$.each(items, function () {
@@ -2577,76 +2455,6 @@
 				.change(function () {
 					var value = $(this).val();
 					var menu = $('#button24value2');
-
-					menu.empty();
-					$.each(temp[value], function () {
-						$('<option />')
-							.attr('value', this.value)
-							.html(this.name)
-							.appendTo(menu);
-					});
-				})
-				.change();
-
-			// menu button25
-			$.each(items, function () {
-				$('<option />')
-					.attr('value', this.value)
-					.html(this.name)
-					.appendTo('#button25action0');
-				temp[this.value] = this.subitems;
-			});
-
-			$('#button25action0')
-				.change(function () {
-					var value = $(this).val();
-					var menu = $('#button25value0');
-
-					menu.empty();
-					$.each(temp[value], function () {
-						$('<option />')
-							.attr('value', this.value)
-							.html(this.name)
-							.appendTo(menu);
-					});
-				})
-				.change();
-
-			$.each(items, function () {
-				$('<option />')
-					.attr('value', this.value)
-					.html(this.name)
-					.appendTo('#button25action1');
-				temp[this.value] = this.subitems;
-			});
-
-			$('#button25action1')
-				.change(function () {
-					var value = $(this).val();
-					var menu = $('#button25value1');
-
-					menu.empty();
-					$.each(temp[value], function () {
-						$('<option />')
-							.attr('value', this.value)
-							.html(this.name)
-							.appendTo(menu);
-					});
-				})
-				.change();
-
-			$.each(items, function () {
-				$('<option />')
-					.attr('value', this.value)
-					.html(this.name)
-					.appendTo('#button25action2');
-				temp[this.value] = this.subitems;
-			});
-
-			$('#button25action2')
-				.change(function () {
-					var value = $(this).val();
-					var menu = $('#button25value2');
 
 					menu.empty();
 					$.each(temp[value], function () {
@@ -2939,76 +2747,6 @@
 				})
 				.change();
 
-			// menu button35
-			$.each(items, function () {
-				$('<option />')
-					.attr('value', this.value)
-					.html(this.name)
-					.appendTo('#button35action0');
-				temp[this.value] = this.subitems;
-			});
-
-			$('#button35action0')
-				.change(function () {
-					var value = $(this).val();
-					var menu = $('#button35value0');
-
-					menu.empty();
-					$.each(temp[value], function () {
-						$('<option />')
-							.attr('value', this.value)
-							.html(this.name)
-							.appendTo(menu);
-					});
-				})
-				.change();
-
-			$.each(items, function () {
-				$('<option />')
-					.attr('value', this.value)
-					.html(this.name)
-					.appendTo('#button35action1');
-				temp[this.value] = this.subitems;
-			});
-
-			$('#button35action1')
-				.change(function () {
-					var value = $(this).val();
-					var menu = $('#button35value1');
-
-					menu.empty();
-					$.each(temp[value], function () {
-						$('<option />')
-							.attr('value', this.value)
-							.html(this.name)
-							.appendTo(menu);
-					});
-				})
-				.change();
-
-			$.each(items, function () {
-				$('<option />')
-					.attr('value', this.value)
-					.html(this.name)
-					.appendTo('#button35action2');
-				temp[this.value] = this.subitems;
-			});
-
-			$('#button35action2')
-				.change(function () {
-					var value = $(this).val();
-					var menu = $('#button35value2');
-
-					menu.empty();
-					$.each(temp[value], function () {
-						$('<option />')
-							.attr('value', this.value)
-							.html(this.name)
-							.appendTo(menu);
-					});
-				})
-				.change();
-
 			// joystick button actions
 			$.each(items, function () {
 				$('<option />')
@@ -3152,7 +2890,7 @@
 
 
 					for (let row = 1; row <= 3; row++) {
-						for (let col = 1; col <= 5; col++) {
+						for (let col = 1; col <= 4; col++) {
 
 							buttonName = 'button' + row + col
 
