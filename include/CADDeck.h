@@ -9,7 +9,7 @@
 // Basic macros for debug and info messages to the serial port
 // If too many messages are being sent the web server used for the configurator may not work as well.
 #define LOG_MSG_BASIC 0
-#define LOG_MSG_LEVEL 1 // 1=ERROR, 2=ERROR+WARN, 3=ERROR+WARN+INFO
+#define LOG_MSG_LEVEL 3 // 1=ERROR, 2=ERROR+WARN, 3=ERROR+WARN+INFO
 #define LOG_MSG_DEBUG 0
 #define LOG_MSG_TOUCH_DEBUG 0   // messages to console each time a touch is detected
 #define LOG_MSG_JOYSTICK_MODE 0 // messages to console for joystick mode debug

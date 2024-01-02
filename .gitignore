@@ -7,6 +7,7 @@ data/config/wificonfig.json
 .vscode/launch.json
 .vscode/ipch
 saved libraries/
+tmp
 # User-specific files
 *.rsuser
 *.suo
