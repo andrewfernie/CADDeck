@@ -229,7 +229,7 @@ uint8_t getButtonPressedNumber(uint16_t x, uint16_t y)
             button_y = SCREEN_CENTER_Y + cos(angle) * BUTTON_CIRCLE_RADIUS;
         }
 
-        if ((abs(x - button_x) < 50) && (abs(y - button_y) < 50))
+        if (sqrt((x - button_x)*(x - button_x) + (y - button_y)*(y - button_y))<50)
         {
             button = button_index;
             break;

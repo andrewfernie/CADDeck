@@ -13,9 +13,11 @@
 #include "Arduino.h"
 #include "LCDKnob.h"
 
-const char *versionnumber = "V1.0.0";
+const char *versionnumber = "V1.0.1";
 /*
-
+ * Version V1.0.1 
+ *                   - Circular region for button press
+ * 
  * Version V1.0.0 
  *                   - Initial version
  *
