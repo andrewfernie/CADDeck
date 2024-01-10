@@ -13,8 +13,12 @@
 #include "Arduino.h"
 #include "LCDKnob.h"
 
-const char *versionnumber = "V1.0.1";
+const char *versionnumber = "V1.0.2";
 /*
+ * Version V1.0.2 
+ *                   - Keep the center circular region for button 0, but use the  wedges outside of the center 
+ *                     circle for buttons 1-6
+ * 
  * Version V1.0.1 
  *                   - Circular region for button press
  * 

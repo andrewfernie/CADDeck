@@ -113,7 +113,7 @@ void drawButtonNumber(uint8_t page, uint8_t button_index)
     }
 }
 
-void drawButtonCircle(uint8_t button_index,uint16_t color)
+void drawButtonCircle(uint8_t button_index, uint16_t color)
 {
     uint16_t x;
     uint16_t y;
@@ -131,7 +131,6 @@ void drawButtonCircle(uint8_t button_index,uint16_t color)
     }
     tft.fillCircle(x, y, 30, TFT_RED);
 }
-
 
 /**
 * @brief This function draws the set buttons that are on each page.
@@ -206,34 +205,39 @@ uint8_t isValidPageNumber(uint8_t page)
  * @param x uint16_t. The x coordinate, in pixels, of the point to be checked
  *
  * @param y uint16_t. The y coordinate, in pixels, of the point to be checked
- * 
- * @return uint8_t. The button number. 255 if invalid. 
-  */
+ *
+ * @return uint8_t. The button number. 255 if invalid.
+ */
 uint8_t getButtonPressedNumber(uint16_t x, uint16_t y)
 {
     uint8_t button = 255;
 
-    for (uint8_t button_index = 0; button_index < BUTTONS_PER_PAGE; button_index++)
+    // First thing to check is button 0, the center button. It is defined as being a circle with a radius of 50 pixels,
+    // centered on the screen center, and if the x,y coordinates are within that circle, then we are done.
+    if (sqrt((x - SCREEN_CENTER_X) * (x - SCREEN_CENTER_X) + (y - SCREEN_CENTER_Y) * (y - SCREEN_CENTER_Y)) < 50)
     {
-        uint16_t button_x;
-        uint16_t button_y;
-        if (button_index == 0)
+        button = 0;
+    }
+    else
+    {
+        // If we get here, then the point is not in the center button, so we need to check the other buttons. The touch
+        // regions for these buttons are the wedges outside of the center button.
+
+        // Determine the angle of the point from the center of the screen
+        float angle = atan2f(x - SCREEN_CENTER_X, y - SCREEN_CENTER_Y);
+
+        // And make sure that it is in the range of 0-2pi
+        if (angle < 0)
         {
-            button_x = SCREEN_CENTER_X;
-            button_y = SCREEN_CENTER_Y;
-        }
-        else
-        {
-            float angle = (button_index - 1 + 0.5) * 2.0 * 3.1416 / (BUTTONS_PER_PAGE - 1);
-            button_x = SCREEN_CENTER_X + sin(angle) * BUTTON_CIRCLE_RADIUS;
-            button_y = SCREEN_CENTER_Y + cos(angle) * BUTTON_CIRCLE_RADIUS;
+            angle += 2 * 3.1416;
         }
 
-        if (sqrt((x - button_x)*(x - button_x) + (y - button_y)*(y - button_y))<50)
-        {
-            button = button_index;
-            break;
-        }
+        // And now map 0-2pi to 0-5. Note that when we reach 2pi, we want to map it to 0, so the multiplier is actually 6
+        button = angle / (2 * 3.1416) * (BUTTONS_PER_PAGE-1);
+
+        // And add 1 to account for the center button (so now mapped to 1-6)
+        button += 1;
     }
+
     return button;
 }
