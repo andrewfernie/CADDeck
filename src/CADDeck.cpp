@@ -68,9 +68,12 @@ r
 
 #include <Arduino.h>
 
-const char *versionnumber = "V1.2";
+const char *versionnumber = "V1.2.1";
 
 /*
+ * Version V1.2.1    - Latest version of Button2 added a prefix of "BTN_" to constants. This 
+ *                     required a change from VIRTUAL_PIN to BTN_VIRTUAL_PIN.
+ * 
  * Version V1.2
  *                   - Added support for LCDKnob. Released along with LCDKnob firmware V1.0.0
  * Version V1.1.5

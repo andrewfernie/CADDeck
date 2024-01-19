@@ -60,7 +60,7 @@ void init_io()
     joystickModeButton.setButtonStateFunction(joystickModeButtonHandler);
     joystickModeButton.setClickHandler(joystickModeButtonClick);
     joystickModeButton.setDoubleClickHandler(joystickModeButtonDoubleClick);
-    joystickModeButton.begin(VIRTUAL_PIN);
+    joystickModeButton.begin(BTN_VIRTUAL_PIN);
 
     pcf857X.begin(false);  // false so as not to start the I2C bus (already done by the touch controller)
 }
