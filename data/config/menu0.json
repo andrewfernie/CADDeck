@@ -1,7 +1,7 @@
 {
   "menuname":"Home", 
   "button11": {
-    "logo": "win.bmp",
+    "logo": "win.png",
     "latch": false,
     "latchlogo": "",
     "buttontext":"",
@@ -17,7 +17,7 @@
     ]
   },
   "button12": {
-    "logo": "cad_options.bmp",
+    "logo": "cad_options.png",
     "latch": false,
     "latchlogo": "",
     "buttontext":"",
@@ -33,7 +33,7 @@
     ]
   },
   "button13": {
-    "logo": "fusion360.bmp",
+    "logo": "fusion360.png",
     "latch": false,
     "latchlogo": "",
     "buttontext":"",
@@ -49,7 +49,7 @@
     ]
   },
   "button14": {
-    "logo": "solidworks.bmp",
+    "logo": "solidworks.png",
     "latch": false,
     "latchlogo": "",
     "buttontext":"",
@@ -65,7 +65,7 @@
     ]
   },
   "button21": {
-    "logo": "button_desc.bmp",
+    "logo": "button_desc.png",
     "latch": false,
     "latchlogo": "",
     "buttontext":"",
@@ -81,23 +81,23 @@
     ]
   },
   "button22": {
-    "logo": "blank.bmp",
+    "logo": "FreeCAD.png",
     "latch": false,
     "latchlogo": "",
     "buttontext":"",
     "actionarray": [
-      "0",
+      "14",
       "0",
       "0"
     ],
     "valuearray": [
-      "0",
+      "6",
       "0",
       "0"
     ]
   },
   "button23": {
-    "logo": "blank.bmp",
+    "logo": "blank.png",
     "latch": false,
     "latchlogo": "",
     "buttontext":"",
@@ -113,7 +113,7 @@
     ]
   },
   "button24": {
-    "logo": "blank.bmp",
+    "logo": "blank.png",
     "latch": false,
     "latchlogo": "",
     "buttontext":"",
@@ -129,7 +129,7 @@
     ]
   },
   "button31": {
-    "logo": "blank.bmp",
+    "logo": "blank.png",
     "latch": false,
     "latchlogo": "",
     "buttontext":"",
@@ -145,7 +145,7 @@
     ]
   },
   "button32": {
-    "logo": "blank.bmp",
+    "logo": "blank.png",
     "latch": false,
     "latchlogo": "",
     "buttontext":"",
@@ -161,7 +161,7 @@
     ]
   },
   "button33": {
-    "logo": "blank.bmp",
+    "logo": "blank.png",
     "latch": false,
     "latchlogo": "",
     "buttontext":"",
@@ -177,7 +177,7 @@
     ]
   },
   "button34": {
-    "logo": "settings.bmp",
+    "logo": "settings.png",
     "latch": false,
     "latchlogo": "",
     "buttontext":"",

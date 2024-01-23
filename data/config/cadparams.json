@@ -16,7 +16,7 @@
   "programs": [
     {
       "name": "Solidworks",
-      "logo": "solidworks.bmp",
+      "logo": "solidworks.png",
       "default_joystick_mode": 4,
       "buttons": [
         {
@@ -277,7 +277,7 @@
     },
     {
       "name": "Fusion360",
-      "logo": "fusion360.bmp",
+      "logo": "fusion360.png",
       "default_joystick_mode": 4,
       "buttons": [
         {
@@ -538,7 +538,7 @@
     },
     {
       "name": "Blender",
-      "logo": "blender.bmp",
+      "logo": "blender.png",
       "default_joystick_mode": 4,
       "buttons": [
         {
@@ -799,7 +799,7 @@
     },
     {
       "name": "FreeCAD",
-      "logo": "FreeCAD.bmp",
+      "logo": "FreeCAD.png",
       "default_joystick_mode": 4,
       "buttons": [
         {
@@ -1060,7 +1060,7 @@
     },
     {
       "name": "AC3D",
-      "logo": "ac3d.bmp",
+      "logo": "ac3d.png",
       "default_joystick_mode": 4,
       "buttons": [
         {

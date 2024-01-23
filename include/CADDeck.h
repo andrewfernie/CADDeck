@@ -9,8 +9,8 @@
 // Basic macros for debug and info messages to the serial port
 // If too many messages are being sent the web server used for the configurator may not work as well.
 #define LOG_MSG_BASIC 0
-#define LOG_MSG_LEVEL 3 // 1=ERROR, 2=ERROR+WARN, 3=ERROR+WARN+INFO
-#define LOG_MSG_DEBUG 0
+#define LOG_MSG_LEVEL 2 // 1=ERROR, 2=ERROR+WARN, 3=ERROR+WARN+INFO
+#define LOG_MSG_DEBUG 1
 #define LOG_MSG_TOUCH_DEBUG 0   // messages to console each time a touch is detected
 #define LOG_MSG_JOYSTICK_MODE 0 // messages to console for joystick mode debug
 
@@ -115,6 +115,7 @@ extern const char *versionnumber;
 
 // ------- Uncomment the define below if you want to preload the logos to PSRAM at start (adds about 10s to startup) -------
 // #define PRELOAD_LOGOS
+#define SAVE_LOGOS_TO_PSRAM true
 
 // Logo Size
 #define LOGO_SIZE_X_Y 75
@@ -383,7 +384,9 @@ extern CADConfig cadconfig;
 extern CADProgramConfig cadprogramconfig[];
 
 // And finally, we have an array of menus
-extern Menu menu[NUM_PAGES];
+//extern Menu menu[NUM_PAGES];
+
+extern Menu *pMenu[];
 
 // struct Logos screen[NUM_PAGES];
 
@@ -416,6 +419,14 @@ extern TFT_eSPI_Button key[BUTTON_ROWS][BUTTON_COLS];
 
 //--------- Internal references ------------
 // (this needs to be below all structs etc..)
+
+enum ImageType
+{
+    ImageType_UNKNOWN = 0,
+    ImageType_BMP = 1,
+    ImageType_PNG = 2
+};
+
 enum ActionEnum
 {
     Action_NoAction = 0,

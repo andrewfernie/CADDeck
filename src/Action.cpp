@@ -518,7 +518,7 @@ void KeyboardMouseAction(int action, int value, char *symbol, uint8_t hwbutton_i
 
                     if (generalconfig.usbcommsenable) {
                         char usbData[40];
-                        snprintf(usbData, sizeof(usbData), "{NewPage, %s , %s}", menu[callingPageNum].name, "Info");
+                        snprintf(usbData, sizeof(usbData), "{NewPage, %s , %s}", pMenu[callingPageNum]->name, "Info");
                         Serial.println(usbData);
                     }
                     break;
@@ -534,7 +534,7 @@ void KeyboardMouseAction(int action, int value, char *symbol, uint8_t hwbutton_i
 
                     if (generalconfig.usbcommsenable) {
                         char usbData[40];
-                        snprintf(usbData, sizeof(usbData), "{NewPage, %s , %s}", menu[callingPageNum].name, "Home");
+                        snprintf(usbData, sizeof(usbData), "{NewPage, %s , %s}", pMenu[callingPageNum]->name, "Home");
                         Serial.println(usbData);
                     }
                     drawKeypad();
@@ -564,7 +564,7 @@ void KeyboardMouseAction(int action, int value, char *symbol, uint8_t hwbutton_i
 
                     if (generalconfig.usbcommsenable) {
                         char usbData[40];
-                        snprintf(usbData, sizeof(usbData), "{NewPage, %s , %s}", menu[callingPageNum].name, "IO Monitor");
+                        snprintf(usbData, sizeof(usbData), "{NewPage, %s , %s}", pMenu[callingPageNum]->name, "IO Monitor");
                         Serial.println(usbData);
                     }
                     break;
@@ -591,7 +591,7 @@ void KeyboardMouseAction(int action, int value, char *symbol, uint8_t hwbutton_i
 
                     if (generalconfig.usbcommsenable) {
                         char usbData[40];
-                        snprintf(usbData, sizeof(usbData), "{NewPage, %s , %s}", menu[callingPageNum].name, "ButtonInfo");
+                        snprintf(usbData, sizeof(usbData), "{NewPage, %s , %s}", pMenu[callingPageNum]->name, "ButtonInfo");
                         Serial.println(usbData);
                     }
                     break;
@@ -696,7 +696,7 @@ void KeyboardMouseAction(int action, int value, char *symbol, uint8_t hwbutton_i
 
                 if (generalconfig.usbcommsenable) {
                     char usbData[40];
-                    snprintf(usbData, sizeof(usbData), "{NewPage, %s , %s}", menu[callingPageNum].name, menu[pageNum].name);
+                    snprintf(usbData, sizeof(usbData), "{NewPage, %s , %s}", pMenu[callingPageNum]->name, pMenu[pageNum]->name);
                     Serial.println(usbData);
                 }
                 drawKeypad();
@@ -853,7 +853,7 @@ void KeyboardMouseAction(int action, int value, char *symbol, uint8_t hwbutton_i
 
             if (generalconfig.usbcommsenable) {
                 char usbData[40];
-                snprintf(usbData, sizeof(usbData), "{NewPage, %s , %s}", menu[callingPageNum].name, menu[pageNum].name);
+                snprintf(usbData, sizeof(usbData), "{NewPage, %s , %s}", pMenu[callingPageNum]->name, pMenu[pageNum]->name);
                 Serial.println(usbData);
             }
 

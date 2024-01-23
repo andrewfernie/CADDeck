@@ -1,7 +1,7 @@
 {
   "menuname":"CAD", 
   "button11": {
-    "logo": "calibrate.bmp",
+    "logo": "calibrate.png",
     "latch": false,
     "latchlogo": "",
     "buttontext":"",
@@ -17,7 +17,7 @@
     ]
   },
   "button12": {
-    "logo": "zero.bmp",
+    "logo": "zero.png",
     "latch": false,
     "latchlogo": "",
     "buttontext":"",
@@ -33,9 +33,9 @@
     ]
   },
   "button13": {
-    "logo": "spacemouseoff.bmp",
+    "logo": "spacemouseoff.png",
     "latch": true,
-    "latchlogo": "spacemouseon.bmp",
+    "latchlogo": "spacemouseon.png",
     "buttontext":"",
     "actionarray": [
       "11",
@@ -49,7 +49,7 @@
     ]
   },
   "button14": {
-    "logo": "blank.bmp",
+    "logo": "blank.png",
     "latch": false,
     "latchlogo": "",
     "buttontext":"",
@@ -65,7 +65,7 @@
     ]
   },
   "button15": {
-    "logo": "blank.bmp",
+    "logo": "blank.png",
     "latch": false,
     "latchlogo": "",
     "buttontext":"",
@@ -81,7 +81,7 @@
     ]
   },
   "button21": {
-    "logo": "flip_x.bmp",
+    "logo": "flip_x.png",
     "latch": false,
     "latchlogo": "",
     "buttontext":"",
@@ -97,7 +97,7 @@
     ]
   },
   "button22": {
-    "logo": "flip_y.bmp",
+    "logo": "flip_y.png",
     "latch": false,
     "latchlogo": "",
     "buttontext":"",
@@ -113,7 +113,7 @@
     ]
   },
   "button23": {
-    "logo": "flip_z.bmp",
+    "logo": "flip_z.png",
     "latch": false,
     "latchlogo": "",
     "buttontext":"",
@@ -129,7 +129,7 @@
     ]
   },
   "button24": {
-    "logo": "flip_r.bmp",
+    "logo": "flip_r.png",
     "latch": false,
     "latchlogo": "",
     "buttontext":"",
@@ -145,7 +145,7 @@
     ]
   },
   "button25": {
-    "logo": "blank.bmp",
+    "logo": "blank.png",
     "latch": false,
     "latchlogo": "",
     "buttontext":"",
@@ -161,7 +161,7 @@
     ]
   },
   "button31": {
-    "logo": "floppy.bmp",
+    "logo": "floppy.png",
     "latch": false,
     "latchlogo": "",
     "buttontext":"",
@@ -177,7 +177,7 @@
     ]
   },
   "button32": {
-    "logo": "app.bmp",
+    "logo": "app.png",
     "latch": false,
     "latchlogo": "",
     "buttontext":"",
@@ -193,7 +193,7 @@
     ]
   },
   "button33": {
-    "logo": "ones_zeros.bmp",
+    "logo": "ones_zeros.png",
     "latch": false,
     "latchlogo": "",
     "buttontext":"",
@@ -209,7 +209,7 @@
     ]
   },
   "button34": {
-    "logo": "home.bmp",
+    "logo": "home.png",
     "latch": false,
     "latchlogo": "",
     "buttontext":"",
@@ -225,7 +225,7 @@
     ]
   },
   "button35": {
-    "logo": "home.bmp",
+    "logo": "home.png",
     "latch": false,
     "latchlogo": "",
     "buttontext":"",

@@ -1,7 +1,7 @@
 {
   "menuname":"Solidworks", 
   "button11": {
-    "logo": "F360_Abrunden.bmp",
+    "logo": "F360_Abrunden.png",
     "latch": false,
     "latchlogo": "",
     "buttontext":"",
@@ -17,7 +17,7 @@
     ]
   },
   "button12": {
-    "logo": "F360_Schale.bmp",
+    "logo": "F360_Schale.png",
     "latch": false,
     "latchlogo": "",
     "buttontext":"",
@@ -33,7 +33,7 @@
     ]
   },
   "button13": {
-    "logo": "F360_Hole.bmp",
+    "logo": "F360_Hole.png",
     "latch": false,
     "latchlogo": "",
     "buttontext":"",
@@ -49,7 +49,7 @@
     ]
   },
   "button14": {
-    "logo": "F360_RPattern.bmp",
+    "logo": "F360_RPattern.png",
     "latch": false,
     "latchlogo": "",
     "buttontext":"",
@@ -65,7 +65,7 @@
     ]
   },
   "button15": {
-    "logo": "blank.bmp",
+    "logo": "blank.png",
     "latch": false,
     "latchlogo": "",
     "buttontext":"",
@@ -81,7 +81,7 @@
     ]
   },
   "button21": {
-    "logo": "F360_CPattern.bmp",
+    "logo": "F360_CPattern.png",
     "latch": false,
     "latchlogo": "",
     "buttontext":"",
@@ -97,7 +97,7 @@
     ]
   },
   "button22": {
-    "logo": "blank.bmp",
+    "logo": "blank.png",
     "latch": false,
     "latchlogo": "",
     "buttontext":"",
@@ -113,7 +113,7 @@
     ]
   },
   "button23": {
-    "logo": "blank.bmp",
+    "logo": "blank.png",
     "latch": false,
     "latchlogo": "",
     "buttontext":"",
@@ -129,7 +129,7 @@
     ]
   },
   "button24": {
-    "logo": "blank.bmp",
+    "logo": "blank.png",
     "latch": false,
     "latchlogo": "",
     "buttontext":"",
@@ -145,7 +145,7 @@
     ]
   },
   "button25": {
-    "logo": "blank.bmp",
+    "logo": "blank.png",
     "latch": false,
     "latchlogo": "",
     "buttontext":"",
@@ -161,7 +161,7 @@
     ]
   },
   "button31": {
-    "logo": "blank.bmp",
+    "logo": "blank.png",
     "latch": false,
     "latchlogo": "",
     "buttontext":"",
@@ -177,7 +177,7 @@
     ]
   },
   "button32": {
-    "logo": "blank.bmp",
+    "logo": "blank.png",
     "latch": false,
     "latchlogo": "",
     "buttontext":"",
@@ -193,7 +193,7 @@
     ]
   },
   "button33": {
-    "logo": "blank.bmp",
+    "logo": "blank.png",
     "latch": false,
     "latchlogo": "",
     "buttontext":"",
@@ -209,7 +209,7 @@
     ]
   },
   "button34": {
-    "logo": "home.bmp",
+    "logo": "home.png",
     "latch": false,
     "latchlogo": "",
     "buttontext":"",
@@ -225,7 +225,7 @@
     ]
   },
   "button35": {
-    "logo": "home.bmp",
+    "logo": "home.png",
     "latch": false,
     "latchlogo": "",
     "buttontext":"",

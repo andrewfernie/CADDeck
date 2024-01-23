@@ -1,7 +1,7 @@
 {
   "menuname": "CADApp",
   "button11": {
-    "logo": "solidworks.bmp",
+    "logo": "solidworks.png",
     "latch": false,
     "latchlogo": "",
     "buttontext":"",
@@ -17,7 +17,7 @@
     ]
   },
   "button12": {
-    "logo": "fusion360.bmp",
+    "logo": "fusion360.png",
     "latch": false,
     "latchlogo": "",
     "buttontext":"",
@@ -33,7 +33,7 @@
     ]
   },
   "button13": {
-    "logo": "blender.bmp",
+    "logo": "blender.png",
     "latch": false,
     "latchlogo": "",
     "buttontext":"",
@@ -49,7 +49,7 @@
     ]
   },
   "button14": {
-    "logo": "FreeCAD.bmp",
+    "logo": "FreeCAD.png",
     "latch": false,
     "latchlogo": "",
     "buttontext":"",
@@ -65,7 +65,7 @@
     ]
   },
   "button15": {
-    "logo": "blank.bmp",
+    "logo": "blank.png",
     "latch": false,
     "latchlogo": "",
     "buttontext":"",
@@ -81,7 +81,7 @@
     ]
   },
   "button21": {
-    "logo": "ac3d.bmp",
+    "logo": "ac3d.png",
     "latch": false,
     "latchlogo": "",
     "buttontext":"",
@@ -97,7 +97,7 @@
     ]
   },
   "button22": {
-    "logo": "blank.bmp",
+    "logo": "blank.png",
     "latch": false,
     "latchlogo": "",
     "buttontext":"",
@@ -113,7 +113,7 @@
     ]
   },
   "button23": {
-    "logo": "blank.bmp",
+    "logo": "blank.png",
     "latch": false,
     "latchlogo": "",
     "buttontext":"",
@@ -129,7 +129,7 @@
     ]
   },
   "button24": {
-    "logo": "blank.bmp",
+    "logo": "blank.png",
     "latch": false,
     "latchlogo": "",
     "buttontext":"",
@@ -145,7 +145,7 @@
     ]
   },
   "button25": {
-    "logo": "blank.bmp",
+    "logo": "blank.png",
     "latch": false,
     "latchlogo": "",
     "buttontext":"",
@@ -161,7 +161,7 @@
     ]
   },
   "button31": {
-    "logo": "blank.bmp",
+    "logo": "blank.png",
     "latch": false,
     "latchlogo": "",
     "buttontext":"",
@@ -177,7 +177,7 @@
     ]
   },
   "button32": {
-    "logo": "blank.bmp",
+    "logo": "blank.png",
     "latch": false,
     "latchlogo": "",
     "buttontext":"",
@@ -193,7 +193,7 @@
     ]
   },
   "button33": {
-    "logo": "blank.bmp",
+    "logo": "blank.png",
     "latch": false,
     "latchlogo": "",
     "buttontext":"",
@@ -209,7 +209,7 @@
     ]
   },
   "button34": {
-    "logo": "return.bmp",
+    "logo": "return.png",
     "latch": false,
     "latchlogo": "",
     "buttontext":"",
@@ -225,7 +225,7 @@
     ]
   },
   "button35": {
-    "logo": "return.bmp",
+    "logo": "return.png",
     "latch": false,
     "latchlogo": "",
     "buttontext":"",

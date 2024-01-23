@@ -1,0 +1,2 @@
+elfsize.py -i C:\Users\andre\Repositories\PlatformIO\CADDeck\.pio\build\esp-wrover-kit\firmware.elf -b
+C:\Users\andre\.platformio\packages\toolchain-xtensa-esp32\bin\xtensa-esp32-elf-nm -l -S -C -f sysv C:\Users\andre\Repositories\PlatformIO\CADDeck\.pio\build\esp-wrover-kit\firmware.elf

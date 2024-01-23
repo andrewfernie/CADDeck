@@ -574,8 +574,8 @@ bool resetconfig(String file)
         newfile.println("}");
 
         newfile.close();
-        MSG_BASICLN("[INFO] Done resetting general config.");
-        MSG_BASICLN("[INFO] Type \"restart\" to reload configuration.");
+        MSG_INFOLN("[INFO] Done resetting general config.");
+        MSG_INFOLN("[INFO] Type \"restart\" to reload configuration.");
         return true;
     }
     else if (file == "cadparams") {
@@ -608,8 +608,8 @@ bool resetconfig(String file)
         newfile.println("}");
 
         newfile.close();
-        MSG_BASICLN("[INFO] Done resetting cadparams.json.");
-        MSG_BASICLN("[INFO] Type \"restart\" to reload configuration.");
+        MSG_INFOLN("[INFO] Done resetting cadparams.json.");
+        MSG_INFOLN("[INFO] Type \"restart\" to reload configuration.");
         return true;
     }
     else {

@@ -1,7 +1,7 @@
 {
   "menuname":"Menu_Name", 
   "button11": {
-    "logo": "question.bmp",
+    "logo": "question.png",
     "latch": false,
     "latchlogo": "",
     "buttontext":"",
@@ -17,7 +17,7 @@
     ]
   },
   "button12": {
-    "logo": "question.bmp",
+    "logo": "question.png",
     "latch": false,
     "latchlogo": "",
     "buttontext":"",
@@ -33,7 +33,7 @@
     ]
   },
   "button13": {
-    "logo": "question.bmp",
+    "logo": "question.png",
     "latch": false,
     "latchlogo": "",
     "buttontext":"",
@@ -49,7 +49,7 @@
     ]
   },
   "button14": {
-    "logo": "question.bmp",
+    "logo": "question.png",
     "latch": false,
     "latchlogo": "",
     "buttontext":"",
@@ -65,7 +65,7 @@
     ]
   },
   "button15": {
-    "logo": "question.bmp",
+    "logo": "question.png",
     "latch": false,
     "latchlogo": "",
     "buttontext":"",
@@ -81,7 +81,7 @@
     ]
   },
   "button21": {
-    "logo": "question.bmp",
+    "logo": "question.png",
     "latch": false,
     "latchlogo": "",
     "buttontext":"",
@@ -97,7 +97,7 @@
     ]
   },
   "button22": {
-    "logo": "question.bmp",
+    "logo": "question.png",
     "latch": false,
     "latchlogo": "",
     "buttontext":"",
@@ -113,7 +113,7 @@
     ]
   },
   "button23": {
-    "logo": "home.bmp",
+    "logo": "home.png",
     "latch": false,
     "latchlogo": "",
     "buttontext":"",
@@ -129,7 +129,7 @@
     ]
   },
   "button24": {
-    "logo": "question.bmp",
+    "logo": "question.png",
     "latch": false,
     "latchlogo": "",
     "buttontext":"",
@@ -145,7 +145,7 @@
     ]
   },
   "button25": {
-    "logo": "question.bmp",
+    "logo": "question.png",
     "latch": false,
     "latchlogo": "",
     "buttontext":"",
@@ -161,7 +161,7 @@
     ]
   },
   "button31": {
-    "logo": "question.bmp",
+    "logo": "question.png",
     "latch": false,
     "latchlogo": "",
     "buttontext":"",
@@ -177,7 +177,7 @@
     ]
   },
   "button32": {
-    "logo": "question.bmp",
+    "logo": "question.png",
     "latch": false,
     "latchlogo": "",
     "buttontext":"",
@@ -193,7 +193,7 @@
     ]
   },
   "button33": {
-    "logo": "question.bmp",
+    "logo": "question.png",
     "latch": false,
     "latchlogo": "",
     "buttontext":"",
@@ -209,7 +209,7 @@
     ]
   },
   "button34": {
-    "logo": "home.bmp",
+    "logo": "home.png",
     "latch": false,
     "latchlogo": "",
     "buttontext":"",
@@ -225,7 +225,7 @@
     ]
   },
   "button35": {
-    "logo": "home.bmp",
+    "logo": "home.png",
     "latch": false,
     "latchlogo": "",
     "buttontext":"",
