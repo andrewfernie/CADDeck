@@ -68,12 +68,16 @@ r
 
 #include <Arduino.h>
 
-const char *versionnumber = "V1.2.1";
+const char *versionnumber = "V1.3.0";
 
 /*
- * Version V1.2.1    - Latest version of Button2 added a prefix of "BTN_" to constants. This 
+ * Version V1.3.0    - Support for PNG images for logos. This is to free up space in the data folder.
+ *                     Support for decoding PNG images required more RAM than was available, so moved
+ *                     the menu structs to PSRAM.
+ *
+ * Version V1.2.1    - Latest version of Button2 added a prefix of "BTN_" to constants. This
  *                     required a change from VIRTUAL_PIN to BTN_VIRTUAL_PIN.
- * 
+ *
  * Version V1.2
  *                   - Added support for LCDKnob. Released along with LCDKnob firmware V1.0.0
  * Version V1.1.5
@@ -270,7 +274,9 @@ char logopath[64] = "/logos/";
 char templogopath[64] = "";
 
 // Create instances of the structs
-Menu menu[NUM_PAGES];
+// Menu menu[NUM_PAGES];
+
+Menu *pMenu[NUM_PAGES] = {nullptr};
 
 Wificonfig wificonfig;
 
@@ -329,6 +335,16 @@ void setup()
     MSG_INFOLN("[INFO] Brightness has been set");
 
     psramAvailable = psramFound();
+
+    if (psramAvailable) {
+        MSG_INFOLN("[INFO] PSRAM available");
+        for (int i = 0; i < NUM_PAGES; i++) {
+            pMenu[i] = (Menu *)ps_malloc(sizeof(struct Menu));
+        }
+    }
+    else {
+        MSG_ERRORLN("[ERROR] PSRAM not available");
+    }
 
 #ifdef SPACEMOUSE_SUPPORT
     spaceMouse.Init();
@@ -594,53 +610,53 @@ void setup()
 #ifdef PRELOAD_LOGOS
     if (psramAvailable) {
         tft.printf("[INFO] PSRAM available\n");
-        MSG_BASICLN("[INFO] PSRAM available");
+        MSG_INFOLN("[INFO] PSRAM available");
         tft.printf("[INFO] Preloading logos. Please wait...\n");
-        MSG_BASICLN("[INFO] Preloading logos. Please wait...");
+        MSG_INFOLN("[INFO] Preloading logos. Please wait...");
         uint16_t imageBGColor;
         uint8_t status;
         for (uint8_t page = 0; page < NUM_PAGES; page++) {
             for (uint8_t row = 0; row < BUTTON_ROWS; row++) {
                 for (uint8_t col = 0; col < BUTTON_COLS; col++) {
                     // Load the logo into PSRAM
-                    status = loadBmpToPSRAM(menu[page].button[row][col].logo, &(menu[page].button[row][col].pImage));
+                    status = loadBmpToPSRAM(pMenu[page]->button[row][col].logo, &(pMenu[page]->button[row][col].pImage));
 
                     if (status == ReturnSuccess) {
-                        imageBGColor = menu[page].button[row][col].pImage[2];
-                        menu[page].button[row][col].imageBGColour = imageBGColor;
-                        menu[page].button[row][col].imageBGColourValid = true;
+                        imageBGColor = pMenu[page]->button[row][col].pImage[2];
+                        pMenu[page]->button[row][col].imageBGColour = imageBGColor;
+                        pMenu[page]->button[row][col].imageBGColourValid = true;
                     }
                     else {
-                        menu[page].button[row][col].imageBGColourValid = false;
-                        menu[page].button[row][col].pImage = nullptr;
-                        tft.printf("Error allocating PSRAM for logo: %s\n", menu[page].button[row][col].logo);
-                        MSG_ERROR1("Error allocating PSRAM for logo: ", menu[page].button[row][col].logo);
+                        pMenu[page]->button[row][col].imageBGColourValid = false;
+                        pMenu[page]->button[row][col].pImage = nullptr;
+                        tft.printf("Error allocating PSRAM for logo: %s\n", pMenu[page]->button[row][col].logo);
+                        MSG_ERROR1("Error allocating PSRAM for logo: ", pMenu[page]->button[row][col].logo);
                     }
 
                     // Load the latchLogo into PSRAM
-                    if (menu[page].button[row][col].latch) {
-                        status = loadBmpToPSRAM(menu[page].button[row][col].latchlogo, &(menu[page].button[row][col].pLatchImage));
+                    if (pMenu[page]->button[row][col].latch) {
+                        status = loadBmpToPSRAM(pMenu[page]->button[row][col].latchlogo, &(pMenu[page]->button[row][col].pLatchImage));
                         if (status == ReturnSuccess) {
-                            imageBGColor = menu[page].button[row][col].pLatchImage[2];
-                            menu[page].button[row][col].latchImageBGColour = imageBGColor;
-                            menu[page].button[row][col].latchImageBGColourValid = true;
+                            imageBGColor = pMenu[page]->button[row][col].pLatchImage[2];
+                            pMenu[page]->button[row][col].latchImageBGColour = imageBGColor;
+                            pMenu[page]->button[row][col].latchImageBGColourValid = true;
                         }
                         else {
-                            menu[page].button[row][col].latchImageBGColourValid = false;
-                            menu[page].button[row][col].pLatchImage = nullptr;
-                            tft.printf("Error allocating PSRAM for latch logo: %s\n", menu[page].button[row][col].latchlogo);
-                            MSG_ERROR1("Error allocating PSRAM for latch logo: ", menu[page].button[row][col].latchlogo);
+                            pMenu[page]->button[row][col].latchImageBGColourValid = false;
+                            pMenu[page]->button[row][col].pLatchImage = nullptr;
+                            tft.printf("Error allocating PSRAM for latch logo: %s\n", pMenu[page]->button[row][col].latchlogo);
+                            MSG_ERROR1("Error allocating PSRAM for latch logo: ", pMenu[page]->button[row][col].latchlogo);
                         }
                     }
                 }
             }
         }
         tft.printf("[INFO] Finished preloading logos\n");
-        MSG_BASICLN("[INFO] Finished preloading logos");
+        MSG_INFOLN("[INFO] Finished preloading logos");
     }
     else {
         tft.printf("[INFO] PSRAM not available\n");
-        MSG_BASICLN("[INFO] PSRAM not available");
+        MSG_INFOLN("[INFO] PSRAM not available");
     }
 #endif
 
@@ -956,38 +972,48 @@ void loop(void)
 
                             if ((pageNum >= 0) && (pageNum < NUM_PAGES)) {
                                 if (row < BUTTON_ROWS && col < BUTTON_COLS) {
-                                    KeyboardMouseAction(menu[pageNum].button[row][col].actions[0].action, menu[pageNum].button[row][col].actions[0].value, menu[pageNum].button[row][col].actions[0].symbol);
-                                    KeyboardMouseAction(menu[pageNum].button[row][col].actions[1].action, menu[pageNum].button[row][col].actions[1].value, menu[pageNum].button[row][col].actions[1].symbol);
-                                    KeyboardMouseAction(menu[pageNum].button[row][col].actions[2].action, menu[pageNum].button[row][col].actions[2].value, menu[pageNum].button[row][col].actions[2].symbol);
-                                    Keyboard.releaseAll();
-                                    if (menu[pageNum].button[row][col].latch) {
-                                        if (menu[pageNum].button[row][col].islatched) {
-                                            menu[pageNum].button[row][col].islatched = false;
-                                        }
-                                        else {
-                                            menu[pageNum].button[row][col].islatched = true;
-                                        }
+                                    if (pageNum < NUM_PAGES) {
+                                        KeyboardMouseAction(pMenu[pageNum]->button[row][col].actions[0].action, pMenu[pageNum]->button[row][col].actions[0].value, pMenu[pageNum]->button[row][col].actions[0].symbol);
+                                    }
+                                    if (pageNum < NUM_PAGES) {
+                                        KeyboardMouseAction(pMenu[pageNum]->button[row][col].actions[1].action, pMenu[pageNum]->button[row][col].actions[1].value, pMenu[pageNum]->button[row][col].actions[1].symbol);
+                                    }
+                                    if (pageNum < NUM_PAGES) {
+                                        KeyboardMouseAction(pMenu[pageNum]->button[row][col].actions[2].action, pMenu[pageNum]->button[row][col].actions[2].value, pMenu[pageNum]->button[row][col].actions[2].symbol);
                                     }
 
-                                    if (generalconfig.usbcommsenable) {
-                                        // separate filename from menu[pageNum].button[row][col].logo path
-                                        char logoname[LEN_FILENAME];
-                                        char *p = strrchr(menu[pageNum].button[row][col].logo, '/');
-                                        if (p != NULL) {
-                                            strlcpy(logoname, p + 1, sizeof(logoname));
-                                        }
-                                        else {
-                                            strlcpy(logoname, menu[pageNum].button[row][col].logo, sizeof(logoname));
+                                    Keyboard.releaseAll();
+
+                                    if (pageNum < NUM_PAGES) {
+                                        if (pMenu[pageNum]->button[row][col].latch) {
+                                            if (pMenu[pageNum]->button[row][col].islatched) {
+                                                pMenu[pageNum]->button[row][col].islatched = false;
+                                            }
+                                            else {
+                                                pMenu[pageNum]->button[row][col].islatched = true;
+                                            }
                                         }
 
-                                        // remove extension from logoname
-                                        char *dot = strrchr(logoname, '.');
-                                        if (dot != NULL) {
-                                            *dot = '\0';
+                                        if (generalconfig.usbcommsenable) {
+                                            // separate filename from pMenu[pageNum]->button[row][col].logo path
+                                            char logoname[LEN_FILENAME];
+                                            char *p = strrchr(pMenu[pageNum]->button[row][col].logo, '/');
+                                            if (p != NULL) {
+                                                strlcpy(logoname, p + 1, sizeof(logoname));
+                                            }
+                                            else {
+                                                strlcpy(logoname, pMenu[pageNum]->button[row][col].logo, sizeof(logoname));
+                                            }
+
+                                            // remove extension from logoname
+                                            char *dot = strrchr(logoname, '.');
+                                            if (dot != NULL) {
+                                                *dot = '\0';
+                                            }
+                                            char usbData[40];
+                                            snprintf(usbData, sizeof(usbData), "{ButtonPress, %s , %s}", pMenu[pageNum]->name, logoname);
+                                            Serial.println(usbData);
                                         }
-                                        char usbData[40];
-                                        snprintf(usbData, sizeof(usbData), "{ButtonPress, %s , %s}", menu[pageNum].name, logoname);
-                                        Serial.println(usbData);
                                     }
                                 }
                                 else  // Back home
@@ -996,6 +1022,7 @@ void loop(void)
                                     drawKeypad();
                                 }
                             }
+
 #ifdef READ_BATTERY_VOLTAGE
                             MSG_INFO1("Battery voltage:", externalBatteryVoltage);
 #endif
@@ -1070,7 +1097,9 @@ void loop(void)
             }
         }
         // Draw top status bar.
-        drawTopStatusBar(false);
+        if (pageNum < NUM_PAGES) {
+            drawTopStatusBar(false);
+        }
 
 #ifdef READ_EXTERNAL_BATTERY
         if ((millis() - lastADCRead) > 100) {
@@ -1084,7 +1113,7 @@ void loop(void)
         loop_100_time += millis() - this_loop_start;
         loop_100_count++;
         if (loop_100_count >= 100) {
-            MSG_DEBUG1("Loop time: ", loop_100_time / 100);
+            // MSG_DEBUG1("Loop time: ", loop_100_time / 100);
             loop_100_time = 0;
             loop_100_count = 0;
         }

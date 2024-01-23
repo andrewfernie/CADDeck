@@ -1,7 +1,7 @@
 {
   "menuname": "Settings",
   "button11": {
-    "logo": "wifi.bmp",
+    "logo": "wifi.png",
     "latch": false,
     "latchlogo": "",
     "buttontext":"",
@@ -17,7 +17,7 @@
     ]
   },
   "button12": {
-    "logo": "brightnessdown.bmp",
+    "logo": "brightnessdown.png",
     "latch": false,
     "latchlogo": "",
     "buttontext":"",
@@ -33,7 +33,7 @@
     ]
   },
   "button13": {
-    "logo": "brightnessup.bmp",
+    "logo": "brightnessup.png",
     "latch": false,
     "latchlogo": "",
     "buttontext":"",
@@ -49,9 +49,9 @@
     ]
   },
   "button14": {
-    "logo": "USBComm2_off.bmp",
+    "logo": "USBComm2_off.png",
     "latch": true,
-    "latchlogo": "USBComm2.bmp",
+    "latchlogo": "USBComm2.png",
     "buttontext":"",
     "actionarray": [
       "11",
@@ -65,9 +65,9 @@
     ]
   },
   "button21": {
-    "logo": "sleep_off.bmp",
+    "logo": "sleep_off.png",
     "latch": true,
-    "latchlogo": "sleep_on.bmp",
+    "latchlogo": "sleep_on.png",
     "buttontext":"",
     "actionarray": [
       "11",
@@ -81,7 +81,7 @@
     ]
   },
   "button22": {
-    "logo": "info.bmp",
+    "logo": "info.png",
     "latch": false,
     "latchlogo": "",
     "buttontext":"",
@@ -97,7 +97,7 @@
     ]
   },
   "button23": {
-    "logo": "floppy.bmp",
+    "logo": "floppy.png",
     "latch": false,
     "latchlogo": "",
     "buttontext":"",
@@ -113,7 +113,7 @@
     ]
   },
   "button24": {
-    "logo": "GreenLED.bmp",
+    "logo": "GreenLED.png",
     "latch": false,
     "latchlogo": "",
     "buttontext":"",
@@ -129,7 +129,7 @@
     ]
   },
   "button31": {
-    "logo": "volumedown.bmp",
+    "logo": "volumedown.png",
     "latch": false,
     "latchlogo": "",
     "buttontext":"",
@@ -145,7 +145,7 @@
     ]
   },
   "button32": {
-    "logo": "volumeup.bmp",
+    "logo": "volumeup.png",
     "latch": false,
     "latchlogo": "",
     "buttontext":"",
@@ -161,7 +161,7 @@
     ]
   },
   "button33": {
-    "logo": "nosound.bmp",
+    "logo": "nosound.png",
     "latch": false,
     "latchlogo": "",
     "buttontext":"",
@@ -177,7 +177,7 @@
     ]
   },
   "button34": {
-    "logo": "home.bmp",
+    "logo": "home.png",
     "latch": false,
     "latchlogo": "",
     "buttontext":"",

@@ -500,7 +500,7 @@ bool loadConfig(String value)
         snprintf(menuFileNameRoot, sizeof(menuFileNameRoot), "menu%d", fileNameMenuNumber);
         const char *menuName = doc["menuname"] | menuFileNameRoot;
         MSG_INFO1("[INFO] load_config menuname is ", menuName);
-        strlcpy(menu[fileNameMenuNumber].name, menuName, sizeof(menu[fileNameMenuNumber].name));
+        strlcpy(pMenu[fileNameMenuNumber]->name, menuName, sizeof(pMenu[fileNameMenuNumber]->name));
 
         for (uint8_t row = 0; row < BUTTON_ROWS; row++) {
             for (uint8_t col = 0; col < BUTTON_COLS; col++) {
@@ -512,24 +512,24 @@ bool loadConfig(String value)
 
                 strlcpy(templogopath, logopath, sizeof(templogopath));
                 strlcat(templogopath, logo, sizeof(templogopath));
-                strlcpy(menu[fileNameMenuNumber].button[row][col].logo, templogopath,
-                        sizeof(menu[fileNameMenuNumber].button[row][col].logo));
+                strlcpy(pMenu[fileNameMenuNumber]->button[row][col].logo, templogopath,
+                        sizeof(pMenu[fileNameMenuNumber]->button[row][col].logo));
                 MSG_INFO2("[INFO] load_config loading logo", objectName, templogopath);
 
                 const char *latchlogo = doc[objectName]["latchlogo"] | "question.bmp";
 
-                menu[fileNameMenuNumber].button[row][col].latch = doc[objectName]["latch"] | false;
+                pMenu[fileNameMenuNumber]->button[row][col].latch = doc[objectName]["latch"] | false;
 
                 strlcpy(templogopath, logopath, sizeof(templogopath));
                 strlcat(templogopath, latchlogo, sizeof(templogopath));
-                strlcpy(menu[fileNameMenuNumber].button[row][col].latchlogo, templogopath,
-                        sizeof(menu[fileNameMenuNumber].button[row][col].latchlogo));
+                strlcpy(pMenu[fileNameMenuNumber]->button[row][col].latchlogo, templogopath,
+                        sizeof(pMenu[fileNameMenuNumber]->button[row][col].latchlogo));
                 MSG_INFO2("[INFO] load_config loading latchlogo", objectName, templogopath);
 
-                menu[fileNameMenuNumber].button[row][col].imageBGColourValid = false;
-                menu[fileNameMenuNumber].button[row][col].latchImageBGColourValid = false;
-                menu[fileNameMenuNumber].button[row][col].pImage = nullptr;
-                menu[fileNameMenuNumber].button[row][col].pLatchImage = nullptr;
+                pMenu[fileNameMenuNumber]->button[row][col].imageBGColourValid = false;
+                pMenu[fileNameMenuNumber]->button[row][col].latchImageBGColourValid = false;
+                pMenu[fileNameMenuNumber]->button[row][col].pImage = nullptr;
+                pMenu[fileNameMenuNumber]->button[row][col].pLatchImage = nullptr;
                 JsonArray button_actionarray = doc[objectName]["actionarray"];
 
                 int button_actionarray_0 = button_actionarray[0];
@@ -540,52 +540,53 @@ bool loadConfig(String value)
 
                 if (button_actionarray_0 == Action_Char || button_actionarray_0 == Action_SpecialChar) {
                     const char *button_symbolarray_0 = button_valuearray[0];
-                    strcpy(menu[fileNameMenuNumber].button[row][col].actions[0].symbol, button_symbolarray_0);
+                    strcpy(pMenu[fileNameMenuNumber]->button[row][col].actions[0].symbol, button_symbolarray_0);
                 }
                 else {
                     int button_valuearray_0 = button_valuearray[0];
-                    menu[fileNameMenuNumber].button[row][col].actions[0].value = button_valuearray_0;
+                    pMenu[fileNameMenuNumber]->button[row][col].actions[0].value = button_valuearray_0;
                 }
 
                 if (button_actionarray_1 == Action_Char || button_actionarray_1 == Action_SpecialChar) {
                     const char *button_symbolarray_1 = button_valuearray[1];
-                    strcpy(menu[fileNameMenuNumber].button[row][col].actions[1].symbol, button_symbolarray_1);
+                    strcpy(pMenu[fileNameMenuNumber]->button[row][col].actions[1].symbol, button_symbolarray_1);
                 }
                 else {
                     int button_valuearray_1 = button_valuearray[1];
-                    menu[fileNameMenuNumber].button[row][col].actions[1].value = button_valuearray_1;
+                    pMenu[fileNameMenuNumber]->button[row][col].actions[1].value = button_valuearray_1;
                 }
 
                 if (button_actionarray_2 == Action_Char || button_actionarray_2 == Action_SpecialChar) {
                     const char *button_symbolarray_2 = button_valuearray[2];
-                    strcpy(menu[fileNameMenuNumber].button[row][col].actions[2].symbol, button_symbolarray_2);
+                    strcpy(pMenu[fileNameMenuNumber]->button[row][col].actions[2].symbol, button_symbolarray_2);
                 }
                 else {
                     int button_valuearray_2 = button_valuearray[2];
-                    menu[fileNameMenuNumber].button[row][col].actions[2].value = button_valuearray_2;
+                    pMenu[fileNameMenuNumber]->button[row][col].actions[2].value = button_valuearray_2;
                 }
 
-                menu[fileNameMenuNumber].button[row][col].actions[0].action = button_actionarray_0;
-                menu[fileNameMenuNumber].button[row][col].actions[1].action = button_actionarray_1;
-                menu[fileNameMenuNumber].button[row][col].actions[2].action = button_actionarray_2;
+                pMenu[fileNameMenuNumber]->button[row][col].actions[0].action = button_actionarray_0;
+                pMenu[fileNameMenuNumber]->button[row][col].actions[1].action = button_actionarray_1;
+                pMenu[fileNameMenuNumber]->button[row][col].actions[2].action = button_actionarray_2;
 
                 //
                 // --------------------- Special Cases ----------------------
                 //
-                // Sleep enable button
-                if (menu[fileNameMenuNumber].button[row][col].actions[0].action == Action_SpecialFn &&
-                    menu[fileNameMenuNumber].button[row][col].actions[0].value == 4) {
-                    menu[fileNameMenuNumber].button[row][col].islatched = generalconfig.sleepenable;
+                if (pMenu[fileNameMenuNumber]->button[row][col].actions[0].action == Action_SpecialFn &&
+                    pMenu[fileNameMenuNumber]->button[row][col].actions[0].value == 4) {
+                    // Sleep enable button
+                    pMenu[fileNameMenuNumber]->button[row][col].islatched = generalconfig.sleepenable;
+                } else if (pMenu[fileNameMenuNumber]->button[row][col].actions[0].action == Action_SpecialFn &&
+                    pMenu[fileNameMenuNumber]->button[row][col].actions[0].value == 8) {
+                    // USB comms enable button
+                    pMenu[fileNameMenuNumber]->button[row][col].islatched = generalconfig.usbcommsenable;
+                } else if (pMenu[fileNameMenuNumber]->button[row][col].actions[0].action == Action_SpecialFn &&
+                    pMenu[fileNameMenuNumber]->button[row][col].actions[0].value == 14) {
+                    // Spacemouse mode enable button
+                    pMenu[fileNameMenuNumber]->button[row][col].islatched = cadconfig.spacemouse_enable;
                 }
-                // USB comms enable button
-                if (menu[fileNameMenuNumber].button[row][col].actions[0].action == Action_SpecialFn &&
-                    menu[fileNameMenuNumber].button[row][col].actions[0].value == 8) {
-                    menu[fileNameMenuNumber].button[row][col].islatched = generalconfig.usbcommsenable;
-                }
-                // Spacemouse mode enable button
-                if (menu[fileNameMenuNumber].button[row][col].actions[0].action == Action_SpecialFn &&
-                    menu[fileNameMenuNumber].button[row][col].actions[0].value == 14) {
-                    menu[fileNameMenuNumber].button[row][col].islatched = cadconfig.spacemouse_enable;
+                else {
+                    pMenu[fileNameMenuNumber]->button[row][col].islatched = false;
                 }
             }
         }

@@ -62,19 +62,19 @@ void drawlogo(uint8_t col, uint8_t row, bool transparent, bool latch)
 
     if ((pageNum >= 0) && (pageNum < NUM_PAGES)) {
         if (latch) {
-            if (menu[pageNum].button[row][col].pLatchImage == nullptr || !psramAvailable) {
-                drawBmp(menu[pageNum].button[row][col].latchlogo, x, y, transparent);
+            if (pMenu[pageNum]->button[row][col].pLatchImage == nullptr || !psramAvailable || !SAVE_LOGOS_TO_PSRAM) {
+                drawImage(pMenu[pageNum]->button[row][col].latchlogo, x, y, transparent);
             }
             else {
-                drawLogoFromPSRAM(menu[pageNum].button[row][col].pLatchImage, x, y, transparent);
+                drawLogoFromPSRAM(pMenu[pageNum]->button[row][col].pLatchImage, x, y, transparent);
             }
         }
         else {
-            if (menu[pageNum].button[row][col].pImage == nullptr || !psramAvailable) {
-                drawBmp(menu[pageNum].button[row][col].logo, x, y, transparent);
+            if (pMenu[pageNum]->button[row][col].pImage == nullptr || !psramAvailable || !SAVE_LOGOS_TO_PSRAM) {
+                drawImage(pMenu[pageNum]->button[row][col].logo, x, y, transparent);
             }
             else {
-                drawLogoFromPSRAM(menu[pageNum].button[row][col].pImage, x, y, transparent);
+                drawLogoFromPSRAM(pMenu[pageNum]->button[row][col].pImage, x, y, transparent);
             }
         }
     }
@@ -82,7 +82,7 @@ void drawlogo(uint8_t col, uint8_t row, bool transparent, bool latch)
 
 /**
 * @brief This function checks if the button is active or inactive.
-         Inactive means that the logo is "blank.bmp" and that there are no actions
+         Inactive means that the logo is "blank.bmp" or "blank.png" and that there are no actions
          defined for the button.
 *
 * @param page int
@@ -96,21 +96,30 @@ void drawlogo(uint8_t col, uint8_t row, bool transparent, bool latch)
 bool isActiveButton(uint8_t page, uint8_t row, uint8_t col)
 {
     bool activeButton = false;
-    char logoPathAndName[64];
+    char logoPathAndNameBMP[64];
+    char logoPathAndNamePNG[64];
 
-    strcpy(logoPathAndName, logopath);
-    strcat(logoPathAndName, "blank.bmp");
+    strcpy(logoPathAndNameBMP, logopath);
+    strcat(logoPathAndNameBMP, "blank.bmp");
+    strcpy(logoPathAndNamePNG, logopath);
+    strcat(logoPathAndNamePNG, "blank.png");
 
-    if (strcmp(menu[pageNum].button[row][col].logo, logoPathAndName) != 0) {
-        activeButton = true;
+    if (page < NUM_PAGES) {
+        if ((strcmp(pMenu[page]->button[row][col].logo, logoPathAndNameBMP) != 0) &&
+            (strcmp(pMenu[page]->button[row][col].logo, logoPathAndNamePNG) != 0)) {
+            activeButton = true;
+        }
+        else {
+            if ((pMenu[page]->button[row][col].actions[0].action != ActionEnum::Action_NoAction) ||
+                (pMenu[page]->button[row][col].actions[1].action != ActionEnum::Action_NoAction) ||
+                (pMenu[page]->button[row][col].actions[2].action != ActionEnum::Action_NoAction))
+                activeButton = true;
+        }
     }
     else {
-        if ((menu[pageNum].button[row][col].actions[0].action != ActionEnum::Action_NoAction) ||
-            (menu[pageNum].button[row][col].actions[1].action != ActionEnum::Action_NoAction) ||
-            (menu[pageNum].button[row][col].actions[2].action != ActionEnum::Action_NoAction))
-            activeButton = true;
+        MSG_ERROR1("Invalid page number: ", page);
+        activeButton = false;
     }
-
     return activeButton;
 }
 
@@ -138,81 +147,90 @@ void drawButtonRowCol(uint8_t page, uint8_t row, uint8_t col)
     activeButton = false;
 
     uint8_t status = ReturnSuccess;
-    activeButton = isActiveButton(pageNum, row, col);
 
-    if (activeButton) {
-        if (menu[pageNum].button[row][col].islatched) {
-            if (menu[pageNum].button[row][col].pLatchImage == nullptr) {
-                if (psramAvailable) {
-                    status = loadBmpToPSRAM(menu[pageNum].button[row][col].latchlogo, &(menu[pageNum].button[row][col].pLatchImage));
-                    if (status == ReturnSuccess) {
-                        imageBGColor = menu[pageNum].button[row][col].pLatchImage[2];
-                        menu[pageNum].button[row][col].latchImageBGColour = imageBGColor;
-                        menu[pageNum].button[row][col].latchImageBGColourValid = true;
+    if (page < NUM_PAGES) {
+        activeButton = isActiveButton(page, row, col);
+
+        if (activeButton) {
+            if (pMenu[page]->button[row][col].islatched) {
+                if (pMenu[page]->button[row][col].pLatchImage == nullptr) {
+                    if (psramAvailable && SAVE_LOGOS_TO_PSRAM) {
+                        status = loadImageToPSRAM(pMenu[page]->button[row][col].latchlogo, &(pMenu[page]->button[row][col].pLatchImage));
+                        if (status == ReturnSuccess) {
+                            imageBGColor = pMenu[page]->button[row][col].pLatchImage[2];
+                            pMenu[page]->button[row][col].latchImageBGColour = imageBGColor;
+                            pMenu[page]->button[row][col].latchImageBGColourValid = true;
+                        }
+                        else {
+                            MSG_ERROR1("Error allocating PSRAM for latch logo: ", pMenu[page]->button[row][col].latchlogo);
+                        }
                     }
                     else {
-                        MSG_ERROR1("Error allocating PSRAM for latch logo: ", menu[pageNum].button[row][col].latchlogo);
+                        imageBGColor = getLatchImageBG(page, row, col);
+                        pMenu[page]->button[row][col].latchImageBGColour = imageBGColor;
+                        pMenu[page]->button[row][col].latchImageBGColourValid = true;
                     }
                 }
                 else {
-                    imageBGColor = getLatchImageBG(pageNum, row, col);
-                    menu[pageNum].button[row][col].latchImageBGColour = imageBGColor;
-                    menu[pageNum].button[row][col].latchImageBGColourValid = true;
+                    imageBGColor = pMenu[page]->button[row][col].latchImageBGColour;
                 }
             }
             else {
-                imageBGColor = menu[pageNum].button[row][col].latchImageBGColour;
-            }
-        }
-        else {
-            if (menu[pageNum].button[row][col].pImage == nullptr) {
-                if (psramAvailable) {
-                    status = loadBmpToPSRAM(menu[pageNum].button[row][col].logo, &(menu[pageNum].button[row][col].pImage));
-                    if (status == ReturnSuccess) {
-                        imageBGColor = menu[pageNum].button[row][col].pImage[2];
-                        menu[pageNum].button[row][col].imageBGColour = imageBGColor;
-                        menu[pageNum].button[row][col].imageBGColourValid = true;
+                if (pMenu[page]->button[row][col].pImage == nullptr) {
+                    if (psramAvailable && SAVE_LOGOS_TO_PSRAM) {
+                        status = loadImageToPSRAM(pMenu[page]->button[row][col].logo, &(pMenu[page]->button[row][col].pImage));
+                        if (status == ReturnSuccess) {
+                            imageBGColor = pMenu[page]->button[row][col].pImage[2];
+                            pMenu[page]->button[row][col].imageBGColour = imageBGColor;
+                            pMenu[page]->button[row][col].imageBGColourValid = true;
+                        }
+                        else {
+                            MSG_ERROR1("Error allocating PSRAM for logo: ", pMenu[page]->button[row][col].logo);
+                        }
                     }
                     else {
-                        MSG_ERROR1("Error allocating PSRAM for logo: ", menu[pageNum].button[row][col].logo);
+                        imageBGColor = getImageBG(page, row, col);
+                        pMenu[page]->button[row][col].imageBGColour = imageBGColor;
+                        pMenu[page]->button[row][col].imageBGColourValid = true;
                     }
                 }
                 else {
-                    imageBGColor = getImageBG(pageNum, row, col);
-                    menu[pageNum].button[row][col].imageBGColour = imageBGColor;
-                    menu[pageNum].button[row][col].imageBGColourValid = true;
+                    imageBGColor = pMenu[page]->button[row][col].imageBGColour;
                 }
             }
-            else {
-                imageBGColor = menu[pageNum].button[row][col].imageBGColour;
+
+            if (imageBGColor > 0) {
+                buttonBG = imageBGColor;
+                drawTransparent = false;
             }
+            else {
+                if (pMenu[page]->button[row][col].actions[0].action == Action_ChangePage) {
+                    buttonBG = generalconfig.menuButtonColour;
+                    drawTransparent = true;
+                }
+                else {
+                    buttonBG = generalconfig.functionButtonColour;
+                    drawTransparent = true;
+                }
+            }
+            outlineColor = TFT_WHITE;
         }
 
-        if (imageBGColor > 0) {
-            buttonBG = imageBGColor;
-            drawTransparent = false;
+        tft.setFreeFont(LABEL_FONT);
+
+        key[row][col].initButton(&tft, KEY_X + col * (KEY_W + KEY_SPACING_X),
+                                 KEY_Y + row * (KEY_H + KEY_SPACING_Y),  // x, y, w, h, outline, fill, text
+                                 KEY_W, KEY_H, outlineColor, buttonBG, outlineColor,
+                                 (char *)"", KEY_TEXTSIZE);
+
+        key[row][col].drawButton();
+        // After drawing the button outline we call this to draw a logo.
+        if (activeButton) {
+            drawlogo(col, row, drawTransparent, pMenu[page]->button[row][col].islatched);
         }
-        else {
-            if (menu[pageNum].button[row][col].actions[0].action == Action_ChangePage) {
-                buttonBG = generalconfig.menuButtonColour;
-                drawTransparent = true;
-            }
-            else {
-                buttonBG = generalconfig.functionButtonColour;
-                drawTransparent = true;
-            }
-        }
-        outlineColor = TFT_WHITE;
     }
-    tft.setFreeFont(LABEL_FONT);
-    key[row][col].initButton(&tft, KEY_X + col * (KEY_W + KEY_SPACING_X),
-                             KEY_Y + row * (KEY_H + KEY_SPACING_Y),  // x, y, w, h, outline, fill, text
-                             KEY_W, KEY_H, outlineColor, buttonBG, outlineColor,
-                             (char *)"", KEY_TEXTSIZE);
-    key[row][col].drawButton();
-    // After drawing the button outline we call this to draw a logo.
-    if (activeButton) {
-        drawlogo(col, row, drawTransparent, menu[pageNum].button[row][col].islatched);
+    else {
+        MSG_ERROR1("Invalid page number: ", page);
     }
 }
 
@@ -536,7 +554,7 @@ void drawTopStatusBar(bool force_redraw = true)
         strncpy(topStatusBarTextLeft, buffer, sizeof(topStatusBarTextLeft));
     }
 
-    strncpy(buffer, menu[pageNum].name, sizeof(buffer));
+    strncpy(buffer, pMenu[pageNum]->name, sizeof(buffer));
     comparison = strncmp(buffer, topStatusBarTextCenter, sizeof(buffer));
 
     if (comparison != 0 || force_redraw) {
@@ -625,7 +643,7 @@ void drawBottomStatusBar(bool force_redraw = true)
 }
 
 /**
- * @brief This function validates a page number 
+ * @brief This function validates a page number
  *
  * @param page uint8_t. The page number to be validated
  *
