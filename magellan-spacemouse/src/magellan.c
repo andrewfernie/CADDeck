@@ -36,7 +36,7 @@ int main() {
     stdio_init_all();
 
     // while(true){
-        printf("hello\n");
+    printf("hello\n");
     //     sleep_ms(1000);
     // }
 
@@ -56,19 +56,37 @@ int main() {
     uint8_t buf[64];
     uint8_t idx = 0;
 
+    long last_trans_time = 0;
+    long last_rot_time = 0;
+    long last_button_time = 0;
+
+    long update_interval = 20;  // ms
+    long time_now_millis = 0;
+
     while (true) {
+        time_now_millis = time_us_64() / 1000;
         tud_task();
-        if (trans_pending && tud_hid_ready()) {
-            tud_hid_report(1, trans_report, 6);
-            trans_pending = 0;
+        if (time_now_millis - last_trans_time > update_interval) {
+            if (trans_pending && tud_hid_ready()) {
+                tud_hid_report(1, trans_report, 6);
+                last_trans_time = time_now_millis;
+                trans_pending = 0;
+            }
         }
-        if (rot_pending && tud_hid_ready()) {
-            tud_hid_report(2, rot_report, 6);
-            rot_pending = 0;
+        if (time_now_millis - last_rot_time > update_interval) {
+            if (rot_pending && tud_hid_ready()) {
+                tud_hid_report(2, rot_report, 6);
+                last_rot_time = time_now_millis;
+                rot_pending = 0;
+            }
         }
-        if (buttons_pending && tud_hid_ready()) {
-            tud_hid_report(3, buttons_report, 6);
-            buttons_pending = 0;
+
+        if (time_now_millis - last_button_time > update_interval) {
+            if (buttons_pending && tud_hid_ready()) {
+                tud_hid_report(3, buttons_report, 6);
+                last_button_time = time_now_millis;
+                buttons_pending = 0;
+            }
         }
 
         if (uart_is_readable(SERIAL_MOUSE_UART)) {
@@ -77,12 +95,11 @@ int main() {
             idx = (idx + 1) % sizeof(buf);
 
             if (c == '\r') {
-
                 switch (buf[0]) {
                     case 'd': {
                         if (idx != 26) {
                             break;
-                        } 
+                        }
 
                         int16_t values[6];
                         for (int i = 0; i < 6; i++) {
@@ -90,7 +107,6 @@ int main() {
                             for (int j = 0; j < 4; j++) {
                                 values[i] += (buf[1 + i * 4 + 3 - j] & 0xf) << (4 * j);
                             }
-
                         }
 
                         trans_report[0] = values[0];
@@ -150,6 +166,8 @@ int main() {
                 idx = 0;
             }
         }
+
+
     }
 
     return 0;
