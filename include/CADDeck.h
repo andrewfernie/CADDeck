@@ -82,6 +82,7 @@
 #include "stack_queue.h"
 #include "SpaceMouse.h"
 
+// Leave this line active if you are using an LCDKnob. Comment it out if you are not.
 #define LCDKNOB_SUPPORT 1
 #ifdef LCDKNOB_SUPPORT
 #include "LCDKnobComms.h"
