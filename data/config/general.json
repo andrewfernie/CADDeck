@@ -11,7 +11,7 @@
   "modifier2": 129,
   "modifier3": 0,
   "helperdelay": 500,
-  "startup_menu": 9,
+  "startup_menu": 5,
   "gpio_pin": 2,
   "gpio_pin_mode": 1
 }

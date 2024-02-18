@@ -1,17 +1,17 @@
 {
-  "menuname":"Home", 
+  "menuname": "Home",
   "button11": {
-    "logo": "win.png",
+    "logo": "blank.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "",
     "actionarray": [
       "14",
       "0",
       "0"
     ],
     "valuearray": [
-      "6",
+      "3",
       "0",
       "0"
     ]
@@ -20,7 +20,7 @@
     "logo": "cad_options.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "Goto CAD Options",
     "actionarray": [
       "14",
       "0",
@@ -36,7 +36,7 @@
     "logo": "fusion360.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "Goto F360",
     "actionarray": [
       "14",
       "0",
@@ -52,14 +52,14 @@
     "logo": "solidworks.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "Goto Solidworks",
     "actionarray": [
       "14",
       "0",
       "0"
     ],
     "valuearray": [
-      "9",
+      "5",
       "0",
       "0"
     ]
@@ -68,7 +68,7 @@
     "logo": "button_desc.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "Goto Button Descriptions ",
     "actionarray": [
       "11",
       "0",
@@ -81,17 +81,17 @@
     ]
   },
   "button22": {
-    "logo": "FreeCAD.png",
+    "logo": "blank.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "",
     "actionarray": [
-      "14",
+      "0",
       "0",
       "0"
     ],
     "valuearray": [
-      "6",
+      "0",
       "0",
       "0"
     ]
@@ -100,7 +100,7 @@
     "logo": "blank.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "",
     "actionarray": [
       "0",
       "0",
@@ -116,7 +116,7 @@
     "logo": "blank.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "",
     "actionarray": [
       "0",
       "0",
@@ -132,7 +132,7 @@
     "logo": "blank.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "",
     "actionarray": [
       "0",
       "0",
@@ -148,7 +148,7 @@
     "logo": "blank.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "",
     "actionarray": [
       "0",
       "0",
@@ -164,7 +164,7 @@
     "logo": "blank.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "",
     "actionarray": [
       "0",
       "0",
@@ -180,7 +180,7 @@
     "logo": "settings.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "",
     "actionarray": [
       "14",
       "0",

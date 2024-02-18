@@ -1,10 +1,10 @@
 {
-  "menuname":"Menu-5", 
+  "menuname": "SW Main",
   "button11": {
-    "logo": "blank.png",
+    "logo": "SW_Insert.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "Insert",
     "actionarray": [
       "0",
       "0",
@@ -17,10 +17,10 @@
     ]
   },
   "button12": {
-    "logo": "blank.png",
+    "logo": "SW_Assembly.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "Assembly",
     "actionarray": [
       "0",
       "0",
@@ -33,10 +33,10 @@
     ]
   },
   "button13": {
-    "logo": "blank.png",
+    "logo": "SW_Part.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "Part",
     "actionarray": [
       "0",
       "0",
@@ -52,7 +52,7 @@
     "logo": "blank.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "",
     "actionarray": [
       "0",
       "0",
@@ -68,7 +68,7 @@
     "logo": "blank.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "",
     "actionarray": [
       "0",
       "0",
@@ -81,49 +81,49 @@
     ]
   },
   "button21": {
-    "logo": "blank.png",
+    "logo": "SW_Sketch.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "Goto Sketch",
     "actionarray": [
-      "0",
+      "14",
       "0",
       "0"
     ],
     "valuearray": [
-      "0",
+      "7",
       "0",
       "0"
     ]
   },
   "button22": {
-    "logo": "blank.png",
+    "logo": "SW_ExtrudedBoss.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "Goto Boss-Base",
     "actionarray": [
-      "0",
+      "14",
       "0",
       "0"
     ],
     "valuearray": [
-      "0",
+      "9",
       "0",
       "0"
     ]
   },
   "button23": {
-    "logo": "blank.png",
+    "logo": "SW_Fillet.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "Goto Features",
     "actionarray": [
-      "0",
+      "14",
       "0",
       "0"
     ],
     "valuearray": [
-      "0",
+      "6",
       "0",
       "0"
     ]
@@ -132,7 +132,7 @@
     "logo": "blank.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "",
     "actionarray": [
       "0",
       "0",
@@ -148,7 +148,7 @@
     "logo": "blank.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "",
     "actionarray": [
       "0",
       "0",
@@ -164,7 +164,7 @@
     "logo": "blank.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "",
     "actionarray": [
       "0",
       "0",
@@ -180,7 +180,7 @@
     "logo": "blank.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "",
     "actionarray": [
       "0",
       "0",
@@ -196,7 +196,7 @@
     "logo": "blank.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "",
     "actionarray": [
       "0",
       "0",
@@ -212,7 +212,7 @@
     "logo": "home.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "",
     "actionarray": [
       "14",
       "0",
@@ -228,7 +228,7 @@
     "logo": "home.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "",
     "actionarray": [
       "14",
       "0",

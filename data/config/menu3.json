@@ -1,18 +1,18 @@
 {
-  "menuname":"Menu-3", 
+  "menuname": "Menu-3",
   "button11": {
     "logo": "blank.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "",
     "actionarray": [
-      "0",
-      "0",
+      "5",
+      "4",
       "0"
     ],
     "valuearray": [
-      "0",
-      "0",
+      "2",
+      "a",
       "0"
     ]
   },
@@ -20,14 +20,14 @@
     "logo": "blank.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "",
     "actionarray": [
-      "0",
+      "4",
       "0",
       "0"
     ],
     "valuearray": [
-      "0",
+      "b",
       "0",
       "0"
     ]
@@ -36,15 +36,15 @@
     "logo": "blank.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "",
     "actionarray": [
-      "0",
-      "0",
+      "5",
+      "4",
       "0"
     ],
     "valuearray": [
-      "0",
-      "0",
+      "2",
+      "c",
       "0"
     ]
   },
@@ -52,14 +52,14 @@
     "logo": "blank.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "",
     "actionarray": [
-      "0",
+      "4",
       "0",
       "0"
     ],
     "valuearray": [
-      "0",
+      "d",
       "0",
       "0"
     ]
@@ -68,7 +68,7 @@
     "logo": "blank.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "",
     "actionarray": [
       "0",
       "0",
@@ -84,15 +84,15 @@
     "logo": "blank.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "",
     "actionarray": [
-      "0",
-      "0",
+      "5",
+      "4",
       "0"
     ],
     "valuearray": [
-      "0",
-      "0",
+      "2",
+      "e",
       "0"
     ]
   },
@@ -100,14 +100,14 @@
     "logo": "blank.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "",
     "actionarray": [
-      "0",
+      "4",
       "0",
       "0"
     ],
     "valuearray": [
-      "0",
+      "f",
       "0",
       "0"
     ]
@@ -116,15 +116,15 @@
     "logo": "blank.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "",
     "actionarray": [
-      "0",
-      "0",
+      "5",
+      "4",
       "0"
     ],
     "valuearray": [
-      "0",
-      "0",
+      "1",
+      " ",
       "0"
     ]
   },
@@ -132,14 +132,14 @@
     "logo": "blank.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "",
     "actionarray": [
-      "0",
+      "4",
       "0",
       "0"
     ],
     "valuearray": [
-      "0",
+      "8",
       "0",
       "0"
     ]
@@ -148,7 +148,7 @@
     "logo": "blank.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "",
     "actionarray": [
       "0",
       "0",
@@ -164,15 +164,15 @@
     "logo": "blank.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "",
     "actionarray": [
-      "0",
-      "0",
+      "5",
+      "4",
       "0"
     ],
     "valuearray": [
-      "0",
-      "0",
+      "1",
+      "9",
       "0"
     ]
   },
@@ -180,14 +180,14 @@
     "logo": "blank.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "",
     "actionarray": [
-      "0",
+      "4",
       "0",
       "0"
     ],
     "valuearray": [
-      "0",
+      "10",
       "0",
       "0"
     ]
@@ -196,15 +196,15 @@
     "logo": "blank.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "",
     "actionarray": [
-      "0",
-      "0",
+      "5",
+      "4",
       "0"
     ],
     "valuearray": [
-      "0",
-      "0",
+      "1",
+      "11",
       "0"
     ]
   },
@@ -212,7 +212,7 @@
     "logo": "home.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "",
     "actionarray": [
       "14",
       "0",
@@ -228,7 +228,7 @@
     "logo": "home.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "",
     "actionarray": [
       "14",
       "0",

@@ -1,12 +1,12 @@
 {
-  "menuname": "CADApp",
+  "menuname": "SW Sketch",
   "button11": {
-    "logo": "solidworks.png",
+    "logo": "SW_Sketch.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "Sketch",
     "actionarray": [
-      "16",
+      "0",
       "0",
       "0"
     ],
@@ -17,10 +17,10 @@
     ]
   },
   "button12": {
-    "logo": "fusion360.png",
+    "logo": "SW_Dimension.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "Dimension",
     "actionarray": [
       "16",
       "0",
@@ -33,10 +33,10 @@
     ]
   },
   "button13": {
-    "logo": "blender.png",
+    "logo": "SW_Line.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "Line",
     "actionarray": [
       "16",
       "0",
@@ -49,10 +49,10 @@
     ]
   },
   "button14": {
-    "logo": "FreeCAD.png",
+    "logo": "SW_Rectangle.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "Rectangle",
     "actionarray": [
       "16",
       "0",
@@ -68,7 +68,7 @@
     "logo": "blank.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "",
     "actionarray": [
       "0",
       "0",
@@ -81,10 +81,10 @@
     ]
   },
   "button21": {
-    "logo": "ac3d.png",
+    "logo": "SW_Slot.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "Slot",
     "actionarray": [
       "16",
       "0",
@@ -97,10 +97,10 @@
     ]
   },
   "button22": {
-    "logo": "blank.png",
+    "logo": "SW_Circle.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "Circle",
     "actionarray": [
       "0",
       "0",
@@ -113,10 +113,10 @@
     ]
   },
   "button23": {
-    "logo": "blank.png",
+    "logo": "SW_Arc.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "Arc",
     "actionarray": [
       "0",
       "0",
@@ -129,10 +129,10 @@
     ]
   },
   "button24": {
-    "logo": "blank.png",
+    "logo": "SW_Polygon.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "Polygon",
     "actionarray": [
       "0",
       "0",
@@ -148,7 +148,7 @@
     "logo": "blank.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "",
     "actionarray": [
       "0",
       "0",
@@ -161,10 +161,10 @@
     ]
   },
   "button31": {
-    "logo": "blank.png",
+    "logo": "SW_Spline.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "Spline",
     "actionarray": [
       "0",
       "0",
@@ -177,10 +177,10 @@
     ]
   },
   "button32": {
-    "logo": "blank.png",
+    "logo": "SW_Ellipse.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "Ellipse",
     "actionarray": [
       "0",
       "0",
@@ -193,26 +193,10 @@
     ]
   },
   "button33": {
-    "logo": "blank.png",
+    "logo": "back.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
-    "actionarray": [
-      "0",
-      "0",
-      "0"
-    ],
-    "valuearray": [
-      "0",
-      "0",
-      "0"
-    ]
-  },
-  "button34": {
-    "logo": "return.png",
-    "latch": false,
-    "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "Back",
     "actionarray": [
       "18",
       "0",
@@ -224,11 +208,27 @@
       "0"
     ]
   },
+  "button34": {
+    "logo": "SW_Home.png",
+    "latch": false,
+    "latchlogo": "",
+    "buttontext": "Solidworks Home",
+    "actionarray": [
+      "14",
+      "0",
+      "0"
+    ],
+    "valuearray": [
+      "5",
+      "0",
+      "0"
+    ]
+  },
   "button35": {
     "logo": "return.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "",
     "actionarray": [
       "18",
       "0",

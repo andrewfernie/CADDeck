@@ -176,7 +176,7 @@ It took me a few tries to get this working so just use the pre-built binary :).
 2. Drag and drop the pre-built magellan.uf2 to the root of the flash drive
 3. You are done
 
-# Setup
+## Setup
 
 Once the unit is assembled and the display is coming up you should see the main page.
 ![Main Page](images/mainpage.png)
@@ -200,11 +200,35 @@ The joystick X and Y data may be bouncing around a bit. This is normal as the jo
 
 Bind your computer to the CADDeck using the Bluetooth settings page on your computer.
 
-# Configuration
+## Configuration
 
 Note that all of the pages shown or mentioned above are samples. Every page can be reorganized and customized to suit your needs via the configurator.
 
-## WiFi Configuration
+All configuration information is stored in a series of JSON files that start from the /CADDeck/data/config folder and which are uploaded to a partition in the ESP32 flash memory. Originally this only needed to be done once as the ESP32 could connect to the PC by WiFI, start a web server and provide a browser interface. All of the configuration parameters could be modified through the web interface and saved directly to flash. However, javascript and HTML are not my strong points and the more complex the pages got the less reliable the interface became.
+
+I instead developed an app that runs on the PC and edits the various JSON files. You can find it here https://github.com/andrewfernie/CADDeckConfigurator. Sorry, for Windows only. When you open the app you point it at the /CADDeck/data folder and make any changes you need. When you save, the previous version of the file is renamed in case you run into any trouble and want to go back. You then have two options to get the modified file onto the CADDeck.
+
+1. Open up VSCode again and use the PlatformIO "Upload Filesystem Image" command. This will send everything in the /CADDeck/data folder.
+2. Turn on the CADDeck Wifi, connect through a web browser, and use the much-simplified web interface. It provides features to upload (and download) files.
+
+### Using CADDeckConfigurator
+
+#### Setup
+
+Download the latest version of the installer from https://github.com/andrewfernie/CADDeckConfigurator. You will find it in the releases section partway down the right side of the page. You need CADDeckConfiguratorSetup.msi. Once downloaded, double-click the file to  start the installation. 
+
+Start CADDeckConfigurator by double-clicking the icon the installer should have put on your desktop. The first time it is run you may get a message that it can't find the data folder. Don't worry about this. Click File, then Open, then use the file picker to open your /CADDeck/data folder. The data in the configuration files should now be accessible through the "Wifi", "General", "Menu", and "HW Buttons" tabs.
+![CADDeckConfigurator Setup](images/CADDeckConfigSetup.png)
+
+#### WiFi Tab
+
+#### General Tab
+
+#### Menu Tab
+
+#### HW Buttons Tab
+
+### WiFi Configuration
 
 The configurator is accessed via a web browser on a computer or tablet connected to the same network as the ESP32. To enable the configurator go to the settings page on the touch panel and select the WiFi Enable button.  
 ![System Settings](images/systemsettings.png)
@@ -214,7 +238,7 @@ If you have already configured your wifi connection in wificonfig.json you shoul
 
 If you have not already configured the wifi you should see a message saying that an access point (AP) has been created with a network name and IP address. You will need to connect your computer to the network provided, and then point your browser at the IP address. Once the configurator screen is displayed in your browser go to the wifi page and enter your network SSID and password. Then select "Save WiFi Config" to save the settings.
 
-## Menu Configuration
+### Menu Configuration
 
 The main change from the original FreeTouchDeck is to allow more buttons per page  - the screen area is just a bit smaller than the size of twelve StreamDeck buttons which seems reasonable. The code is currently set to three rows of four buttons, but can be changed to three rows of five buttons (or two rows of four, etc.) by modifying CADDeck.h: "#define BUTTON_ROWS 3" and "#define BUTTON_COLS 5".  In principle it should support larger arrays, but not tested, and the configurator page is set to a maximum of 3x5.
 
@@ -229,7 +253,7 @@ If you don't want to use all buttons use the configurator to set the logo to "bl
 
 One limitation is the size of the FLASH used for the configuration files and icons displayed on the touch screen. The icons are 75x75 24-bit color BMP files, each one taking about 17kB.  If you run out of space your only option is to check to see if any are unused and delete them.
 
-## Hardware Buttons
+### Hardware Buttons
 
 Configuration of the hardware buttons is via a dedicated page within the same web-based configurator as for the LCD panel.
 
@@ -252,3 +276,24 @@ Below that is the button action definition. The same approach to defining the ac
 ![Configuring the Rotate function](images/ConfigureRotate.png)
 
 At the very bottom is the "Save CAD Config" button. When selected the settings for all CAD programs are saved on the ESP32 in file cadparams.json
+
+## Known Issues
+
+### Reboots when Cura is running
+
+If Cura is running on your computer while CADDeck is connected you may find that the CADDeck continuously reboots. When Cura is closed the reboots will stop. This appears to be that, if USB Printing is enabled in Cura it checks the USB ports to determine if a printer is connected. This resets the ESP32.  
+
+I did a quick web search for "Cura Resets ESP32" and found a few links:
+
+1. https://www.reddit.com/r/Cura/comments/12o75to/cura_forces_connected_esp32_to_reboot/
+2. https://www.reddit.com/r/WLED/comments/zh48vk/opening_cura_results_in_my_lights_turning_orange/ (look at the end of the thread)
+
+The first link provides a solution. Do the following in Cura:
+
+1. Select "Marketplace" to bring up "Install Plugins" , then the little gear icon to bring up "Manage packages".
+2. Scroll down until you find "USB Printing".  It will probably show "Disable",  so click that button to disable USB printing. It will now show "Enable".
+3. Restart Cura.
+
+As long as you don't use Cura to control your printer while it is printing there should be no disadvantage to doing this.
+
+Another way you can resolve it is to have some application connect to the COM port that the ESP32 uses to connect to the PC. I used the TeraTerm terminal emulation application and connected to the CADDeck COM port, but it shouldn't matter which app you use. You just want to prevent Cura from trying to use it. As the ESP32 uses Bluetooth to communicate with the PC and the USB port is used only for power and to download new versions of the code you don't lose anything by doing this other than the inconvenience of starting an application.

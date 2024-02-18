@@ -1,26 +1,26 @@
 {
-  "menuname":"FreeCAD", 
+  "menuname": "SW Features",
   "button11": {
-    "logo": "F360_Move.png",
+    "logo": "SW_Fillet.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "Fillet",
     "actionarray": [
-      "0",
+      "14",
       "0",
       "0"
     ],
     "valuearray": [
-      "0",
+      "5",
       "0",
       "0"
     ]
   },
   "button12": {
-    "logo": "FreeCad_Radius.png",
+    "logo": "SW_Chamfer.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "Chamfer",
     "actionarray": [
       "0",
       "0",
@@ -33,10 +33,10 @@
     ]
   },
   "button13": {
-    "logo": "flip_x.png",
+    "logo": "SW_Rib.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "Rib",
     "actionarray": [
       "0",
       "0",
@@ -49,10 +49,10 @@
     ]
   },
   "button14": {
-    "logo": "blank.png",
+    "logo": "SW_Draft.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "Draft",
     "actionarray": [
       "0",
       "0",
@@ -68,7 +68,7 @@
     "logo": "blank.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "",
     "actionarray": [
       "0",
       "0",
@@ -81,10 +81,10 @@
     ]
   },
   "button21": {
-    "logo": "blank.png",
+    "logo": "SW_Shell.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "Shell",
     "actionarray": [
       "0",
       "0",
@@ -97,10 +97,10 @@
     ]
   },
   "button22": {
-    "logo": "blank.png",
+    "logo": "SW_Intersect.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "Intersect",
     "actionarray": [
       "0",
       "0",
@@ -113,10 +113,10 @@
     ]
   },
   "button23": {
-    "logo": "blank.png",
+    "logo": "SW_Wrap.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "Wrap",
     "actionarray": [
       "0",
       "0",
@@ -129,10 +129,10 @@
     ]
   },
   "button24": {
-    "logo": "blank.png",
+    "logo": "SW_Mirror.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "Mirror",
     "actionarray": [
       "0",
       "0",
@@ -148,7 +148,7 @@
     "logo": "blank.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "",
     "actionarray": [
       "0",
       "0",
@@ -161,10 +161,10 @@
     ]
   },
   "button31": {
-    "logo": "blank.png",
+    "logo": "SW_LinearPattern.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "Linear Pattern",
     "actionarray": [
       "0",
       "0",
@@ -180,9 +180,9 @@
     "logo": "blank.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "",
     "actionarray": [
-      "0",
+      "18",
       "0",
       "0"
     ],
@@ -193,12 +193,12 @@
     ]
   },
   "button33": {
-    "logo": "blank.png",
+    "logo": "back.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "Back",
     "actionarray": [
-      "0",
+      "18",
       "0",
       "0"
     ],
@@ -209,17 +209,17 @@
     ]
   },
   "button34": {
-    "logo": "home.png",
+    "logo": "SW_Home.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "SW Home",
     "actionarray": [
       "14",
       "0",
       "0"
     ],
     "valuearray": [
-      "0",
+      "5",
       "0",
       "0"
     ]
@@ -228,7 +228,7 @@
     "logo": "home.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "",
     "actionarray": [
       "14",
       "0",
