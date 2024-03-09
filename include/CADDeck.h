@@ -190,8 +190,6 @@ extern bool psramAvailable;
 // ---------------- SpaceMouse Support ----------------
 // enable support for SpaceMouse emulation on Serial 1
 #define SPACEMOUSE_SUPPORT // Comment out to disable SpaceMouse support
-#define SPACEMOUSE_RX_PIN 5
-#define SPACEMOUSE_TX_PIN 4
 #define SPACEMOUSE_BAUD 115200
 #define SPACEMOUSE_CONFIG SERIAL_8N1
 #define SPACEMOUSE_SERIAL Serial1
@@ -201,8 +199,6 @@ extern SpaceMouse spaceMouse;
 extern LCDKnobComms lcdKnobComms;
 #define LCD_KNOB_BAUD 115200
 #define LCD_KNOB_CONFIG SERIAL_8N1
-#define LCD_KNOB_RX_PIN 26
-#define LCD_KNOB_TX_PIN 25
 #endif
 // ---------------- Debug pins ----------------
 // set to 1 to enable debug pins, 0 to disable

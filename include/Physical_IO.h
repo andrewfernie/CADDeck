@@ -6,9 +6,9 @@
 #include "DenoiseComparison.h"
 #include "Button2.h" // Button library with support for clicks, etc.
 
-const uint8_t PCF857X_SCL = 19;
-const uint8_t PCF857X_SDA = 18;
-const uint8_t PCF857X_INT = 27;
+const uint8_t PCF857X_SCL = PIN_SCL;
+const uint8_t PCF857X_SDA = PIN_SDA;
+const uint8_t PCF857X_INT = PCF8575_INTERRUPT_PIN;
 const uint8_t PCF857X_ADDR = 0x20;
 
 extern PCF857X pcf857X;
@@ -17,13 +17,8 @@ extern Joystick joystick;
 extern AnalogControl zoomControl;
 extern AnalogControl rotateControl;
 
-const uint8_t JOYSTICK_X = 32;
-const uint8_t JOYSTICK_Y = 33;
 extern int8_t joystick_mode_pins[4];
 extern int8_t mode_select_button_pin;
-
-const uint8_t ZOOM_PIN = 35;
-const uint8_t ROTATE_PIN = 34;
 
 const uint16_t CALIBRATION_TIME_MS = 10000;
 
@@ -41,6 +36,7 @@ const uint8_t BUTTON_9 = P9;
 const uint8_t BUTTON_10 = P11;
 
 extern PCF857X::DigitalInput pcf857X_inputs;
+
 extern const uint8_t HWButton_Pins[];
 
 void init_io();

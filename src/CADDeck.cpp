@@ -391,6 +391,7 @@ void setup()
 
     // Initialise the TFT screen
     tft.init();
+    tft.invertDisplay(INVERT_DISPLAY);
 
     // Set the rotation before we calibrate
     tft.setRotation(1);
@@ -665,6 +666,7 @@ void setup()
     init_io();
 
     // Setup the Font used for plain text
+    MSG_INFOLN("[INFO] Setting font for plain text");
     tft.setFreeFont(LABEL_FONT);
 
 //------------------BLE Initialization ------------------------

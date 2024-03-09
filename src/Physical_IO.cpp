@@ -40,10 +40,12 @@ void init_io()
     joystick.SetScale(0, cadconfig.joy_scale_x);
     joystick.SetScale(1, cadconfig.joy_scale_y);
 
+    MSG_INFOLN("[INFO] Init zoom control");
     zoomControl.Init();
     zoomControl.SetDeadzone(cadconfig.zoom_deadzone);
     zoomControl.SetScale(cadconfig.zoom_scale);
 
+    MSG_INFOLN("[INFO] Init rotate control");
     rotateControl.Init();
     rotateControl.SetDeadzone(cadconfig.rotate_deadzone);
     rotateControl.SetScale(cadconfig.rotate_scale);
@@ -55,14 +57,17 @@ void init_io()
         pcf857X.pinMode(i, INPUT);
     }
 
+    pcf857X.begin(false);  // false so as not to start the I2C bus (already done by the touch controller)
+
+    MSG_INFOLN("[INFO] Set pantilt mode");
     set_pantilt_mode(cadconfig.current_program);
 
+    MSG_INFOLN("[INFO] Init joystick mode button");
     joystickModeButton.setButtonStateFunction(joystickModeButtonHandler);
     joystickModeButton.setClickHandler(joystickModeButtonClick);
     joystickModeButton.setDoubleClickHandler(joystickModeButtonDoubleClick);
+    MSG_INFOLN("[INFO] Begin joystick mode button with virtual pin");
     joystickModeButton.begin(BTN_VIRTUAL_PIN);
-
-    pcf857X.begin(false);  // false so as not to start the I2C bus (already done by the touch controller)
 }
 
 void set_move_mode(uint8_t cadapp)
@@ -230,6 +235,7 @@ void update_io()
     joystick.Update();
     zoomControl.Update();
     rotateControl.Update();
+
     pcf857X_inputs = pcf857X.digitalReadAll();
 
     uint8_t mode_buttton_set = 0;
