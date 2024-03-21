@@ -88,6 +88,12 @@
 #include "LCDKnobComms.h"
 #endif
 
+
+#if SPM_USB_HID
+#include <tusb.h>
+#include "descriptors_spm_hid.h"
+#endif
+
 #define MIN_TO_MS 60 * 1000
 
 const long loop_period = 20; // 20ms loop period

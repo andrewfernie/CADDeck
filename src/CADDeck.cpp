@@ -680,6 +680,12 @@ void setup()
     Keyboard.begin();
     Mouse.begin();
 
+#if SPM_USB_HID
+    MSG_INFOLN("[INFO] Starting SPM USB HID device...");
+    tusb_init();
+    MSG_INFOLN("[INFO] ... SPM USB HID device started.");
+#endif
+
     // ---------------- Printing version numbers ------------------
     MSG_INFO("[INFO] ArduinoJson version: ");
     MSG_INFOLN(ARDUINOJSON_VERSION);
@@ -1121,6 +1127,10 @@ void loop(void)
         }
         last_loop_start = this_loop_start;
     }
+
+    #if SPM_USB_HID
+    spm_hid_task();
+    #endif
 }
 
 #ifdef READ_EXTERNAL_BATTERY
