@@ -389,6 +389,12 @@ void setup()
 
     // --------------- Init Display -------------------------
 
+    pinMode(TFT_CS, OUTPUT);
+    digitalWrite(TFT_CS, LOW);
+
+    pinMode(TFT_RST, OUTPUT);
+    digitalWrite(TFT_RST, HIGH);
+
     // Initialise the TFT screen
     tft.init();
     tft.invertDisplay(INVERT_DISPLAY);
