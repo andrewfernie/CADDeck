@@ -80,7 +80,11 @@
 #include "Physical_IO.h"
 #include "SerialCommands.h"
 #include "stack_queue.h"
+#if SPM_USB_HID
+#include "SpaceMouseHID.h"
+#else
 #include "SpaceMouse.h"
+#endif
 
 // Leave this line active if you are using an LCDKnob. Comment it out if you are not.
 #define LCDKNOB_SUPPORT 1

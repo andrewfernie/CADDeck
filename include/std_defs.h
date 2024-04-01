@@ -5,25 +5,28 @@ const uint8_t ReturnFail = 1;
 
 #ifdef LOG_MSG_PORT
 #define MSG_PORT LOG_MSG_PORT
+#elif ARDUINO_USB_CDC_ON_BOOT == 1
+#define MSG_PORT Serial0
 #else
 #define MSG_PORT Serial
 #endif
+// #define MSG_PORT Serial0
 
 #ifndef LOG_MSG_BASIC
-//#define LOG_MSG_BASIC 0       // off
+// #define LOG_MSG_BASIC 0       // off
 #define LOG_MSG_BASIC 1         // on
 #endif
 
 #ifndef LOG_MSG_LEVEL
-//#define LOG_MSG_LEVEL 0         // off
+// #define LOG_MSG_LEVEL 0         // off
 #define LOG_MSG_LEVEL 1         // ERROR
 //#define LOG_MSG_LEVEL 2         // ERROR, WARN
 //#define LOG_MSG_LEVEL 3         // ERROR, WARN, INFO
 #endif
 
 #ifndef LOG_MSG_DEBUG
-#define LOG_MSG_DEBUG 0  // off
-//#define LOG_MSG_DEBUG 1         // on
+// #define LOG_MSG_DEBUG 0  // off
+#define LOG_MSG_DEBUG 1         // on
 #endif
 
 #ifndef LOG_MSG_TOUCH_DEBUG

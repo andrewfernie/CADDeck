@@ -363,7 +363,7 @@ void drawPng(const char *filename, int16_t x, int16_t y, uint8_t transparent)
     int16_t rc = png.open(filename, pngOpen, pngClose, pngRead, pngSeek, pngDraw);
     if (rc == PNG_SUCCESS) {
         tft.startWrite();
-//        Serial.printf("image specs: (%d x %d), %d bpp, pixel type: %d\n", png.getWidth(), png.getHeight(), png.getBpp(), png.getPixelType());
+//        MSG_PORT.printf("image specs: (%d x %d), %d bpp, pixel type: %d\n", png.getWidth(), png.getHeight(), png.getBpp(), png.getPixelType());
         uint32_t dt = millis();
         if (png.getWidth() > MAX_IMAGE_WIDTH) {
             MSG_ERROR1("[ERROR] Image too wide for allocated line buffer size for ", filename);
@@ -574,7 +574,7 @@ uint8_t loadPNGToPSRAM(const char *filename, uint16_t **pImage)
     int16_t rc = png.open(filename, pngOpen, pngClose, pngRead, pngSeek, pngDrawToPSRAM);
 
     if (rc == PNG_SUCCESS) {
-//        Serial.printf("image specs: (%d x %d), %d bpp, pixel type: %d\n", png.getWidth(), png.getHeight(), png.getBpp(), png.getPixelType());
+//        MSG_PORT.printf("image specs: (%d x %d), %d bpp, pixel type: %d\n", png.getWidth(), png.getHeight(), png.getBpp(), png.getPixelType());
 
         uint16_t imageSize = 2 + 2 + (png.getWidth() * png.getHeight() * 2);  // 2 bytes for width, 2 bytes for height, 2 bytes per pixel (will always be 565)
         uint16_t *pLogoImage = (uint16_t *)ps_malloc(imageSize);

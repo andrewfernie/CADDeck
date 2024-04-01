@@ -310,8 +310,11 @@ long loop_count = 0;
 long this_loop_start = 0;
 long loop_100_count = 0;
 long loop_100_time = 0;
-
+#if SPM_USB_HID
+SpaceMouseHID spaceMouse(SPACEMOUSE_BAUD, SPACEMOUSE_CONFIG, SPACEMOUSE_RX_PIN, SPACEMOUSE_TX_PIN);
+#else
 SpaceMouse spaceMouse(SPACEMOUSE_BAUD, SPACEMOUSE_CONFIG, SPACEMOUSE_RX_PIN, SPACEMOUSE_TX_PIN);
+#endif
 
 #ifdef LCDKNOB_SUPPORT
 LCDKnobComms lcdKnobComms(LCD_KNOB_BAUD, LCD_KNOB_CONFIG, LCD_KNOB_RX_PIN, LCD_KNOB_TX_PIN);
@@ -324,8 +327,8 @@ void setup()
     uint8_t status;
 
     // Use serial port
-    Serial.begin(115200);
-    Serial.setDebugOutput(true);
+    MSG_PORT.begin(115200);
+    MSG_PORT.setDebugOutput(true);
     MSG_INFOLN("");
 
     MSG_INFOLN("[INFO] Loading saved brightness state");
@@ -588,12 +591,12 @@ void setup()
         strlcat(menuName, menuNumber, sizeof(menuName));
 
         if (!loadConfig(menuName)) {
-            Serial.print("[WARNING]: menu");
+            MSG_PORT.print("[WARNING]: menu");
             sprintf(menuNumberZeroIndex, "%d", i);
-            Serial.print(menuNumberZeroIndex);
+            MSG_PORT.print(menuNumberZeroIndex);
             MSG_INFOLN(".json seems to be corrupted!");
-            Serial.print("[WARNING]: To reset to default type 'reset ");
-            Serial.print(menuName);
+            MSG_PORT.print("[WARNING]: To reset to default type 'reset ");
+            MSG_PORT.print(menuName);
             MSG_INFOLN("'.");
             strlcpy(jsonFileFail, menuName, sizeof(jsonFileFail));
             status = pageHistoryStack.push(pageNum);
@@ -1020,7 +1023,7 @@ void loop(void)
                                             }
                                             char usbData[40];
                                             snprintf(usbData, sizeof(usbData), "{ButtonPress, %s , %s}", pMenu[pageNum]->name, logoname);
-                                            Serial.println(usbData);
+                                            MSG_PORT.println(usbData);
                                         }
                                     }
                                 }
@@ -1066,7 +1069,7 @@ void loop(void)
             uint8_t eventType = lcdKnobComms.ReceiveData();
 
             if (eventType != LCDKNOB_EVENT_NONE) {
-                // MSG_DEBUG1("LCD Knob Event: ", eventType);
+                MSG_DEBUG1("LCD Knob Event: ", eventType);
 
                 switch (eventType) {
                     case LCDKNOB_EVENT_NONE:
@@ -1088,7 +1091,7 @@ void loop(void)
                     case LCDKNOB_EVENT_BUTTON_STATE:
                         if (lcdKnobComms.GetLastEventButtonNumber() == 0) {
                             cadconfig.joystick_mode = lcdKnobComms.GetButtonState(0);
-                            // MSG_DEBUG1("LCD Knob Mode state : ", lcdKnobComms.GetButtonState(0));
+                            MSG_DEBUG1("LCD Knob Mode state : ", lcdKnobComms.GetButtonState(0));
                         }
 
                         break;
@@ -1128,9 +1131,9 @@ void loop(void)
         last_loop_start = this_loop_start;
     }
 
-    #if SPM_USB_HID
+#if SPM_USB_HID
     spm_hid_task();
-    #endif
+#endif
 }
 
 #ifdef READ_EXTERNAL_BATTERY

@@ -75,9 +75,9 @@ uint8_t LCDKnobComms::ReceiveData()
     if (Serial2.available() > 0) {
         char c = Serial2.read();
         buf[idx] = c;
-        // MSG_PORT.print(c,HEX);
-        // MSG_PORT.print(' ');
-        // MSG_PORT.println(idx);
+        MSG_PORT.print(c,HEX);
+        MSG_PORT.print(' ');
+        MSG_PORT.println(idx);
         idx = (idx + 1) % sizeof(buf);
 
         if (c == LCDKNOB_EVENT_END) {
@@ -154,14 +154,14 @@ uint8_t LCDKnobComms::ReceiveData()
                     lastEventButtonNumber = ReadUInt8(&buf[1]);
                     char state = buf[3];
 
-                    // Serial.println("Button state event received for button " + String(lastEventButtonNumber) + " state " + state);
+                    // MSG_PORT.println("Button state event received for button " + String(lastEventButtonNumber) + " state " + state);
 
                     if (state == '1') {
-                        // Serial.println("SetButton for button " + String(lastEventButtonNumber));
+                        // MSG_PORT.println("SetButton for button " + String(lastEventButtonNumber));
                         SetButton(lastEventButtonNumber);
                     }
                     else {
-                        // Serial.println("ClearButton for button " + String(lastEventButtonNumber));
+                        // MSG_PORT.println("ClearButton for button " + String(lastEventButtonNumber));
                         ClearButton(lastEventButtonNumber);
                     }
 

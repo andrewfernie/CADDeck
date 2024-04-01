@@ -309,11 +309,11 @@ void printDeviceAddress()
         char str[3];
 
         sprintf(str, "%02X", (int)point[i]);
-        // Serial.print(str);
+        // MSG_PORT.print(str);
         tft.print(str);
 
         if (i < 5) {
-            // Serial.print(":");
+            // MSG_PORT.print(":");
             tft.print(":");
         }
     }

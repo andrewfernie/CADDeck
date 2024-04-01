@@ -18,4 +18,6 @@
 
 #define CFG_TUD_HID_EP_BUFSIZE 64
 
+#define TUP_DCD_ENDPOINT_MAX 8
+
 #endif

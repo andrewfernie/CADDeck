@@ -4,8 +4,8 @@ void serial_commands()
 {
     // Check if there is data available on the serial input that needs to be handled.
 
-    if (Serial.available()) {
-        String command = Serial.readStringUntil(' ');
+    if (MSG_PORT.available()) {
+        String command = MSG_PORT.readStringUntil(' ');
 
         if (command == "cal") {
             MSG_INFOLN("[INFO] received command cal");
@@ -13,7 +13,7 @@ void serial_commands()
             ESP.restart();
         }
         else if (command == "setssid") {
-            String value = Serial.readString();
+            String value = MSG_PORT.readString();
             MSG_INFO1("[INFO] received command setssid ", value.c_str());
             if (saveWifiSSID(value)) {
                 MSG_INFO1F("[INFO] Saved new SSID: %s\n", value.c_str());
@@ -22,7 +22,7 @@ void serial_commands()
             }
         }
         else if (command == "setpassword") {
-            String value = Serial.readString();
+            String value = MSG_PORT.readString();
             MSG_INFO1("[INFO] received command setpassword ", value.c_str());
             if (saveWifiPW(value)) {
                 MSG_INFO1F("[INFO] Saved new Password: %s\n", value.c_str());
@@ -31,7 +31,7 @@ void serial_commands()
             }
         }
         else if (command == "setwifimode") {
-            String value = Serial.readString();
+            String value = MSG_PORT.readString();
             MSG_INFO1("[INFO] received command setwifimode ", value.c_str());
             if (saveWifiMode(value)) {
                 MSG_INFO1F("[INFO] Saved new WiFi Mode: %s\n", value.c_str());
@@ -62,7 +62,7 @@ void serial_commands()
             ESP.restart();
         }
         else if (command == "reset") {
-            String file = Serial.readString();
+            String file = MSG_PORT.readString();
             MSG_INFO1F("[INFO] Resetting %s.json now\n", file.c_str());
             resetconfig(file);
         }

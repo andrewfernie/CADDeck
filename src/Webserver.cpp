@@ -459,48 +459,48 @@ void handlerSetup()
     //----------- 404 handler -----------------
 
     webserver.onNotFound([](AsyncWebServerRequest *request) {
-        Serial.printf("NOT_FOUND: ");
+        MSG_PORT.printf("NOT_FOUND: ");
         if (request->method() == HTTP_GET)
-            Serial.printf("GET");
+            MSG_PORT.printf("GET");
         else if (request->method() == HTTP_POST)
-            Serial.printf("POST");
+            MSG_PORT.printf("POST");
         else if (request->method() == HTTP_DELETE)
-            Serial.printf("DELETE");
+            MSG_PORT.printf("DELETE");
         else if (request->method() == HTTP_PUT)
-            Serial.printf("PUT");
+            MSG_PORT.printf("PUT");
         else if (request->method() == HTTP_PATCH)
-            Serial.printf("PATCH");
+            MSG_PORT.printf("PATCH");
         else if (request->method() == HTTP_HEAD)
-            Serial.printf("HEAD");
+            MSG_PORT.printf("HEAD");
         else if (request->method() == HTTP_OPTIONS)
-            Serial.printf("OPTIONS");
+            MSG_PORT.printf("OPTIONS");
         else
-            Serial.printf("UNKNOWN");
-        Serial.printf(" http://%s%s\n", request->host().c_str(), request->url().c_str());
+            MSG_PORT.printf("UNKNOWN");
+        MSG_PORT.printf(" http://%s%s\n", request->host().c_str(), request->url().c_str());
 
         if (request->contentLength()) {
-            Serial.printf("_CONTENT_TYPE: %s\n", request->contentType().c_str());
-            Serial.printf("_CONTENT_LENGTH: %u\n", request->contentLength());
+            MSG_PORT.printf("_CONTENT_TYPE: %s\n", request->contentType().c_str());
+            MSG_PORT.printf("_CONTENT_LENGTH: %u\n", request->contentLength());
         }
 
         int headers = request->headers();
         int i;
         for (i = 0; i < headers; i++) {
             AsyncWebHeader *h = request->getHeader(i);
-            Serial.printf("_HEADER[%s]: %s\n", h->name().c_str(), h->value().c_str());
+            MSG_PORT.printf("_HEADER[%s]: %s\n", h->name().c_str(), h->value().c_str());
         }
 
         int params = request->params();
         for (i = 0; i < params; i++) {
             AsyncWebParameter *p = request->getParam(i);
             if (p->isFile()) {
-                Serial.printf("_FILE[%s]: %s, size: %u\n", p->name().c_str(), p->value().c_str(), p->size());
+                MSG_PORT.printf("_FILE[%s]: %s, size: %u\n", p->name().c_str(), p->value().c_str(), p->size());
             }
             else if (p->isPost()) {
-                Serial.printf("_POST[%s]: %s\n", p->name().c_str(), p->value().c_str());
+                MSG_PORT.printf("_POST[%s]: %s\n", p->name().c_str(), p->value().c_str());
             }
             else {
-                Serial.printf("_GET[%s]: %s\n", p->name().c_str(), p->value().c_str());
+                MSG_PORT.printf("_GET[%s]: %s\n", p->name().c_str(), p->value().c_str());
             }
         }
 
@@ -509,15 +509,15 @@ void handlerSetup()
 
     webserver.onFileUpload([](AsyncWebServerRequest *request, const String &filename, size_t index, uint8_t *data, size_t len, bool final) {
         if (!index)
-            Serial.printf("UploadStart: %s\n", filename.c_str());
-        Serial.printf("%s", (const char *)data);
+            MSG_PORT.printf("UploadStart: %s\n", filename.c_str());
+        MSG_PORT.printf("%s", (const char *)data);
         if (final)
-            Serial.printf("UploadEnd: %s (%u)\n", filename.c_str(), index + len);
+            MSG_PORT.printf("UploadEnd: %s (%u)\n", filename.c_str(), index + len);
     });
 
     webserver.onRequestBody([](AsyncWebServerRequest *request, uint8_t *data, size_t len, size_t index, size_t total) {
         if (!index)
-            Serial.printf("BodyStart: %u\n", total);
+            MSG_PORT.printf("BodyStart: %u\n", total);
         MSG_INFO1F("%s", (const char *)data);
         if (index + len == total)
             MSG_INFO1F("BodyEnd: %u\n", total);
