@@ -13,16 +13,19 @@
 #include "Arduino.h"
 #include "LCDKnob.h"
 
-const char *versionnumber = "V1.0.2";
+const char *versionnumber = "V1.0.3";
 /*
- * Version V1.0.2 
- *                   - Keep the center circular region for button 0, but use the  wedges outside of the center 
+ * Version V1.0.2
+ *                   - Add LCD brightness command (0=off, anything else = on)
+ * 
+ * Version V1.0.2
+ *                   - Keep the center circular region for button 0, but use the  wedges outside of the center
  *                     circle for buttons 1-6
- * 
- * Version V1.0.1 
+ *
+ * Version V1.0.1
  *                   - Circular region for button press
- * 
- * Version V1.0.0 
+ *
+ * Version V1.0.0
  *                   - Initial version
  *
  * */
@@ -261,6 +264,22 @@ void loop()
             pageNum = menuNumber;
             drawKeypad();
             drawGrid();
+            break;
+        }
+
+        case LCDKNOB_SEND_SET_BRIGHTNESS: {
+            uint8_t brightness = serialChannel.GetLastEventBrightness();
+            MSG_DEBUGLN("Set brightness received with value " + String(brightness));
+
+            if(brightness == 0)
+            {
+                tft.BLOff();
+            }
+            else
+            {
+                tft.BLOn();
+            }
+
             break;
         }
 

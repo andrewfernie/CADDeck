@@ -17,17 +17,17 @@
     ]
   },
   "button12": {
-    "logo": "cad_options.png",
+    "logo": "FreeCAD.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext": "Goto CAD Options",
+    "buttontext": "FreeCAD",
     "actionarray": [
       "14",
       "0",
       "0"
     ],
     "valuearray": [
-      "2",
+      "4",
       "0",
       "0"
     ]
@@ -81,17 +81,17 @@
     ]
   },
   "button22": {
-    "logo": "blank.png",
+    "logo": "cad_options.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext": "",
+    "buttontext": "Goto CAD Options",
     "actionarray": [
-      "0",
+      "14",
       "0",
       "0"
     ],
     "valuearray": [
-      "0",
+      "2",
       "0",
       "0"
     ]

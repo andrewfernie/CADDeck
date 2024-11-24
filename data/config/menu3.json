@@ -1,65 +1,65 @@
 {
-  "menuname": "Menu-3",
+  "menuname": "CAD App Select",
   "button11": {
-    "logo": "blank.png",
+    "logo": "ac3d.png",
     "latch": false,
     "latchlogo": "",
     "buttontext": "",
     "actionarray": [
-      "5",
-      "4",
-      "0"
-    ],
-    "valuearray": [
-      "2",
-      "a",
-      "0"
-    ]
-  },
-  "button12": {
-    "logo": "blank.png",
-    "latch": false,
-    "latchlogo": "",
-    "buttontext": "",
-    "actionarray": [
-      "4",
+      "16",
       "0",
       "0"
     ],
     "valuearray": [
-      "b",
+      "4",
+      "0",
+      "0"
+    ]
+  },
+  "button12": {
+    "logo": "blender.png",
+    "latch": false,
+    "latchlogo": "",
+    "buttontext": "",
+    "actionarray": [
+      "16",
+      "0",
+      "0"
+    ],
+    "valuearray": [
+      "2",
       "0",
       "0"
     ]
   },
   "button13": {
-    "logo": "blank.png",
+    "logo": "FreeCAD.png",
     "latch": false,
     "latchlogo": "",
     "buttontext": "",
     "actionarray": [
-      "5",
-      "4",
-      "0"
-    ],
-    "valuearray": [
-      "2",
-      "c",
-      "0"
-    ]
-  },
-  "button14": {
-    "logo": "blank.png",
-    "latch": false,
-    "latchlogo": "",
-    "buttontext": "",
-    "actionarray": [
-      "4",
+      "16",
       "0",
       "0"
     ],
     "valuearray": [
-      "d",
+      "3",
+      "0",
+      "0"
+    ]
+  },
+  "button14": {
+    "logo": "fusion360.png",
+    "latch": false,
+    "latchlogo": "",
+    "buttontext": "",
+    "actionarray": [
+      "16",
+      "0",
+      "0"
+    ],
+    "valuearray": [
+      "1",
       "0",
       "0"
     ]
@@ -81,18 +81,18 @@
     ]
   },
   "button21": {
-    "logo": "blank.png",
+    "logo": "solidworks.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext": "",
+    "buttontext": "Solidworks",
     "actionarray": [
-      "5",
-      "4",
+      "16",
+      "0",
       "0"
     ],
     "valuearray": [
-      "2",
-      "e",
+      "0",
+      "0",
       "0"
     ]
   },

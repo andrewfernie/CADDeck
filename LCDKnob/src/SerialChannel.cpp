@@ -155,6 +155,16 @@ uint8_t SerialChannel::ReceiveData()
                 buf[idx] = 0;
                 break;
             }
+            case LCDKNOB_SEND_SET_BRIGHTNESS: {
+                if (idx != 4) {
+                    break;
+                }
+                lastEventType = LCDKNOB_SEND_SET_BRIGHTNESS;
+                lastEventBrightness = ReadUInt8(&buf[1]);
+                Serial.println("Set brightness received with value " + String(lastEventBrightness));
+                buf[idx] = 0;
+                break;
+            }
 
             default:
                 break;
@@ -198,6 +208,11 @@ uint8_t SerialChannel::GetLastEventButtonNumber()
 uint8_t SerialChannel::GetLastEventMenuNumber()
 {
     return lastEventMenuNumber;
+}
+
+uint8_t SerialChannel::GetLastEventBrightness()
+{
+    return lastEventBrightness;
 }
 
 uint8_t SerialChannel::GetLastEventState()

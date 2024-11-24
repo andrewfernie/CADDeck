@@ -17,6 +17,7 @@ const uint8_t BUTTON_INVALID = 255;
 #define LCDKNOB_SEND_BUTTON_STATE_REQUEST 't'
 #define LCDKNOB_SEND_SET_BUTTON_STATE 'u'
 #define LCDKNOB_SEND_SET_MENU 'v'
+#define LCDKNOB_SEND_SET_BRIGHTNESS 'w'
 
 class SerialChannel
 {
@@ -34,6 +35,7 @@ public:
     uint8_t ReceiveData();
     uint8_t GetLastEventType();
     uint8_t GetLastEventButtonNumber();
+    uint8_t GetLastEventBrightness();
     uint16_t GetLastEventX();
     uint16_t GetLastEventY();
     uint8_t GetLastEventMenuNumber();
@@ -63,6 +65,7 @@ private:
     uint8_t idx;
     uint8_t lastEventType;
     uint8_t lastEventMenuNumber;
+    uint8_t lastEventBrightness;
     uint8_t lastEventButtonNumber;
     uint8_t lastEventState;
     uint16_t buttonStateMask;

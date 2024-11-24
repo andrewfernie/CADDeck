@@ -69,6 +69,13 @@ void LCDKnobComms::SendSetButtonState(uint8_t button_number, uint8_t state)
     Serial2.write(LCDKNOB_EVENT_END);
 }
 
+void LCDKnobComms::SendSetBrightnes(uint8_t brightness)
+{
+    Serial2.write(LCDKNOB_SEND_SET_BRIGHTNESS);
+    SendUInt8(brightness);
+    Serial2.write(LCDKNOB_EVENT_END);
+}
+
 uint8_t LCDKnobComms::ReceiveData()
 {
     lastEventType = LCDKNOB_EVENT_NONE;

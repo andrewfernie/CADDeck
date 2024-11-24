@@ -1,10 +1,10 @@
 {
-  "menuname":"Menu-4", 
+  "menuname": "FreeCAD",
   "button11": {
-    "logo": "blank.png",
+    "logo": "FreeCad_Radius.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "",
     "actionarray": [
       "0",
       "0",
@@ -20,7 +20,7 @@
     "logo": "blank.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "",
     "actionarray": [
       "0",
       "0",
@@ -36,7 +36,7 @@
     "logo": "blank.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "",
     "actionarray": [
       "0",
       "0",
@@ -52,7 +52,7 @@
     "logo": "blank.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "",
     "actionarray": [
       "0",
       "0",
@@ -68,7 +68,7 @@
     "logo": "blank.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "",
     "actionarray": [
       "0",
       "0",
@@ -84,7 +84,7 @@
     "logo": "blank.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "",
     "actionarray": [
       "0",
       "0",
@@ -100,7 +100,7 @@
     "logo": "blank.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "",
     "actionarray": [
       "0",
       "0",
@@ -116,7 +116,7 @@
     "logo": "blank.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "",
     "actionarray": [
       "0",
       "0",
@@ -132,7 +132,7 @@
     "logo": "blank.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "",
     "actionarray": [
       "0",
       "0",
@@ -148,7 +148,7 @@
     "logo": "blank.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "",
     "actionarray": [
       "0",
       "0",
@@ -164,7 +164,7 @@
     "logo": "blank.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "",
     "actionarray": [
       "0",
       "0",
@@ -180,7 +180,7 @@
     "logo": "blank.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "",
     "actionarray": [
       "0",
       "0",
@@ -196,7 +196,7 @@
     "logo": "blank.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "",
     "actionarray": [
       "0",
       "0",
@@ -212,7 +212,7 @@
     "logo": "home.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "",
     "actionarray": [
       "14",
       "0",
@@ -228,7 +228,7 @@
     "logo": "home.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "",
     "actionarray": [
       "14",
       "0",

@@ -68,9 +68,11 @@ r
 
 #include <Arduino.h>
 
-const char *versionnumber = "V1.3.0";
+const char *versionnumber = "V1.3.1";
 
 /*
+ * Version V1.3.1    - Turn off LCDButton screen if CADDeck goes to sleep, and turn it on when CADDeck starts up.
+ *
  * Version V1.3.0    - Support for PNG images for logos. This is to free up space in the data folder.
  *                     Support for decoding PNG images required more RAM than was available, so moved
  *                     the menu structs to PSRAM.
@@ -353,6 +355,7 @@ void setup()
 
 #ifdef LCDKNOB_SUPPORT
     lcdKnobComms.Begin();
+    lcdKnobComms.SendSetBrightnes(255);
 #endif
 
 #ifdef USECAPTOUCH
@@ -893,6 +896,10 @@ void loop(void)
                     // The timer has ended and we are going to sleep  .
                     tft.fillScreen(TFT_BLACK);
                     MSG_INFOLN("[INFO] Going to sleep.");
+#ifdef LCDKNOB_SUPPORT
+                    lcdKnobComms.SendSetBrightnes(0);
+#endif 
+
 #ifdef speakerPin
                     if (generalconfig.beep) {
                         ledcAttachPin(speakerPin, 2);

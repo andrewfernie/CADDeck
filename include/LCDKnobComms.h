@@ -16,7 +16,8 @@
 
 #define LCDKNOB_SEND_BUTTON_STATE_REQUEST 't'
 #define LCDKNOB_SEND_SET_BUTTON_STATE 'u'
-#define LCDKNOB_SEND_SET_MENU 'v'
+#define LCDKNOB_SEND_SET_MENU 'v' 
+#define LCDKNOB_SEND_SET_BRIGHTNESS 'w'
 
 const uint8_t LCDKNOB_MAX_BUTTON = 7;
 const uint8_t LCDKNOB_BUTTON_INVALID = 255;
@@ -31,6 +32,7 @@ public:
     void SendSetMenu(uint8_t menu_number);
     void SendButtonStateRequest(uint8_t button_number);
     void SendSetButtonState(uint8_t button_number, uint8_t state);
+    void SendSetBrightnes(uint8_t brightness);
     uint8_t ReceiveData();
     uint8_t GetLastEventType();
     uint8_t GetLastEventButtonNumber();
