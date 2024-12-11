@@ -9,6 +9,10 @@ const uint8_t ReturnFail = 1;
 #define MSG_PORT Serial
 #endif
 
+#ifndef SERIAL_COMMAND_PORT
+#define SERIAL_COMMAND_PORT Serial
+#endif
+
 #ifndef LOG_MSG_BASIC
 //#define LOG_MSG_BASIC 0       // off
 #define LOG_MSG_BASIC 1         // on
@@ -30,6 +34,12 @@ const uint8_t ReturnFail = 1;
 #define LOG_MSG_TOUCH_DEBUG 0  // off
 //#define LOG_MSG_TOUCH_DEBUG 1         // on
 #endif
+
+#ifndef LOG_MSG_SERIAL_DEBUG
+#define LOG_MSG_SERIAL_DEBUG 0  // off
+// #define LOG_MSG_SERIAL_DEBUG 1         // on
+#endif
+
 #ifndef USE_DEBUG_PINS
 #define USE_DEBUG_PINS 0  // off
 #endif
@@ -263,5 +273,43 @@ const uint8_t ReturnFail = 1;
         MSG_PORT.print(z);     \
         MSG_PORT.print(" ");   \
         MSG_PORT.println(w);   \
+    }
+
+#define MSG_SERIAL_DEBUGLN(x)       \
+    if (LOG_MSG_SERIAL_DEBUG > 0) { \
+        MSG_PORT.println(x);       \
+    }
+#define MSG_SERIAL_DEBUG(x)         \
+    if (LOG_MSG_SERIAL_DEBUG > 0) { \
+        MSG_PORT.print(x);         \
+    }
+#define MSG_SERIAL_DEBUG1(x, y)     \
+    if (LOG_MSG_SERIAL_DEBUG > 0) { \
+        MSG_PORT.print(x);         \
+        MSG_PORT.print(" ");       \
+        MSG_PORT.println(y);       \
+    }
+#define MSG_SERIAL_DEBUG1F(x, y)    \
+    if (LOG_MSG_SERIAL_DEBUG > 0) { \
+        MSG_PORT.printf(x, y);     \
+    }
+#define MSG_SERIAL_DEBUG2(x, y, z)  \
+    if (LOG_MSG_SERIAL_DEBUG > 0) { \
+        MSG_PORT.print(x);         \
+        MSG_PORT.print(" ");       \
+        MSG_PORT.print(y);         \
+        MSG_PORT.print(" ");       \
+        MSG_PORT.println(z);       \
+    }
+
+#define MSG_SERIAL_DEBUG3(x, y, z, w) \
+    if (LOG_MSG_SERIAL_DEBUG > 0) {   \
+        MSG_PORT.print(x);           \
+        MSG_PORT.print(" ");         \
+        MSG_PORT.print(y);           \
+        MSG_PORT.print(" ");         \
+        MSG_PORT.print(z);           \
+        MSG_PORT.print(" ");         \
+        MSG_PORT.println(w);         \
     }
     

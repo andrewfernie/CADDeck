@@ -1,66 +1,66 @@
 {
   "menuname": "Fusion360",
   "button11": {
-    "logo": "F360_Sketch.png",
+    "logo": "blank.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "",
     "actionarray": [
-      "9",
-      "4",
+      "0",
+      "0",
       "0"
     ],
     "valuearray": [
-      "1",
-      "n",
+      "0",
+      "0",
       "0"
     ]
   },
   "button12": {
-    "logo": "F360_Extrude.png",
+    "logo": "SW_ExtrudedBoss.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
-    "actionarray": [
-      "4",
-      "0",
-      "0"
-    ],
-    "valuearray": [
-      "e",
-      "0",
-      "0"
-    ]
-  },
-  "button13": {
-    "logo": "F360_Revolve.png",
-    "latch": false,
-    "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "",
     "actionarray": [
       "9",
       "4",
       "0"
     ],
     "valuearray": [
-      "1",
+      "6",
+      "e",
+      "0"
+    ]
+  },
+  "button13": {
+    "logo": "SW_RevolvedBoss.png",
+    "latch": false,
+    "latchlogo": "",
+    "buttontext": "",
+    "actionarray": [
+      "9",
+      "4",
+      "0"
+    ],
+    "valuearray": [
+      "2",
       "r",
       "0"
     ]
   },
   "button14": {
-    "logo": "F360_Hole.png",
+    "logo": "SW_ExtrudedCut.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "",
     "actionarray": [
+      "9",
       "4",
-      "0",
       "0"
     ],
     "valuearray": [
+      "1",
       "h",
-      "0",
       "0"
     ]
   },
@@ -68,7 +68,7 @@
     "logo": "blank.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "",
     "actionarray": [
       "0",
       "0",
@@ -81,66 +81,66 @@
     ]
   },
   "button21": {
-    "logo": "F360_RPattern.png",
+    "logo": "SW_LinearPattern.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "",
     "actionarray": [
-      "5",
-      "7",
+      "9",
+      "4",
       "0"
     ],
     "valuearray": [
-      "2",
-      "1",
+      "6",
+      "p",
       "0"
     ]
   },
   "button22": {
-    "logo": "F360_Kombinieren.png",
+    "logo": "SW_Fillet.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "",
     "actionarray": [
+      "9",
       "4",
-      "0",
       "0"
     ],
     "valuearray": [
-      "k",
-      "0",
+      "6",
+      "f",
       "0"
     ]
   },
   "button23": {
-    "logo": "F360_Teilen.png",
+    "logo": "SW_LoftedBase.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "",
     "actionarray": [
+      "9",
       "4",
-      "0",
       "0"
     ],
     "valuearray": [
-      "d",
-      "0",
+      "1",
+      "l",
       "0"
     ]
   },
   "button24": {
-    "logo": "F360_Ziehen.png",
+    "logo": "SW_LoftedCut.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "",
     "actionarray": [
+      "5",
       "4",
-      "0",
       "0"
     ],
     "valuearray": [
-      "q",
-      "0",
+      "1",
+      "l",
       "0"
     ]
   },
@@ -148,7 +148,7 @@
     "logo": "blank.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "",
     "actionarray": [
       "0",
       "0",
@@ -161,58 +161,42 @@
     ]
   },
   "button31": {
-    "logo": "F360_Move.png",
+    "logo": "SW_HoleWizard.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "",
     "actionarray": [
+      "5",
       "4",
-      "0",
       "0"
     ],
     "valuearray": [
-      "m",
-      "0",
+      "1",
+      "h",
       "0"
     ]
   },
   "button32": {
-    "logo": "blank.png",
+    "logo": "SW_RevolvedCut.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "",
     "actionarray": [
-      "0",
-      "0",
+      "9",
+      "4",
       "0"
     ],
     "valuearray": [
-      "0",
-      "0",
+      "1",
+      "r",
       "0"
     ]
   },
   "button33": {
-    "logo": "blank.png",
+    "logo": "back.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
-    "actionarray": [
-      "0",
-      "0",
-      "0"
-    ],
-    "valuearray": [
-      "0",
-      "0",
-      "0"
-    ]
-  },
-  "button34": {
-    "logo": "return.png",
-    "latch": false,
-    "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "",
     "actionarray": [
       "18",
       "0",
@@ -224,11 +208,27 @@
       "0"
     ]
   },
+  "button34": {
+    "logo": "SW_Home.png",
+    "latch": false,
+    "latchlogo": "",
+    "buttontext": "",
+    "actionarray": [
+      "14",
+      "0",
+      "0"
+    ],
+    "valuearray": [
+      "5",
+      "0",
+      "0"
+    ]
+  },
   "button35": {
     "logo": "return.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext":"",
+    "buttontext": "",
     "actionarray": [
       "18",
       "0",

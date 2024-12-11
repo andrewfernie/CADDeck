@@ -6,13 +6,13 @@
     "latchlogo": "",
     "buttontext": "Extruded Boss",
     "actionarray": [
-      "20",
-      "0",
+      "9",
+      "4",
       "0"
     ],
     "valuearray": [
-      "11",
-      "0",
+      "6",
+      "e",
       "0"
     ]
   },
@@ -22,13 +22,13 @@
     "latchlogo": "",
     "buttontext": "Revolved Boss",
     "actionarray": [
-      "20",
-      "0",
+      "9",
+      "4",
       "0"
     ],
     "valuearray": [
-      "12",
-      "0",
+      "2",
+      "r",
       "0"
     ]
   },
@@ -38,13 +38,13 @@
     "latchlogo": "",
     "buttontext": "Swept Boss",
     "actionarray": [
-      "20",
-      "0",
+      "9",
+      "4",
       "0"
     ],
     "valuearray": [
-      "13",
-      "0",
+      "6",
+      "w",
       "0"
     ]
   },
@@ -54,13 +54,13 @@
     "latchlogo": "",
     "buttontext": "Lofted Boss",
     "actionarray": [
-      "20",
-      "0",
+      "9",
+      "4",
       "0"
     ],
     "valuearray": [
-      "14",
-      "0",
+      "1",
+      "l",
       "0"
     ]
   },
@@ -86,13 +86,13 @@
     "latchlogo": "",
     "buttontext": "Extruded Cut",
     "actionarray": [
-      "20",
-      "0",
+      "9",
+      "4",
       "0"
     ],
     "valuearray": [
-      "15",
-      "0",
+      "1",
+      "h",
       "0"
     ]
   },
@@ -102,13 +102,13 @@
     "latchlogo": "",
     "buttontext": "Revolved Cut",
     "actionarray": [
-      "0",
-      "0",
+      "9",
+      "4",
       "0"
     ],
     "valuearray": [
-      "0",
-      "0",
+      "1",
+      "r",
       "0"
     ]
   },
@@ -118,13 +118,13 @@
     "latchlogo": "",
     "buttontext": "Swept Cut",
     "actionarray": [
-      "0",
-      "0",
+      "9",
+      "4",
       "0"
     ],
     "valuearray": [
-      "0",
-      "0",
+      "6",
+      "i",
       "0"
     ]
   },
@@ -134,13 +134,13 @@
     "latchlogo": "",
     "buttontext": "Lofted Cut",
     "actionarray": [
-      "0",
-      "0",
+      "5",
+      "4",
       "0"
     ],
     "valuearray": [
-      "0",
-      "0",
+      "1",
+      "l",
       "0"
     ]
   },
@@ -166,13 +166,13 @@
     "latchlogo": "",
     "buttontext": "Hole Wizard",
     "actionarray": [
-      "0",
-      "0",
+      "5",
+      "4",
       "0"
     ],
     "valuearray": [
-      "0",
-      "0",
+      "1",
+      "h",
       "0"
     ]
   },

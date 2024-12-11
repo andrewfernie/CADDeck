@@ -1,92 +1,108 @@
 {
-  "menuname": "SW Main",
+  "menuname": "Settings",
   "button11": {
-    "logo": "SW_Insert.png",
+    "logo": "wifi.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext": "Insert",
+    "buttontext":"",
     "actionarray": [
-      "5",
-      "4",
+      "11",
+      "0",
       "0"
     ],
     "valuearray": [
       "1",
-      "o",
+      "0",
       "0"
     ]
   },
   "button12": {
-    "logo": "SW_Assembly.png",
+    "logo": "brightnessdown.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext": "Assembly",
+    "buttontext":"",
     "actionarray": [
-      "0",
+      "11",
       "0",
       "0"
     ],
     "valuearray": [
-      "0",
+      "2",
       "0",
       "0"
     ]
   },
   "button13": {
-    "logo": "SW_Part.png",
+    "logo": "brightnessup.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext": "Part",
+    "buttontext":"",
     "actionarray": [
-      "0",
+      "11",
       "0",
       "0"
     ],
     "valuearray": [
-      "0",
+      "3",
       "0",
       "0"
     ]
   },
   "button14": {
-    "logo": "blank.png",
-    "latch": false,
-    "latchlogo": "",
-    "buttontext": "",
+    "logo": "USBComm2_off.png",
+    "latch": true,
+    "latchlogo": "USBComm2.png",
+    "buttontext":"",
     "actionarray": [
-      "0",
+      "11",
       "0",
       "0"
     ],
     "valuearray": [
-      "0",
-      "0",
-      "0"
-    ]
-  },
-  "button15": {
-    "logo": "blank.png",
-    "latch": false,
-    "latchlogo": "",
-    "buttontext": "",
-    "actionarray": [
-      "0",
-      "0",
-      "0"
-    ],
-    "valuearray": [
-      "0",
+      "8",
       "0",
       "0"
     ]
   },
   "button21": {
-    "logo": "SW_Sketch.png",
+    "logo": "sleep_off.png",
+    "latch": true,
+    "latchlogo": "sleep_on.png",
+    "buttontext":"",
+    "actionarray": [
+      "11",
+      "0",
+      "0"
+    ],
+    "valuearray": [
+      "4",
+      "0",
+      "0"
+    ]
+  },
+  "button22": {
+    "logo": "info.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext": "Goto Sketch",
+    "buttontext":"",
     "actionarray": [
-      "14",
+      "11",
+      "0",
+      "0"
+    ],
+    "valuearray": [
+      "5",
+      "0",
+      "0"
+    ]
+  },
+  "button23": {
+    "logo": "floppy.png",
+    "latch": false,
+    "latchlogo": "",
+    "buttontext":"",
+    "actionarray": [
+      "11",
       "0",
       "0"
     ],
@@ -96,114 +112,66 @@
       "0"
     ]
   },
-  "button22": {
-    "logo": "SW_ExtrudedBoss.png",
-    "latch": false,
-    "latchlogo": "",
-    "buttontext": "Goto Boss-Base",
-    "actionarray": [
-      "14",
-      "0",
-      "0"
-    ],
-    "valuearray": [
-      "9",
-      "0",
-      "0"
-    ]
-  },
-  "button23": {
-    "logo": "SW_Fillet.png",
-    "latch": false,
-    "latchlogo": "",
-    "buttontext": "Goto Features",
-    "actionarray": [
-      "14",
-      "0",
-      "0"
-    ],
-    "valuearray": [
-      "6",
-      "0",
-      "0"
-    ]
-  },
   "button24": {
-    "logo": "blank.png",
+    "logo": "GreenLED.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext": "",
+    "buttontext":"",
     "actionarray": [
-      "0",
+      "11",
       "0",
       "0"
     ],
     "valuearray": [
-      "0",
-      "0",
-      "0"
-    ]
-  },
-  "button25": {
-    "logo": "blank.png",
-    "latch": false,
-    "latchlogo": "",
-    "buttontext": "",
-    "actionarray": [
-      "0",
-      "0",
-      "0"
-    ],
-    "valuearray": [
-      "0",
+      "10",
       "0",
       "0"
     ]
   },
   "button31": {
-    "logo": "blank.png",
+    "logo": "volumedown.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext": "",
+    "buttontext":"",
     "actionarray": [
-      "0",
+      "3",
       "0",
       "0"
     ],
     "valuearray": [
-      "0",
+      "2",
       "0",
       "0"
     ]
   },
   "button32": {
-    "logo": "blank.png",
+    "logo": "volumeup.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext": "",
+    "buttontext":"",
     "actionarray": [
-      "0",
+      "3",
       "0",
       "0"
     ],
     "valuearray": [
-      "0",
+      "3",
       "0",
       "0"
     ]
   },
   "button33": {
-    "logo": "blank.png",
+    "logo": "nosound.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext": "",
+    "buttontext":"",
     "actionarray": [
-      "0",
+      "3",
       "0",
       "0"
     ],
     "valuearray": [
-      "0",
+      "1",
       "0",
       "0"
     ]
@@ -212,23 +180,7 @@
     "logo": "home.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext": "",
-    "actionarray": [
-      "14",
-      "0",
-      "0"
-    ],
-    "valuearray": [
-      "0",
-      "0",
-      "0"
-    ]
-  },
-  "button35": {
-    "logo": "home.png",
-    "latch": false,
-    "latchlogo": "",
-    "buttontext": "",
+    "buttontext":"",
     "actionarray": [
       "14",
       "0",

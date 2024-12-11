@@ -60,7 +60,7 @@
     ],
     "valuearray": [
       "2",
-      "s",
+      "r",
       "0"
     ]
   },
@@ -86,13 +86,13 @@
     "latchlogo": "",
     "buttontext": "Slot",
     "actionarray": [
-      "9",
-      "4",
+      "16",
+      "0",
       "0"
     ],
     "valuearray": [
-      "2",
-      "t",
+      "4",
+      "0",
       "0"
     ]
   },
@@ -118,29 +118,29 @@
     "latchlogo": "",
     "buttontext": "Arc",
     "actionarray": [
-      "9",
-      "4",
+      "0",
+      "0",
       "0"
     ],
     "valuearray": [
-      "2",
-      "a",
+      "0",
+      "0",
       "0"
     ]
   },
   "button24": {
-    "logo": "SW_Mirror.png",
+    "logo": "SW_Polygon.png",
     "latch": false,
     "latchlogo": "",
     "buttontext": "Polygon",
     "actionarray": [
-      "9",
-      "4",
+      "0",
+      "0",
       "0"
     ],
     "valuearray": [
-      "2",
-      "m",
+      "0",
+      "0",
       "0"
     ]
   },
@@ -166,13 +166,13 @@
     "latchlogo": "",
     "buttontext": "Spline",
     "actionarray": [
-      "9",
-      "4",
+      "0",
+      "0",
       "0"
     ],
     "valuearray": [
-      "1",
-      "p",
+      "0",
+      "0",
       "0"
     ]
   },
@@ -182,13 +182,13 @@
     "latchlogo": "",
     "buttontext": "Ellipse",
     "actionarray": [
-      "9",
-      "4",
+      "0",
+      "0",
       "0"
     ],
     "valuearray": [
-      "2",
-      "e",
+      "0",
+      "0",
       "0"
     ]
   },

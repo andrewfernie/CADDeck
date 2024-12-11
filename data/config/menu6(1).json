@@ -1,66 +1,66 @@
 {
-  "menuname": "SW Sketch",
+  "menuname": "SW Features",
   "button11": {
-    "logo": "SW_Sketch.png",
+    "logo": "SW_Fillet.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext": "Sketch",
+    "buttontext": "Fillet",
     "actionarray": [
-      "9",
-      "4",
-      "0"
-    ],
-    "valuearray": [
-      "2",
-      "s",
-      "0"
-    ]
-  },
-  "button12": {
-    "logo": "SW_Dimension.png",
-    "latch": false,
-    "latchlogo": "",
-    "buttontext": "Dimension",
-    "actionarray": [
-      "9",
-      "4",
-      "0"
-    ],
-    "valuearray": [
-      "2",
-      "d",
-      "0"
-    ]
-  },
-  "button13": {
-    "logo": "SW_Line.png",
-    "latch": false,
-    "latchlogo": "",
-    "buttontext": "Line",
-    "actionarray": [
-      "4",
+      "14",
       "0",
       "0"
     ],
     "valuearray": [
-      "l",
+      "5",
+      "0",
+      "0"
+    ]
+  },
+  "button12": {
+    "logo": "SW_Chamfer.png",
+    "latch": false,
+    "latchlogo": "",
+    "buttontext": "Chamfer",
+    "actionarray": [
+      "0",
+      "0",
+      "0"
+    ],
+    "valuearray": [
+      "0",
+      "0",
+      "0"
+    ]
+  },
+  "button13": {
+    "logo": "SW_Rib.png",
+    "latch": false,
+    "latchlogo": "",
+    "buttontext": "Rib",
+    "actionarray": [
+      "0",
+      "0",
+      "0"
+    ],
+    "valuearray": [
+      "0",
       "0",
       "0"
     ]
   },
   "button14": {
-    "logo": "SW_Rectangle.png",
+    "logo": "SW_Draft.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext": "Rectangle",
+    "buttontext": "Draft",
     "actionarray": [
-      "9",
-      "4",
+      "0",
+      "0",
       "0"
     ],
     "valuearray": [
-      "2",
-      "s",
+      "0",
+      "0",
       "0"
     ]
   },
@@ -81,50 +81,50 @@
     ]
   },
   "button21": {
-    "logo": "SW_Slot.png",
+    "logo": "SW_Shell.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext": "Slot",
+    "buttontext": "Shell",
     "actionarray": [
-      "9",
-      "4",
+      "0",
+      "0",
       "0"
     ],
     "valuearray": [
-      "2",
-      "t",
+      "0",
+      "0",
       "0"
     ]
   },
   "button22": {
-    "logo": "SW_Circle.png",
+    "logo": "SW_Intersect.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext": "Circle",
+    "buttontext": "Intersect",
     "actionarray": [
-      "9",
-      "4",
+      "0",
+      "0",
       "0"
     ],
     "valuearray": [
-      "2",
-      "c",
+      "0",
+      "0",
       "0"
     ]
   },
   "button23": {
-    "logo": "SW_Arc.png",
+    "logo": "SW_Wrap.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext": "Arc",
+    "buttontext": "Wrap",
     "actionarray": [
-      "9",
-      "4",
+      "0",
+      "0",
       "0"
     ],
     "valuearray": [
-      "2",
-      "a",
+      "0",
+      "0",
       "0"
     ]
   },
@@ -132,15 +132,15 @@
     "logo": "SW_Mirror.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext": "Polygon",
+    "buttontext": "Mirror",
     "actionarray": [
-      "9",
-      "4",
+      "0",
+      "0",
       "0"
     ],
     "valuearray": [
-      "2",
-      "m",
+      "0",
+      "0",
       "0"
     ]
   },
@@ -161,34 +161,34 @@
     ]
   },
   "button31": {
-    "logo": "SW_Spline.png",
+    "logo": "SW_LinearPattern.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext": "Spline",
+    "buttontext": "Linear Pattern",
     "actionarray": [
-      "9",
-      "4",
+      "0",
+      "0",
       "0"
     ],
     "valuearray": [
-      "1",
-      "p",
+      "0",
+      "0",
       "0"
     ]
   },
   "button32": {
-    "logo": "SW_Ellipse.png",
+    "logo": "blank.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext": "Ellipse",
+    "buttontext": "",
     "actionarray": [
-      "9",
-      "4",
+      "18",
+      "0",
       "0"
     ],
     "valuearray": [
-      "2",
-      "e",
+      "0",
+      "0",
       "0"
     ]
   },
@@ -212,7 +212,7 @@
     "logo": "SW_Home.png",
     "latch": false,
     "latchlogo": "",
-    "buttontext": "Solidworks Home",
+    "buttontext": "SW Home",
     "actionarray": [
       "14",
       "0",
@@ -225,12 +225,12 @@
     ]
   },
   "button35": {
-    "logo": "return.png",
+    "logo": "home.png",
     "latch": false,
     "latchlogo": "",
     "buttontext": "",
     "actionarray": [
-      "18",
+      "14",
       "0",
       "0"
     ],

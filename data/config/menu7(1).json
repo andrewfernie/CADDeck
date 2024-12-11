@@ -6,13 +6,13 @@
     "latchlogo": "",
     "buttontext": "Sketch",
     "actionarray": [
-      "9",
-      "4",
+      "0",
+      "0",
       "0"
     ],
     "valuearray": [
-      "2",
-      "s",
+      "0",
+      "0",
       "0"
     ]
   },
@@ -22,13 +22,13 @@
     "latchlogo": "",
     "buttontext": "Dimension",
     "actionarray": [
-      "9",
-      "4",
+      "16",
+      "0",
       "0"
     ],
     "valuearray": [
-      "2",
-      "d",
+      "1",
+      "0",
       "0"
     ]
   },
@@ -38,12 +38,12 @@
     "latchlogo": "",
     "buttontext": "Line",
     "actionarray": [
-      "4",
+      "16",
       "0",
       "0"
     ],
     "valuearray": [
-      "l",
+      "2",
       "0",
       "0"
     ]
@@ -54,13 +54,13 @@
     "latchlogo": "",
     "buttontext": "Rectangle",
     "actionarray": [
-      "9",
-      "4",
+      "16",
+      "0",
       "0"
     ],
     "valuearray": [
-      "2",
-      "s",
+      "3",
+      "0",
       "0"
     ]
   },
@@ -86,13 +86,13 @@
     "latchlogo": "",
     "buttontext": "Slot",
     "actionarray": [
-      "9",
-      "4",
+      "16",
+      "0",
       "0"
     ],
     "valuearray": [
-      "2",
-      "t",
+      "4",
+      "0",
       "0"
     ]
   },
@@ -102,13 +102,13 @@
     "latchlogo": "",
     "buttontext": "Circle",
     "actionarray": [
-      "9",
-      "4",
+      "0",
+      "0",
       "0"
     ],
     "valuearray": [
-      "2",
-      "c",
+      "0",
+      "0",
       "0"
     ]
   },
@@ -118,29 +118,29 @@
     "latchlogo": "",
     "buttontext": "Arc",
     "actionarray": [
-      "9",
-      "4",
+      "0",
+      "0",
       "0"
     ],
     "valuearray": [
-      "2",
-      "a",
+      "0",
+      "0",
       "0"
     ]
   },
   "button24": {
-    "logo": "SW_Mirror.png",
+    "logo": "SW_Polygon.png",
     "latch": false,
     "latchlogo": "",
     "buttontext": "Polygon",
     "actionarray": [
-      "9",
-      "4",
+      "0",
+      "0",
       "0"
     ],
     "valuearray": [
-      "2",
-      "m",
+      "0",
+      "0",
       "0"
     ]
   },
@@ -166,13 +166,13 @@
     "latchlogo": "",
     "buttontext": "Spline",
     "actionarray": [
-      "9",
-      "4",
+      "0",
+      "0",
       "0"
     ],
     "valuearray": [
-      "1",
-      "p",
+      "0",
+      "0",
       "0"
     ]
   },
@@ -182,13 +182,13 @@
     "latchlogo": "",
     "buttontext": "Ellipse",
     "actionarray": [
-      "9",
-      "4",
+      "0",
+      "0",
       "0"
     ],
     "valuearray": [
-      "2",
-      "e",
+      "0",
+      "0",
       "0"
     ]
   },
